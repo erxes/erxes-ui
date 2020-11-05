@@ -4,4 +4,5 @@ import FormGroup from './Group';
 import ControlLabel from './Label';
 import Textarea from './Textarea';
 
-export default { FormControl, ControlLabel, FormGroup, Textarea, Form };
+export { FormControl, ControlLabel, FormGroup, Textarea, Form };
+
