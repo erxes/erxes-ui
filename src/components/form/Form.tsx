@@ -1,6 +1,6 @@
 import React from 'react';
 import validator from 'validator';
-import { __, generateRandomString, isValidUsername } from '../helpers';
+import { generateRandomString, isValidUsername } from '../helpers';
 import { Error } from './styles';
 
 interface IFormProps {
@@ -97,13 +97,13 @@ class Form extends React.Component<Props, State> {
     const value = element ? element.value : '';
 
     if (props.required && !value) {
-      return <Error>{__('Required field')}</Error>;
+      return <Error>Required field</Error>;
     }
 
     if (props.type === 'email' && !validator.isEmail(value)) {
       return (
         <Error>
-          {__('Invalid email format! Please enter a valid email address')}
+          Invalid email format! Please enter a valid email address
         </Error>
       );
     }
@@ -114,25 +114,25 @@ class Form extends React.Component<Props, State> {
     ) {
       return (
         <Error>
-          {__('Maximum length is')} {props.max} {__('characters')}
+          Maximum length is {props.max} characters
         </Error>
       );
     }
 
     if (value && props.type === 'url' && !validator.isURL(value)) {
-      return <Error>{__('Invalid link')}</Error>;
+      return <Error>Invalid link</Error>;
     }
 
     if (value && props.type === 'number' && !validator.isFloat(value)) {
       return (
         <Error>
-          {__('Invalid number format! Please enter a valid number')}
+          Invalid number format! Please enter a valid number
         </Error>
       );
     }
 
     if (value && props.name === 'username' && !isValidUsername(value)) {
-      return <Error>{__('Invalid Username')}</Error>;
+      return <Error>Invalid Username</Error>;
     }
 
     return null;

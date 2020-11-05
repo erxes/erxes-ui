@@ -36,7 +36,6 @@
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
     "color": "^3.1.3",
-    "i18n-react": "^0.7.0",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-scripts": "3.0.1",
@@ -55,7 +54,7 @@
     "clean": "rm -rf ./lib",
     "prebuild": "yarn clean",
     "build": "tsc --build \"./tsconfig.json\"",
-    "copy-files": "copyfiles -u 1 src/style/base.css lib/",
+    "copy-files": "copyfiles -u 1 src/style/erxes-base.css lib/",
     "postbuild": "yarn run copy-files"
   },
   "eslintConfig": {
