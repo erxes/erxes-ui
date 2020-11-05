@@ -1,0 +1,141 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  text-align: left;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+:before,
+:after {
+  box-sizing: inherit;
+}
+
+img {
+  display: block;
+}
+
+caption,
+th,
+td {
+  text-align: inherit;
+}
+
+html,
+body,
+th,
+td {
+  padding: 0;
+}
+
+html,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+dl,
+dd,
+figure,
+blockquote,
+hr,
+input,
+button,
+select,
+textarea {
+  margin: 0;
+}
+
+tt,
+code,
+kbd,
+samp,
+pre {
+  font-family: code, monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+em,
+cite,
+strong,
+small,
+input,
+button,
+select,
+text-area {
+  font-style: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ol,
+ul {
+  /* list-style: none; */
+  padding-left: 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+u,
+s,
+strike,
+del,
+ins {
+  text-decoration: inherit;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  line-height: inherit;
+}
+
+[type="date"],
+[type="email"],
+[type="number"],
+[type="password"],
+[type="search"],
+[type="tel"],
+[type="url"],
+[type="text"],
+[type="button"],
+[type="submit"],
+[type="reset"],
+button,
+textarea {
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+[type="button"],
+[type="submit"],
+[type="reset"],
+button {
+  cursor: pointer;
+  text-align: inherit;
+}
