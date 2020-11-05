@@ -1,9 +1,8 @@
 {
   "name": "erxes-common-ui",
   "version": "0.1.0",
-  "private": false,
   "description": "erxes component library",
-  "license": "GNU General Public License v3.0 with Commons Clause",
+  "license": "MIT",
   "main": "lib/src/index.js",
   "keywords": [
     "erxes",
@@ -20,31 +19,35 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/erxes/erxes-ui.git"
+    "url": "git+https://github.com/erxes/erxes-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erxes/erxes-icon/issues"
+  },
+  "author": "erxes",
+  "homepage": "https://erxes.io/",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "dependencies": {
     "@nateradebaugh/react-datetime": "^4.4.3",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.6",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
+    "@types/node": "10.9.4",
+    "@types/react": "16.4.13",
+    "@types/react-dom": "16.0.7",
     "color": "^3.1.3",
     "i18n-react": "^0.7.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
     "react-scripts": "4.0.0",
-    "styled-components": "^5.2.1",
+    "styled-components": "3.2.6",
     "styled-components-ts": "0.0.15",
     "typescript": "^4.0.5",
-    "validator": "^13.1.17",
+    "validator": "12.1.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "start-storybook -p 9009 -s public",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-storybook": "build-storybook --no-dll",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'",
@@ -69,18 +72,6 @@
           "import/no-anonymous-default-export": "off"
         }
       }
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   },
   "devDependencies": {
