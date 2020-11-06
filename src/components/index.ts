@@ -6,3 +6,4 @@ export { default as Form } from './form/Form';
 export { default as FormGroup } from './form/Group';
 export { default as ControlLabel } from './form/Label';
 export { default as Textarea } from './form/Textarea';
+export { default as ActionButtons } from './actionButtons';
