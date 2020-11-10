@@ -1,4 +1,3 @@
-import T from "i18n-react";
 import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
@@ -52,7 +51,7 @@ const createAlert = (type: string, text: string, time?: number) => {
 
   ReactDOM.render(
     <AlertStyled key={alertcount} type={type}>
-      {T.translate(text)}
+      {text}
     </AlertStyled>,
     wrapper
   );
