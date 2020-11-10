@@ -17,3 +17,6 @@ export { default as Step } from "./step/Step";
 export { default as Steps } from "./step/Steps";
 export { default as SubMenu } from "./subMenu";
 export { default as MenuItem } from "./subMenu/MenuItem";
+export { default as Table } from "./table";
+export { default as Tabs } from "./tabs";
+export { default as AnimatedLoader } from "./loader";
