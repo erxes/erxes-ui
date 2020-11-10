@@ -11,3 +11,4 @@ export { default as BreadCrumb } from "./breadCrumb";
 export { default as BreadCrumbItem } from "./breadCrumb/BreadCrumbItem";
 export { default as Chip } from "./chip";
 export { default as EmptyContent } from "./empty/EmptyContent";
+export { default as NameCard } from "./nameCard";
