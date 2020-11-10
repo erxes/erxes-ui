@@ -1,16 +1,8 @@
-import React from 'react';
-import validator from 'validator';
-import { generateRandomString, isValidUsername } from '../helpers';
-import { Error } from './styles';
-
-interface IFormProps {
-  errors: any;
-  values: any;
-  registerChild: (child: React.ReactNode) => void;
-  runValidations?: (callback: any) => void;
-  resetSubmit?: () => void;
-  isSubmitted: boolean;
-}
+import React from "react";
+import validator from "validator";
+import { generateRandomString, isValidUsername } from "../helpers";
+import { Error } from "./styles";
+import { IFormProps } from "../types";
 
 type Props = {
   renderContent: (props: IFormProps) => React.ReactNode;
@@ -34,11 +26,11 @@ class Form extends React.Component<Props, State> {
     this.state = {
       errors: {},
       values: {},
-      isSubmitted: false
+      isSubmitted: false,
     };
   }
 
-  registerChild = child => {
+  registerChild = (child) => {
     this.children.push(child);
   };
 
@@ -56,7 +48,7 @@ class Form extends React.Component<Props, State> {
     }
 
     this.setState({ errors, values }, () => {
-      const hasErrors = Object.values(errors).some(error => error !== null);
+      const hasErrors = Object.values(errors).some((error) => error !== null);
 
       if (hasErrors) {
         return;
@@ -74,64 +66,54 @@ class Form extends React.Component<Props, State> {
     return document.querySelector(`#${this.formId} [name='${name}']`) as any;
   };
 
-  getValue = child => {
+  getValue = (child) => {
     const element = this.getSelector(child.props.name);
 
     if (element) {
       return element.value;
     }
 
-    return '';
+    return "";
   };
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     this.runValidations();
   };
 
-  validate = child => {
+  validate = (child) => {
     const { props } = child;
     const element = this.getSelector(props.name);
-    const value = element ? element.value : '';
+    const value = element ? element.value : "";
 
     if (props.required && !value) {
       return <Error>Required field</Error>;
     }
 
-    if (props.type === 'email' && !validator.isEmail(value)) {
+    if (props.type === "email" && !validator.isEmail(value)) {
       return (
-        <Error>
-          Invalid email format! Please enter a valid email address
-        </Error>
+        <Error>Invalid email format! Please enter a valid email address</Error>
       );
     }
 
     if (
       props.max &&
-      !validator.isLength('description', { min: 0, max: props.max })
+      !validator.isLength("description", { min: 0, max: props.max })
     ) {
-      return (
-        <Error>
-          Maximum length is {props.max} characters
-        </Error>
-      );
+      return <Error>Maximum length is {props.max} characters</Error>;
     }
 
-    if (value && props.type === 'url' && !validator.isURL(value)) {
+    if (value && props.type === "url" && !validator.isURL(value)) {
       return <Error>Invalid link</Error>;
     }
 
-    if (value && props.type === 'number' && !validator.isFloat(value)) {
-      return (
-        <Error>
-          Invalid number format! Please enter a valid number
-        </Error>
-      );
+    if (value && props.type === "number" && !validator.isFloat(value)) {
+      return <Error>Invalid number format! Please enter a valid number</Error>;
     }
 
-    if (value && props.name === 'username' && !isValidUsername(value)) {
+    if (value && props.name === "username" && !isValidUsername(value)) {
       return <Error>Invalid Username</Error>;
     }
 
@@ -152,7 +134,7 @@ class Form extends React.Component<Props, State> {
           registerChild: this.registerChild,
           runValidations: this.runValidations,
           isSubmitted: this.state.isSubmitted,
-          resetSubmit: this.resetSubmit
+          resetSubmit: this.resetSubmit,
         })}
       </form>
     );
