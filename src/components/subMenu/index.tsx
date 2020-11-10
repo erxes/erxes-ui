@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import MenuItem from "./MenuItem";
-import { ISubMenuItem } from "../types";
-import { __ } from "../../utils";
+
+export interface ISubMenuItem {
+  title: string;
+  link?: string;
+}
 
 const Items = styled.ul`
   display: inline-block;
@@ -24,7 +27,7 @@ function Submenu({
       <Items>
         {items.map((b) => (
           <MenuItem to={b.link || ""} key={b.title}>
-            {__(b.title)}
+            {b.title}
           </MenuItem>
         ))}
         {additionalMenuItem}

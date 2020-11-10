@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import BreadCrumbItem from "./BreadCrumbItem";
-import { IBreadCrumbItem } from "../types";
 import dimensions from "../helpers/dimensions";
+
+export interface IBreadCrumbItem {
+  title: string;
+  link?: string;
+}
 
 const Items = styled.ul`
   display: inline-block;

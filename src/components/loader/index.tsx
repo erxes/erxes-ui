@@ -2,8 +2,18 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import styledTS from "styled-components-ts";
 import colors from "../colors";
-import { IAnimatedLoader } from "../types";
 import dimensions from "../helpers/dimensions";
+
+export interface IAnimatedLoader {
+  height?: string;
+  width?: string;
+  color?: string;
+  round?: boolean;
+  margin?: string;
+  marginRight?: string;
+  isBox?: boolean;
+  withImage?: boolean;
+}
 
 const placeHolderShimmer = keyframes`
   0% { background-position: -468px 0 }

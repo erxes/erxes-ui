@@ -1,11 +1,78 @@
-import { FlexPad, InlineForm } from "../step/styles";
 import { RULE_CONDITIONS, VISITOR_AUDIENCE_RULES } from "./constants";
 import React from "react";
 import styled from "styled-components";
+import styledTS from "styled-components-ts";
 import Button from "../button";
 import FormGroup from "../form/Group";
 import ControlLabel from "../form/Label";
 import FormControl from "../form/Control";
+import colors from "../colors";
+import dimensions from "../helpers/dimensions";
+
+const FlexItem = styledTS<{
+  count?: string;
+  overflow?: string;
+  v?: string;
+  h?: string;
+  direction?: string;
+}>(styled.div)`
+  display: flex;
+  height: 100%;
+  border-right: 1px solid ${colors.borderPrimary};
+  flex: ${(props) => (props.count ? props.count : 1)};
+  ${(props) => {
+    if (props.overflow) {
+      return `
+        overflow: ${props.overflow};
+      `;
+    }
+    return null;
+  }};
+  ${(props) => {
+    if (props.v) {
+      return `
+        align-items: ${props.v};
+      `;
+    }
+    return null;
+  }};
+  ${(props) => {
+    if (props.h) {
+      return `
+        justify-content: ${props.h};
+      `;
+    }
+    return null;
+  }};
+  ${(props) => {
+    if (props.direction) {
+      return `
+        flex-direction: ${props.direction};
+      `;
+    }
+    return null;
+  }};
+
+  &:last-of-type {
+    border: none;
+  }
+`;
+
+const FlexPad = styled(FlexItem)`
+  padding: ${dimensions.coreSpacing}px;
+  flex: 1;
+  border-right: ${colors.borderPrimary};
+  padding: ${dimensions.coreSpacing}px;
+`;
+
+const InlineForm = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  > *:not(:first-child) {
+    margin-left: ${dimensions.unitSpacing}px;
+  }
+`;
 
 export interface IConditionsRule {
   _id: string;

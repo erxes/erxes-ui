@@ -2,16 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
 import colors from "../colors";
-
-const closeSize = "20px";
-const horizontalSpace = "10px";
+import dimensions from "../helpers/dimensions";
 
 const ChipItem = styledTS<{ capitalize?: boolean; hasSpace: boolean }>(
   styled.span
 )`
   color: ${colors.colorWhite};
   background: ${colors.colorSecondary};
-  padding: 2px ${horizontalSpace};
+  padding: 2px ${dimensions.unitSpacing}px;
   margin: 2px 5px 2px 0;
   text-transform: ${(props) => (props.capitalize ? "capitalize" : "none")};
   display: inline-block;
@@ -27,9 +25,9 @@ const Click = styled.span`
   right: 1px;
   top: 1px;
   cursor: pointer;
-  width: ${closeSize};
-  height: ${closeSize};
-  border-radius: 10px;
+  width: ${dimensions.coreSpacing}px;
+  height: ${dimensions.coreSpacing}px;
+  border-radius: ${dimensions.unitSpacing}px;
   position: absolute;
   text-align: center;
   line-height: 18px;

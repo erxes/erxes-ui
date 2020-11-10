@@ -4,7 +4,6 @@ import { ITEM_COLORS } from "./constants";
 import { Action, Container, ItemContent, Items } from "./styles";
 import Button from "../button";
 import Icon from "../icon";
-import { __ } from "../../utils";
 
 type Props = {
   content: any;
@@ -25,7 +24,7 @@ function EmptyContent({ content, vertical, maxItemWidth }: Props) {
       return null;
     }
 
-    const buttonText = __(text) || __("Learn More");
+    const buttonText = text || "Learn More";
 
     if (isOutside) {
       return (
@@ -61,11 +60,11 @@ function EmptyContent({ content, vertical, maxItemWidth }: Props) {
             ) : (
               <i>{index + 1}</i>
             )}
-            <h4>{__(step.title)}</h4>
+            <h4>{step.title}</h4>
             {step.html ? (
               <p dangerouslySetInnerHTML={{ __html: step.description }} />
             ) : (
-              <p>{__(step.description)}</p>
+              <p>{step.description}</p>
             )}
             <Action>
               {renderButton(

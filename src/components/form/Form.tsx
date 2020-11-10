@@ -2,7 +2,15 @@ import React from "react";
 import validator from "validator";
 import { generateRandomString, isValidUsername } from "../helpers";
 import { Error } from "./styles";
-import { IFormProps } from "../types";
+
+export interface IFormProps {
+  errors: any;
+  values: any;
+  registerChild: (child: React.ReactNode) => void;
+  runValidations?: (callback: any) => void;
+  resetSubmit?: () => void;
+  isSubmitted: boolean;
+}
 
 type Props = {
   renderContent: (props: IFormProps) => React.ReactNode;
