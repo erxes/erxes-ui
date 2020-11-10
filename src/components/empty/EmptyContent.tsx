@@ -4,7 +4,7 @@ import { ITEM_COLORS } from "./constants";
 import { Action, Container, ItemContent, Items } from "./styles";
 import Button from "../button";
 import Icon from "../icon";
-import { __ } from "../utils";
+import { __ } from "../../utils";
 
 type Props = {
   content: any;

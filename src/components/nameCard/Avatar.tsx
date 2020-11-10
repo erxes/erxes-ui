@@ -5,7 +5,7 @@ import styledTS from "styled-components-ts";
 import colors from "../colors";
 import { rgba } from "../colors/color";
 import { IUser, ICustomer, ICompany } from "../types";
-import { readFile } from "../utils";
+import { readFile } from "../../utils";
 
 const AvatarStyled = styledTS<{ state?: string }>(styled.span)`
   display: block;

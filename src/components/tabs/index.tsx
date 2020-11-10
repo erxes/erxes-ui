@@ -1,5 +1,5 @@
-import React from 'react';
-import { TabCaption, TabContainer } from './styles';
+import React from "react";
+import { TabCaption, TabContainer } from "./styles";
 
 function Tabs(props: {
   children: React.ReactNode;
@@ -19,4 +19,4 @@ function TabTitle(props: TabTitleProps) {
   return <TabCaption {...props} />;
 }
 
-export { Tabs, TabTitle };
+export default { Tabs, TabTitle };

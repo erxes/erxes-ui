@@ -10,7 +10,7 @@ import {
   StepItem,
 } from "./styles";
 import Button from "../button";
-import { __ } from "../utils";
+import { __ } from "../../utils";
 import Icon from "../icon";
 
 type Props = {

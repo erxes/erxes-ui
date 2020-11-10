@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import MenuItem from "./MenuItem";
 import { ISubMenuItem } from "../types";
-import { __ } from "../utils";
+import { __ } from "../../utils";
 
 const Items = styled.ul`
   display: inline-block;

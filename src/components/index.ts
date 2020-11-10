@@ -19,4 +19,8 @@ export { default as SubMenu } from "./subMenu";
 export { default as MenuItem } from "./subMenu/MenuItem";
 export { default as Table } from "./table";
 export { default as Tabs } from "./tabs";
+export { default as TabTitle } from "./tabs";
 export { default as AnimatedLoader } from "./loader";
+export { default as Attachment } from "./attachment";
+export { default as ImageWithPreview } from "./ImageWithPreview";
+export { default as CommonPortal } from "./CommonPortal";
