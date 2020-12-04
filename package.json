@@ -1,6 +1,6 @@
 {
   "name": "erxes-ui-utils",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "erxes component library",
   "license": "MIT",
   "main": "lib/index.js",
