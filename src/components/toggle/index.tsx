@@ -1,6 +1,5 @@
 import React from "react";
 import Toggle from "react-toggle";
-import "react-toggle/style.css";
 import styled from "styled-components";
 import colors from "../../styles/colors";
 
