@@ -98,7 +98,6 @@ const ButtonStyled = styledTS<{
         opacity: 0.75;
       }
     `;
-    // console.log(cs)
     return cs
   }};
 
