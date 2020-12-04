@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import styledTS from "styled-components-ts";
-import colors from "../colors";
-import dimensions from "../helpers/dimensions";
+import colors from "../../styles/colors";
+import dimensions from "../../styles/dimensions";
 
 export interface IAnimatedLoader {
   height?: string;
@@ -26,9 +26,9 @@ const Loader = styledTS<IAnimatedLoader>(styled.div)`
   animation-iteration-count: infinite;
   animation-name: ${placeHolderShimmer};
   animation-timing-function: linear;
-  background: linear-gradient(to right, 
-    ${(props) => (props.color ? props.color : colors.borderPrimary)} 8%, 
-    ${(props) => (props.color ? colors.bgLight : colors.borderDarker)} 18%, 
+  background: linear-gradient(to right,
+    ${(props) => (props.color ? props.color : colors.borderPrimary)} 8%,
+    ${(props) => (props.color ? colors.bgLight : colors.borderDarker)} 18%,
     ${(props) => (props.color ? props.color : colors.borderPrimary)} 33%);
   background-size: 800px 200px;
   width: ${(props) => (props.width ? props.width : "100%")};
@@ -104,7 +104,7 @@ class AnimatedLoader extends React.Component<Props> {
     if (loaderStyle.isBox) {
       return (
         <Box>
-          {[...Array(6)].map((b, index) => (
+          {[...Array(6)].map((_b, index) => (
             <Row key={index}>
               <Text>
                 <Line />

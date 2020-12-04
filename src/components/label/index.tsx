@@ -3,8 +3,8 @@ import { shake as animationShake } from "../../utils/animations";
 import React from "react";
 import styled, { css } from "styled-components";
 import styledTS from "styled-components-ts";
-import colors from "../colors";
-import { rgba, darken } from "../colors/color";
+import colors from "../../styles/colors";
+import { rgba, darken } from "../../styles/color";
 
 const types = {
   default: {
@@ -49,7 +49,7 @@ const LabelStyled = styledTS<{
   font-weight: 600;
   animation: ${(props) =>
     props.shake ? `${animationShake} 3.5s ease infinite` : "none"};
-  
+
   ${(props) =>
     props.shake &&
     css`
@@ -77,13 +77,11 @@ type Props = {
   children: React.ReactNode | string;
   className?: string;
   shake?: boolean;
-  ignoreTrans?: boolean;
 };
 
 class Label extends React.Component<Props> {
   render() {
     const {
-      ignoreTrans,
       children,
       lblColor,
       lblStyle = "default",
@@ -99,15 +97,7 @@ class Label extends React.Component<Props> {
         : color(types[lblStyle].color).isLight(),
     };
 
-    let content;
-
-    if (ignoreTrans) {
-      content = children;
-    } else if (typeof children === "string") {
-      content = children;
-    }
-
-    return <LabelStyled {...updatedProps}>{content}</LabelStyled>;
+    return <LabelStyled {...updatedProps}>{children}</LabelStyled>;
   }
 }
 

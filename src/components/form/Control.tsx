@@ -171,6 +171,9 @@ class FormControl extends React.Component<Props> {
       );
     }
 
+    console.log('++++++++++++++++++++')
+    const nput = new Input({...attributes});
+    console.log(nput)
     return (
       <FlexWrapper>
         <Input {...attributes} />

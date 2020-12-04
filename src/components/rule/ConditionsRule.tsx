@@ -6,8 +6,8 @@ import Button from "../button";
 import FormGroup from "../form/Group";
 import ControlLabel from "../form/Label";
 import FormControl from "../form/Control";
-import colors from "../colors";
-import dimensions from "../helpers/dimensions";
+import colors from "../../styles/colors";
+import dimensions from "../../styles/dimensions";
 
 const FlexItem = styledTS<{
   count?: string;

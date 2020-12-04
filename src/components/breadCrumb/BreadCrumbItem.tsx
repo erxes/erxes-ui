@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import colors from "../colors";
-import dimensions from "../helpers/dimensions";
-import { rgba } from "../colors/color";
+import colors from "../../styles/colors";
+import dimensions from "../../styles/dimensions";
+import { rgba } from "../../styles/color";
 
 const Item = styled.li`
   display: inline-block;

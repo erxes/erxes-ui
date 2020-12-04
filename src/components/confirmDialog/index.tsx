@@ -1,9 +1,9 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
-import dimensions from "../helpers/dimensions";
-import colors from "../colors";
-import { rgba } from "../colors/color";
+import dimensions from "../../styles/dimensions";
+import colors from "../../styles/colors";
+import { rgba } from "../../styles/color";
 import { ControlLabel, FormControl } from "../form";
 import Icon from "../icon";
 import Button from "../button";

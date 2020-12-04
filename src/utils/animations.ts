@@ -26,7 +26,7 @@ const fadeIn = keyframes`
   0% {
     opacity: 0;
 	}
-	
+
   100% {
     opacity: 1;
   }
@@ -37,7 +37,7 @@ const slideDown = keyframes`
     transform: translateY(-20px);
     opacity: 0.7;
 	}
-	
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -128,6 +128,20 @@ const robotAnimation = keyframes`
 }`;
 
 export {
+  rotate,
+  fadeIn,
+  slideDown,
+  slideLeft,
+  slideRight,
+  shake,
+  twinkling,
+  stripe,
+  wave,
+  robotAnimation,
+  highlight
+};
+
+export default {
   rotate,
   fadeIn,
   slideDown,

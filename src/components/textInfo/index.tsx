@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
-import colors from "../colors";
+import colors from "../../styles/colors";
 
 const types = {
   default: {

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import React from "react";
 import styled from "styled-components";
 import Tip from "../tip";
-import colors from "../colors";
+import colors from "../../styles/colors";
 
 type Props = {
   text: string;

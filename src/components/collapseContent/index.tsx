@@ -3,8 +3,8 @@ import Collapse from "react-bootstrap/Collapse";
 import styled, { css } from "styled-components";
 import styledTS from "styled-components-ts";
 import Icon from "../icon";
-import colors from "../colors";
-import { rgba } from "../colors/color";
+import colors from "../../styles/colors";
+import { rgba } from "../../styles/color";
 
 const Title = styledTS<{
   compact?: boolean;

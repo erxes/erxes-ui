@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
-import colors from "../../components/colors";
-import { darken } from "../../components/colors/color";
-import dimensions from "../../components/helpers/dimensions";
-import typography from "../../components/helpers/typography";
+import colors from "../../styles/colors";
+import { darken } from "../../styles/color";
+import dimensions from "../../components/../styles/dimensions";
+import typography from "../../components/../styles/typography";
 import { slideDown } from "../animations";
 import { Icon } from "../..";
 

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
-import colors from "../colors";
-import dimensions from "../helpers/dimensions";
+import colors from "../../styles/colors";
+import dimensions from "../../styles/dimensions";
 
 const ChipItem = styledTS<{ capitalize?: boolean; hasSpace: boolean }>(
   styled.span

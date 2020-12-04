@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
-import dimensions from "../helpers/dimensions";
-import colors from "../colors";
-import { rgba, darken } from "../colors/color";
+import dimensions from "../../styles/dimensions";
+import colors from "../../styles/colors";
+import { rgba, darken } from "../../styles/color";
 
 const Container = styled.div`
   display: flex;
@@ -78,7 +78,7 @@ const ItemContent = styledTS<{
 
 	${Action} > button, ${Action} > a {
 		background: ${(props) => props.color};
-		
+
 		&:hover {
 			background: ${(props) => darken(props.color, 15)};
 		}
@@ -104,7 +104,7 @@ const ItemContent = styledTS<{
 			}
 		}
 	}
-	
+
 	> i {
 		line-height: 32px;
 		background: ${colors.colorWhite};

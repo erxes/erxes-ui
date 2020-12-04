@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BreadCrumbItem from "./BreadCrumbItem";
-import dimensions from "../helpers/dimensions";
+import dimensions from "../../styles/dimensions";
 
 export interface IBreadCrumbItem {
   title: string;

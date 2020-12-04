@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
 import Icon from '../icon';
-import colors from '../colors';
-import { darken, lighten } from '../colors/color';
+import colors from '../../styles/colors';
+import { darken, lighten } from '../../styles/color';
 
 const types = {
   default: {
@@ -60,43 +60,47 @@ const ButtonStyled = styledTS<{
   transition: all 0.3s ease;
   outline: 0;
 
-  ${props => css`
-    padding: ${sizes[props.hugeness].padding};
-    background: ${types[props.btnStyle].background};
-    font-size: ${props.uppercase
-      ? sizes[props.hugeness].fontSize
-      : `calc(${sizes[props.hugeness].fontSize} + 1px)`};
-    text-transform: ${props.uppercase ? 'uppercase' : 'none'};
-    color: ${types[props.btnStyle].color
-      ? types[props.btnStyle].color
-      : colors.colorWhite} !important;
-    border: none;
-    display: ${props.block && 'block'};
-    width: ${props.block && '100%'};
-    font-weight: ${!props.uppercase && '500'};
+  ${props => {
+    const cs = css`
+      padding: ${sizes[props.hugeness].padding};
+      background: ${types[props.btnStyle].background};
+      font-size: ${props.uppercase
+          ? sizes[props.hugeness].fontSize
+          : `calc(${sizes[props.hugeness].fontSize} + 1px)`};
+      text-transform: ${props.uppercase ? 'uppercase' : 'none'};
+      color: ${types[props.btnStyle].color
+          ? types[props.btnStyle].color
+          : colors.colorWhite} !important;
+      border: none;
+      display: ${props.block && 'block'};
+      width: ${props.block && '100%'};
+      font-weight: ${!props.uppercase && '500'};
 
-    &:hover {
-      cursor: pointer;
-      text-decoration: none;
-      color: ${types[props.btnStyle].color &&
+      &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        color: ${types[props.btnStyle].color &&
         darken(types[props.btnStyle].color, 35)};
-      background: ${props.btnStyle !== 'link' &&
+        background: ${props.btnStyle !== 'link' &&
         `${darken(types[props.btnStyle].background, 20)}`};
-    }
+      }
 
-    &:active,
-    &:focus {
-      box-shadow: ${types[props.btnStyle].border
-        ? `0 0 0 0.2rem ${lighten(types[props.btnStyle].border, 65)}`
-        : `0 0 0 0.2rem ${lighten(types[props.btnStyle].background, 65)}`};
-      box-shadow: ${props.btnStyle === 'link' && 'none'};
-    }
+      &:active,
+      &:focus {
+        box-shadow: ${types[props.btnStyle].border
+          ? `0 0 0 0.2rem ${lighten(types[props.btnStyle].border, 65)}`
+          : `0 0 0 0.2rem ${lighten(types[props.btnStyle].background, 65)}`};
+        box-shadow: ${props.btnStyle === 'link' && 'none'};
+      }
 
-    &:disabled {
-      cursor: not-allowed !important;
-      opacity: 0.75;
-    }
-  `};
+      &:disabled {
+        cursor: not-allowed !important;
+        opacity: 0.75;
+      }
+    `;
+    // console.log(cs)
+    return cs
+  }};
 
   a {
     color: ${colors.colorWhite};
@@ -120,7 +124,7 @@ const ButtonLink = styledTS<{ disabled?: boolean }>(
 )`
   text-decoration: inherit;
   text-align: center;
-  
+
   ${props =>
     props.disabled &&
     css`
@@ -133,7 +137,7 @@ const ButtonLink = styledTS<{ disabled?: boolean }>(
     `};
 `;
 
-const ButtonGroup = styledTS<{ hasGap: boolean }>(styled.div)`
+export const ButtonGroup = styledTS<{ hasGap: boolean }>(styled.div)`
   position: relative;
 
   button + a,
@@ -200,7 +204,6 @@ class Button extends React.Component<ButtonProps> {
     const props = { ...commonExcluded, hugeness: size, btnStyle, block, type, uppercase };
 
     const Element = href ? ButtonLink : ButtonStyled;
-
 
     if (icon) {
       return (

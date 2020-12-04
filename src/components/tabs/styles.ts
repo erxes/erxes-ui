@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
-import colors from "../colors";
-import dimensions from "../helpers/dimensions";
-import typography from "../helpers/typography";
+import colors from "../../styles/colors";
+import dimensions from "../../styles/dimensions";
+import typography from "../../styles/typography";
 
 const TabContainer = styledTS<{ grayBorder?: boolean; full?: boolean }>(
   styled.div
@@ -53,3 +53,4 @@ const TabCaption = styled.span`
 `;
 
 export { TabContainer, TabCaption };
+export default { TabContainer, TabCaption };

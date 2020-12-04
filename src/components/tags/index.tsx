@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
-import dimensions from "../helpers/dimensions";
-import colors from "../colors";
+import dimensions from "../../styles/dimensions";
+import colors from "../../styles/colors";
 import Label from "../label";
 
 export interface ITag {
@@ -38,13 +38,13 @@ function Tags({ tags, limit }: Props) {
     <TagList length={length}>
       {tags.slice(0, limit ? limit : length).map((tag) => {
         return (
-          <Label key={tag.name} lblColor={tag.colorCode} ignoreTrans={true}>
+          <Label key={tag.name} lblColor={tag.colorCode}>
             <span>{tag.name}</span>
           </Label>
         );
       })}
       {limit && length - limit > 0 && (
-        <Label lblColor={colors.colorCoreGray} ignoreTrans={true}>
+        <Label lblColor={colors.colorCoreGray}>
           <span>{`+${length - limit}`}</span>
         </Label>
       )}

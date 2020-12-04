@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import styledTS from "styled-components-ts";
 import { FormLabel, Input } from "../form/styles";
-import colors from "../colors";
-import dimensions from "../helpers/dimensions";
-import typography from "../helpers/typography";
+import colors from "../../styles/colors";
+import dimensions from "../../styles/dimensions";
+import typography from "../../styles/typography";
 
 const tableHoverColor = "#f5f5f5";
 

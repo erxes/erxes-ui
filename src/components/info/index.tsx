@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import styledTS from "styled-components-ts";
-import dimensions from "../helpers/dimensions";
-import colors from "../colors";
+import dimensions from "../../styles/dimensions";
+import colors from "../../styles/colors";
 
 const addition = 2;
 

@@ -2,8 +2,8 @@ import * as React from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
-import dimensions from "../helpers/dimensions";
-import colors from "../colors";
+import dimensions from "../../styles/dimensions";
+import colors from "../../styles/colors";
 import { Icon } from "..";
 
 const PopoverContent = styled.div`
@@ -53,7 +53,7 @@ class HelpPopover extends React.Component<Props> {
         trigger={trigger || "click"}
         placement="auto"
         overlay={this.renderContent()}
-        rootClose={true}
+        // rootClose={true}
       >
         <IconClass>
           <Icon icon="question-circle" />

@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
-import colors from '../colors';
-import typography from '../helpers/typography';
-import dimensions from '../helpers/dimensions';
+import colors from '../../styles/colors';
+import typography from '../../styles/typography';
+import dimensions from '../../styles/dimensions';
 
 const inputPadding = '0px';
 const inputHeight = '15px';
@@ -304,6 +304,20 @@ const FlexWrapper = styled.span`
 `;
 
 export {
+  Input,
+  SelectWrapper,
+  Select,
+  TextArea,
+  Radio,
+  Checkbox,
+  FormLabel,
+  Label,
+  Formgroup,
+  FlexWrapper,
+  Error
+};
+
+export default {
   Input,
   SelectWrapper,
   Select,

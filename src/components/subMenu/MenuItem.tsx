@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import colors from "../colors";
-import { rgba } from "../colors/color";
+import colors from "../../styles/colors";
+import { rgba } from "../../styles/color";
 
 const Item = styled.li`
   display: inline-block;

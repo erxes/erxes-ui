@@ -18,16 +18,18 @@ const Items = styled.ul`
 function Submenu({
   items,
   additionalMenuItem,
+  translator,
 }: {
   items?: ISubMenuItem[];
   additionalMenuItem?: React.ReactNode;
+  translator?: (el: String) => String;
 }) {
   if (items) {
     return (
       <Items>
         {items.map((b) => (
           <MenuItem to={b.link || ""} key={b.title}>
-            {b.title}
+            { translator ? translator(b.title) : b.title}
           </MenuItem>
         ))}
         {additionalMenuItem}
