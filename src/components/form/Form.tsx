@@ -16,6 +16,7 @@ type Props = {
   renderContent: (props: IFormProps) => React.ReactNode;
   onSubmit?: (values: any) => any;
   autoComplete?: string;
+  translator?: (key: string, options?: any) => string;
 };
 
 type State = {
@@ -92,17 +93,28 @@ class Form extends React.Component<Props, State> {
   };
 
   validate = (child) => {
+    const { translator } = this.props;
+    const __ = (key: string, options?: any) => {
+      if (!translator) {
+        return key;
+      }
+
+      return translator(key, options);
+    }
+
     const { props } = child;
     const element = this.getSelector(props.name);
     const value = element ? element.value : "";
 
     if (props.required && !value) {
-      return <Error>Required field</Error>;
+      return <Error>{__('Required field')}</Error>;
     }
 
     if (props.type === "email" && !validator.isEmail(value)) {
       return (
-        <Error>Invalid email format! Please enter a valid email address</Error>
+        <Error>
+          {__('Invalid email format! Please enter a valid email address')}
+        </Error>
       );
     }
 
@@ -110,19 +122,25 @@ class Form extends React.Component<Props, State> {
       props.max &&
       !validator.isLength("description", { min: 0, max: props.max })
     ) {
-      return <Error>Maximum length is {props.max} characters</Error>;
+      return <Error>
+        {__('Maximum length is')} {props.max} {__('characters')}
+      </Error>;
     }
 
     if (value && props.type === "url" && !validator.isURL(value)) {
-      return <Error>Invalid link</Error>;
+      return <Error>{__('Invalid link')}</Error>;
     }
 
     if (value && props.type === "number" && !validator.isFloat(value)) {
-      return <Error>Invalid number format! Please enter a valid number</Error>;
+      return (
+        <Error>
+          {__('Invalid number format! Please enter a valid number')}
+        </Error>
+      );
     }
 
     if (value && props.name === "username" && !isValidUsername(value)) {
-      return <Error>Invalid Username</Error>;
+      return <Error>{__('Invalid Username')}</Error>;
     }
 
     return null;
