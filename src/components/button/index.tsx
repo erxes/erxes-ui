@@ -60,46 +60,43 @@ const ButtonStyled = styledTS<{
   transition: all 0.3s ease;
   outline: 0;
 
-  ${props => {
-    const cs = css`
-      padding: ${sizes[props.hugeness].padding};
-      background: ${types[props.btnStyle].background};
-      font-size: ${props.uppercase
-          ? sizes[props.hugeness].fontSize
-          : `calc(${sizes[props.hugeness].fontSize} + 1px)`};
-      text-transform: ${props.uppercase ? 'uppercase' : 'none'};
-      color: ${types[props.btnStyle].color
-          ? types[props.btnStyle].color
-          : colors.colorWhite} !important;
-      border: none;
-      display: ${props.block && 'block'};
-      width: ${props.block && '100%'};
-      font-weight: ${!props.uppercase && '500'};
+  ${props => css`
+    padding: ${sizes[props.hugeness].padding};
+    background: ${types[props.btnStyle].background};
+    font-size: ${props.uppercase
+      ? sizes[props.hugeness].fontSize
+      : `calc(${sizes[props.hugeness].fontSize} + 1px)`};
+    text-transform: ${props.uppercase ? 'uppercase' : 'none'};
+    color: ${types[props.btnStyle].color
+      ? types[props.btnStyle].color
+      : colors.colorWhite} !important;
+    border: none;
+    display: ${props.block && 'block'};
+    width: ${props.block && '100%'};
+    font-weight: ${!props.uppercase && '500'};
 
-      &:hover {
-        cursor: pointer;
-        text-decoration: none;
-        color: ${types[props.btnStyle].color &&
-        darken(types[props.btnStyle].color, 35)};
-        background: ${props.btnStyle !== 'link' &&
-        `${darken(types[props.btnStyle].background, 20)}`};
-      }
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+      color: ${types[props.btnStyle].color &&
+    darken(types[props.btnStyle].color, 35)};
+      background: ${props.btnStyle !== 'link' &&
+    `${darken(types[props.btnStyle].background, 20)}`};
+    }
 
-      &:active,
-      &:focus {
-        box-shadow: ${types[props.btnStyle].border
-          ? `0 0 0 0.2rem ${lighten(types[props.btnStyle].border, 65)}`
-          : `0 0 0 0.2rem ${lighten(types[props.btnStyle].background, 65)}`};
-        box-shadow: ${props.btnStyle === 'link' && 'none'};
-      }
+    &:active,
+    &:focus {
+      box-shadow: ${types[props.btnStyle].border
+      ? `0 0 0 0.2rem ${lighten(types[props.btnStyle].border, 65)}`
+      : `0 0 0 0.2rem ${lighten(types[props.btnStyle].background, 65)}`};
+      box-shadow: ${props.btnStyle === 'link' && 'none'};
+    }
 
-      &:disabled {
-        cursor: not-allowed !important;
-        opacity: 0.75;
-      }
-    `;
-    return cs
-  }};
+    &:disabled {
+      cursor: not-allowed !important;
+      opacity: 0.75;
+    }
+  `};
 
   a {
     color: ${colors.colorWhite};
@@ -136,7 +133,7 @@ const ButtonLink = styledTS<{ disabled?: boolean }>(
     `};
 `;
 
-export const ButtonGroup = styledTS<{ hasGap: boolean }>(styled.div)`
+const ButtonGroup = styledTS<{ hasGap: boolean }>(styled.div)`
   position: relative;
 
   button + a,
@@ -177,7 +174,7 @@ type ButtonProps = {
   btnStyle?: string;
   size?: string;
   disabled?: boolean;
-  ignoreTrans?: boolean;
+  translator?: (key: string, options?: any) => string;
   block?: boolean;
   icon?: string;
   style?: any;
@@ -186,7 +183,7 @@ type ButtonProps = {
   target?: string;
 };
 
-class Button extends React.Component<ButtonProps> {
+export default class Button extends React.Component<ButtonProps> {
   static Group = Group;
 
   static defaultProps = {
@@ -198,22 +195,28 @@ class Button extends React.Component<ButtonProps> {
   };
 
   render() {
-    const { size = 'medium', btnStyle = 'default', block = false, type = 'button', uppercase = true, ...commonExcluded } = this.props;
-    const { href, children, icon } = commonExcluded;
-    const props = { ...commonExcluded, hugeness: size, btnStyle, block, type, uppercase };
+    const { size, ...sizeExcluded } = this.props;
+    const { href, children, translator, icon, btnStyle } = sizeExcluded;
+    const props = { ...sizeExcluded, hugeness: size || 'medium', btnStyle: btnStyle || 'default' };
 
     const Element = href ? ButtonLink : ButtonStyled;
+
+    let content = children;
+
+    if (translator && typeof content === 'string') {
+      content = translator(content);
+    }
 
     if (icon) {
       return (
         <Element {...props}>
           <Icon icon={icon} />
-          {children && <span>{children}</span>}
+          {content && <span>{content}</span>}
         </Element>
       );
     }
 
-    return <Element {...props}>{children}</Element>;
+    return <Element {...props}>{content}</Element>;
   }
 }
 
@@ -226,5 +229,3 @@ function Group({
 }) {
   return <ButtonGroup hasGap={hasGap}>{children}</ButtonGroup>;
 }
-
-export default Button;
