@@ -1,6 +1,8 @@
 export { default as Icon } from "./icon";
 export { default as AsyncComponent} from './asyncComponent';
 export { default as Button } from "./button";
+export { default as MutateButton } from "./button/mutate";
+export { default as smallLoader } from "./button/smallLoader";
 export { default as FormControl } from "./form/Control";
 export { default as DateControl } from "./form/DateControl";
 export { default as Form } from "./form/Form";

@@ -133,7 +133,7 @@ const ButtonLink = styledTS<{ disabled?: boolean }>(
     `};
 `;
 
-const ButtonGroup = styledTS<{ hasGap: boolean }>(styled.div)`
+export const ButtonGroup = styledTS<{ hasGap: boolean }>(styled.div)`
   position: relative;
 
   button + a,
@@ -195,9 +195,9 @@ export default class Button extends React.Component<ButtonProps> {
   };
 
   render() {
-    const { size, ...sizeExcluded } = this.props;
-    const { href, children, translator, icon, btnStyle } = sizeExcluded;
-    const props = { ...sizeExcluded, hugeness: size || 'medium', btnStyle: btnStyle || 'default' };
+    const { size = 'medium', btnStyle = 'default', block = false, type = 'button', uppercase = true, ...commonExcluded } = this.props;
+    const { href, children, icon, translator } = commonExcluded;
+    const props = { ...commonExcluded, hugeness: size, btnStyle, block, type, uppercase };
 
     const Element = href ? ButtonLink : ButtonStyled;
 
