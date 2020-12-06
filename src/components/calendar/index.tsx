@@ -62,6 +62,7 @@ type Props = {
     renderMiddleContent: () => React.ReactNode
   ) => React.ReactNode;
   renderColumn: (date: IDateColumn) => React.ReactNode;
+  translator?: (key: string, options?: any) => string;
 };
 
 class Calendar extends React.Component<Props, State> {

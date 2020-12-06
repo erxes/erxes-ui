@@ -1,3 +1,7 @@
+import dayjs from 'dayjs';
+import React from 'react';
+import Tip from '../components/tip';
+import { Limited } from '../styles/main';
 import Alert from './Alert';
 import confirm from './confirmation';
 import router from './router';
@@ -143,6 +147,24 @@ export const readFile = (value: string, REACT_APP_API_URL): string => {
   return `${REACT_APP_API_URL}/read-file?key=${value}`;
 };
 
+export function withProps<IProps>(
+  Wrapped: new (props: IProps) => React.Component<IProps>
+): any {
+  class WithProps extends React.Component<IProps, {}> {
+    render() {
+      return <Wrapped {...this.props} />
+    }
+  };
+  return WithProps
+}
+
+export function renderWithProps<Props>(
+  props: Props,
+  Wrapped: new (props: Props) => React.Component<Props>
+) {
+  return <Wrapped { ...props } />;
+}
+
 export const isValidDate = date => {
   const parsedDate = Date.parse(date);
 
@@ -273,6 +295,54 @@ export const roundToTwo = value => {
   return Math.round(value * 100) / 100;
 };
 
+function createLinkFromUrl(url) {
+  if (!url.includes('http')) {
+    url = 'http://' + url;
+  }
+
+  const onClick = e => {
+    e.stopPropagation();
+    window.open(url);
+  };
+
+  return (
+    <a href="#website" onClick={onClick} >
+      { urlParser.extractRootDomain(url)}
+    </a>
+  );
+}
+
+export function formatValue(value) {
+  if (typeof value === 'boolean') {
+    return value.toString();
+  }
+
+  if (urlParser.isValidURL(value)) {
+    return createLinkFromUrl(value);
+  }
+
+  if (typeof value === 'string') {
+    if (
+      dayjs(value).isValid() &&
+      (value.includes('/') || value.includes('-'))
+    ) {
+      return (
+        <Tip text={dayjs(value).format('D MMM YYYY, HH:mm')} placement="top" >
+          <time>{dayjs(value).format('L')} </time>
+        </Tip>
+      );
+    }
+
+    return <Limited>{value} </Limited>;
+  }
+
+  if (value && typeof value === 'object') {
+    return value.toString();
+  }
+
+  return value || '-';
+}
+
 
 export function isEmptyContent(content: string) {
   // check if a string contains whitespace or empty
@@ -340,6 +410,8 @@ export default {
   difference,
   can,
   readFile,
+  withProps,
+  renderWithProps,
   isValidDate,
   extractAttachment,
   setCookie,
@@ -348,6 +420,7 @@ export default {
   getRandomNumber,
   sendDesktopNotification,
   roundToTwo,
+  formatValue,
   isValidUsername,
   storeConstantToStore,
   getConstantFromStore,
