@@ -9,9 +9,16 @@ type Props = {
   content: any;
   vertical?: boolean;
   maxItemWidth?: string;
+  translator?: (key: string, options?: any) => string;
 };
 
-function EmptyContent({ content, vertical, maxItemWidth }: Props) {
+function EmptyContent({ content, vertical, maxItemWidth, translator }: Props) {
+  const __ = (key: string, options?: any) => {
+    if (!translator) {
+      return key;
+    }
+    return translator(key, options);
+  }
   const { steps, title, description, url, urlText } = content;
 
   const renderButton = (
@@ -24,7 +31,7 @@ function EmptyContent({ content, vertical, maxItemWidth }: Props) {
       return null;
     }
 
-    const buttonText = text || "Learn More";
+    const buttonText = __(text) || __('Learn More');
 
     if (isOutside) {
       return (
@@ -60,11 +67,11 @@ function EmptyContent({ content, vertical, maxItemWidth }: Props) {
             ) : (
               <i>{index + 1}</i>
             )}
-            <h4>{step.title}</h4>
+            <h4>{__(step.title)}</h4>
             {step.html ? (
               <p dangerouslySetInnerHTML={{ __html: step.description }} />
             ) : (
-              <p>{step.description}</p>
+              <p>{__(step.description)}</p>
             )}
             <Action>
               {renderButton(

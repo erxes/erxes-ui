@@ -78,6 +78,7 @@ type Props = {
   size?: string;
   extra?: React.ReactNode;
   light?: boolean;
+  translator?: (key: string, optios?: any) => string;
 };
 
 function EmptyState({
@@ -87,12 +88,13 @@ function EmptyState({
   size = "small",
   extra,
   light,
+  translator
 }: Props) {
   return (
     <EmptyStateStyled hugeness={size} light={light}>
       {icon ? <Icon icon={icon} /> : <img src={image} alt={text} />}
 
-      <span>{text}</span>
+      <span>{translator ? translator(text) : text}</span>
       {extra && <ExtraContent>{extra}</ExtraContent>}
     </EmptyStateStyled>
   );
