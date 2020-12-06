@@ -149,20 +149,19 @@ export const readFile = (value: string, REACT_APP_API_URL): string => {
 
 export function withProps<IProps>(
   Wrapped: new (props: IProps) => React.Component<IProps>
-): any {
-  class WithProps extends React.Component<IProps, {}> {
+) {
+  return class WithProps extends React.Component<IProps, {}> {
     render() {
-      return <Wrapped {...this.props} />
+      return <Wrapped {...this.props} />;
     }
   };
-  return WithProps
 }
 
 export function renderWithProps<Props>(
   props: Props,
   Wrapped: new (props: Props) => React.Component<Props>
 ) {
-  return <Wrapped { ...props } />;
+  return <Wrapped {...props} />;
 }
 
 export const isValidDate = date => {

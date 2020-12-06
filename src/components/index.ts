@@ -1,5 +1,6 @@
 export { default as Icon } from "./icon";
 export { default as AsyncComponent } from './asyncComponent';
+export { default as Bulk } from './bulk';
 export { default as Button } from "./button";
 export { default as ButtonMutate } from "./button/mutate";
 export { default as Calendar } from './calendar';
