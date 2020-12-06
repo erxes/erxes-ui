@@ -1,7 +1,8 @@
-import React from "react";
-import Toggle from "react-toggle";
-import styled from "styled-components";
-import colors from "../../styles/colors";
+import 'react-toggle/style.css';
+import React from 'react';
+import Toggle from 'react-toggle';
+import styled from 'styled-components';
+import colors from '../../styles/colors';
 
 const Wrapper = styled.div`
   line-height: 10px;

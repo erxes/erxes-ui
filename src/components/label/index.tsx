@@ -77,6 +77,7 @@ type Props = {
   children: React.ReactNode | string;
   className?: string;
   shake?: boolean;
+  translator?: (key: string, options?: any) => string;
 };
 
 class Label extends React.Component<Props> {
@@ -86,7 +87,14 @@ class Label extends React.Component<Props> {
       lblColor,
       lblStyle = "default",
       shake = false,
+      translator
     } = this.props;
+
+    let content = children;
+
+    if (translator && typeof children === 'string') {
+      content = translator(children);
+    }
 
     const updatedProps = {
       ...this.props,
@@ -97,7 +105,7 @@ class Label extends React.Component<Props> {
         : color(types[lblStyle].color).isLight(),
     };
 
-    return <LabelStyled {...updatedProps}>{children}</LabelStyled>;
+    return <LabelStyled {...updatedProps}>{content}</LabelStyled>;
   }
 }
 
