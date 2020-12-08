@@ -2,6 +2,7 @@ import Alert from './Alert';
 import { AlertItem } from './Alert/Alert';
 import animations from './animations';
 import calendar from './calendar';
+import { generateCategoryOptions } from './category';
 import confirm from './confirmation';
 import createConfirmation from './confirmation/createConfirmation';
 import core from './core';
@@ -15,6 +16,7 @@ export {
   Alert,
   animations,
   calendar,
+  generateCategoryOptions,
   confirm,
   createConfirmation,
   core,
