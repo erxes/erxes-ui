@@ -27,7 +27,7 @@ const Actions = styledTS<{ isSmall?: boolean }>(styled.div)`
   }
 `;
 
-const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled.div)`
+export const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled.div)`
   flex: 1;
   display: flex;
   min-height: 100%;
@@ -35,7 +35,7 @@ const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled.div)`
   align-items: ${props => (props.align ? 'flex-start' : 'center')};
 `;
 
-const MiddleContent = styledTS<{ transparent?: boolean; shrink?: boolean }>(
+export const MiddleContent = styledTS<{ transparent?: boolean; shrink?: boolean }>(
   styled.div
 )`
   width: 900px;
@@ -193,7 +193,7 @@ const HomeContainer = styled.div`
   width: 320px;
 `;
 
-const CloseModal = styled.div`
+export const CloseModal = styled.div`
   position: absolute;
   right: -40px;
   width: 30px;

@@ -5,6 +5,7 @@ import calendar from './calendar';
 import confirm from './confirmation';
 import createConfirmation from './confirmation/createConfirmation';
 import core from './core';
+import { cleanIntegrationKind } from './integration';
 import router from './router';
 import toggleCheckBoxes from './toggleCheckBoxes';
 import uploadHandler from './uploadHandler';
@@ -17,6 +18,7 @@ export {
   confirm,
   createConfirmation,
   core,
+  cleanIntegrationKind,
   router,
   toggleCheckBoxes,
   uploadHandler,

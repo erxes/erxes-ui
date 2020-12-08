@@ -22,7 +22,7 @@ function Submenu({
 }: {
   items?: ISubMenuItem[];
   additionalMenuItem?: React.ReactNode;
-  translator?: (el: String) => String;
+  translator?: (kye: string, options?: any) => string;
 }) {
   if (items) {
     return (

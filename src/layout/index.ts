@@ -1,3 +1,8 @@
+import ActionBar from './components/ActionBar'
+import Header from './components/Header'
+import PageContent from './components/PageContent'
+import Sidebar from './components/Sidebar'
+import Wrapper from './components/Wrapper'
 import {
   Layout,
   PageHeader,
@@ -83,5 +88,10 @@ export {
   SectionBodyItem,
   MobileRecommend,
   FieldStyle,
-  PasswordWithEye
+  PasswordWithEye,
+  ActionBar,
+  Header,
+  PageContent,
+  Sidebar,
+  Wrapper
 }
