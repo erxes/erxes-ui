@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import styledTS from 'styled-components-ts';
+import { dimensions } from '.';
 import colors from './colors';
-import dimensions from './dimensions';
 
 const columnSizing = '20px';
 const borderRadius = '2px';
@@ -151,4 +151,4 @@ const ActionTop = styled.div`
   }
 `;
 
-export default { Columns, Column, Title, Footer, Select, ActionTop };
+export { Columns, Column, Title, Footer, Select, ActionTop };

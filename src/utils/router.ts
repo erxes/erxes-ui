@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import { router } from './core';
+import { router } from '.';
 
 /**
  * @param {Object} query
@@ -152,6 +152,5 @@ export default {
   removeParams,
   removeHash,
   refetchIfUpdated,
-  checkHashKeyInURL,
-  generatePaginationParams
+  checkHashKeyInURL
 };

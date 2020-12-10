@@ -1,118 +1,94 @@
 {
-  "name": "erxes-ui-utils",
-  "version": "0.1.22",
-  "description": "erxes component library",
-  "license": "MIT",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "keywords": [
-    "erxes",
-    "component",
-    "library",
-    "javascript",
-    "typescript"
-  ],
-  "directories": {
-    "lib": "lib"
-  },
-  "files": [
-    "lib"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/erxes/erxes-ui.git"
-  },
-  "bugs": {
-    "url": "https://github.com/erxes/erxes-icon/issues"
-  },
-  "author": "erxes",
-  "homepage": "https://erxes.io/",
-  "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
-  },
+  "name": "erxes",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
-    "@nateradebaugh/react-datetime": "4.0.0-rc.10",
-    "@types/node": "^14.14.6",
+    "@daily-co/daily-js": "^0.9.995",
+    "@nateradebaugh/react-datetime": "^4.0.0-rc.10",
+    "@nivo/line": "0.35.0",
+    "@nivo/pie": "0.35.0",
+    "@types/bunyan": "^1.8.6",
+    "@types/draft-js": "^0.10.24",
+    "@types/enzyme": "^3.1.12",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jest": "^26.0.10",
+    "@types/node": "^10.9.4",
     "@types/react": "^16.4.13",
-    "@types/react-dom": "^16.9.9",
+    "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^5.1.3",
+    "@types/styled-components": "^3.0.0",
+    "abortcontroller-polyfill": "^1.4.0",
+    "apollo-cache-inmemory": "^1.1.5",
     "apollo-client": "^2.6.4",
-    "awesome-typescript-loader": "^5.2.0",
-    "color": "^3.1.3",
-    "css-loader": "^0.27.3",
+    "apollo-link": "^1.0.7",
+    "apollo-link-error": "^1.0.9",
+    "apollo-link-http": "^1.5.16",
+    "apollo-link-ws": "^1.0.8",
+    "apollo-utilities": "^1.0.5",
+    "bat-draft-js-mention-plugin": "^2.0.1",
+    "ckeditor4-react": "^1.0.0",
+    "classnames": "^2.2.5",
+    "color": "^3.1.2",
+    "cypress-file-upload": "^4.0.7",
     "date-fns": "1.29.0",
     "dayjs": "^1.8.15",
-    "dotenv-webpack": "^1.7.0",
+    "draft-js": "^0.10.5",
+    "draft-js-anchor-plugin": "^2.0.2",
+    "draft-js-buttons": "^2.0.1",
+    "draft-js-emoji-plugin": "^2.1.1",
+    "draft-js-export-html": "^1.2.0",
+    "draft-js-plugins-editor": "^2.0.3",
+    "draft-js-static-toolbar-plugin": "^3.0.0",
+    "erxes-icon": "^1.2.1",
+    "fuzzysearch-highlight": "^1.0.3",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
+    "i18n-react": "^0.6.4",
+    "juice": "^5.2.0",
+    "lodash": "^4.17.15",
+    "lodash.flowright": "^3.5.0",
     "query-string": "^5.0.0",
-    "react": "16.11.0",
+    "react": "^16.11.0",
     "react-apollo": "^3.1.3",
+    "react-beautiful-dnd": "^13.0.0",
     "react-bootstrap": "^1.0.0-beta.14",
-    "react-dom": "16.11.0",
+    "react-color": "^2.17.3",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.11.0",
+    "react-markdown": "^3.3.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.0.1",
+    "react-select-plus": "^1.0.0-rc.5",
     "react-toggle": "^4.1.1",
     "react-transition-group": "^2.5.1",
-    "styled-components": "3.4.10",
+    "request-idle-callback": "^1.0.2",
+    "sanitize-html": "^1.20.1",
+    "strip": "^3.0.0",
+    "styled-components": "^3.2.6",
     "styled-components-ts": "^0.0.14",
-    "tslint": "^6.1.3",
-    "typescript": "^3.0.3",
-    "validator": "12.1.0",
-    "web-vitals": "^0.2.4",
-    "webpack": "4.16.3",
-    "webpack-cli": "^3.1.0"
+    "subscriptions-transport-ws": "^0.9.16",
+    "ua-parser-js": "^0.7.17",
+    "underscore.string": "^3.3.5",
+    "validator": "^12.1.0",
+    "xss": "^1.0.3"
   },
   "scripts": {
-    "start": "start-storybook -p 9009 -s public",
-    "eject": "react-scripts eject",
-    "dev-webpack": "webpack --mode development --watch --progress",
-    "build-webpack": "webpack --mode production --config=webpack.config.js",
-    "build-storybook": "build-storybook --no-dll",
-    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
-    "clean": "rm -rf ./lib",
-    "prebuild": "yarn clean",
-    "build": "yarn build-webpack && tsc --build \"./tsconfig.json\"",
-    "copy-files": "copyfiles -u 1 src/style/erxes-base.css lib/",
-    "postbuild": "yarn run copy-files"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "src/**/*.stories.js"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
+    "build": "tsc -p tsconfig.prod.json"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@storybook/addon-actions": "^6.0.28",
-    "@storybook/addon-essentials": "^6.0.28",
-    "@storybook/addon-knobs": "^6.0.28",
-    "@storybook/addon-links": "^6.0.28",
-    "@storybook/node-logger": "^6.0.28",
-    "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "^6.0.28",
-    "babel-loader": "^8.1.0",
-    "copyfiles": "^2.4.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.1.2",
-    "react-is": "^17.0.1",
-    "storybook-readme": "^5.0.8"
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "ts-jest": "^23.0.1",
+    "typescript": "^3.0.3",
+    "cypress": "^4.9.0"
   },
-  "resolutions": {
-    "@types/react": "^16.4.13"
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "engines": {
+    "node": ">=10.x.x"
   }
 }

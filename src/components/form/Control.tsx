@@ -10,7 +10,7 @@ import {
 } from './styles';
 import Textarea from './Textarea';
 
-type FormControlProps = {
+type Props = {
   children?: React.ReactNode;
   id?: string;
   onChange?: (e: React.FormEvent<HTMLElement>) => void;
@@ -41,6 +41,7 @@ type FormControlProps = {
   onBlur?: (e: React.FormEvent<HTMLElement>) => void;
   maxHeight?: number;
   maxLength?: number;
+  color?: string;
 };
 
 const renderElement = (Element, attributes, type, child) => {
@@ -55,7 +56,7 @@ const renderElement = (Element, attributes, type, child) => {
   );
 };
 
-class FormControl extends React.Component<FormControlProps> {
+class FormControl extends React.Component<Props> {
   static defaultProps = {
     componentClass: 'input',
     required: false,
@@ -110,7 +111,8 @@ class FormControl extends React.Component<FormControlProps> {
       max: props.max,
       id: props.id,
       maxHeight: props.maxHeight,
-      maxLength: props.maxLength
+      maxLength: props.maxLength,
+      color: props.color
     };
 
     if (elementType === 'select') {

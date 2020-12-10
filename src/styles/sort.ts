@@ -1,6 +1,6 @@
+import { colors } from '../styles';
 import styled from 'styled-components';
 import styledTS from 'styled-components-ts';
-import colors from './colors';
 
 const SortItem = styledTS<{ isDragging: boolean; isModal: boolean }>(
   styled.div
@@ -12,7 +12,7 @@ const SortItem = styledTS<{ isDragging: boolean; isModal: boolean }>(
   position: relative;
   display: flex;
   justify-content: space-between;
-  border-left: 2px solid transparent;
+  border-left: 2px solid transparent; 
   box-shadow: ${props =>
     props.isDragging ? `0 2px 8px ${colors.shadowPrimary}` : 'none'};
   left: ${props =>
@@ -46,4 +46,4 @@ const DragHandler = styled.div`
   }
 `;
 
-export default { SortItem, SortableWrapper, DragHandler };
+export { SortItem, SortableWrapper, DragHandler };

@@ -1,24 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { ITEM_COLORS } from "./constants";
-import { Action, Container, ItemContent, Items } from "./styles";
-import Button from "../button";
-import Icon from "../icon";
+import Button from '../Button';
+import { __ } from '../../utils';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Icon from '../Icon';
+import { ITEM_COLORS } from './constants';
+import { Action, Container, ItemContent, Items } from './styles';
 
-export type EmptyContentProps = {
+type Props = {
   content: any;
   vertical?: boolean;
   maxItemWidth?: string;
-  translator?: (key: string, options?: any) => string;
 };
 
-function EmptyContent({ content, vertical, maxItemWidth, translator }: EmptyContentProps) {
-  const __ = (key: string, options?: any) => {
-    if (!translator) {
-      return key;
-    }
-    return translator(key, options);
-  }
+function EmptyContent({ content, vertical, maxItemWidth }: Props) {
   const { steps, title, description, url, urlText } = content;
 
   const renderButton = (

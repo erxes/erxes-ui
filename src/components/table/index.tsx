@@ -1,7 +1,7 @@
-import React from "react";
-import StyledTable from "./styles";
+import React from 'react';
+import StyledTable from './styles';
 
-type TableProps = {
+type Props = {
   children: React.ReactNode;
   striped?: boolean;
   bordered?: boolean;
@@ -12,7 +12,7 @@ type TableProps = {
   alignTop?: boolean;
 };
 
-class Table extends React.Component<TableProps> {
+class Table extends React.Component<Props> {
   static defaultProps = {
     required: false,
     striped: false,
@@ -20,7 +20,7 @@ class Table extends React.Component<TableProps> {
     condensed: false,
     hover: false,
     responsive: false,
-    alignTop: false,
+    alignTop: false
   };
 
   render() {

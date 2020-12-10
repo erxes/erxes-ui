@@ -1,4 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
+import { __ } from '.';
+import { IDateColumn } from '../types';
 
 const MONTHS = [
   'January',
@@ -20,7 +22,7 @@ const MONTHS = [
  * @param date - current date
  * @param range - range of months to get
  */
-export const monthColumns = (date: Dayjs, range: number) => {
+export const monthColumns = (date: Dayjs, range: number): [IDateColumn] => {
   let currentDate = date.clone(); // deep copy prevent mutability
 
   const months: any = [getMonthYear(currentDate)];
@@ -43,11 +45,11 @@ export const previousMonth = (date: Dayjs): Dayjs => {
   return date.subtract(1, 'month');
 };
 
-export const getMonthTitle = (month: number): string => MONTHS[month];
+export const getMonthTitle = (month: number): string => __(MONTHS[month]);
 
-export const getFullTitle = (date): string => {
+export const getFullTitle = (date: IDateColumn): string => {
   const { month, year } = date;
-  return MONTHS[month] + ' - ' + year;
+  return __(MONTHS[month]) + ' - ' + year;
 };
 
 export const getMonthYear = (date: Dayjs): { month: number; year: number } => {
@@ -56,13 +58,3 @@ export const getMonthYear = (date: Dayjs): { month: number; year: number } => {
 
   return { month, year };
 };
-
-export default {
-  monthColumns,
-  getCurrentDate,
-  nextMonth,
-  previousMonth,
-  getMonthTitle,
-  getFullTitle,
-  getMonthYear ,
-}

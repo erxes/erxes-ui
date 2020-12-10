@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ConfirmDialog from '../../components/confirmDialog';
+import ConfirmDialog from '../../components/ConfirmDialog';
 
 const createConfirmation = (unmountDelay = 1000) => {
   return props => {

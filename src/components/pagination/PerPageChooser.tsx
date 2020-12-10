@@ -1,14 +1,14 @@
+import DropdownToggle from '../DropdownToggle';
+import Icon from '../Icon';
+import { IRouterProps } from '../../types';
+import { __, router } from '../../utils';
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { withRouter } from 'react-router-dom';
-import { router } from '../../utils';
-import DropdownToggle from '../dropdownToggle';
-import Icon from '../icon';
-import { IRouterProps } from '../types';
 import { Option, PerPageButton } from './styles';
 
 // per page chooser component
-const PerPageChooser = ({ history, translator }: IRouterProps & { translator?: (key: string, options?: any) => string }) => {
+const PerPageChooser = ({ history }: IRouterProps) => {
   const currentPerPage = Number(router.getParam(history, 'perPage')) || 20;
 
   const onClick = perPage => {
@@ -29,8 +29,7 @@ const PerPageChooser = ({ history, translator }: IRouterProps & { translator?: (
     <Dropdown className="dropdown-btn" drop="up">
       <Dropdown.Toggle as={DropdownToggle} id="per-page-chooser">
         <PerPageButton>
-          {currentPerPage}
-          {translator ? translator('per page') : 'per page'} <Icon icon="angle-up" />
+          {currentPerPage} {__('per page')} <Icon icon="angle-up" />
         </PerPageButton>
       </Dropdown.Toggle>
       <Dropdown.Menu>
@@ -43,4 +42,4 @@ const PerPageChooser = ({ history, translator }: IRouterProps & { translator?: (
   );
 };
 
-export default withRouter<IRouterProps, React.ComponentType<IRouterProps>>(PerPageChooser);
+export default withRouter<IRouterProps>(PerPageChooser);

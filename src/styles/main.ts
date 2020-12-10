@@ -1,33 +1,11 @@
-import { colors, dimensions } from '.';
-import { rgba } from './color';
+import { colors, dimensions, typography } from '../styles';
+import { rgba } from '../styles/color';
+// TODO: fix
+// import { Actions } from 'modules/customers/styles';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
 
-const Actions = styledTS<{ isSmall?: boolean }>(styled.div)`
-  display: flex;
-  justify-content: space-between;
-  padding: 0 ${dimensions.coreSpacing}px ${dimensions.unitSpacing}px;
-
-  > a, button {
-    flex: 1;
-    padding: 4px 15px;
-
-    i {
-      font-size: 12px;
-      line-height: 16px;
-    }
-  }
-
-  > div {
-    margin-left: 10px;
-  }
-
-  .dropdown {
-    display: ${props => (props.isSmall ? 'inline-block' : 'block')};
-  }
-`;
-
-export const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled.div)`
+const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled.div)`
   flex: 1;
   display: flex;
   min-height: 100%;
@@ -35,11 +13,11 @@ export const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled
   align-items: ${props => (props.align ? 'flex-start' : 'center')};
 `;
 
-export const MiddleContent = styledTS<{ transparent?: boolean; shrink?: boolean }>(
+const MiddleContent = styledTS<{ transparent?: boolean; shrink?: boolean }>(
   styled.div
 )`
   width: 900px;
-
+  
   background: ${props => !props.transparent && colors.colorWhite};
   margin: 10px 0;
 
@@ -115,11 +93,20 @@ const InfoWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
-  ${Actions} {
-    padding: 0;
-  }
 `;
+
+// TODO: fix
+// const InfoWrapper = styled.div`
+//   padding: 20px 20px 30px 20px;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+
+//   ${Actions} {
+//     padding: 0;
+//   }
+// `;
 
 const Links = styled.div`
   margin-top: 5px;
@@ -193,7 +180,7 @@ const HomeContainer = styled.div`
   width: 320px;
 `;
 
-export const CloseModal = styled.div`
+const CloseModal = styled.div`
   position: absolute;
   right: -40px;
   width: 30px;
@@ -240,6 +227,7 @@ const DateContainer = styled.div`
     background: none;
     border-bottom: 1px solid ${colors.colorShadowGray};
     padding: 5px 0;
+    font-size: ${typography.fontSizeBody}px;
 
     &:focus {
       box-shadow: none;
@@ -296,7 +284,7 @@ const Title = styledTS<{ capitalize?: boolean }>(styled.div)`
   font-size: 24px;
   margin: 20px 0;
   display: flex;
-  line-height: 30px;
+  line-height: 30px;  
   text-transform: ${props => props.capitalize && 'capitalize'};
 
   > span {
@@ -314,14 +302,13 @@ const Count = styled.div`
   color: #666;
 `;
 
-export const Limited = styled.div`
+const Limited = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 200px;
 `;
 
-export default {
-  Actions,
+export {
   BoxRoot,
   FullContent,
   ModalFooter,

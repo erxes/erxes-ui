@@ -1,8 +1,7 @@
+import { rgba } from '../../styles/color';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
-import colors from '../../styles/colors';
-import typography from '../../styles/typography';
-import dimensions from '../../styles/dimensions';
+import { colors, dimensions, typography } from '../../styles';
 
 const inputPadding = '0px';
 const inputHeight = '15px';
@@ -129,7 +128,7 @@ const TextArea = styledTS<{
   maxHeight?: number;
 }>(styled(Input.withComponent('textarea')))`
   transition: none;
-  max-height: ${props => props.maxHeight ? `${props.maxHeight}px` : 'none'};
+  max-height: ${props => props.maxHeight && `${props.maxHeight}px`};
   min-height: 80px;
   resize: none;
 `;
@@ -145,7 +144,9 @@ const FormLabel = styled.label`
   }
 `;
 
-const inputStyle = styledTS<{ disabled?: boolean }>(styled.input)`
+const inputStyle = styledTS<{ disabled?: boolean; color?: string }>(
+  styled.input
+)`
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
   clip-path: inset(50%) !important;
@@ -168,7 +169,8 @@ const inputStyle = styledTS<{ disabled?: boolean }>(styled.input)`
   &:hover {
     + span {
       &::before {
-        border-color: ${colors.colorLightGray};
+        border-color: ${props =>
+          props.color ? props.color : colors.colorLightGray};
       }
     }
   }
@@ -188,7 +190,8 @@ const inputStyle = styledTS<{ disabled?: boolean }>(styled.input)`
 
     &:before {
       background-color: ${colors.colorWhite};
-      border: ${inputBorderWidth} solid ${colors.colorShadowGray};
+      border: ${inputBorderWidth} solid ${props =>
+  props.color ? rgba(props.color, 0.7) : colors.colorShadowGray};
       box-sizing: content-box;
       content: '';
       color: ${colors.colorWhite};
@@ -258,7 +261,7 @@ const Radio = styled(inputStyle)`
   }
 `;
 
-const Checkbox = styled(inputStyle)`
+const Checkbox = styledTS<{ color?: string }>(styled(inputStyle))`
   + span {
     &:after {
       background-color: transparent;
@@ -280,7 +283,8 @@ const Checkbox = styled(inputStyle)`
   &:checked + span {
     &:before {
       animation: none;
-      background-color: ${colors.colorSecondary};
+      background-color: ${props =>
+        props.color ? props.color : colors.colorSecondary};
       border-color: transparent;
     }
 
@@ -304,20 +308,6 @@ const FlexWrapper = styled.span`
 `;
 
 export {
-  Input,
-  SelectWrapper,
-  Select,
-  TextArea,
-  Radio,
-  Checkbox,
-  FormLabel,
-  Label,
-  Formgroup,
-  FlexWrapper,
-  Error
-};
-
-export default {
   Input,
   SelectWrapper,
   Select,

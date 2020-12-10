@@ -1,11 +1,9 @@
-import styled, { css } from "styled-components";
-import styledTS from "styled-components-ts";
-import { FormLabel, Input } from "../form/styles";
-import colors from "../../styles/colors";
-import dimensions from "../../styles/dimensions";
-import typography from "../../styles/typography";
+import styled, { css } from 'styled-components';
+import styledTS from 'styled-components-ts';
+import { colors, dimensions, typography } from '../../styles';
+import { FormLabel, Input } from '../form/styles';
 
-const tableHoverColor = "#f5f5f5";
+const tableHoverColor = '#f5f5f5';
 
 const StyledTable = styledTS<{
   whiteSpace?: string;
@@ -14,12 +12,12 @@ const StyledTable = styledTS<{
   bordered?: boolean;
   striped?: boolean;
 }>(styled.table)`
-  ${(props) => css`
+  ${props => css`
     width: 100%;
     max-width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
-    white-space: ${props.whiteSpace || ""};
+    white-space: ${props.whiteSpace || ''};
 
     th,
     td {
@@ -27,7 +25,7 @@ const StyledTable = styledTS<{
       color: ${colors.textPrimary};
       padding: ${dimensions.unitSpacing - 2}px;
       display: table-cell;
-      vertical-align: ${props.alignTop && "top"};
+      vertical-align: ${props.alignTop && 'top'};
 
       & ${FormLabel}, & ${Input} {
         margin: 0px;
@@ -50,13 +48,19 @@ const StyledTable = styledTS<{
       }
     }
 
-    ${props.hover
-      ? `tr:hover td { background-color: ${tableHoverColor}; }`
-      : null} ${props.bordered
+    ${
+      props.hover
+        ? `tr:hover td { background-color: ${tableHoverColor}; }`
+        : null
+    } ${
+    props.bordered
       ? `th, td { border-bottom: 1px solid ${colors.borderPrimary}; }`
-      : null} ${props.striped
+      : null
+  } ${
+    props.striped
       ? `tr:nth-of-type(odd) td { background-color: ${colors.bgLightPurple}; }`
-      : null} th {
+      : null
+  } th {
       border-top: none;
     }
 
@@ -88,7 +92,8 @@ const StyledTable = styledTS<{
     @media (min-width: 1170px) {
       th,
       td {
-        padding: ${dimensions.unitSpacing - 2}px ${dimensions.coreSpacing - 2}px;
+        padding: ${dimensions.unitSpacing - 2}px ${dimensions.coreSpacing -
+    2}px;
 
         &:first-child {
           padding-left: ${dimensions.coreSpacing}px;

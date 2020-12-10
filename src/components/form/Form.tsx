@@ -1,22 +1,13 @@
-import React from "react";
-import validator from "validator";
-import { generateRandomString, isValidUsername } from "../helpers";
-import { Error } from "./styles";
+import { IFormProps } from '../../types';
+import React from 'react';
+import validator from 'validator';
+import { __, generateRandomString, isValidUsername } from '../../utils';
+import { Error } from './styles';
 
-export interface IRenderContentProps {
-  errors: any;
-  values: any;
-  registerChild: (child: React.ReactNode) => void;
-  runValidations?: (callback: any) => void;
-  resetSubmit?: () => void;
-  isSubmitted: boolean;
-}
-
-export type IFormProps = {
-  renderContent: (props: IRenderContentProps) => React.ReactNode;
+type Props = {
+  renderContent: (props: IFormProps) => React.ReactNode;
   onSubmit?: (values: any) => any;
   autoComplete?: string;
-  translator?: (key: string, options?: any) => string;
 };
 
 type State = {
@@ -25,21 +16,21 @@ type State = {
   isSubmitted: boolean;
 };
 
-class Form extends React.Component<IFormProps, State> {
+class Form extends React.Component<Props, State> {
   private formId: string = generateRandomString();
   private children: any[] = [];
 
-  constructor(props: IFormProps) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
       errors: {},
       values: {},
-      isSubmitted: false,
+      isSubmitted: false
     };
   }
 
-  registerChild = (child) => {
+  registerChild = child => {
     this.children.push(child);
   };
 
@@ -57,7 +48,7 @@ class Form extends React.Component<IFormProps, State> {
     }
 
     this.setState({ errors, values }, () => {
-      const hasErrors = Object.values(errors).some((error) => error !== null);
+      const hasErrors = Object.values(errors).some(error => error !== null);
 
       if (hasErrors) {
         return;
@@ -75,42 +66,33 @@ class Form extends React.Component<IFormProps, State> {
     return document.querySelector(`#${this.formId} [name='${name}']`) as any;
   };
 
-  getValue = (child) => {
+  getValue = child => {
     const element = this.getSelector(child.props.name);
 
     if (element) {
       return element.value;
     }
 
-    return "";
+    return '';
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
 
     this.runValidations();
   };
 
-  validate = (child) => {
-    const { translator } = this.props;
-    const __ = (key: string, options?: any) => {
-      if (!translator) {
-        return key;
-      }
-
-      return translator(key, options);
-    }
-
+  validate = child => {
     const { props } = child;
     const element = this.getSelector(props.name);
-    const value = element ? element.value : "";
+    const value = element ? element.value : '';
 
     if (props.required && !value) {
       return <Error>{__('Required field')}</Error>;
     }
 
-    if (props.type === "email" && !validator.isEmail(value)) {
+    if (props.type === 'email' && !validator.isEmail(value)) {
       return (
         <Error>
           {__('Invalid email format! Please enter a valid email address')}
@@ -120,18 +102,20 @@ class Form extends React.Component<IFormProps, State> {
 
     if (
       props.max &&
-      !validator.isLength("description", { min: 0, max: props.max })
+      !validator.isLength('description', { min: 0, max: props.max })
     ) {
-      return <Error>
-        {__('Maximum length is')} {props.max} {__('characters')}
-      </Error>;
+      return (
+        <Error>
+          {__('Maximum length is')} {props.max} {__('characters')}
+        </Error>
+      );
     }
 
-    if (value && props.type === "url" && !validator.isURL(value)) {
+    if (value && props.type === 'url' && !validator.isURL(value)) {
       return <Error>{__('Invalid link')}</Error>;
     }
 
-    if (value && props.type === "number" && !validator.isFloat(value)) {
+    if (value && props.type === 'number' && !validator.isFloat(value)) {
       return (
         <Error>
           {__('Invalid number format! Please enter a valid number')}
@@ -139,7 +123,7 @@ class Form extends React.Component<IFormProps, State> {
       );
     }
 
-    if (value && props.name === "username" && !isValidUsername(value)) {
+    if (value && props.name === 'username' && !isValidUsername(value)) {
       return <Error>{__('Invalid Username')}</Error>;
     }
 
@@ -160,7 +144,7 @@ class Form extends React.Component<IFormProps, State> {
           registerChild: this.registerChild,
           runValidations: this.runValidations,
           isSubmitted: this.state.isSubmitted,
-          resetSubmit: this.resetSubmit,
+          resetSubmit: this.resetSubmit
         })}
       </form>
     );

@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import styledTS from "styled-components-ts";
-import dimensions from "../../styles/dimensions";
-import colors from "../../styles/colors";
-import { rgba, darken } from "../../styles/color";
+import { darken, rgba } from '../../styles/color';
+import styled from 'styled-components';
+import styledTS from 'styled-components-ts';
+import { colors, dimensions } from '../../styles';
 
 const Container = styled.div`
   display: flex;
@@ -35,7 +34,7 @@ const Container = styled.div`
 const Items = styledTS<{ vertical?: boolean }>(styled.div)`
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: ${(props) => (props.vertical ? "column" : "row")};
+	flex-direction: ${props => (props.vertical ? 'column' : 'row')};
 `;
 
 const Action = styled.div`
@@ -55,12 +54,12 @@ const ItemContent = styledTS<{
   vertical?: boolean;
   max?: string;
 }>(styled.div)`
-	background: ${(props) => rgba(props.color, 0.2)};
+	background: ${props => rgba(props.color, 0.2)};
 	padding: 25px 30px;
 	border-radius: 5px;
 	margin: 10px;
 	min-width: 240px;
-	max-width: ${(props) => (props.vertical ? "420px" : props.max)};
+	max-width: ${props => (props.vertical ? '420px' : props.max)};
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -77,10 +76,10 @@ const ItemContent = styledTS<{
 	}
 
 	${Action} > button, ${Action} > a {
-		background: ${(props) => props.color};
-
+		background: ${props => props.color};
+		
 		&:hover {
-			background: ${(props) => darken(props.color, 15)};
+			background: ${props => darken(props.color, 15)};
 		}
 	}
 
@@ -104,7 +103,7 @@ const ItemContent = styledTS<{
 			}
 		}
 	}
-
+	
 	> i {
 		line-height: 32px;
 		background: ${colors.colorWhite};
@@ -118,8 +117,8 @@ const ItemContent = styledTS<{
 	}
 
 	&:hover {
-		background: ${(props) => rgba(props.color, 0.3)};
-		border-color: ${(props) => props.color};
+		background: ${props => rgba(props.color, 0.3)};
+		border-color: ${props => props.color};
 	}
 `;
 

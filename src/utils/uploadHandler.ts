@@ -1,4 +1,5 @@
-import Alert from './Alert';
+import { getEnv } from 'apolloClient';
+import { Alert } from '../utils';
 
 type FileInfo = {
   name: string;
@@ -33,7 +34,9 @@ export const deleteHandler = (params: {
   fileName: string;
   url?: string;
   afterUpload: ({ status }: { status: string }) => any;
-}, REACT_APP_API_URL) => {
+}) => {
+  const { REACT_APP_API_URL } = getEnv();
+
   const {
     url = `${REACT_APP_API_URL}/delete-file`,
     fileName,
@@ -65,7 +68,9 @@ export const deleteHandler = (params: {
   });
 };
 
-export const uploadHandler = (params: Params, REACT_APP_API_URL) => {
+const uploadHandler = (params: Params) => {
+  const { REACT_APP_API_URL } = getEnv();
+
   const {
     files,
     beforeUpload,
@@ -165,4 +170,4 @@ export const uploadHandler = (params: Params, REACT_APP_API_URL) => {
   }
 };
 
-export default { uploadHandler, deleteHandler } ;
+export default uploadHandler;

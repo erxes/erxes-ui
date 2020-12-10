@@ -1,20 +1,17 @@
-import styled from "styled-components";
-import styledTS from "styled-components-ts";
-import colors from "../../styles/colors";
-import dimensions from "../../styles/dimensions";
-import typography from "../../styles/typography";
+import styled from 'styled-components';
+import styledTS from 'styled-components-ts';
+import { colors, dimensions, typography } from '../../styles';
 
 const TabContainer = styledTS<{ grayBorder?: boolean; full?: boolean }>(
   styled.div
 )`
   border-bottom: 1px solid
-    ${(props) =>
-      props.grayBorder ? colors.borderDarker : colors.borderPrimary};
+    ${props => (props.grayBorder ? colors.borderDarker : colors.borderPrimary)};
   margin-bottom: -1px;
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: ${(props) => props.full && "space-evenly"};
+  justify-content: ${props => props.full && 'space-evenly'};
   flex-shrink: 0;
   height: ${dimensions.headerSpacing}px;
 `;
@@ -42,7 +39,7 @@ const TabCaption = styled.span`
 
     &:before {
       border-bottom: 3px solid ${colors.colorSecondary};
-      content: "";
+      content: '';
       width: 100%;
       position: absolute;
       z-index: 1;
@@ -53,4 +50,3 @@ const TabCaption = styled.span`
 `;
 
 export { TabContainer, TabCaption };
-export default { TabContainer, TabCaption };
