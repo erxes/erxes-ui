@@ -1,4 +1,4 @@
-import { __ } from '../utils';
+import { __ } from 'modules/common/utils';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
@@ -12,7 +12,7 @@ type Props = {
   title: string;
   trigger?: React.ReactNode;
   autoOpenKey?: string;
-  content: ({ closeModal }: { closeModal: () => void }) => void;
+  content: ({ closeModal }: { closeModal: () => void }) => React.ReactNode;
   size?: 'sm' | 'lg' | 'xl';
   ignoreTrans?: boolean;
   dialogClassName?: string;
