@@ -129,3 +129,13 @@ export {
   AvatarImg,
   IconWrapper
 };
+
+export default {
+  PopoverHeader,
+  PopoverBody,
+  PopoverList,
+  PopoverFooter,
+  FlexRow,
+  AvatarImg,
+  IconWrapper
+};
