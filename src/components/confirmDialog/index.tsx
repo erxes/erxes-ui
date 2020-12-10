@@ -49,7 +49,7 @@ const Error = styled.span`
   }
 `;
 
-type Props = {
+type ConfirmDialogProps = {
   options?: {
     okLabel?: string;
     cancelLabel?: string;
@@ -68,7 +68,7 @@ type State = {
   errors: { [key: string]: React.ReactNode };
 };
 
-class ConfirmDialog extends React.Component<Props, State> {
+class ConfirmDialog extends React.Component<ConfirmDialogProps, State> {
   constructor(props) {
     super(props);
 

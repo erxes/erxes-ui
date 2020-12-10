@@ -1,13 +1,13 @@
 import React from 'react';
 import { TextArea } from './styles';
 
-type Props = {
+type TextareaProps = {
   onChange?: (e: React.FormEvent<HTMLTextAreaElement>) => void;
   hasError?: boolean;
   maxHeight?: number;
 };
 
-class Textarea extends React.Component<Props> {
+class Textarea extends React.Component<TextareaProps> {
   private area;
 
   componentDidMount() {

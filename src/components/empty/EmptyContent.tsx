@@ -5,14 +5,14 @@ import { Action, Container, ItemContent, Items } from "./styles";
 import Button from "../button";
 import Icon from "../icon";
 
-type Props = {
+type EmptyContentProps = {
   content: any;
   vertical?: boolean;
   maxItemWidth?: string;
   translator?: (key: string, options?: any) => string;
 };
 
-function EmptyContent({ content, vertical, maxItemWidth, translator }: Props) {
+function EmptyContent({ content, vertical, maxItemWidth, translator }: EmptyContentProps) {
   const __ = (key: string, options?: any) => {
     if (!translator) {
       return key;

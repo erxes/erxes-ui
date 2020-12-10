@@ -44,12 +44,12 @@ const RoundedBackground = styledTS<{ type: string; size?: number }>(
   }
 `;
 
-type Props = {
+type IntegrationIconProps = {
   integration: IIntegration;
   size?: number;
 };
 
-class IntegrationIcon extends React.PureComponent<Props> {
+class IntegrationIcon extends React.PureComponent<IntegrationIconProps> {
   getIcon() {
     const { integration } = this.props;
 

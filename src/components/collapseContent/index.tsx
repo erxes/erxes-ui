@@ -95,7 +95,7 @@ const Content = styledTS<{ full: boolean }>(styled.div)`
   }
 `;
 
-type Props = {
+type CollapseContentProps = {
   contendId?: string;
   title: string;
   children: React.ReactNode;
@@ -109,7 +109,7 @@ type Props = {
   id?: string;
 };
 
-function CollapseContent(props: Props) {
+function CollapseContent(props: CollapseContentProps) {
   const [open, toggleCollapse] = useState<boolean>(props.open || false);
 
   const onClick = () => {

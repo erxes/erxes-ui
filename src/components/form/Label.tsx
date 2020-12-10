@@ -1,14 +1,14 @@
 import React from 'react';
 import { Label } from './styles';
 
-type Props = {
+export type ControlLabelProps = {
   children: React.ReactNode | string;
   htmlFor?: string;
   required?: boolean;
   uppercase?: boolean;
 };
 
-function ControlLabel(props: Props) {
+function ControlLabel(props: ControlLabelProps) {
   const { children, required, uppercase = true } = props;
 
   return (

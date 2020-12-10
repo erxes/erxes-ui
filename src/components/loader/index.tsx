@@ -78,11 +78,11 @@ const Row = styled.div`
   margin-bottom: ${dimensions.coreSpacing}px;
 `;
 
-type Props = {
+type AnimatedLoaderProps = {
   loaderStyle?: IAnimatedLoader;
 };
 
-class AnimatedLoader extends React.Component<Props> {
+class AnimatedLoader extends React.Component<AnimatedLoaderProps> {
   render() {
     const { loaderStyle } = this.props;
 

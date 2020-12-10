@@ -4,7 +4,7 @@ import styledTS from "styled-components-ts";
 import { rotate } from "../../utils/animations";
 import colors from "../../styles/colors";
 
-type Props = {
+type SpinnerProps = {
   objective?: boolean;
   size?: number;
   left?: string;
@@ -13,12 +13,12 @@ type Props = {
   bottom?: string;
 };
 
-const Spin = styledTS<Props>(styled.div)`
+const Spin = styledTS<SpinnerProps>(styled.div)`
   height: ${(props) => props.objective && "100px"};
   position: ${(props) => props.objective && "relative"};
 `;
 
-export const MainLoader = styledTS<Props>(styled.div)`
+export const MainLoader = styledTS<SpinnerProps>(styled.div)`
   position: absolute;
   left: ${(props) => props.left};
   right: ${(props) => props.right};
@@ -42,7 +42,7 @@ function Spinner({
   bottom = "auto",
   left = "50%",
   right = "auto",
-}: Props) {
+}: SpinnerProps) {
   return (
     <Spin objective={objective}>
       <MainLoader

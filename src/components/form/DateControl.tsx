@@ -2,7 +2,7 @@ import Datetime from '@nateradebaugh/react-datetime';
 import React from 'react';
 import { FlexWrapper } from './styles';
 
-type Props = {
+type DateControlProps = {
   onChange?: (e: React.FormEvent<HTMLElement>) => void;
   defaultValue?: any;
   value?: any;
@@ -15,7 +15,7 @@ type Props = {
   registerChild?: (child: any) => void;
 };
 
-class DateControl extends React.Component<Props> {
+class DateControl extends React.Component<DateControlProps> {
   static defaultProps = {
     dateFormat: 'MMM,DD YYYY'
   };

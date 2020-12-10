@@ -15,15 +15,17 @@ const Items = styled.ul`
   font-size: 14px;
 `;
 
+export type SubmenuProps = {
+  items?: ISubMenuItem[];
+  additionalMenuItem?: React.ReactNode;
+  translator?: (kye: string, options?: any) => string;
+}
+
 function Submenu({
   items,
   additionalMenuItem,
   translator,
-}: {
-  items?: ISubMenuItem[];
-  additionalMenuItem?: React.ReactNode;
-  translator?: (kye: string, options?: any) => string;
-}) {
+}: SubmenuProps) {
   if (items) {
     return (
       <Items>

@@ -48,12 +48,14 @@ const Front = styled(Click)`
   left: 1px;
 `;
 
-function Chip(props: {
+export type ChipProps = {
   capitalize?: boolean;
   onClick: () => void;
   children: React.ReactNode;
   frontContent?: React.ReactNode;
-}) {
+}
+
+function Chip(props: ChipProps) {
   const { capitalize = false, onClick, children, frontContent } = props;
 
   return (

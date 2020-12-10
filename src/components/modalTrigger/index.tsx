@@ -7,7 +7,7 @@ import routerUtils from '../../utils/router';
 import Icon from '../icon';
 import { IRouterProps } from '../types';
 
-type Props = {
+type ModalTriggerProps = {
   title: string;
   trigger?: React.ReactNode;
   autoOpenKey?: string;
@@ -32,7 +32,7 @@ type State = {
   autoOpenKey?: string;
 };
 
-class ModalTrigger extends React.Component<Props, State> {
+class ModalTrigger extends React.Component<ModalTriggerProps, State> {
   static getDerivedStateFromProps(props, state) {
     if (props.autoOpenKey !== state.autoOpenKey) {
       if (routerUtils.checkHashKeyInURL(props.history, props.autoOpenKey)) {

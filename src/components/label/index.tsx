@@ -71,7 +71,7 @@ const LabelStyled = styledTS<{
   }
 `;
 
-type Props = {
+type LabelProps = {
   lblStyle?: string;
   lblColor?: string;
   children: React.ReactNode | string;
@@ -80,7 +80,7 @@ type Props = {
   translator?: (key: string, options?: any) => string;
 };
 
-class Label extends React.Component<Props> {
+class Label extends React.Component<LabelProps> {
   render() {
     const {
       children,

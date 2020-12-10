@@ -1,11 +1,11 @@
 import React from 'react';
 
-type Props = {
+type DropdownToggleProps = {
   children: React.ReactNode;
   onClick?: (e: React.FormEvent) => void;
 };
 
-class DropdownToggle extends React.Component<Props> {
+class DropdownToggle extends React.Component<DropdownToggleProps> {
   handleClick = e => {
     e.preventDefault();
     e.stopPropagation();

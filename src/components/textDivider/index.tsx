@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Tip from "../tip";
 import colors from "../../styles/colors";
 
-type Props = {
+type TextDividerProps = {
   text: string;
   date: Date;
 };
@@ -31,7 +31,7 @@ const Divider = styled.div`
   }
 `;
 
-function TextDivider({ text, date }: Props) {
+function TextDivider({ text, date }: TextDividerProps) {
   return (
     <Divider>
       <span>

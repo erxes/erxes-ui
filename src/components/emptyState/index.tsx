@@ -71,7 +71,7 @@ const ExtraContent = styled.div`
   }
 `;
 
-type Props = {
+type EmptyState = {
   text: string;
   icon?: string;
   image?: string;
@@ -89,7 +89,7 @@ function EmptyState({
   extra,
   light,
   translator
-}: Props) {
+}: EmptyState) {
   return (
     <EmptyStateStyled hugeness={size} light={light}>
       {icon ? <Icon icon={icon} /> : <img src={image} alt={text} />}

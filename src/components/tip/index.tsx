@@ -2,7 +2,7 @@ import React from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-type Props = {
+export type TipProps = {
   text?: string | React.ReactNode;
   children: React.ReactNode | any;
   placement?:
@@ -23,7 +23,7 @@ type Props = {
     | "left-start";
 };
 
-function Tip({ text, children, placement }: Props) {
+function Tip({ text, children, placement }: TipProps) {
   const tooltip = <Tooltip id="tooltip">{text}</Tooltip>;
   const placementValue = placement || "auto";
 

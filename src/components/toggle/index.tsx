@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   }
 `;
 
-type Props = {
+type ToggleProps = {
   value?: string;
   name?: string;
   id?: string;
@@ -41,7 +41,7 @@ type Props = {
   icons?: any;
 };
 
-export default (props: Props) => (
+export default (props: ToggleProps) => (
   <Wrapper>
     <Toggle {...props} />
   </Wrapper>

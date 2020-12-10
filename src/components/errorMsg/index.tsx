@@ -7,11 +7,11 @@ const Text = styledTS<{}>(styled.span)`
   color: red
 `;
 
-type Props = {
+type ErrorMsgProps = {
   children: string;
 };
 
-class ErrorMsg extends React.PureComponent<Props> {
+class ErrorMsg extends React.PureComponent<ErrorMsgProps> {
   render() {
     const { children } = this.props;
 

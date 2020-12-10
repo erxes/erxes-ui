@@ -28,12 +28,12 @@ const IconClass = styled.div`
   color: ${colors.colorCoreRed};
 `;
 
-type Props = {
+type HelpPopoverProps = {
   title?: string;
   trigger?: "hover" | "click" | "focus";
 };
 
-class HelpPopover extends React.Component<Props> {
+class HelpPopover extends React.Component<HelpPopoverProps> {
   renderContent() {
     const { title } = this.props;
     return (

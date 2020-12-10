@@ -2,7 +2,7 @@ import React from "react";
 import Spinner from "../spinner";
 import EmptyState from "../emptyState";
 
-type Props = {
+type DataWithLoaderProps = {
   data: any;
   count?: any;
   loading: boolean;
@@ -15,7 +15,7 @@ type Props = {
   loadingContent?: React.ReactNode;
 };
 
-class DataWithLoader extends React.Component<Props> {
+class DataWithLoader extends React.Component<DataWithLoaderProps> {
   static defaultProps = {
     emptyText: "There is no data",
     emptyIcon: "",

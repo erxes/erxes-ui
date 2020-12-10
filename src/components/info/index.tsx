@@ -23,12 +23,12 @@ const InfoBox = styledTS<{ bordered?: boolean }>(styled.div)`
   }
 `;
 
-type Props = {
+type InfoProps = {
   children: React.ReactNode;
   bordered?: boolean;
 };
 
-class Info extends React.PureComponent<Props> {
+class Info extends React.PureComponent<InfoProps> {
   render() {
     const { children, bordered = true } = this.props;
 

@@ -109,7 +109,7 @@ class Page extends React.Component<{
   }
 }
 
-interface IPaginationProps extends IRouterProps {
+export interface IPaginationProps extends IRouterProps {
   totalPagesCount: number;
   pages?: number[];
   currentPage?: number;

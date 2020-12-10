@@ -1,15 +1,17 @@
 import React from "react";
 import { TabCaption, TabContainer } from "./styles";
 
-function Tabs(props: {
+export type TabsProps = {
   children: React.ReactNode;
   grayBorder?: boolean;
   full?: boolean;
-}) {
+}
+
+function Tabs(props: TabsProps) {
   return <TabContainer {...props} />;
 }
 
-type TabTitleProps = {
+export type TabTitleProps = {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;

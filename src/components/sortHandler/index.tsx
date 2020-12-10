@@ -37,7 +37,7 @@ const SortWrapper = styled.div`
   }
 `;
 
-interface IProps extends IRouterProps {
+interface ISortHandlerProps extends IRouterProps {
   sortField?: string;
   label?: string;
 }
@@ -46,7 +46,7 @@ type State = {
   sortValue: string | number;
 };
 
-class SortHandler extends React.Component<IProps, State> {
+class SortHandler extends React.Component<ISortHandlerProps, State> {
   constructor(props) {
     super(props);
     const { history } = props;
@@ -112,4 +112,4 @@ class SortHandler extends React.Component<IProps, State> {
   }
 }
 
-export default withRouter<IProps, React.ComponentType<IProps>>(SortHandler);
+export default withRouter<ISortHandlerProps, React.ComponentType<ISortHandlerProps>>(SortHandler);

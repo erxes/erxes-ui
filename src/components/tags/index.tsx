@@ -25,13 +25,13 @@ const TagList = styledTS<{ length: number }>(styled.div).attrs({
   }
 `;
 
-type Props = {
+type TagsProps = {
   tags: ITag[];
   size?: string;
   limit?: number;
 };
 
-function Tags({ tags, limit }: Props) {
+function Tags({ tags, limit }: TagsProps) {
   const length = tags.length;
 
   return (

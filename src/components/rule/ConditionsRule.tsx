@@ -86,7 +86,7 @@ const RuleDescription = styled.p`
   text-transform: initial;
 `;
 
-type Props = {
+type ConditionsRuleProps = {
   rules: IConditionsRule[];
   onChange: (name: "rules", rules: IConditionsRule[]) => void;
 };
@@ -95,8 +95,8 @@ type State = {
   rules: IConditionsRule[];
 };
 
-class ConditionsRule extends React.Component<Props, State> {
-  constructor(props: Props) {
+class ConditionsRule extends React.Component<ConditionsRuleProps, State> {
+  constructor(props: ConditionsRuleProps) {
     super(props);
 
     this.state = {

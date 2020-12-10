@@ -31,7 +31,7 @@ const Text = styledTS<{ textStyle: string; hugeness: string }>(styled.span)`
   color: ${(props) => types[props.textStyle].color}
 `;
 
-type Props = {
+export type TextInfoProps = {
   children: React.ReactNode | string;
   textStyle?: string;
   hugeness?: string;
@@ -43,7 +43,7 @@ const defaultProps = {
   hugeness: "small",
 };
 
-class TextInfo extends React.PureComponent<Props> {
+class TextInfo extends React.PureComponent<TextInfoProps> {
   render() {
     const { translator, children } = this.props;
 

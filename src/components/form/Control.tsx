@@ -10,7 +10,7 @@ import {
 } from './styles';
 import Textarea from './Textarea';
 
-type Props = {
+type FormControlProps = {
   children?: React.ReactNode;
   id?: string;
   onChange?: (e: React.FormEvent<HTMLElement>) => void;
@@ -55,7 +55,7 @@ const renderElement = (Element, attributes, type, child) => {
   );
 };
 
-class FormControl extends React.Component<Props> {
+class FormControl extends React.Component<FormControlProps> {
   static defaultProps = {
     componentClass: 'input',
     required: false,

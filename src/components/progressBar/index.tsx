@@ -55,7 +55,7 @@ const Progress = styledTS<{ color?: string }>(styled.div)`
   animation: ${stripe} 1s linear infinite;
 `;
 
-type Props = {
+type ProgressBarProps = {
   children?: React.ReactNode;
   close?: React.ReactNode;
   percentage: number;
@@ -69,7 +69,7 @@ function ProgressBar({
   close,
   color = "#dddeff",
   height,
-}: Props) {
+}: ProgressBarProps) {
   return (
     <Wrapper height={height}>
       <Progress style={{ width: `${percentage}%` }} color={color} />
