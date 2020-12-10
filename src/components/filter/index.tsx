@@ -8,7 +8,7 @@ import { IRouterProps } from '../types';
 import createChipText from './createChipText';
 import { cleanIntegrationKind } from '../../utils/integration';
 
-interface IProps extends IRouterProps {
+export interface IFilterProps extends IRouterProps {
   queryParams?: any;
   translator?: (key: string, options?: any) => string;
 }
@@ -17,7 +17,7 @@ const Filters = styled.div`
   font-size: 0.9em;
 `;
 
-function Filter({ queryParams = {}, history, translator }: IProps) {
+function Filter({ queryParams = {}, history, translator }: IFilterProps) {
   const onClickClose = paramKey => {
     for (const key of paramKey) {
       router.setParams(history, { [key]: null });
@@ -106,4 +106,4 @@ function Filter({ queryParams = {}, history, translator }: IProps) {
   );
 }
 
-export default withRouter<IProps, React.ComponentType<IProps>>(Filter);
+export default withRouter<IFilterProps, React.ComponentType<IFilterProps>>(Filter);
