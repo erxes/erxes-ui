@@ -5,7 +5,7 @@ import { Action, Container, ItemContent, Items } from "./styles";
 import Button from "../button";
 import Icon from "../icon";
 
-type EmptyContentProps = {
+export type EmptyContentProps = {
   content: any;
   vertical?: boolean;
   maxItemWidth?: string;
