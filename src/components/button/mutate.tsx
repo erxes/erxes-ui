@@ -3,7 +3,7 @@ import React from 'react';
 import Button from './';
 import SmallLoader from './smallLoader';
 
-type Props = {
+export type ButtonMutateProps = {
   client: any;
   gql: any;
   mutation: string;
@@ -27,13 +27,13 @@ type Props = {
   translator?: (key: string, options?: any) => string;
 };
 
-class ButtonMutate extends React.Component<Props, { isLoading: boolean }> {
+class ButtonMutate extends React.Component<ButtonMutateProps, { isLoading: boolean }> {
   static defaultProps = {
     btnSize: 'medium',
     icon: 'check-circle'
   };
 
-  constructor(props: Props) {
+  constructor(props: ButtonMutateProps) {
     super(props);
 
     this.state = {
@@ -41,7 +41,7 @@ class ButtonMutate extends React.Component<Props, { isLoading: boolean }> {
     };
   }
 
-  componentDidUpdate = (prevProps: Props) => {
+  componentDidUpdate = (prevProps: ButtonMutateProps) => {
     if (prevProps.isSubmitted !== this.props.isSubmitted) {
       this.mutate();
     }

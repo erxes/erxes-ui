@@ -164,7 +164,7 @@ export const ButtonGroup = styledTS<{ hasGap: boolean }>(styled.div)`
     `};
 `;
 
-type ButtonProps = {
+export type ButtonProps = {
   children?: React.ReactNode;
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;

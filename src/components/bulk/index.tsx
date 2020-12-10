@@ -10,7 +10,7 @@ export interface IBulkContentProps {
   toggleAll: (targets: any[], containerId: string) => void;
 }
 
-type Props = {
+export type BulkProps = {
   content: (props: IBulkContentProps) => React.ReactNode;
   refetch?: () => void;
 };
@@ -20,7 +20,7 @@ type State = {
   isAllSelected: boolean;
 };
 
-export default abstract class Bulk extends React.Component<Props, State> {
+export default abstract class Bulk extends React.Component<BulkProps, State> {
   constructor(props) {
     super(props);
 

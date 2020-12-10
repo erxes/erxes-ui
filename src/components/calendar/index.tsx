@@ -56,7 +56,7 @@ type ItemButton = {
   translator?: (key: string, options?: any) => string;
 };
 
-type Props = {
+type CalendarProps = {
   renderContent: (
     renderMonths: () => React.ReactNode[],
     renderMiddleContent: () => React.ReactNode
@@ -65,7 +65,7 @@ type Props = {
   translator?: (key: string, options?: any) => string;
 };
 
-class Calendar extends React.Component<Props, State> {
+class Calendar extends React.Component<CalendarProps, State> {
   state = { currentDate: getCurrentDate() };
 
   onPreviousClick = () => {

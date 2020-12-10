@@ -24,7 +24,7 @@ const Item = styled.li`
   }
 `;
 
-type Props = {
+export type BreadcrumbProps = {
   children: React.ReactNode;
   active?: boolean;
   to: string;
@@ -39,7 +39,7 @@ function BreadcrumbItem({
   target,
   children,
   ...props
-}: Props) {
+}: BreadcrumbProps) {
   const linkProps = { to, title, target };
 
   return (
