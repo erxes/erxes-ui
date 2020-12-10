@@ -458,13 +458,6 @@ csstype@^2.6.7:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.7.tgz#20b0024c20b6718f4eda3853a1f5a1cce7f5e4a5"
   integrity sha512-9Mcn9sFbGBAdmimWb2gLVDtFJzeKtDGIr76TUqmjZrw9LFXBMSU70lcs+C0/7fyCd6iBDqmksUcCOUIkisPHsQ==
 
-cypress-file-upload@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/cypress-file-upload/-/cypress-file-upload-4.0.7.tgz#1136139bb3c660b9c39a69f231ac1da7785acaae"
-  integrity sha512-rFFmnoZ2bWyWFpSV09AhkSUgYEiVy70pcQ6nf/mGTMTrVHvKCCCIfRu3TbgVYHbgBq+0hqjfjQrtz4IbgH7qZA==
-  dependencies:
-    mime "^2.4.4"
-
 date-fns@1.29.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
@@ -894,11 +887,6 @@ memoize-one@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
   integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
-
-mime@^2.4.4:
-  version "2.4.6"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
-  integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
 
 mini-create-react-context@^0.3.0:
   version "0.3.2"

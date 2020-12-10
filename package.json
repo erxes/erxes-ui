@@ -21,7 +21,6 @@
     "ckeditor4-react": "^1.0.0",
     "classnames": "^2.2.5",
     "color": "^3.1.2",
-    "cypress-file-upload": "^4.0.7",
     "date-fns": "1.29.0",
     "dayjs": "^1.8.15",
     "draft-js": "^0.10.5",
