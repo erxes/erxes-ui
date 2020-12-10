@@ -4,7 +4,7 @@
   "private": true,
   "main": "lib/index.js",
   "license": "SEE LICENSE IN LICENSE",
-  "dependencies": {
+  "peerDependencies": {
     "@nateradebaugh/react-datetime": "^4.0.0-rc.10",
     "@types/draft-js": "^0.10.24",
     "@types/react": "^16.4.13",
