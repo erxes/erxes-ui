@@ -3,16 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "license": "SEE LICENSE IN LICENSE",
+  "main": "lib/index.js",
   "dependencies": {
-    "@daily-co/daily-js": "^0.9.995",
     "@nateradebaugh/react-datetime": "^4.0.0-rc.10",
-    "@nivo/line": "0.35.0",
-    "@nivo/pie": "0.35.0",
     "@types/bunyan": "^1.8.6",
     "@types/draft-js": "^0.10.24",
-    "@types/enzyme": "^3.1.12",
-    "@types/enzyme-adapter-react-16": "^1.0.2",
-    "@types/jest": "^26.0.10",
     "@types/node": "^10.9.4",
     "@types/react": "^16.4.13",
     "@types/react-dom": "^16.0.7",
@@ -30,7 +25,6 @@
     "ckeditor4-react": "^1.0.0",
     "classnames": "^2.2.5",
     "color": "^3.1.2",
-    "cypress-file-upload": "^4.0.7",
     "date-fns": "1.29.0",
     "dayjs": "^1.8.15",
     "draft-js": "^0.10.5",
@@ -77,11 +71,7 @@
     "build": "tsc -p tsconfig.prod.json"
   },
   "devDependencies": {
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "ts-jest": "^23.0.1",
-    "typescript": "^3.0.3",
-    "cypress": "^4.9.0"
+    "typescript": "^3.0.3"
   },
   "browserslist": [
     ">0.2%",
