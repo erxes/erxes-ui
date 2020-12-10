@@ -3,7 +3,7 @@ import validator from "validator";
 import { generateRandomString, isValidUsername } from "../helpers";
 import { Error } from "./styles";
 
-export interface IFormProps {
+export interface IRenderContentProps {
   errors: any;
   values: any;
   registerChild: (child: React.ReactNode) => void;
@@ -12,8 +12,8 @@ export interface IFormProps {
   isSubmitted: boolean;
 }
 
-type Props = {
-  renderContent: (props: IFormProps) => React.ReactNode;
+export type IFormProps = {
+  renderContent: (props: IRenderContentProps) => React.ReactNode;
   onSubmit?: (values: any) => any;
   autoComplete?: string;
   translator?: (key: string, options?: any) => string;
@@ -25,11 +25,11 @@ type State = {
   isSubmitted: boolean;
 };
 
-class Form extends React.Component<Props, State> {
+class Form extends React.Component<IFormProps, State> {
   private formId: string = generateRandomString();
   private children: any[] = [];
 
-  constructor(props: Props) {
+  constructor(props: IFormProps) {
     super(props);
 
     this.state = {
