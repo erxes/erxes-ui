@@ -1,12 +1,13 @@
-import DataWithLoader from './DataWithLoader';
-import EmptyState from './EmptyState';
-// TODO
-// import { FieldStyle, SidebarCounter, SidebarList } from 'modules/layout/styles';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { FieldStyle, SidebarCounter, SidebarList } from '../layout/styles';
 import { IRouterProps } from '../types';
+import { router } from '../utils';
+import DataWithLoader from './DataWithLoader';
+import EmptyState from './EmptyState';
 import Filter from './filterableList/Filter';
+import Icon from './Icon';
 
 interface IProps extends IRouterProps {
   fields: any[];
@@ -48,7 +49,8 @@ class FilterByParams extends React.Component<IProps, State> {
   };
 
   renderItems() {
-    const { fields, icon, searchable } = this.props;
+    const { history, fields, counts, paramKey, icon, searchable } = this.props;
+    const { key } = this.state;
 
     if (fields.length === 0) {
       return <EmptyState icon={icon} text="No templates" size="full" />;
@@ -57,6 +59,44 @@ class FilterByParams extends React.Component<IProps, State> {
     return (
       <PopoverContent>
         {searchable && <Filter onChange={this.filterItems} />}
+        <SidebarList>
+          {fields.map(field => {
+            // filter items by key
+            if (key && field.name.toLowerCase().indexOf(key) < 0) {
+              return false;
+            }
+
+            const onClick = () => {
+              router.setParams(history, { [paramKey]: field._id });
+              router.removeParams(history, 'page');
+            };
+
+            if (!field._id || !field.name) {
+              return null;
+            }
+
+            return (
+              <li key={field._id}>
+                <a
+                  href="#param"
+                  tabIndex={0}
+                  className={
+                    router.getParam(history, [paramKey]) === field._id
+                      ? 'active'
+                      : ''
+                  }
+                  onClick={onClick}
+                >
+                  {icon ? (
+                    <Icon icon={icon} style={{ color: field.colorCode }} />
+                  ) : null}{' '}
+                  <FieldStyle>{field.name}</FieldStyle>
+                  <SidebarCounter>{counts[field._id]}</SidebarCounter>
+                </a>
+              </li>
+            );
+          })}
+        </SidebarList>
       </PopoverContent>
     );
   }

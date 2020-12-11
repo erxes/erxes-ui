@@ -7,6 +7,7 @@ import EmptyState from './components/EmptyState';
 import Filter from './components/filter/Filter';
 import FilterableList from './components/filterableList/FilterableList';
 import FilterableListStyles from './components/filterableList/styles';
+import FilterByParams from './components/FilterByParams';
 import ActionBar from './layout/components/ActionBar';
 import Header from './layout/components/Header';
 import NotFound from './layout/components/NotFound';
@@ -14,12 +15,7 @@ import PageContent from './layout/components/PageContent';
 import Sidebar from './layout/components/Sidebar';
 import Wrapper from './layout/components/Wrapper';
 import {
-  HeightedWrapper,
-  Contents,
-  MainContent,
-  ContenFooter,
-  CenterContent,
-  PageHeader
+  CenterContent, ContenFooter, Contents, HeightedWrapper, MainContent, PageHeader
 } from './layout/styles';
 import {
   ActionTop as ChooserStyleActionTop, Column as ChooserStyleColumn,
@@ -38,6 +34,7 @@ export {
   Filter,
   FilterableList,
   FilterableListStyles,
+  FilterByParams,
 
   // layout components
   ActionBar,
