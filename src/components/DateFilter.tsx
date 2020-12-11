@@ -1,15 +1,15 @@
 import dayjs from 'dayjs';
 import gql from 'graphql-tag';
-import Button from './Button';
-import Icon from './Icon';
-import { __, Alert, router } from '../utils';
 import React from 'react';
 import { withApollo } from 'react-apollo';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import styled from 'styled-components';
 import { colors, dimensions } from '../styles';
+import { __, Alert, router } from '../utils';
 import asyncComponent from './AsyncComponent';
+import Button from './Button';
+import Icon from './Icon';
 
 const Datetime = asyncComponent(() =>
   import(/* webpackChunkName: "Datetime" */ '@nateradebaugh/react-datetime')
@@ -243,10 +243,6 @@ class DateFilter extends React.Component<Props & ApolloClientProps, State> {
         container={this}
         rootClose={true}
       >
-        <div>
-          {__('Date')}
-          <Icon icon="angle-down" />
-        </div>
         <PopoverButton>
           {__('Date')}
           <Icon icon="angle-down" />
