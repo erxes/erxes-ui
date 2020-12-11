@@ -3,19 +3,37 @@ import gql from 'graphql-tag';
 import Button from './Button';
 import Icon from './Icon';
 import { __, Alert, router } from '../utils';
-// TODO: fix
-// import { PopoverButton } from 'modules/inbox/styles';
 import React from 'react';
 import { withApollo } from 'react-apollo';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import styled from 'styled-components';
-import { dimensions } from '../styles';
+import { colors, dimensions } from '../styles';
 import asyncComponent from './AsyncComponent';
 
 const Datetime = asyncComponent(() =>
   import(/* webpackChunkName: "Datetime" */ '@nateradebaugh/react-datetime')
 );
+
+export const PopoverButton = styled.div`
+  display: inline-block;
+  position: relative;
+
+  > * {
+    display: inline-block;
+  }
+
+  > i {
+    margin-left: 3px;
+    margin-right: -4px;
+    transition: all ease 0.3s;
+    color: ${colors.colorCoreGray};
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const FlexRow = styled.div`
   display: flex;
@@ -229,10 +247,10 @@ class DateFilter extends React.Component<Props & ApolloClientProps, State> {
           {__('Date')}
           <Icon icon="angle-down" />
         </div>
-        {/* <PopoverButton>
+        <PopoverButton>
           {__('Date')}
           <Icon icon="angle-down" />
-        </PopoverButton> */}
+        </PopoverButton>
       </OverlayTrigger>
     );
   }

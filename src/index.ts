@@ -2,6 +2,7 @@ import BreadCrumb from './components/breadcrumb/BreadCrumb';
 import Bulk from './components/Bulk';
 import Button from './components/Button';
 import ButtonMutate from './components/ButtonMutate';
+import DateFilter, { PopoverButton } from './components/DateFilter';
 import EmptyContent from './components/empty/EmptyContent';
 import EmptyState from './components/EmptyState';
 import Filter from './components/filter/Filter';
@@ -43,6 +44,8 @@ export {
   Bulk,
   Button,
   ButtonMutate,
+  DateFilter,
+  PopoverButton,
   EmptyContent,
   EmptyState,
   Filter,
