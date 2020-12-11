@@ -9,11 +9,11 @@ import FilterableList from './components/filterableList/FilterableList';
 import FilterableListStyles from './components/filterableList/styles';
 import FilterByParams from './components/FilterByParams';
 import FormControl from './components/form/Control';
+import DateControl from './components/form/DateControl';
 import Form from './components/form/Form';
 import FormGroup from './components/form/Group';
 import ControlLabel from './components/form/Label';
 import Textarea from './components/form/Textarea';
-import DateControl from './components/form/DateControl';
 import ActionBar from './layout/components/ActionBar';
 import Header from './layout/components/Header';
 import NotFound from './layout/components/NotFound';
@@ -25,9 +25,17 @@ import {
 } from './layout/styles';
 import {
   ActionTop as ChooserStyleActionTop, Column as ChooserStyleColumn,
-  Columns as ChooserStyleColumns, Footer as ChooserStyleFooter, Select as ChooserStyleSelect,
-  Title as ChooserStyleTitle
+  Columns as ChooserStyleColumns, Footer as ChooserStyleFooter, Select as ChooserStyleSelect
 } from './styles/chooser';
+import {
+  ButtonRelated as MainStyleButtonRelated, CenterContent as MainStyleCenterContent,
+  CloseModal as MainStyleCloseModal, Count as MainStyleCount,
+  DateContainer as MainStyleDateContainer, DateWrapper as MainStyleDateWrapper,
+  FormColumn as MainStyleFormColumn, FormWrapper as MainStyleFormWrapper,
+  HomeContainer as MainStyleHomeContainer, InfoWrapper as MainStyleInfoWrapper,
+  Limited as MainStyleLimited, Links as MainStyleLinks, ModalFooter as MainStyleModalFooter,
+  TabContent as MainStyleTabContent, TopHeader as MainStyleTopHeader
+} from './styles/main';
 
 export {
   // common components
@@ -67,8 +75,22 @@ export {
   // main styles
   ChooserStyleColumns,
   ChooserStyleColumn,
-  ChooserStyleTitle,
   ChooserStyleFooter,
   ChooserStyleSelect,
   ChooserStyleActionTop,
+  MainStyleModalFooter,
+  MainStyleInfoWrapper,
+  MainStyleLinks,
+  MainStyleFormWrapper,
+  MainStyleFormColumn,
+  MainStyleCenterContent,
+  MainStyleHomeContainer,
+  MainStyleDateWrapper,
+  MainStyleCloseModal,
+  MainStyleDateContainer,
+  MainStyleTabContent,
+  MainStyleButtonRelated,
+  MainStyleTopHeader,
+  MainStyleCount,
+  MainStyleLimited
 }

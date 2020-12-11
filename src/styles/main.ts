@@ -1,9 +1,31 @@
 import { colors, dimensions, typography } from '../styles';
 import { rgba } from '../styles/color';
-// TODO: fix
-// import { Actions } from 'modules/customers/styles';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
+
+const Actions = styledTS<{ isSmall?: boolean }>(styled.div)`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 ${dimensions.coreSpacing}px ${dimensions.unitSpacing}px;
+
+  > a, button {
+    flex: 1;
+    padding: 4px 15px;
+
+    i {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  > div {
+    margin-left: 10px;
+  }
+
+  .dropdown {
+    display: ${props => (props.isSmall ? 'inline-block' : 'block')};
+  }
+`;
 
 const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled.div)`
   flex: 1;
@@ -17,7 +39,7 @@ const MiddleContent = styledTS<{ transparent?: boolean; shrink?: boolean }>(
   styled.div
 )`
   width: 900px;
-  
+
   background: ${props => !props.transparent && colors.colorWhite};
   margin: 10px 0;
 
@@ -93,20 +115,11 @@ const InfoWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  ${Actions} {
+    padding: 0;
+  }
 `;
-
-// TODO: fix
-// const InfoWrapper = styled.div`
-//   padding: 20px 20px 30px 20px;
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-between;
-
-//   ${Actions} {
-//     padding: 0;
-//   }
-// `;
 
 const Links = styled.div`
   margin-top: 5px;
@@ -284,7 +297,7 @@ const Title = styledTS<{ capitalize?: boolean }>(styled.div)`
   font-size: 24px;
   margin: 20px 0;
   display: flex;
-  line-height: 30px;  
+  line-height: 30px;
   text-transform: ${props => props.capitalize && 'capitalize'};
 
   > span {
@@ -309,6 +322,7 @@ const Limited = styled.div`
 `;
 
 export {
+  Actions,
   BoxRoot,
   FullContent,
   ModalFooter,
