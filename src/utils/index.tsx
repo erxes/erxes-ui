@@ -1,8 +1,7 @@
 import { getEnv } from 'apolloClient';
 import dayjs from 'dayjs';
 import T from 'i18n-react';
-// TODO: fix
-// import { IUser, IUserDoc } from 'modules/auth/types';
+import { IUser, IUserDoc } from '../auth/types';
 import React from 'react';
 import Tip from '../components/Tip';
 import { Limited } from '../styles/main';
@@ -121,8 +120,7 @@ export const difference = (array1: any[], array2: any[]) => {
 
 export { Alert, uploadHandler, router, confirm, toggleCheckBoxes, urlParser };
 
-export const can = (actionName: string, currentUser): boolean => {
-// export const can = (actionName: string, currentUser: IUser): boolean => {
+export const can = (actionName: string, currentUser: IUser): boolean => {
   if (!currentUser) {
     return false;
   }
@@ -165,8 +163,7 @@ export const readFile = (value: string): string => {
   return `${REACT_APP_API_URL}/read-file?key=${value}`;
 };
 
-export const getUserAvatar = (user) => {
-// export const getUserAvatar = (user: IUserDoc) => {
+export const getUserAvatar = (user: IUserDoc) => {
   if (!user) {
     return '';
   }

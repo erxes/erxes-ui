@@ -1,12 +1,10 @@
 import dayjs from 'dayjs';
 import T from 'i18n-react';
-// TODO: fix
-// import { IUser } from 'modules/auth/types';
+import { IUser } from './auth/types';
 import React from 'react';
 
 interface IState {
-  currentUser?;
-  // currentUser?: IUser;
+  currentUser?: IUser;
   currentLanguage: string;
   isShownIndicator: boolean;
   isRemovingImport: boolean;
@@ -14,8 +12,7 @@ interface IState {
 }
 
 interface IStore extends IState {
-  currentUser?;
-  // currentUser?: IUser;
+  currentUser?: IUser;
   changeLanguage: (languageCode: string) => void;
   closeLoadingBar: () => void;
   doneIndicatorAction: () => void;
@@ -27,8 +24,7 @@ const AppContext = React.createContext({} as IStore);
 export const AppConsumer = AppContext.Consumer;
 
 export class AppProvider extends React.Component<
-  { currentUser? },
-  // { currentUser?: IUser },
+  { currentUser?: IUser },
   IState
 > {
   constructor(props) {
