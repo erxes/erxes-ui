@@ -95,8 +95,8 @@ class FormControl extends React.Component<Props> {
       [props.defaultChecked
         ? 'defaultChecked'
         : 'checked']: props.defaultChecked
-        ? props.defaultChecked
-        : props.checked,
+          ? props.defaultChecked
+          : props.checked,
       placeholder: props.placeholder,
       hasError: errorMessage ? true : false,
       type: props.type,

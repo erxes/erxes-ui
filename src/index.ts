@@ -8,6 +8,12 @@ import Filter from './components/filter/Filter';
 import FilterableList from './components/filterableList/FilterableList';
 import FilterableListStyles from './components/filterableList/styles';
 import FilterByParams from './components/FilterByParams';
+import FormControl from './components/form/Control';
+import Form from './components/form/Form';
+import FormGroup from './components/form/Group';
+import ControlLabel from './components/form/Label';
+import Textarea from './components/form/Textarea';
+import DateControl from './components/form/DateControl';
 import ActionBar from './layout/components/ActionBar';
 import Header from './layout/components/Header';
 import NotFound from './layout/components/NotFound';
@@ -35,6 +41,12 @@ export {
   FilterableList,
   FilterableListStyles,
   FilterByParams,
+  ControlLabel,
+  Form,
+  FormControl,
+  FormGroup,
+  Textarea,
+  DateControl,
 
   // layout components
   ActionBar,
