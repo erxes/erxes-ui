@@ -21,6 +21,7 @@ import NotFound from './layout/components/NotFound';
 import PageContent from './layout/components/PageContent';
 import Sidebar from './layout/components/Sidebar';
 import Wrapper from './layout/components/Wrapper';
+import DetectBrowser from './layout/components/DetectBrowser';
 import {
   CenterContent, ContenFooter, Contents, HeightedWrapper, MainContent, PageHeader
 } from './layout/styles';
@@ -61,6 +62,7 @@ export {
 
   // layout components
   ActionBar,
+  DetectBrowser,
   Header,
   NotFound,
   PageContent,
@@ -95,5 +97,6 @@ export {
   MainStyleButtonRelated,
   MainStyleTopHeader,
   MainStyleCount,
-  MainStyleLimited
+  MainStyleLimited,
+
 }
