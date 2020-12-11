@@ -7,13 +7,21 @@ import EmptyState from './components/EmptyState';
 import Filter from './components/filter/Filter';
 import FilterableList from './components/filterableList/FilterableList';
 import FilterableListStyles from './components/filterableList/styles';
+import ActionBar from './layout/components/ActionBar';
+import Header from './layout/components/Header';
+import NotFound from './layout/components/NotFound';
+import PageContent from './layout/components/PageContent';
+import Sidebar from './layout/components/Sidebar';
+import Wrapper from './layout/components/Wrapper';
+
 import {
-    ActionTop as ChooserStyleActionTop, Column as ChooserStyleColumn,
-    Columns as ChooserStyleColumns, Footer as ChooserStyleFooter, Select as ChooserStyleSelect,
-    Title as ChooserStyleTitle
+  ActionTop as ChooserStyleActionTop, Column as ChooserStyleColumn,
+  Columns as ChooserStyleColumns, Footer as ChooserStyleFooter, Select as ChooserStyleSelect,
+  Title as ChooserStyleTitle
 } from './styles/chooser';
 
 export {
+  // common components
   BreadCrumb,
   Bulk,
   Button,
@@ -23,6 +31,16 @@ export {
   Filter,
   FilterableList,
   FilterableListStyles,
+
+  // layout components
+  ActionBar,
+  Header,
+  NotFound,
+  PageContent,
+  Sidebar,
+  Wrapper,
+
+  // main styles
   ChooserStyleColumns,
   ChooserStyleColumn,
   ChooserStyleTitle,
