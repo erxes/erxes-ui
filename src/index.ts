@@ -13,7 +13,14 @@ import NotFound from './layout/components/NotFound';
 import PageContent from './layout/components/PageContent';
 import Sidebar from './layout/components/Sidebar';
 import Wrapper from './layout/components/Wrapper';
-
+import {
+  HeightedWrapper,
+  Contents,
+  MainContent,
+  ContenFooter,
+  CenterContent,
+  PageHeader
+} from './layout/styles';
 import {
   ActionTop as ChooserStyleActionTop, Column as ChooserStyleColumn,
   Columns as ChooserStyleColumns, Footer as ChooserStyleFooter, Select as ChooserStyleSelect,
@@ -39,6 +46,14 @@ export {
   PageContent,
   Sidebar,
   Wrapper,
+
+  // layout styles
+  PageHeader,
+  HeightedWrapper,
+  Contents,
+  MainContent,
+  ContenFooter,
+  CenterContent,
 
   // main styles
   ChooserStyleColumns,
