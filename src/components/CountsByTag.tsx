@@ -6,11 +6,10 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { IRouterProps } from '../types';
 import Box from './Box';
+import { ITag } from '../tags/types'
 
 interface IProps extends IRouterProps {
-  // TODO: fix
-  tags: any[];
-  // tags: ITag[];
+  tags: ITag[];
   counts: any;
   manageUrl: string;
   loading: boolean;
