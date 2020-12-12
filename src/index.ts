@@ -1,20 +1,4 @@
-import BreadCrumb from './components/breadcrumb/BreadCrumb';
-import Bulk from './components/Bulk';
-import Button from './components/Button';
-import ButtonMutate from './components/ButtonMutate';
-import DateFilter, { PopoverButton } from './components/DateFilter';
-import EmptyContent from './components/empty/EmptyContent';
-import EmptyState from './components/EmptyState';
-import Filter from './components/filter/Filter';
-import FilterableList from './components/filterableList/FilterableList';
-import FilterableListStyles from './components/filterableList/styles';
-import FilterByParams from './components/FilterByParams';
-import FormControl from './components/form/Control';
-import DateControl from './components/form/DateControl';
-import Form from './components/form/Form';
-import FormGroup from './components/form/Group';
-import ControlLabel from './components/form/Label';
-import Textarea from './components/form/Textarea';
+import * as components from './components';
 import ActionBar from './layout/components/ActionBar';
 import Header from './layout/components/Header';
 import NotFound from './layout/components/NotFound';
@@ -39,25 +23,7 @@ import {
 } from './styles/main';
 
 export {
-  // common components
-  BreadCrumb,
-  Bulk,
-  Button,
-  ButtonMutate,
-  DateFilter,
-  PopoverButton,
-  EmptyContent,
-  EmptyState,
-  Filter,
-  FilterableList,
-  FilterableListStyles,
-  FilterByParams,
-  ControlLabel,
-  Form,
-  FormControl,
-  FormGroup,
-  Textarea,
-  DateControl,
+  components,
 
   // layout components
   ActionBar,
