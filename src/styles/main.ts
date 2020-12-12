@@ -27,6 +27,26 @@ const Actions = styledTS<{ isSmall?: boolean }>(styled.div)`
   }
 `;
 
+const PopoverButton = styled.div`
+  display: inline-block;
+  position: relative;
+
+  > * {
+    display: inline-block;
+  }
+
+  > i {
+    margin-left: 3px;
+    margin-right: -4px;
+    transition: all ease 0.3s;
+    color: ${colors.colorCoreGray};
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const FullContent = styledTS<{ center: boolean; align?: boolean }>(styled.div)`
   flex: 1;
   display: flex;
@@ -323,6 +343,7 @@ const Limited = styled.div`
 
 export {
   Actions,
+  PopoverButton,
   BoxRoot,
   FullContent,
   ModalFooter,

@@ -5,10 +5,11 @@ import { withApollo } from 'react-apollo';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import styled from 'styled-components';
-import { setParams } from '../utils/router';
-import { colors, dimensions } from '../styles';
-import { __ } from '../utils/core';
+import { dimensions } from '../styles';
+import { PopoverButton } from '../styles/main';
 import Alert from '../utils/Alert';
+import { __ } from '../utils/core';
+import { setParams } from '../utils/router';
 import asyncComponent from './AsyncComponent';
 import Button from './Button';
 import Icon from './Icon';
@@ -16,26 +17,6 @@ import Icon from './Icon';
 const Datetime = asyncComponent(() =>
   import(/* webpackChunkName: "Datetime" */ '@nateradebaugh/react-datetime')
 );
-
-export const PopoverButton = styled.div`
-  display: inline-block;
-  position: relative;
-
-  > * {
-    display: inline-block;
-  }
-
-  > i {
-    margin-left: 3px;
-    margin-right: -4px;
-    transition: all ease 0.3s;
-    color: ${colors.colorCoreGray};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 const FlexRow = styled.div`
   display: flex;

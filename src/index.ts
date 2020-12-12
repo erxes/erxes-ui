@@ -9,6 +9,7 @@ import {
   FormColumn as MainStyleFormColumn, FormWrapper as MainStyleFormWrapper,
   HomeContainer as MainStyleHomeContainer, InfoWrapper as MainStyleInfoWrapper,
   Limited as MainStyleLimited, Links as MainStyleLinks, ModalFooter as MainStyleModalFooter,
+  PopoverButton,
   TabContent as MainStyleTabContent, TopHeader as MainStyleTopHeader
 } from './styles/main';
 
@@ -39,4 +40,5 @@ export {
   MainStyleCount,
   MainStyleLimited,
 
+  PopoverButton
 }
