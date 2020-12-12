@@ -1,4 +1,4 @@
-import { getEnv } from '../utils';
+import { getEnv } from '../utils/core';
 import Alert from '../utils/Alert';
 
 type FileInfo = {

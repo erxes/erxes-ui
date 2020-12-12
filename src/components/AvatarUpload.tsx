@@ -1,7 +1,9 @@
 import { colors } from '../styles';
 import React from 'react';
 import styled from 'styled-components';
-import { Alert, readFile, uploadHandler } from '../utils';
+import { readFile } from '../utils/core';
+import Alert from '../utils/Alert';
+import uploadHandler from '../utils/uploadHandler'
 import Icon from './Icon';
 import Spinner from './Spinner';
 

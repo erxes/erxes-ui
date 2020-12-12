@@ -1,5 +1,5 @@
 import { dimensions } from '../../styles';
-import { __ } from '../../utils';
+import { __ } from '../../utils/core';
 import { AlertItem } from '../../utils/Alert/Alert';
 import React from 'react';
 import RTG from 'react-transition-group';

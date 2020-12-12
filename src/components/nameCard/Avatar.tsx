@@ -1,6 +1,6 @@
 import { colors } from '../../styles';
 import { rgba } from '../../styles/ecolor';
-import { readFile } from '../../utils';
+import { readFile } from '../../utils/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';

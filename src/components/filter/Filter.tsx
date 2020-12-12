@@ -1,10 +1,7 @@
 import gql from 'graphql-tag';
 import Chip from '../Chip';
-import { __ } from '../../utils';
-
-// TODO: fix
-// import { cleanIntegrationKind } from 'modules/settings/integrations/containers/utils';
-
+import { __ } from '../../utils/core';
+import { cleanIntegrationKind } from '../../utils/core';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
@@ -39,15 +36,9 @@ function Filter({ queryParams = {}, history }: IProps) {
       text = 'Awaiting Response';
     }
 
-    // return (
-    //   <Chip capitalize={true} onClick={onClick}>
-    //     {bool ? text : __(cleanIntegrationKind(queryParams[paramKey]))}
-    //   </Chip>
-    // );
-
     return (
       <Chip capitalize={true} onClick={onClick}>
-        {text}
+        {bool ? text : __(cleanIntegrationKind(queryParams[paramKey]))}
       </Chip>
     );
   };

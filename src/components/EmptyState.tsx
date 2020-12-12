@@ -1,4 +1,4 @@
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import React from 'react';
 import styled from 'styled-components';
 import styledTS from 'styled-components-ts';

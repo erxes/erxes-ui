@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { rgba } from '../styles/ecolor';
 import colors from '../styles/colors';
 import { IAttachment } from '../types';
-import { __, readFile } from '../utils';
+import { __, readFile } from '../utils/core';
 
 export const AttachmentWrapper = styled.div`
   border-radius: 4px;

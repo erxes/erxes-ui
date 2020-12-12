@@ -1,9 +1,12 @@
-import { __, Alert, confirm, uploadHandler } from '../utils';
 import React from 'react';
 import styled from 'styled-components';
-import { rgba } from '../styles/ecolor';
 import colors from '../styles/colors';
+import { rgba } from '../styles/ecolor';
 import { IAttachment } from '../types';
+import Alert from '../utils/Alert';
+import confirm from '../utils/confirmation/confirm';
+import { __ } from '../utils/core';
+import uploadHandler from '../utils/uploadHandler';
 import Attachment from './Attachment';
 import Spinner from './Spinner';
 

@@ -1,8 +1,8 @@
-import Box from './Box';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
-import { Alert } from '../utils';
+import Alert from '../utils/Alert';
+import Box from './Box';
 import Button from './Button';
 import Tip from './Tip';
 
@@ -25,7 +25,6 @@ const Container = styledTS<{ isComplete: boolean }>(styled.div)`
         transparent
       );
     `};
-  
 
   button {
     width: 39px;

@@ -1,5 +1,5 @@
 import { dimensions } from '../styles';
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import React from 'react';
 import styled from 'styled-components';
 

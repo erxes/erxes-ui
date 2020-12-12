@@ -1,11 +1,11 @@
+import React from 'react';
+import styled from 'styled-components';
+import { colors } from '../styles';
+import Alert from '../utils/Alert';
+import { __ } from '../utils/core';
 import Button from './Button';
 import FormControl from './form/Control';
 import Icon from './Icon';
-import { colors } from '../styles';
-import { Alert } from '../utils';
-import { __ } from '../utils';
-import React from 'react';
-import styled from 'styled-components';
 
 const List = styled.ul`
   list-style: none;

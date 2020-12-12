@@ -1,5 +1,5 @@
 import color from 'color';
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import { shake as animationShake } from '../utils/animations';
 import React from 'react';
 import styled, { css } from 'styled-components';

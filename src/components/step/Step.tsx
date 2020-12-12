@@ -1,6 +1,6 @@
 import Button from '../Button';
 import Icon from '../Icon';
-import { __ } from '../../utils';
+import { __ } from '../../utils/core';
 import React from 'react';
 import {
   FullStep,

@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import React, { useCallback, useEffect, useState } from 'react';
 import Select from 'react-select-plus';
 import styled from 'styled-components';
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import Alert from '../utils/Alert';
 import Button from './Button';
 import Icon from './Icon';

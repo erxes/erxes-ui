@@ -6,7 +6,7 @@
 // } from 'modules/settings/properties/types';
 import React from 'react';
 // import { graphql } from 'react-apollo';
-// import { withProps } from '../utils';
+// import { withProps } from '../utils/core';
 // import { queries } from '../../settings/team/graphql';
 import EditorCK from '../components/EditorCK';
 import { IEditorProps } from '../types';

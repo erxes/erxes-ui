@@ -1,5 +1,5 @@
 import Button from '../Button';
-import { __ } from '../../utils';
+import { __ } from '../../utils/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../Icon';

@@ -1,6 +1,6 @@
 import FilterByParams from './FilterByParams';
 import Icon from './Icon';
-import { __, router } from '../utils';
+import { __, router } from '../utils/core';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';

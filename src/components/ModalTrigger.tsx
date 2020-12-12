@@ -1,4 +1,4 @@
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';

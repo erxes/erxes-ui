@@ -1,7 +1,7 @@
 import client from '../apolloClient';
 import gql from 'graphql-tag';
 import { colors } from '../styles';
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import Alert from '../utils/Alert';
 import confirm from '../utils/confirmation/confirm';
 import { rotate } from '../utils/animations';

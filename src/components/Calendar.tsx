@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import React from 'react';
 import styled from 'styled-components';
 import { IDateColumn } from '../types';
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import {
   getCurrentDate,
   getFullTitle,

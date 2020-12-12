@@ -1,9 +1,9 @@
 import Icon from '../Icon';
-import { router } from '../../utils';
+import { router } from '../../utils/core';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { IRouterProps } from '../../types';
-import { difference, intersection, range, union } from '../../utils';
+import { difference, intersection, range, union } from '../../utils/core';
 import PerPageChooser from './PerPageChooser';
 import { PaginationList, PaginationWrapper } from './styles';
 

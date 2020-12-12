@@ -7,7 +7,7 @@ import Popover from 'react-bootstrap/Popover';
 import styled from 'styled-components';
 import { setParams } from '../utils/router';
 import { colors, dimensions } from '../styles';
-import { __ } from '../utils';
+import { __ } from '../utils/core';
 import Alert from '../utils/Alert';
 import asyncComponent from './AsyncComponent';
 import Button from './Button';

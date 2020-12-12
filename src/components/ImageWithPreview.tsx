@@ -1,7 +1,7 @@
 import { fadeIn, slideDown } from '../utils/animations';
 import React from 'react';
 import styled from 'styled-components';
-import { readFile } from '../utils';
+import { readFile } from '../utils/core';
 import CommonPortal from './CommonPortal';
 
 const PreviewWrapper = styled.div`

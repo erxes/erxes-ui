@@ -1,7 +1,7 @@
 import DropdownToggle from '../DropdownToggle';
 import Icon from '../Icon';
 import { IRouterProps } from '../../types';
-import { __, router } from '../../utils';
+import { __, router } from '../../utils/core';
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { withRouter } from 'react-router-dom';

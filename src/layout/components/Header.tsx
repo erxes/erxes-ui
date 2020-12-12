@@ -3,7 +3,7 @@ import BreadCrumb from '../../components/breadcrumb/BreadCrumb';
 import Filter from '../../components/filter/Filter';
 import Submenu from '../../components/subMenu/Submenu';
 import { IBreadCrumbItem, ISubMenuItem } from '../../types';
-import { __, setTitle } from '../../utils';
+import { __, setTitle } from '../../utils/core';
 import { PageHeader } from '../styles';
 
 type Props = {

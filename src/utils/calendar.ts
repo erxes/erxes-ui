@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { __ } from '.';
+import { __ } from './core';
 import { IDateColumn } from '../types';
 
 const MONTHS = [
