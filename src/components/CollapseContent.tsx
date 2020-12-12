@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
-import { rgba } from '../styles/color';
+import { rgba } from '../styles/ecolor';
 import colors from '../styles/colors';
 import Icon from './Icon';
 

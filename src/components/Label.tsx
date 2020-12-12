@@ -5,7 +5,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
 import { colors } from '../styles';
-import { darken, rgba } from '../styles/color';
+import { darken, rgba } from '../styles/ecolor';
 
 const types = {
   default: {
@@ -50,7 +50,7 @@ const LabelStyled = styledTS<{
   font-weight: 600;
   animation: ${props =>
     props.shake ? `${animationShake} 3.5s ease infinite` : 'none'};
-  
+
   ${props =>
     props.shake &&
     css`

@@ -121,7 +121,7 @@ const ButtonLink = styledTS<{ disabled?: boolean }>(
 )`
   text-decoration: inherit;
   text-align: center;
-  
+
   ${props =>
     props.disabled &&
     css`

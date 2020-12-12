@@ -2,7 +2,7 @@ import Icon from './Icon';
 import ImageWithPreview from './ImageWithPreview';
 import React from 'react';
 import styled from 'styled-components';
-import { rgba } from '../styles/color';
+import { rgba } from '../styles/ecolor';
 import colors from '../styles/colors';
 
 const Wrapper = styled.a`

@@ -1,5 +1,5 @@
 import { colors } from '../../styles';
-import { rgba } from '../../styles/color';
+import { rgba } from '../../styles/ecolor';
 import { readFile } from '../../utils';
 import React from 'react';
 import { Link } from 'react-router-dom';

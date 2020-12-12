@@ -1,10 +1,15 @@
 import dayjs from 'dayjs';
 import T from 'i18n-react';
-import { IUser, IUserDoc } from '../auth/types';
 import React from 'react';
+import { IUser, IUserDoc } from '../auth/types';
 import Tip from '../components/Tip';
 import { Limited } from '../styles/main';
 import { IAttachment } from '../types';
+import Alert from './Alert';
+import confirm from './confirmation/confirm';
+import * as router from './router';
+import toggleCheckBoxes from './toggleCheckBoxes';
+import uploadHandler from './uploadHandler';
 import urlParser from './urlParser';
 
 export const renderFullName = data => {
@@ -111,6 +116,8 @@ export const union = (array1: any[], array2: any[]) => {
 export const difference = (array1: any[], array2: any[]) => {
   return array1.filter(n => !array2.includes(n));
 };
+
+export { Alert, uploadHandler, router, confirm, toggleCheckBoxes, urlParser };
 
 export const can = (actionName: string, currentUser: IUser): boolean => {
   if (!currentUser) {

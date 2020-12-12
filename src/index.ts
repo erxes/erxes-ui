@@ -1,14 +1,3 @@
-export * from './components';
-import ActionBar from './layout/components/ActionBar';
-import Header from './layout/components/Header';
-import NotFound from './layout/components/NotFound';
-import PageContent from './layout/components/PageContent';
-import Sidebar from './layout/components/Sidebar';
-import Wrapper from './layout/components/Wrapper';
-import DetectBrowser from './layout/components/DetectBrowser';
-import {
-  CenterContent, ContenFooter, Contents, HeightedWrapper, MainContent, PageHeader
-} from './layout/styles';
 import {
   ActionTop as ChooserStyleActionTop, Column as ChooserStyleColumn,
   Columns as ChooserStyleColumns, Footer as ChooserStyleFooter, Select as ChooserStyleSelect
@@ -24,26 +13,9 @@ import {
 } from './styles/main';
 
 export * from './components';
+export * from './layout';
 
 export {
-
-  // layout components
-  ActionBar,
-  DetectBrowser,
-  Header,
-  NotFound,
-  PageContent,
-  Sidebar,
-  Wrapper,
-
-  // layout styles
-  PageHeader,
-  HeightedWrapper,
-  Contents,
-  MainContent,
-  ContenFooter,
-  CenterContent,
-
   // main styles
   ChooserStyleColumns,
   ChooserStyleColumn,

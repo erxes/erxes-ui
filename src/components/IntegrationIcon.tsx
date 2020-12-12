@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import styledTS from 'styled-components-ts';
 // TODO: fix
 // import { IIntegration } from '../../settings/integrations/types';
-import { darken } from '../styles/color';
+import { darken } from '../styles/ecolor';
 
 const RoundedBackground = styledTS<{ type: string; size?: number }>(
   styled.span
