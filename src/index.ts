@@ -1,4 +1,4 @@
-import * as components from './components';
+export * from './components';
 import ActionBar from './layout/components/ActionBar';
 import Header from './layout/components/Header';
 import NotFound from './layout/components/NotFound';
@@ -23,8 +23,9 @@ import {
   TabContent as MainStyleTabContent, TopHeader as MainStyleTopHeader
 } from './styles/main';
 
+export * from './components';
+
 export {
-  components,
 
   // layout components
   ActionBar,
