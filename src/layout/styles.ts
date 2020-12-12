@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
 import { TabContainer } from '../components/tabs/styles';
 import { colors, dimensions, typography } from '../styles';
-import { lighten } from '../styles/color';
+import { lighten } from '../styles/ecolor';
 
 const PageHeader = styled.div`
   height: ${dimensions.headerSpacing}px;

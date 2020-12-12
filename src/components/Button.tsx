@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import styledTS from 'styled-components-ts';
 import { colors } from '../styles';
-import { darken, lighten } from '../styles/color';
+import { darken, lighten } from '../styles/ecolor';
 import Icon from './Icon';
 
 const types = {

@@ -1,4 +1,4 @@
-import { rgba } from './color';
+import { rgba } from './ecolor';
 
 // Core colors
 const colorPrimary = '#673FBD';

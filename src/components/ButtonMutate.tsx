@@ -1,4 +1,4 @@
-import client from 'apolloClient';
+import client from '../apolloClient';
 import gql from 'graphql-tag';
 import { colors } from '../styles';
 import { __ } from '../utils';

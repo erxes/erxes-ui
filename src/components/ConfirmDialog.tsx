@@ -3,7 +3,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 import { colors, dimensions } from '../styles';
-import { rgba } from '../styles/color';
+import { rgba } from '../styles/ecolor';
 import Button from './Button';
 import { ControlLabel, FormControl } from './form';
 import Icon from './Icon';
