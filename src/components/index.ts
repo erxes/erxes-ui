@@ -16,6 +16,7 @@ import Form from './form/Form';
 import FormGroup from './form/Group';
 import ControlLabel from './form/Label';
 import Textarea from './form/Textarea';
+import NameCard from './nameCard/NameCard';
 import ConditionsRule from './rule/ConditionsRule';
 
 export {
@@ -38,5 +39,6 @@ export {
   FormGroup,
   Textarea,
   DateControl,
-  ConditionsRule
+  NameCard,
+  ConditionsRule,
 }
