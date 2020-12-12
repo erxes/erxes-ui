@@ -5,7 +5,7 @@ import { withApollo } from 'react-apollo';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import styled from 'styled-components';
-import router from 'utils/router';
+import { setParams } from '../utils/router';
 import { colors, dimensions } from '../styles';
 import { __ } from '../utils';
 import Alert from '../utils/Alert';
@@ -150,7 +150,7 @@ class DateFilter extends React.Component<Props & ApolloClientProps, State> {
     const formattedStartDate = dayjs(startDate).format(format);
     const formattedEndDate = dayjs(endDate).format(format);
 
-    router.setParams(this.props.history, {
+    setParams(this.props.history, {
       startDate: formattedStartDate,
       endDate: formattedEndDate
     });

@@ -143,7 +143,7 @@ const removeHash = (history: any, hashKey?: string) => {
   history.push(`${location.pathname}?${stringified}`);
 };
 
-export default {
+export {
   onParamSelect,
   setParams,
   getParam,

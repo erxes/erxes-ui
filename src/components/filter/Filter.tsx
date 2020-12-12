@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { IRouterProps } from '../../types';
 import createChipText from './createChipText';
-import router from 'utils/router';
+import { setParams } from '../../utils/router';
 
 interface IProps extends IRouterProps {
   queryParams?: any;
@@ -23,7 +23,7 @@ const Filters = styled.div`
 function Filter({ queryParams = {}, history }: IProps) {
   const onClickClose = paramKey => {
     for (const key of paramKey) {
-      router.setParams(history, { [key]: null });
+      setParams(history, { [key]: null });
     }
   };
 
