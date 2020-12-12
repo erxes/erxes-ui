@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import Chip from '../Chip';
-import { __, router } from '../../utils';
+import { __ } from '../../utils';
 
 // TODO: fix
 // import { cleanIntegrationKind } from 'modules/settings/integrations/containers/utils';
@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { IRouterProps } from '../../types';
 import createChipText from './createChipText';
+import { setParams } from '../../utils/router';
 
 interface IProps extends IRouterProps {
   queryParams?: any;
@@ -22,7 +23,7 @@ const Filters = styled.div`
 function Filter({ queryParams = {}, history }: IProps) {
   const onClickClose = paramKey => {
     for (const key of paramKey) {
-      router.setParams(history, { [key]: null });
+      setParams(history, { [key]: null });
     }
   };
 

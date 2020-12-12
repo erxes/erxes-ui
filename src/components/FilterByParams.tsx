@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { getParam, removeParams, setParams } from '../utils/router';
 import { FieldStyle, SidebarCounter, SidebarList } from '../layout/styles';
 import { IRouterProps } from '../types';
-import { router } from '../utils';
 import DataWithLoader from './DataWithLoader';
 import EmptyState from './EmptyState';
 import Filter from './filterableList/Filter';
@@ -67,8 +67,8 @@ class FilterByParams extends React.Component<IProps, State> {
             }
 
             const onClick = () => {
-              router.setParams(history, { [paramKey]: field._id });
-              router.removeParams(history, 'page');
+              setParams(history, { [paramKey]: field._id });
+              removeParams(history, 'page');
             };
 
             if (!field._id || !field.name) {
@@ -81,7 +81,7 @@ class FilterByParams extends React.Component<IProps, State> {
                   href="#param"
                   tabIndex={0}
                   className={
-                    router.getParam(history, [paramKey]) === field._id
+                    getParam(history, [paramKey]) === field._id
                       ? 'active'
                       : ''
                   }

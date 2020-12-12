@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../styles';
-import { rgba } from '../../styles/color';
+import { rgba } from '../../styles/ecolor';
 
 const Item = styled.li`
   display: inline-block;

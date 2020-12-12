@@ -1,11 +1,12 @@
-import client from 'apolloClient';
+import client from '../apolloClient';
 import gql from 'graphql-tag';
 import * as _ from 'lodash';
 import debounce from 'lodash/debounce';
 import React, { useCallback, useEffect, useState } from 'react';
 import Select from 'react-select-plus';
 import styled from 'styled-components';
-import { __, Alert } from '../utils';
+import { __ } from '../utils';
+import Alert from '../utils/Alert';
 import Button from './Button';
 import Icon from './Icon';
 

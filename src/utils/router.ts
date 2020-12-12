@@ -1,5 +1,4 @@
 import queryString from 'query-string';
-import { router } from '.';
 
 /**
  * @param {Object} query
@@ -105,7 +104,7 @@ const onParamSelect = (
   values: string[] | string,
   history: any
 ) => {
-  router.setParams(history, { [name]: values });
+  setParams(history, { [name]: values });
 };
 
 /**
@@ -144,7 +143,7 @@ const removeHash = (history: any, hashKey?: string) => {
   history.push(`${location.pathname}?${stringified}`);
 };
 
-export default {
+export {
   onParamSelect,
   setParams,
   getParam,

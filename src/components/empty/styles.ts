@@ -1,4 +1,4 @@
-import { darken, rgba } from '../../styles/color';
+import { darken, rgba } from '../../styles/ecolor';
 import styled from 'styled-components';
 import styledTS from 'styled-components-ts';
 import { colors, dimensions } from '../../styles';

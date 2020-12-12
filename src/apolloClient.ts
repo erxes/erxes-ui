@@ -5,19 +5,8 @@ import { onError } from 'apollo-link-error';
 import { createHttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-import { Alert } from './utils';
-import { __ } from './utils';
-
-// get env config from process.env or window.env
-export const getEnv = (): any => {
-  const envs = {};
-
-  for (const envMap of (window as any).envMaps) {
-    envs[envMap.name] = localStorage.getItem(`erxes_env_${envMap.name}`);
-  }
-
-  return envs;
-};
+import { __, getEnv } from './utils';
+import Alert from './utils/Alert';
 
 const { REACT_APP_API_URL, REACT_APP_API_SUBSCRIPTION_URL } = getEnv();
 
