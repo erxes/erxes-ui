@@ -1,5 +1,5 @@
-import { getEnv } from 'apolloClient';
-import { Alert } from '../utils';
+import { getEnv } from '../utils';
+import Alert from '../utils/Alert';
 
 type FileInfo = {
   name: string;

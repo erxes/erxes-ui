@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { FieldStyle, SidebarCounter, SidebarList } from '../layout/styles';
 import { IRouterProps } from '../types';
-import { router } from '../utils';
+import router from '../utils/router';
 import DataWithLoader from './DataWithLoader';
 import EmptyState from './EmptyState';
 import Filter from './filterableList/Filter';

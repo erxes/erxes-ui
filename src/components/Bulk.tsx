@@ -1,5 +1,5 @@
 import React from 'react';
-import { toggleCheckBoxes } from '../utils';
+import toggleCheckBoxes from 'utils/toggleCheckBoxes';
 
 export interface IBulkContentProps {
   isAllSelected: boolean;
