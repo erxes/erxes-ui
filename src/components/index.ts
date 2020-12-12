@@ -15,6 +15,7 @@ import Form from './form/Form';
 import FormGroup from './form/Group';
 import ControlLabel from './form/Label';
 import Textarea from './form/Textarea';
+import ConditionsRule from './rule/ConditionsRule';
 
 export {
   // common components
@@ -36,4 +37,5 @@ export {
   FormGroup,
   Textarea,
   DateControl,
+  ConditionsRule
 }

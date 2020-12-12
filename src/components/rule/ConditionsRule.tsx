@@ -3,13 +3,10 @@ import FormControl from '../form/Control';
 import FormGroup from '../form/Group';
 import ControlLabel from '../form/Label';
 import { FlexPad, InlineForm } from '../step/styles';
-
-// TODO: fix
-// import {
-//   RULE_CONDITIONS,
-//   VISITOR_AUDIENCE_RULES
-// } from 'modules/engage/constants';
-
+import {
+  RULE_CONDITIONS,
+  VISITOR_AUDIENCE_RULES
+} from '../../constants/engage';
 import React from 'react';
 import styled from 'styled-components';
 import { IConditionsRule } from '../../types';
@@ -123,12 +120,7 @@ class ConditionsRule extends React.Component<Props, State> {
             defaultValue={rule.condition}
             onChange={onChangeCondition}
           >
-            {/* {RULE_CONDITIONS[rule.kind].map((cond, index) => (
-              <option key={index} value={cond.value}>
-                {cond.text}
-              </option>
-            ))} */}
-            {{}[rule.kind].map((cond, index) => (
+            {RULE_CONDITIONS[rule.kind].map((cond, index) => (
               <option key={index} value={cond.value}>
                 {cond.text}
               </option>
@@ -157,12 +149,7 @@ class ConditionsRule extends React.Component<Props, State> {
         <FormGroup>
           <ControlLabel>Add rule</ControlLabel>
           <FormControl componentClass="select" onChange={this.addRule}>
-            {/* {VISITOR_AUDIENCE_RULES.map((rule, index) => (
-              <option key={index} value={rule.value}>
-                {rule.text}
-              </option>
-            ))} */}
-            {[{value: '', text: ''}].map((rule, index) => (
+            {VISITOR_AUDIENCE_RULES.map((rule, index) => (
               <option key={index} value={rule.value}>
                 {rule.text}
               </option>
