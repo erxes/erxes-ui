@@ -17,9 +17,11 @@ import apolloClient from './apolloClient';
 import { AppConsumer, AppProvider } from './appContext';
 import { EditorCK } from './containers';
 
+export * from './conformity';
 export * from './components';
 export * from './layout';
 export * from './utils';
+export * from './boards';
 
 export {
   apolloClient,
