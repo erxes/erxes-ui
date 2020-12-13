@@ -27,4 +27,6 @@ function ActionButtons({ children }: { children: React.ReactNode }) {
   return <ActionButton>{children}</ActionButton>;
 }
 
+ActionButtons.ActionButton = ActionButton;
+
 export default ActionButtons;
