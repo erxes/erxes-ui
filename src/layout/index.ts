@@ -6,7 +6,8 @@ import PageContent from './components/PageContent';
 import Sidebar from './components/Sidebar';
 import Wrapper from './components/Wrapper';
 import {
-  CenterContent, ContenFooter, Contents, HeightedWrapper, MainContent, PageHeader
+    CenterContent, ContenFooter, Contents, HeightedWrapper, MainContent, PageHeader,
+    SectionContainer, SidebarCollapse
 } from './styles';
 
 export {
@@ -25,4 +26,6 @@ export {
   HeightedWrapper,
   MainContent,
   PageHeader,
+  SectionContainer,
+  SidebarCollapse,
 }

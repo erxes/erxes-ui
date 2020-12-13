@@ -352,6 +352,45 @@ const CenterContent = styled.div`
   }
 `;
 
+const SectionContainer = styled.div`
+  position: relative;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+
+  > div {
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  ${SidebarBox} {
+    box-shadow: none;
+  }
+
+  ${SidebarTitle} {
+    height: 40px;
+  }
+`;
+
+const SidebarCollapse = styled.a`
+  color: ${colors.colorCoreGray};
+  position: absolute;
+  top: ${dimensions.unitSpacing - 2}px;
+  right: ${dimensions.coreSpacing - 3}px;
+  font-size: 14px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+`;
+
+
 export {
   PageHeader,
   VerticalContent,
@@ -377,4 +416,6 @@ export {
   SidebarTitle,
   SidebarList,
   FieldStyle,
+  SectionContainer,
+  SidebarCollapse,
 };
