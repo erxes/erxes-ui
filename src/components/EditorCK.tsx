@@ -2,7 +2,7 @@ import CKEditor from 'ckeditor4-react';
 import { colors } from '../styles';
 import React from 'react';
 import { IEditorProps } from '../types';
-import { getEnv } from 'utils';
+import { getEnv } from '../utils';
 
 const { REACT_APP_API_URL } = getEnv();
 

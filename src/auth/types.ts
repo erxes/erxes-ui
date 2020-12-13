@@ -1,3 +1,4 @@
+import { QueryResponse } from '../types';
 export interface IOnboardingHistory {
   _id: string;
   userId: string;
@@ -65,3 +66,7 @@ export interface IUser extends IUserDoc {
   emailSignatures?: IEmailSignature[];
   onboardingHistory?: IOnboardingHistory;
 }
+
+export type AllUsersQueryResponse = {
+  allUsers: IUser[];
+} & QueryResponse;

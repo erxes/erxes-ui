@@ -15,6 +15,7 @@ import {
 
 import apolloClient from './apolloClient';
 import { AppConsumer, AppProvider } from './appContext';
+import { EditorCK } from './containers';
 
 export * from './components';
 export * from './layout';
@@ -24,6 +25,7 @@ export {
   apolloClient,
   AppConsumer,
   AppProvider,
+  EditorCK,
 
   // main styles
   ChooserStyleColumns,
