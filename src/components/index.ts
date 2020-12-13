@@ -66,8 +66,10 @@ import Tip from './Tip';
 import Toggle from './Toggle';
 import Uploader from './Uploader';
 import WithPermission from './WithPermission';
+import HelpPopover from './HelpPopover';
 
 export {
+  HelpPopover,
   WithPermission,
   Toggle,
   Uploader,

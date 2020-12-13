@@ -119,6 +119,8 @@ type State = {
 };
 
 class TaskTimer extends React.Component<Props, State> {
+  static STATUS_TYPES = STATUS_TYPES;
+
   timer: NodeJS.Timeout;
 
   constructor(props) {

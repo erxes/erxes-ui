@@ -88,6 +88,9 @@ type Props = {
 };
 
 class Attachment extends React.Component<Props> {
+  static AttachmentWrapper = AttachmentWrapper;
+  static Meta = Meta;
+
   renderOtherInfo = attachment => {
     const name = attachment.name || attachment.url || '';
 
