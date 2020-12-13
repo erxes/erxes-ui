@@ -47,7 +47,6 @@ import HeaderDescription from './HeaderDescription';
 import Icon from './Icon';
 import ImageWithPreview from './ImageWithPreview';
 import Info from './Info';
-import IntegrationIcon from './IntegrationIcon';
 import Label from './Label';
 import LoadMore from './LoadMore';
 import ModalTrigger from './ModalTrigger';
@@ -88,7 +87,6 @@ export {
   ModalTrigger,
   LoadMore,
   Label,
-  IntegrationIcon,
   Info,
   Icon,
   ImageWithPreview,
