@@ -13,11 +13,15 @@ import {
   TabContent as MainStyleTabContent, TopHeader as MainStyleTopHeader
 } from './styles/main';
 
+import apolloClient from './apolloClient';
+
 export * from './components';
 export * from './layout';
 export * from './utils';
 
 export {
+  apolloClient,
+
   // main styles
   ChooserStyleColumns,
   ChooserStyleColumn,
