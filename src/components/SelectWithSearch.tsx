@@ -1,16 +1,42 @@
 import gql from 'graphql-tag';
 import * as compose from 'lodash.flowright';
 import debounce from 'lodash/debounce';
-// TODO: fix
-// import { Avatar, SelectOption, SelectValue } from 'modules/boards/styles/item';
 import React from 'react';
 import { graphql } from 'react-apollo';
 import Select from 'react-select-plus';
 import styled from 'styled-components';
+import colors from '../styles/colors';
 import { IOption } from '../types';
-import { __, withProps } from '../utils/core';
-import confirm from '../utils/confirmation/confirm';
+import { __, confirm, readFile, withProps } from '../utils';
 import Icon from './Icon';
+
+export const SelectValue = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -7px;
+  padding-left: 25px;
+
+  img {
+    position: absolute;
+    left: 0;
+  }
+`;
+
+export const SelectOption = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+export const Avatar = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: ${colors.bgActive};
+  float: left;
+  margin-right: 5px;
+`;
 
 const SelectWrapper = styled.div`
   position: relative;
@@ -46,11 +72,11 @@ type Props = {
 
 const content = (option: IOption): React.ReactNode => (
   <>
-    {/* <Avatar
+    <Avatar
       src={
         option.avatar ? readFile(option.avatar) : '/images/avatar-colored.svg'
       }
-    /> */}
+    />
     {option.label}
   </>
 );
@@ -191,20 +217,12 @@ class SelectWithSearch extends React.Component<
     let optionRenderer;
     let valueRenderer;
 
-    // TODO: fix
-    // if (multi) {
-    //   valueRenderer = (option: IOption) =>
-    //     selectItemRenderer(option, showAvatar, SelectValue);
-
-    //   optionRenderer = (option: IOption) =>
-    //     selectItemRenderer(option, showAvatar, SelectOption);
-    // }
     if (multi) {
       valueRenderer = (option: IOption) =>
-        selectItemRenderer(option, showAvatar, {});
+        selectItemRenderer(option, showAvatar, SelectValue);
 
       optionRenderer = (option: IOption) =>
-        selectItemRenderer(option, showAvatar, {});
+        selectItemRenderer(option, showAvatar, SelectOption);
     }
 
     return (
