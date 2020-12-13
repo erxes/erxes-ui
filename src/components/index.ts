@@ -19,6 +19,7 @@ import Textarea from './form/Textarea';
 import NameCard from './nameCard/NameCard';
 import Pagination from './pagination/Pagination';
 import ConditionsRule from './rule/ConditionsRule';
+import * as CommonStep from './step';
 
 export {
   // common components
@@ -43,4 +44,5 @@ export {
   NameCard,
   Pagination,
   ConditionsRule,
+  CommonStep,
 }
