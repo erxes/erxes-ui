@@ -14,6 +14,7 @@ import {
 } from './styles/main';
 
 import apolloClient from './apolloClient';
+import { AppConsumer, AppProvider } from './appContext';
 
 export * from './components';
 export * from './layout';
@@ -21,6 +22,8 @@ export * from './utils';
 
 export {
   apolloClient,
+  AppConsumer,
+  AppProvider,
 
   // main styles
   ChooserStyleColumns,

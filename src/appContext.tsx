@@ -86,7 +86,7 @@ export class AppProvider extends React.Component<
         .catch(_ => dayjs.locale('en'));
     }
 
-    import(`./locales/${currentLanguage}.json`)
+    import(`locales/${currentLanguage}.json`)
       .then(data => {
         const translations = data.default;
         T.setTexts(translations);
