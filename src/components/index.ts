@@ -20,6 +20,7 @@ import NameCard from './nameCard/NameCard';
 import Pagination from './pagination/Pagination';
 import ConditionsRule from './rule/ConditionsRule';
 import * as CommonStep from './step';
+import Submenu from './subMenu/Submenu';
 
 export {
   // common components
@@ -45,4 +46,5 @@ export {
   Pagination,
   ConditionsRule,
   CommonStep,
+  Submenu,
 }
