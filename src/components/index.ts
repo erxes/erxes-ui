@@ -23,6 +23,7 @@ import * as CommonStep from './step';
 import Submenu from './subMenu/Submenu';
 import Table from './table';
 import withTableWrapper from './table/withTableWrapper';
+import { Tabs, TabTitle } from './tabs'
 
 export {
   // common components
@@ -51,4 +52,6 @@ export {
   Submenu,
   Table,
   withTableWrapper,
+  Tabs,
+  TabTitle,
 }
