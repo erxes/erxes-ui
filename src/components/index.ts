@@ -4,6 +4,7 @@ import Button from './Button';
 import ButtonMutate from './ButtonMutate';
 import DateFilter from './DateFilter';
 import Editor from './editor/Editor';
+import EditorCKPlain from './EditorCK';
 import EmptyContent from './empty/EmptyContent';
 import EmptyState from './EmptyState';
 import Filter from './filter/Filter';
@@ -33,6 +34,7 @@ export {
   ButtonMutate,
   DateFilter,
   Editor,
+  EditorCKPlain,
   EmptyContent,
   EmptyState,
   Filter,

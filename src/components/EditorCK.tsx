@@ -19,6 +19,8 @@ export const getMentionedUserIds = (content: string) => {
 };
 
 class EditorCK extends React.Component<IEditorProps, { content: string }> {
+  static getMentionedUserIds = getMentionedUserIds;
+
   constructor(props: IEditorProps) {
     super(props);
 
