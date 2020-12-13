@@ -45,6 +45,8 @@ type Props = {
 };
 
 class ButtonMutate extends React.Component<Props, { isLoading: boolean }> {
+  static SmallLoader = SmallLoader;
+
   static defaultProps = {
     btnSize: 'medium',
     icon: 'check-circle'
