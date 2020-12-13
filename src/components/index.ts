@@ -46,8 +46,48 @@ import FilePreview from './FilePreview';
 import HeaderDescription from './HeaderDescription';
 import Icon from './Icon';
 import ImageWithPreview from './ImageWithPreview';
+import Info from './Info';
+import IntegrationIcon from './IntegrationIcon';
+import Label from './Label';
+import LoadMore from './LoadMore';
+import ModalTrigger from './ModalTrigger';
+import ModifiableList from './ModifiableList';
+import ModifiableSelect from './ModifiableSelect';
+import ProgressBar from './ProgressBar';
+import SelectWithSearch from './SelectWithSearch';
+import SortableList from './SortableList';
+import SortHandler from './SortHandler';
+import Spinner from './Spinner';
+import Tags from './Tags';
+import TextDivider from './TextDivider';
+import TextInfo from './TextInfo';
+import Timer from './Timer';
+import Tip from './Tip';
+import Toggle from './Toggle';
+import Uploader from './Uploader';
+import WithPermission from './WithPermission';
 
 export {
+  WithPermission,
+  Toggle,
+  Uploader,
+  Tip,
+  Timer,
+  TextInfo,
+  TextDivider,
+  Tags,
+  Spinner,
+  SortHandler,
+  SortableList,
+  SelectWithSearch,
+  ProgressBar,
+  ModifiableSelect,
+  ModifiableList,
+  ModalTrigger,
+  LoadMore,
+  Label,
+  IntegrationIcon,
+  Info,
   Icon,
   ImageWithPreview,
   FilePreview,
