@@ -19,7 +19,7 @@ import Textarea from './form/Textarea';
 import NameCard from './nameCard/NameCard';
 import Pagination from './pagination/Pagination';
 import ConditionsRule from './rule/ConditionsRule';
-import * as CommonStep from './step';
+import { Step, Steps } from './step';
 import Submenu from './subMenu/Submenu';
 import Table from './table';
 import withTableWrapper from './table/withTableWrapper';
@@ -48,7 +48,8 @@ export {
   NameCard,
   Pagination,
   ConditionsRule,
-  CommonStep,
+  Step,
+  Steps,
   Submenu,
   Table,
   withTableWrapper,
