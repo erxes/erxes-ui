@@ -21,6 +21,8 @@ import Pagination from './pagination/Pagination';
 import ConditionsRule from './rule/ConditionsRule';
 import * as CommonStep from './step';
 import Submenu from './subMenu/Submenu';
+import Table from './table';
+import withTableWrapper from './table/withTableWrapper';
 
 export {
   // common components
@@ -47,4 +49,6 @@ export {
   ConditionsRule,
   CommonStep,
   Submenu,
+  Table,
+  withTableWrapper,
 }
