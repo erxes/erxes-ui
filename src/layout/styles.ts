@@ -4,6 +4,19 @@ import { TabContainer } from '../components/tabs/styles';
 import { colors, dimensions, typography } from '../styles';
 import { lighten } from '../styles/ecolor';
 
+
+const WhiteBoxRoot = styled.div`
+  margin-bottom: ${dimensions.coreSpacing}px;
+  background-color: ${colors.colorWhite};
+  box-shadow: 0 0 6px 1px ${colors.shadowPrimary};
+`;
+
+const WhiteBox = styled(WhiteBoxRoot)`
+  flex: 1;
+  overflow: auto;
+  position: relative;
+`;
+
 const PageHeader = styled.div`
   height: ${dimensions.headerSpacing}px;
   position: fixed;
@@ -418,4 +431,6 @@ export {
   FieldStyle,
   SectionContainer,
   SidebarCollapse,
+  WhiteBoxRoot,
+  WhiteBox,
 };

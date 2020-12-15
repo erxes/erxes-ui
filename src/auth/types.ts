@@ -1,4 +1,4 @@
-import { QueryResponse } from '../types';
+import { IBrand, QueryResponse } from '../types';
 export interface IOnboardingHistory {
   _id: string;
   userId: string;
@@ -9,15 +9,6 @@ export interface IOnboardingHistory {
 export interface IEmailSignature {
   brandId?: string;
   signature?: string;
-}
-
-export interface IBrand {
-  _id: string;
-  code: string;
-  name?: string;
-  createdAt: string;
-  description?: string;
-  emailConfig: { type: string; template: string };
 }
 
 export interface IUserDetails {
@@ -70,3 +61,8 @@ export interface IUser extends IUserDoc {
 export type AllUsersQueryResponse = {
   allUsers: IUser[];
 } & QueryResponse;
+
+export type CurrentUserQueryResponse = {
+  currentUser: IUser;
+  loading: boolean;
+};
