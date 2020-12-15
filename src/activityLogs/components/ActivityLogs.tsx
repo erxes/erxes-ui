@@ -15,6 +15,7 @@ type Props = {
   loadingLogs: boolean;
   extraTabs: Array<{ name: string; label: string }>;
   onTabClick: (currentTab: string) => void;
+  activityRenderItem?: (activity: IActivityLog, currentUser?: IUser) => React.ReactNode;
 };
 
 type State = {
@@ -40,7 +41,7 @@ class ActivityLogs extends React.PureComponent<Props, State> {
 
   renderTabContent() {
     const { currentTab } = this.state;
-    const { currentUser, activityLogs, loadingLogs, target } = this.props;
+    const { currentUser, activityLogs, loadingLogs, target, activityRenderItem } = this.props;
 
     const hasActivity = hasAnyActivity(activityLogs);
 
@@ -55,6 +56,7 @@ class ActivityLogs extends React.PureComponent<Props, State> {
               activities={activityLogs}
               target={target}
               type={currentTab}
+              activityRenderItem={activityRenderItem}
             />
           }
           emptyText="No Activities"

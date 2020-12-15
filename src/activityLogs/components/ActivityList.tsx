@@ -1,22 +1,23 @@
 import dayjs from 'dayjs';
-import EmptyState from '../../components/EmptyState';
 import React from 'react';
 import { IUser } from '../../auth/types';
+import EmptyState from '../../components/EmptyState';
 import { ActivityTitle, Timeline } from '../styles';
 import { IActivityLog } from '../types';
 import ActivityItem from './ActivityItem';
 
-type Props = {
+export type IActivityListProps = {
   activities: IActivityLog[];
   user: IUser;
   target?: string;
   type: string;
+  activityRenderItem?: (activity: IActivityLog, currentUser?: IUser) => React.ReactNode;
 };
 
-class ActivityList extends React.Component<Props> {
+class ActivityList extends React.Component<IActivityListProps> {
   renderItem(data) {
     return data.map((item, index) => (
-      <ActivityItem key={index} activity={item} currentUser={this.props.user} />
+      <ActivityItem key={index} activity={item} currentUser={this.props.user} activityRenderItem={this.props.activityRenderItem} />
     ));
   }
 

@@ -1,19 +1,20 @@
 import { AppConsumer } from 'appContext';
 import gql from 'graphql-tag';
 import * as compose from 'lodash.flowright';
-import { IUser } from '../../auth/types';
-import { withProps } from '../../utils';
 import React from 'react';
 import { graphql } from 'react-apollo';
-import { ActivityLogQueryResponse } from '../types';
+import { IUser } from '../../auth/types';
+import { withProps } from '../../utils';
 import ActivityLogs from '../components/ActivityLogs';
 import { queries, subscriptions } from '../graphql';
+import { ActivityLogQueryResponse, IActivityLog } from '../types';
 
-type Props = {
+export type ActivityLogsProps = {
   contentId: string;
   contentType: string;
   target?: string;
   extraTabs: Array<{ name: string; label: string }>;
+  activityRenderItem?: (activity: IActivityLog, currentUser?: IUser) => React.ReactNode;
 };
 
 type FinalProps = {
@@ -49,7 +50,8 @@ class Container extends React.Component<FinalProps, {}> {
       target,
       activityLogQuery,
       extraTabs,
-      onChangeActivityTab
+      onChangeActivityTab,
+      activityRenderItem
     } = this.props;
 
     const props = {
@@ -57,20 +59,21 @@ class Container extends React.Component<FinalProps, {}> {
       loadingLogs: activityLogQuery.loading,
       activityLogs: activityLogQuery.activityLogs || [],
       onTabClick: onChangeActivityTab,
-      extraTabs
+      extraTabs,
+      activityRenderItem
     };
 
     return (
       <AppConsumer>
         {({ currentUser }) => (
-          <ActivityLogs {...props} currentUser={currentUser || ({} as IUser)} />
+          <ActivityLogs {...props} currentUser={currentUser || ({} as IUser)} activityRenderItem={this.props.activityRenderItem} />
         )}
       </AppConsumer>
     );
   }
 }
 
-type WithDataProps = Props & {
+type WithDataProps = ActivityLogsProps & {
   onChangeActivityTab: (currentTab: string) => void;
   activityType: string;
 };
@@ -96,9 +99,9 @@ const WithData = withProps<WithDataProps>(
 );
 
 export default class Wrapper extends React.Component<
-  Props,
+  ActivityLogsProps,
   { activityType: string }
-> {
+  > {
   constructor(props) {
     super(props);
 
@@ -112,7 +115,7 @@ export default class Wrapper extends React.Component<
   };
 
   render() {
-    const { contentId, contentType, target, extraTabs } = this.props;
+    const { contentId, contentType, target, extraTabs, activityRenderItem } = this.props;
     const { activityType } = this.state;
 
     return (
@@ -122,6 +125,7 @@ export default class Wrapper extends React.Component<
         contentType={contentType}
         extraTabs={extraTabs}
         activityType={activityType}
+        activityRenderItem={activityRenderItem}
         onChangeActivityTab={this.onChangeActivityTab}
       />
     );
