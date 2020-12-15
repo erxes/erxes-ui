@@ -8,7 +8,7 @@ import {
 import React from 'react';
 import { graphql } from 'react-apollo';
 import { withProps } from '../utils';
-import { allUsers } from '../auth/graphql';
+import { allUsers } from '../team/graphql';
 import { AllUsersQueryResponse } from '../auth/types';
 import EditorCK from '../components/EditorCK';
 import { IEditorProps, IMentionUser } from '../types';
