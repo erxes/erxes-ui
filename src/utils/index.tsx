@@ -1,6 +1,7 @@
 import Alert from './Alert';
 import * as animations from './animations';
 import * as calendar from './calendar';
+import * as categories from './categories';
 import confirm from './confirmation/confirm';
 import * as core from './core';
 import parseMD from './parseMd';
@@ -44,6 +45,7 @@ export const getEnv = core.getEnv;
 export const cleanIntegrationKind = core.cleanIntegrationKind;
 export const getConfig = core.getConfig;
 export const setConfig = core.setConfig;
+export const generateCategoryOptions = categories.generateCategoryOptions;
 
 export {
   animations,
@@ -55,5 +57,6 @@ export {
   router,
   confirm,
   toggleCheckBoxes,
-  urlParser
+  urlParser,
+  categories
 };
