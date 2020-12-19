@@ -9,12 +9,12 @@ export interface ICategory {
   parentId?: string;
   createdAt: Date;
   isRoot: boolean;
-  drawCode?: boolean;
 }
 
 export const generateCategoryOptions = (
   categories: ICategory[],
-  currentCategoryId?: string
+  currentCategoryId?: string,
+  drawCode?: boolean
 ) => {
   const result: React.ReactNode[] = [];
 
@@ -33,7 +33,7 @@ export const generateCategoryOptions = (
       result.push(
         <option key={category._id} value={category._id}>
           {space}
-          {category.drawCode ? `${category.code} - ` : ''}
+          {drawCode ? `${category.code} - ` : ''}
           {category.name}
         </option>
       );
