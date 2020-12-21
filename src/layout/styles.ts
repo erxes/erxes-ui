@@ -403,6 +403,97 @@ const SidebarCollapse = styled.a`
   }
 `;
 
+const BarItems = styled.div`
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .dropdown-menu {
+    min-width: 200px;
+  }
+
+  > * + * {
+    margin: 5px 0 5px ${dimensions.unitSpacing}px;
+  }
+
+  .Select {
+    min-width: 200px;
+  }
+
+  input[type='text'] {
+    width: auto;
+    display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    > * + * {
+      margin: 3px 0 3px ${dimensions.unitSpacing / 2}px;
+    }
+  }
+`;
+
+const SidebarFlexRow = styled.li`
+  white-space: inherit !important;
+  display: flex !important;
+  justify-content: space-between;
+
+  span {
+    color: ${colors.colorCoreGray};
+    overflow: hidden;
+    max-height: 140px;
+    padding-left: ${dimensions.coreSpacing}px;
+    text-align: right;
+  }
+`;
+
+const FlexContent = styled.div`
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+`;
+
+const FlexItem = styledTS<{ count?: number; hasSpace?: boolean }>(styled.div)`
+  flex: ${props => (props.count ? props.count : 1)};
+  position: relative;
+
+  ${props =>
+    props.hasSpace &&
+    css`
+      margin-left: ${dimensions.coreSpacing}px;
+    `};
+`;
+
+const FlexRightItem = styled.div`
+  margin-left: auto;
+`;
+
+const SectionBodyItem = styled.div`
+  border-bottom: 1px solid ${colors.borderPrimary};
+  word-break: break-word;
+
+  > a {
+    padding: 10px 20px;
+    display: flex;
+    width: 100%;
+    color: ${colors.textSecondary};
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  > span {
+    display: block;
+    padding: 0px 20px 10px 20px;
+    margin-top: -10px;
+  }
+
+  ul li {
+    margin-left: ${dimensions.coreSpacing}px;
+  }
+`;
 
 export {
   PageHeader,
@@ -433,4 +524,10 @@ export {
   SidebarCollapse,
   WhiteBoxRoot,
   WhiteBox,
+  BarItems,
+  SidebarFlexRow,
+  FlexContent,
+  FlexItem,
+  FlexRightItem,
+  SectionBodyItem,
 };

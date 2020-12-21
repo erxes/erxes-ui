@@ -4,6 +4,8 @@ import { EditorCK } from './containers';
 
 export * from './auth';
 export * from './team';
+export * from './companies';
+export * from './customers';
 export * from './conformity';
 export * from './components';
 export * from './styles/eindex';
