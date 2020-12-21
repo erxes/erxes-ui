@@ -66,3 +66,7 @@ export type CurrentUserQueryResponse = {
   currentUser: IUser;
   loading: boolean;
 };
+
+export type UsersQueryResponse = {
+  users: IUser[];
+} & QueryResponse;
