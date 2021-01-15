@@ -4,7 +4,6 @@ import { TabContainer } from '../components/tabs/styles';
 import { colors, dimensions, typography } from '../styles';
 import { lighten } from '../styles/ecolor';
 
-
 const WhiteBoxRoot = styled.div`
   margin-bottom: ${dimensions.coreSpacing}px;
   background-color: ${colors.colorWhite};
@@ -128,8 +127,9 @@ const SideContent = styledTS<{
   width: ${props => (props.wide ? '340px' : '290px')};
   flex: ${props => (props.half ? '1' : 'none')};
   background: ${props => (props.full ? colors.colorWhite : 'none')};
-  margin: ${dimensions.unitSpacing}px ${dimensions.unitSpacing}px ${dimensions.unitSpacing
-  }px 0;
+  margin: ${dimensions.unitSpacing}px ${dimensions.unitSpacing}px ${
+  dimensions.unitSpacing
+}px 0;
   box-shadow: ${props =>
     props.full ? `0 0 6px 1px ${colors.shadowPrimary}` : 'none'};
 
@@ -206,7 +206,7 @@ const SidebarBox = styledTS<{
 const BoxContent = styled.div`
   flex: 1;
 
-  ul {
+  ul:first-child {
     padding: 10px 0;
   }
 `;
@@ -529,5 +529,5 @@ export {
   FlexContent,
   FlexItem,
   FlexRightItem,
-  SectionBodyItem,
+  SectionBodyItem
 };

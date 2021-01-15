@@ -4,6 +4,6 @@ export interface ITag {
   name: string;
   colorCode: string;
   objectCount?: number;
-  order?: string;
   parentId?: string;
+  order?: string;
 }

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { IRouterProps } from '../types';
 import Box from './Box';
-import { ITag } from '../tags/types'
+import { ITag } from '../tags/types';
 
 interface IProps extends IRouterProps {
   tags: ITag[];
@@ -47,6 +47,7 @@ function CountsByTag({ history, tags, counts, manageUrl, loading }: IProps) {
         counts={counts}
         icon="tag-alt"
         loading={loading}
+        treeView={true}
       />
     </Box>
   );

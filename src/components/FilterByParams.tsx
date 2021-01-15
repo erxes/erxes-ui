@@ -34,8 +34,8 @@ const PopoverContent = styled.div`
 
 const ChildList = styled.ul`
   list-style: none;
-  padding-left: 20px;
   position: relative;
+  padding: 0 0 0 20px !important;
 `;
 
 const iconWidth = 30;
@@ -186,7 +186,7 @@ class FilterByParams extends React.Component<IProps, State> {
           const isOpen = this.state.parentFieldIds[field._id];
 
           return (
-            <>
+            <SidebarList key={`parent-${field._id}`}>
               {renderFieldItem(field)}
 
               <ChildList>
@@ -201,7 +201,7 @@ class FilterByParams extends React.Component<IProps, State> {
                     return renderTree(childField);
                   })}
               </ChildList>
-            </>
+            </SidebarList>
           );
         }
 

@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { IRouterProps } from '../../types';
 import createChipText from './createChipText';
-import { setParams } from '../../utils/router';
+import { removeParams, setParams } from '../../utils/router';
 
 interface IProps extends IRouterProps {
   queryParams?: any;
@@ -20,7 +20,19 @@ const Filters = styled.div`
 function Filter({ queryParams = {}, history }: IProps) {
   const onClickClose = paramKey => {
     for (const key of paramKey) {
-      setParams(history, { [key]: null });
+      removeParams(history, key);
+    }
+  };
+
+  const onClickRemove = (paramKey: string, ids: string[], id: string) => {
+    if (ids.length === 1) {
+      removeParams(history, paramKey);
+    } else {
+      const index = ids.indexOf(id);
+
+      ids.splice(index, 1);
+
+      setParams(history, { [paramKey]: ids.toString() });
     }
   };
 
@@ -58,6 +70,20 @@ function Filter({ queryParams = {}, history }: IProps) {
             }
           }
         `;
+
+      const ids = id.split(',');
+
+      if (ids.length > 1) {
+        return ids.map((_id: string) => {
+          const ChipText = createChipText(graphqlQuery, _id);
+
+          return (
+            <Chip onClick={onClickRemove.bind(null, paramKey, ids, _id)}>
+              <ChipText />
+            </Chip>
+          );
+        });
+      }
 
       const ChipText = createChipText(graphqlQuery, id);
 
