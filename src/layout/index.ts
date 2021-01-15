@@ -6,9 +6,10 @@ import PageContent from './components/PageContent';
 import Sidebar from './components/Sidebar';
 import Wrapper from './components/Wrapper';
 import {
-    CenterContent, ContenFooter, ContentBox, ContentHeader, Contents, FieldStyle, HeightedWrapper,
-    MainContent, PageHeader, SectionContainer, SidebarBox, SidebarCollapse, SidebarCounter,
-    SidebarList, SidebarTitle, WhiteBox, WhiteBoxRoot
+  BarItems, CenterContent, ContenFooter, ContentBox, ContentHeader, Contents, FieldStyle,
+  FlexContent, FlexItem, FlexRightItem, HeightedWrapper, MainContent, PageHeader, SectionBodyItem,
+  SectionContainer, SidebarBox, SidebarCollapse, SidebarCounter, SidebarFlexRow, SidebarList,
+  SidebarTitle, WhiteBox, WhiteBoxRoot
 } from './styles';
 
 export {
@@ -38,4 +39,10 @@ export {
   SidebarCounter,
   SidebarList,
   SidebarTitle,
+  BarItems,
+  SidebarFlexRow,
+  FlexContent,
+  FlexItem,
+  FlexRightItem,
+  SectionBodyItem,
 }

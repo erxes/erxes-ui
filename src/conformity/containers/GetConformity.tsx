@@ -15,6 +15,7 @@ type IProps = {
   data?: any;
   collapseCallback?: () => void;
   alreadyItems?: any;
+  actionSection?: any;
 };
 
 type FinalProps = {

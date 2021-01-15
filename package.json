@@ -5,7 +5,9 @@
   "license": "SEE LICENSE IN LICENSE",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": ["lib/components"],
+  "files": [
+    "lib/components"
+  ],
   "dependencies": {
     "@nateradebaugh/react-datetime": "^4.0.0-rc.10",
     "@types/bunyan": "^1.8.6",
