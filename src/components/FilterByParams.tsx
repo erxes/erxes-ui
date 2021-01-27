@@ -112,11 +112,29 @@ class FilterByParams extends React.Component<IProps, State> {
     this.setState({ parentFieldIds });
   };
 
+  getCount(field: any) {
+    const counts = this.props.counts;
+    let count = counts[field._id];
+
+    if (!this.props.treeView) {
+      return count;
+    }
+
+    if (field.relatedIds) {
+      const relatedIds = field.relatedIds || [];
+
+      for (const id of relatedIds) {
+        count += counts[id];
+      }
+    }
+
+    return count;
+  }
+
   renderItems() {
     const {
       history,
       fields,
-      counts,
       paramKey,
       icon,
       searchable,
@@ -150,7 +168,7 @@ class FilterByParams extends React.Component<IProps, State> {
       }
 
       return (
-        <li key={_id}>
+        <li key={_id} title={field.name}>
           <a
             href="#param"
             tabIndex={0}
@@ -161,7 +179,7 @@ class FilterByParams extends React.Component<IProps, State> {
               <Icon icon={icon} style={{ color: field.colorCode }} />
             ) : null}{' '}
             <FieldStyle>{field.name}</FieldStyle>
-            <SidebarCounter>{counts[_id]}</SidebarCounter>
+            <SidebarCounter>{this.getCount(field)}</SidebarCounter>
           </a>
         </li>
       );
