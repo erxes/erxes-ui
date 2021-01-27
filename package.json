@@ -1,14 +1,13 @@
 {
   "name": "erxes-ui",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.0.18",
   "license": "SEE LICENSE IN LICENSE",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/components"
+    "lib"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "@nateradebaugh/react-datetime": "^4.0.0-rc.10",
     "@types/bunyan": "^1.8.6",
     "@types/draft-js": "^0.10.24",
@@ -21,6 +20,7 @@
     "apollo-cache-inmemory": "^1.1.5",
     "apollo-client": "^2.6.4",
     "apollo-link": "^1.0.7",
+    "apollo-link-context": "^1.0.3",
     "apollo-link-error": "^1.0.9",
     "apollo-link-http": "^1.5.16",
     "apollo-link-ws": "^1.0.8",
@@ -73,9 +73,6 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.prod.json"
-  },
-  "devDependencies": {
-    "typescript": "^3.0.3"
   },
   "browserslist": [
     ">0.2%",
