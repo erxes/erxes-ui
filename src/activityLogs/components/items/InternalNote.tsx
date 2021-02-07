@@ -56,8 +56,8 @@ class InternalNote extends React.Component<Props, { editing: boolean }> {
 
   renderContent() {
     const { internalNote, isLoading, edit, currentUser } = this.props;
-    const { content } = internalNote;
-    const isCurrentUserNote = currentUser._id === internalNote.createdUser._id;
+    const { content, createdUser = { _id: '' } } = internalNote;
+    const isCurrentUserNote = currentUser._id === createdUser._id;
 
     if (this.state.editing) {
       return (
@@ -83,7 +83,8 @@ class InternalNote extends React.Component<Props, { editing: boolean }> {
 
   render() {
     const { internalNote, remove, currentUser } = this.props;
-    const isCurrentUserNote = currentUser._id === internalNote.createdUser._id;
+    const createdUser = internalNote.createdUser || { _id: '' };
+    const isCurrentUserNote = currentUser._id === createdUser._id;
 
     return (
       <LogWrapper>
