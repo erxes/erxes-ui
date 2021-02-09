@@ -10,6 +10,10 @@ import {
 import React from 'react';
 import styled from 'styled-components';
 import { IConditionsRule } from '../../types';
+import ModalTrigger from '../ModalTrigger';
+import RuleForm from './RuleForm';
+
+
 
 const RuleDescription = styled.p`
   text-transform: initial;
@@ -18,6 +22,7 @@ const RuleDescription = styled.p`
 type Props = {
   rules: IConditionsRule[];
   onChange: (name: 'rules', rules: IConditionsRule[]) => void;
+  description?: string;
 };
 
 type State = {
@@ -143,11 +148,32 @@ class ConditionsRule extends React.Component<Props, State> {
     );
   }
 
+  renderAddRule = () => {
+
+    const trigger = (
+      <Button btnStyle="primary" uppercase={false} icon="plus-circle">
+        Add another rule
+      </Button>
+    );
+
+    const content = props => (
+      <RuleForm {...props} onChange={this.addRule} />
+    );
+
+    return (
+      <ModalTrigger title="Add rule" trigger={trigger} content={content} />
+    );
+  };
+
   render() {
+    const { description } = this.props;
     return (
       <FlexPad overflow="auto" direction="column">
         <FormGroup>
-          <ControlLabel>Add rule</ControlLabel>
+          <ControlLabel>Add rules</ControlLabel>
+          <RuleDescription>
+            {description || "Rules are used when you wish to target the audience of the form according to custom rules. For example, you can show the form only if a visitor views the webpage more than 5 times."} 
+            </RuleDescription>
           <FormControl componentClass="select" onChange={this.addRule}>
             {VISITOR_AUDIENCE_RULES.map((rule, index) => (
               <option key={index} value={rule.value}>
@@ -159,6 +185,10 @@ class ConditionsRule extends React.Component<Props, State> {
 
         <FormGroup>
           {this.state.rules.map(rule => this.renderRule(rule))}
+        </FormGroup>
+
+        <FormGroup>
+          {this.renderAddRule()}
         </FormGroup>
       </FlexPad>
     );
