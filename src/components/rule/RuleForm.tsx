@@ -22,9 +22,14 @@ class ChannelForm extends React.Component<Props, State> {
 
     }
 
+    onSelect = (e: any) => {
+        this.props.onChange(e)
+        this.props.closeModal();
+    }
+
 
     renderContent = () => {
-        const { closeModal, onChange } = this.props;
+        const { closeModal } = this.props;
 
         return (
             <>
@@ -32,7 +37,7 @@ class ChannelForm extends React.Component<Props, State> {
                     <ControlLabel>Rules</ControlLabel>
                     <p> Add rules as many as you want</p>
 
-                    <FormControl componentClass="select" onChange={onChange}>
+                    <FormControl componentClass="select" onChange={this.onSelect}>
                         {VISITOR_AUDIENCE_RULES.map((rule, index) => (
                             <option key={index} value={rule.value}>
                                 {rule.text}
