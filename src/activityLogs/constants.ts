@@ -90,5 +90,9 @@ export const ICON_AND_COLOR_TABLE = {
   archive: {
     icon: 'archive-alt',
     color: '#fdb761'
+  },
+  sms: {
+    icon: 'comment-lines',
+    color: '#FF6600'
   }
 };
