@@ -54,6 +54,14 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
     }
   }
 
+  componentWillUnmount() {
+    const name = this.props.name;
+
+    if (name) {
+      localStorage.removeItem(name);
+    }
+  }
+
   onEnter(event: any) {
     const { name, onCtrlEnter } = this.props;
 
