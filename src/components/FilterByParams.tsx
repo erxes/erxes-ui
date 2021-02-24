@@ -112,11 +112,11 @@ class FilterByParams extends React.Component<IProps, State> {
     this.setState({ parentFieldIds });
   };
 
-  getCount(field: any) {
+  getCount(field: any, isOpen?: boolean) {
     const counts = this.props.counts;
     let count = counts[field._id];
 
-    if (!this.props.treeView) {
+    if (!this.props.treeView || isOpen) {
       return count;
     }
 
@@ -147,7 +147,7 @@ class FilterByParams extends React.Component<IProps, State> {
       return <EmptyState icon={icon} text="No templates" size="full" />;
     }
 
-    const renderFieldItem = field => {
+    const renderFieldItem = (field: any, isOpen?: boolean) => {
       // filter items by key
       if (key && field.name.toLowerCase().indexOf(key) < 0) {
         return false;
@@ -179,7 +179,7 @@ class FilterByParams extends React.Component<IProps, State> {
               <Icon icon={icon} style={{ color: field.colorCode }} />
             ) : null}{' '}
             <FieldStyle>{field.name}</FieldStyle>
-            <SidebarCounter>{this.getCount(field)}</SidebarCounter>
+            <SidebarCounter>{this.getCount(field, isOpen)}</SidebarCounter>
           </a>
         </li>
       );
@@ -205,7 +205,7 @@ class FilterByParams extends React.Component<IProps, State> {
 
           return (
             <SidebarList key={`parent-${field._id}`}>
-              {renderFieldItem(field)}
+              {renderFieldItem(field, isOpen)}
 
               <ChildList>
                 <ToggleIcon

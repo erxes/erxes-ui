@@ -6,4 +6,5 @@ export interface ITag {
   objectCount?: number;
   parentId?: string;
   order?: string;
+  totalObjectCount?: number;
 }
