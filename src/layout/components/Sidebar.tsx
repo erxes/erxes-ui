@@ -56,8 +56,6 @@ class Section extends React.Component<Props, State> {
   static Title = Title;
   static QuickButtons = QuickButtons;
 
-  node: any;
-
   constructor(props: Props) {
     super(props);
 
