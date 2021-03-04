@@ -220,6 +220,7 @@ const SidebarToggle = styledTS<{ inverse?: boolean }>(styled.a)`
   padding: 0;
   background: ${props => (props.inverse ? colors.colorWhite : colors.bgLight)};
   border-top: 1px solid ${colors.borderPrimary};
+  z-index: 2;
 
   &:hover {
     cursor: pointer;
