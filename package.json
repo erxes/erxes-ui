@@ -1,6 +1,6 @@
 {
   "name": "erxes-ui",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "license": "SEE LICENSE IN LICENSE",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
