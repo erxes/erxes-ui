@@ -47,7 +47,7 @@ class SortableList extends React.Component<Props> {
 
     return (
       <DragHandler>
-        <Icon icon="ellipsis-v" />
+        <Icon icon="move" />
       </DragHandler>
     );
   }
@@ -80,6 +80,7 @@ class SortableList extends React.Component<Props> {
                       {...dragProvided.draggableProps}
                       {...dragProvided.dragHandleProps}
                       isDragging={snapshot.isDragging}
+                      column={field.column}
                     >
                       {this.renderDragHandler()}
                       {child(field)}
