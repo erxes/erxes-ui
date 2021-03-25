@@ -49,7 +49,7 @@ type State = {
   primaryName?: string;
   primaryEmail?: string;
   primaryPhone?: string;
-  industry?: string;
+  industry?: string[];
   businessType?: string;
 };
 
@@ -72,7 +72,7 @@ class CompanyForm extends React.Component<Props, State> {
       doNotDisturb: company.doNotDisturb || 'No',
       users: [],
       avatar: company.avatar,
-      industry: company.industry || '',
+      industry: company.industry || [],
       businessType: company.businessType || ''
     };
   }
@@ -81,6 +81,7 @@ class CompanyForm extends React.Component<Props, State> {
     values: { _id: string; size?: number } & ICompanyDoc & ICompanyLinks
   ) => {
     const { company } = this.props;
+    const { industry } = this.state;
 
     const finalValues = values;
 
@@ -100,7 +101,8 @@ class CompanyForm extends React.Component<Props, State> {
       size: Number(finalValues.size),
       description: finalValues.description,
       code: finalValues.code,
-      links
+      links,
+      industry: industry && industry.toString()
     };
   };
 
@@ -131,7 +133,7 @@ class CompanyForm extends React.Component<Props, State> {
   };
 
   onIndustryChange = option => {
-    this.setState({ industry: option.value });
+    this.setState({ industry: option.map(item => item.value) || [] });
   };
 
   onBusinessChange = option => {
@@ -236,13 +238,14 @@ class CompanyForm extends React.Component<Props, State> {
                 </FormGroup>
 
                 <FormGroup>
-                  <ControlLabel>Industry</ControlLabel>
+                  <ControlLabel>Industries</ControlLabel>
                   <Select
                     value={this.state.industry}
                     onChange={this.onIndustryChange}
                     options={this.generateConstantParams(
                       COMPANY_INDUSTRY_TYPES()
                     )}
+                    multi={true}
                     clearable={false}
                   />
                 </FormGroup>
