@@ -27,7 +27,7 @@ type FinalProps = {
 class CompanyChooser extends React.Component<
   WrapperProps & FinalProps,
   { newCompany?: ICompany }
-  > {
+> {
   constructor(props) {
     super(props);
 
@@ -130,7 +130,7 @@ export default class Wrapper extends React.Component<
     perPage: number;
     searchValue: string;
   }
-  > {
+> {
   constructor(props) {
     super(props);
 
