@@ -63,7 +63,9 @@ class Step extends React.Component<Props> {
     const { next, onClick } = this.props;
 
     if (next && stepNumber) {
-      onClick && onClick(stepNumber)
+      if (onClick) {
+        onClick(stepNumber)
+      }
 
       return next(stepNumber);
     }
