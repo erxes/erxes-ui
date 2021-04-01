@@ -42,6 +42,7 @@ export interface ICompanyDoc {
   tagIds?: string[];
   customFieldsData?: any;
   code?: string;
+  location?: string;
 }
 
 export interface ICompany extends ICompanyDoc {
