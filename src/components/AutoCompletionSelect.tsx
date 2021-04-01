@@ -1,12 +1,10 @@
-import client from '../apolloClient';
+import client from 'apolloClient';
 import gql from 'graphql-tag';
-import * as _ from 'lodash';
 import debounce from 'lodash/debounce';
 import React, { useCallback, useEffect, useState } from 'react';
 import Select from 'react-select-plus';
 import styled from 'styled-components';
-import { __ } from '../utils/core';
-import Alert from '../utils/Alert';
+import { __, Alert } from '../utils';
 import Button from './Button';
 import Icon from './Icon';
 
@@ -105,8 +103,6 @@ type Field = {
   added: { label: string; options: Option[] };
 };
 
-type SelectOptions = Array<{ label: string; options: Option[] }>;
-
 function AutoCompletionSelect({
   placeholder,
   queryName,
@@ -120,10 +116,34 @@ function AutoCompletionSelect({
 }: Props) {
   const selectRef = React.useRef<{ handleInputBlur: () => void }>(null);
 
+  const handleRemove = (value: string) => {
+    const currentFields = { ...fields };
+    const addedOptions = currentFields.added.options;
+
+    const filteredOptions = addedOptions.filter(
+      option => option.value !== value
+    );
+
+    currentFields.added.options = filteredOptions;
+
+    setSearchValue('');
+    setSelectedValue(null);
+    setFields(currentFields);
+
+    onChange({
+      options: currentFields.added.options.map(item => item.label),
+      selectedOption: null
+    });
+  }
+
   const [fields, setFields] = useState<Field>({
     added: {
       label: __(`Possible ${autoCompletionType}`),
-      options: []
+      options: defaultOptions.map(item => ({
+        label: item,
+        value: item,
+        onRemove: handleRemove
+      }))
     },
     search: {
       label: __('Search result'),
@@ -131,7 +151,6 @@ function AutoCompletionSelect({
     }
   });
 
-  const [selectOptions, setSelectOptions] = useState<SelectOptions>([]);
   const [selectedValue, setSelectedValue] = useState<Option | null>(
     defaultValue ? { label: defaultValue, value: defaultValue } : null
   );
@@ -155,47 +174,6 @@ function AutoCompletionSelect({
     },
     [autoCompletionType]
   );
-
-  const handleRemove = useCallback(
-    (value: string) => {
-      const currentFields = { ...fields };
-      const addedOptions = currentFields.added.options;
-
-      const filteredOptions = addedOptions.filter(
-        option => option.value !== value
-      );
-
-      currentFields.added.options = filteredOptions;
-
-      setSearchValue('');
-      setSelectedValue(null);
-      setFields(currentFields);
-
-      onChange({
-        options: currentFields.added.options.map(item => item.label),
-        selectedOption: null
-      });
-    },
-    [fields, onChange]
-  );
-
-  useEffect(() => {
-    if (defaultOptions.length > 0) {
-      const options = defaultOptions.map(item => ({
-        label: item,
-        value: item,
-        onRemove: handleRemove
-      }));
-
-      const currentOptions = fields.added.options;
-
-      fields.added.options = _.uniqBy([...currentOptions, ...options], 'label');
-    }
-
-    const updatedOptions = [fields.added, fields.search];
-
-    setSelectOptions(updatedOptions);
-  }, [defaultOptions, fields, handleRemove]);
 
   const setFetchResult = useCallback(
     list => {
@@ -355,7 +333,7 @@ function AutoCompletionSelect({
           placeholder={placeholder}
           inputRenderer={inputRenderer}
           value={selectedValue}
-          options={selectOptions}
+          options={[fields.added, fields.search]}
           onSelectResetsInput={true}
           onBlurResetsInput={true}
           onBlur={handleOnBlur}

@@ -22,7 +22,7 @@ type Props = {
   next?: (stepNumber: number) => void;
   noButton?: boolean;
   message?: any;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (stepNumber: number) => void;
 };
 
 class Step extends React.Component<Props> {
@@ -60,9 +60,13 @@ class Step extends React.Component<Props> {
   }
 
   onClickNext = (stepNumber?: number) => {
-    const { next } = this.props;
+    const { next, onClick } = this.props;
 
     if (next && stepNumber) {
+      if (onClick) {
+        onClick(stepNumber)
+      }
+
       return next(stepNumber);
     }
   };
@@ -75,7 +79,6 @@ class Step extends React.Component<Props> {
       title,
       children,
       noButton,
-      onClick
     } = this.props;
 
     let show = false;
@@ -85,7 +88,7 @@ class Step extends React.Component<Props> {
     }
 
     return (
-      <StepItem show={show} onClick={onClick}>
+      <StepItem show={show}>
         <FullStep show={show}>
           <StepHeaderContainer>
             <StepHeader>

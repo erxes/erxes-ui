@@ -46,7 +46,6 @@ type Props = {
 
 type State = {
   collapse: boolean;
-  maxHeight: number;
 };
 
 class Section extends React.Component<Props, State> {
@@ -57,20 +56,15 @@ class Section extends React.Component<Props, State> {
   static Title = Title;
   static QuickButtons = QuickButtons;
 
-  node: any;
-
   constructor(props: Props) {
     super(props);
 
-    this.state = { collapse: false, maxHeight: props.maxHeight };
+    this.state = { collapse: false };
   }
 
   toggleCollapse = () => {
     this.setState({
-      collapse: !this.state.collapse,
-      maxHeight: this.state.collapse
-        ? this.props.maxHeight
-        : this.node.clientHeight + 20
+      collapse: !this.state.collapse
     });
   };
 
@@ -85,25 +79,30 @@ class Section extends React.Component<Props, State> {
   };
 
   render() {
-    const { children, collapsible, noShadow, noBackground, full } = this.props;
+    const {
+      children,
+      collapsible,
+      noShadow,
+      noBackground,
+      full,
+      maxHeight
+    } = this.props;
 
-    const height = {
-      maxHeight: collapsible ? this.state.maxHeight : undefined
-    };
-
-    const innerRef = node => {
-      this.node = node;
-    };
+    const style = collapsible
+      ? {
+          maxHeight: this.state.collapse ? undefined : maxHeight
+        }
+      : {};
 
     return (
       <SidebarBox
         collapsible={collapsible}
-        style={height}
+        style={style}
         noShadow={noShadow}
         noBackground={noBackground}
         full={full}
       >
-        <BoxContent innerRef={innerRef}>{children}</BoxContent>
+        <BoxContent>{children}</BoxContent>
         {collapsible ? this.renderCollapseButton() : null}
       </SidebarBox>
     );

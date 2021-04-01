@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import EmptyState from '../EmptyState';
-import Icon from '../Icon';
-import Spinner from '../Spinner';
-import Filter from './Filter';
+import React from "react";
+import { Link } from "react-router-dom";
+import EmptyState from "../EmptyState";
+import Icon from "../Icon";
+import Spinner from "../Spinner";
+import Filter from "./Filter";
 import {
   AvatarImg,
   FlexRow,
@@ -11,8 +11,11 @@ import {
   PopoverBody,
   PopoverFooter,
   PopoverHeader,
-  PopoverList
-} from './styles';
+  PopoverList,
+  ChildList,
+  ToggleIcon,
+} from "./styles";
+import { SidebarList } from "../../layout/styles";
 
 type Props = {
   items?: any[];
@@ -21,6 +24,7 @@ type Props = {
   selectable?: boolean;
   loading?: boolean;
   className?: string;
+  treeView?: boolean;
 
   // hooks
   onClick?: (items: any[], id: string) => void;
@@ -31,6 +35,7 @@ type Props = {
 type State = {
   key: string;
   items: any[];
+  parentIds: { [key: string]: boolean };
 };
 
 class FilterableList extends React.Component<Props, State> {
@@ -38,8 +43,9 @@ class FilterableList extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      key: '',
-      items: props.items
+      key: "",
+      items: props.items,
+      parentIds: {},
     };
   }
 
@@ -55,21 +61,21 @@ class FilterableList extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps) {
     if (JSON.stringify(this.props.items) !== JSON.stringify(nextProps.items)) {
       this.setState({
-        items: nextProps.items
+        items: nextProps.items,
       });
     }
   }
 
-  filterItems = e => {
+  filterItems = (e) => {
     this.setState({ key: e.target.value });
   };
 
   toggleItem = (id: string) => {
     const items = this.state.items;
-    const item = items.find(i => i._id === id);
+    const item = items.find((i) => i._id === id);
 
     items[items.indexOf(item)].selectedBy =
-      item.selectedBy === 'all' ? 'none' : 'all';
+      item.selectedBy === "all" ? "none" : "all";
 
     this.setState({ items });
 
@@ -81,9 +87,94 @@ class FilterableList extends React.Component<Props, State> {
     }
   };
 
+  groupByParent = (array: any[]) => {
+    const key = "parentId";
+
+    return array.reduce((rv, x) => {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+
+      return rv;
+    }, {});
+  };
+
+  onToggle = (id: string, isOpen: boolean) => {
+    const parentIds = this.state.parentIds;
+    parentIds[id] = !isOpen;
+
+    this.setState({ parentIds });
+  };
+
+  renderItem(item) {
+    const { showCheckmark = true } = this.props;
+    const { key } = this.state;
+
+    if (key && item.title.toLowerCase().indexOf(key.toLowerCase()) < 0) {
+      return false;
+    }
+
+    const onClick = () => this.toggleItem(item._id);
+
+    return (
+      <FlexRow key={item._id}>
+        <li
+          className={showCheckmark ? item.selectedBy : ""}
+          style={item.style}
+          onClick={onClick}
+        >
+          {item.iconClass ? (
+            <i
+              className={`icon ${item.iconClass}`}
+              style={{ color: item.iconColor }}
+            />
+          ) : null}{" "}
+          {item.avatar ? <AvatarImg src={item.avatar} /> : null}
+          <span>{item.title || "[undefined]"}</span>
+        </li>
+        {item.additionalIconClass && (
+          <IconWrapper
+            onClick={
+              item.additionalIconOnClick &&
+              item.additionalIconOnClick.bind(this, item._id)
+            }
+          >
+            <Icon icon={item.additionalIconClass} size={12} />
+          </IconWrapper>
+        )}
+      </FlexRow>
+    );
+  }
+
+  renderTree(parent, subFields?) {
+    const groupByParent = this.groupByParent(subFields);
+    const childrens = groupByParent[parent._id];
+
+    if (childrens) {
+      const isOpen = this.state.parentIds[parent._id];
+
+      return (
+        <SidebarList key={`parent-${parent._id}`}>
+          {this.renderItem(parent)}
+
+          <ChildList>
+            <ToggleIcon onClick={this.onToggle.bind(this, parent._id, isOpen)}>
+              <Icon icon={isOpen ? "angle-down" : "angle-right"} />
+            </ToggleIcon>
+
+            {isOpen &&
+              childrens.map((childparent) =>
+                this.renderTree(childparent, subFields)
+              )}
+          </ChildList>
+        </SidebarList>
+      );
+    }
+
+    return this.renderItem(parent);
+  }
+
   renderItems() {
-    const { showCheckmark = true, loading } = this.props;
-    const { items, key } = this.state;
+    const { loading, treeView } = this.props;
+    const { items } = this.state;
 
     if (loading) {
       return <Spinner objective={true} />;
@@ -98,43 +189,14 @@ class FilterableList extends React.Component<Props, State> {
       );
     }
 
-    return items.map(item => {
-      // filter items by key
-      if (key && item.title.toLowerCase().indexOf(key.toLowerCase()) < 0) {
-        return false;
-      }
+    if (!treeView) {
+      return items.map((item) => this.renderItem(item));
+    }
 
-      const onClick = () => this.toggleItem(item._id);
+    const parents = items.filter((item) => !item.parentId);
+    const subFields = items.filter((item) => item.parentId);
 
-      return (
-        <FlexRow key={item._id}>
-          <li
-            className={showCheckmark ? item.selectedBy : ''}
-            style={item.style}
-            onClick={onClick}
-          >
-            {item.iconClass ? (
-              <i
-                className={`icon ${item.iconClass}`}
-                style={{ color: item.iconColor }}
-              />
-            ) : null}{' '}
-            {item.avatar ? <AvatarImg src={item.avatar} /> : null}
-            <span>{item.title || '[undefined]'}</span>
-          </li>
-          {item.additionalIconClass && (
-            <IconWrapper
-              onClick={
-                item.additionalIconOnClick &&
-                item.additionalIconOnClick.bind(this, item._id)
-              }
-            >
-              <Icon icon={item.additionalIconClass} size={12} />
-            </IconWrapper>
-          )}
-        </FlexRow>
-      );
-    });
+    return parents.map((parent) => this.renderTree(parent, subFields));
   }
 
   render() {
@@ -154,7 +216,7 @@ class FilterableList extends React.Component<Props, State> {
         {links && (
           <PopoverFooter>
             <PopoverList>
-              {links.map(link => (
+              {links.map((link) => (
                 <li key={link.href}>
                   <Link onClick={link.onClick} to={link.href}>
                     {link.title}

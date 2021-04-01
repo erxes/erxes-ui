@@ -438,7 +438,7 @@ export const cleanIntegrationKind = (name: string) => {
     name = name.replace('smooch-', '');
   }
   if (name === 'lead') {
-    name = 'popups';
+    name = 'forms';
   }
   return name;
 };

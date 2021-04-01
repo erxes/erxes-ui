@@ -135,7 +135,7 @@ const uploadHandler = (params: Params) => {
               if (!response.ok) {
                 return afterUpload({
                   status: 'error',
-                  response: text,
+                  response,
                   fileInfo
                 });
               }

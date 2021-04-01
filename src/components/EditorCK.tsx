@@ -18,6 +18,8 @@ export const getMentionedUserIds = (content: string) => {
   });
 };
 
+let editorContent: string;
+
 class EditorCK extends React.Component<IEditorProps, { content: string }> {
   static getMentionedUserIds = getMentionedUserIds;
 
@@ -31,7 +33,7 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
   componentDidUpdate = (prevProps: IEditorProps) => {
     const { name, content } = this.props;
 
-    if (name && prevProps.content !== this.props.content) {
+    if (name && prevProps.content !== content) {
       localStorage.setItem(name, content);
     }
   };
@@ -41,6 +43,7 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
 
     if (name) {
       const content = localStorage.getItem(name);
+      editorContent = this.props.content;
 
       if (content && content !== this.props.content) {
         this.setState({ content });
@@ -55,9 +58,9 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
   }
 
   componentWillUnmount() {
-    const name = this.props.name;
+    const { name, content, isSubmitted } = this.props;
 
-    if (name) {
+    if (name && (isSubmitted || content === editorContent)) {
       localStorage.removeItem(name);
     }
   }

@@ -4,4 +4,7 @@ export interface ITag {
   name: string;
   colorCode: string;
   objectCount?: number;
+  parentId?: string;
+  order?: string;
+  totalObjectCount?: number;
 }

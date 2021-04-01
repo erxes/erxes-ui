@@ -72,6 +72,7 @@ const Title = styledTS<{ isComplete?: boolean; isEditing: boolean }>(
   h4 {
     text-decoration: ${props => props.isComplete && 'line-through'};
     transition: all ease 0.4s;
+    margin-bottom: ${dimensions.unitSpacing}px;
 
     > i {
       margin-right: 5px;
@@ -281,6 +282,7 @@ const Description = styled.div`
   border: 1px solid ${colors.borderPrimary};
   border-radius: 2px;
   margin: ${dimensions.coreSpacing}px 0;
+  word-break: break-word;
 `;
 
 const DeleteAction = styled.div`
