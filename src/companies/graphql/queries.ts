@@ -13,6 +13,7 @@ const companyFields = `
   size
   industry
   plan
+  location
 
   parentCompanyId
   emails
