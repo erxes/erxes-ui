@@ -1,7 +1,7 @@
-import Button from '../Button';
-import Icon from '../Icon';
-import { __ } from '../../utils/core';
-import React from 'react';
+import Button from "../Button";
+import Icon from "../Icon";
+import { __ } from "../../utils/core";
+import React from "react";
 import {
   FullStep,
   ShortStep,
@@ -10,8 +10,8 @@ import {
   StepHeaderContainer,
   StepHeaderTitle,
   StepImg,
-  StepItem
-} from './styles';
+  StepItem,
+} from "./styles";
 
 type Props = {
   stepNumber?: number;
@@ -54,7 +54,7 @@ class Step extends React.Component<Props> {
 
     return (
       <Button btnStyle="primary" size="small" onClick={next.bind(null, 0)}>
-        {__('Next')} <Icon icon="arrow-right" />
+        {__("Next")} <Icon icon="arrow-right" />
       </Button>
     );
   }
@@ -63,23 +63,14 @@ class Step extends React.Component<Props> {
     const { next, onClick } = this.props;
 
     if (next && stepNumber) {
-      if (onClick) {
-        onClick(stepNumber)
-      }
+      onClick && onClick(stepNumber);
 
       return next(stepNumber);
     }
   };
 
   render() {
-    const {
-      stepNumber,
-      active,
-      img,
-      title,
-      children,
-      noButton,
-    } = this.props;
+    const { stepNumber, active, img, title, children, noButton } = this.props;
 
     let show = false;
 
@@ -96,7 +87,7 @@ class Step extends React.Component<Props> {
                 <img src={img} alt="step-icon" />
               </StepImg>
 
-              <StepHeaderTitle>{__(title || '')}</StepHeaderTitle>
+              <StepHeaderTitle>{__(title || "")}</StepHeaderTitle>
             </StepHeader>
             {!noButton && this.renderButton()}
           </StepHeaderContainer>
