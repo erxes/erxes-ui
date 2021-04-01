@@ -15,7 +15,8 @@ const commonFields = `
   $doNotDisturb: String,
   $links: JSON,
   $customFieldsData: JSON,
-  $code: String
+  $code: String,
+  $location: String
 `;
 
 const commonVariables = `
@@ -35,7 +36,8 @@ const commonVariables = `
   doNotDisturb: $doNotDisturb,
   links: $links,
   customFieldsData: $customFieldsData,
-  code: $code
+  code: $code,
+  location: $location
 `;
 
 const companiesAdd = `
@@ -68,6 +70,7 @@ const companiesEdit = `
       doNotDisturb
       code
       links
+      location
     }
   }
 `;
