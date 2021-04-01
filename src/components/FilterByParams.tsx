@@ -1,13 +1,13 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
-import { getParam, removeParams, setParams } from '../utils/router';
-import { FieldStyle, SidebarCounter, SidebarList } from '../layout/styles';
-import { IRouterProps } from '../types';
-import DataWithLoader from './DataWithLoader';
-import EmptyState from './EmptyState';
-import Filter from './filterableList/Filter';
-import Icon from './Icon';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { getParam, removeParams, setParams } from "../utils/router";
+import { FieldStyle, SidebarCounter, SidebarList } from "../layout/styles";
+import { IRouterProps } from "../types";
+import DataWithLoader from "./DataWithLoader";
+import EmptyState from "./EmptyState";
+import Filter from "./filterableList/Filter";
+import Icon from "./Icon";
+import { PopoverContent, ChildList, ToggleIcon } from "./filterableList/styles";
 
 interface IProps extends IRouterProps {
   fields: any[];
@@ -26,42 +26,17 @@ type State = {
   parentFieldIds: { [key: string]: boolean };
 };
 
-const PopoverContent = styled.div`
-  > input {
-    padding: 10px 20px;
-  }
-`;
-
-const ChildList = styled.ul`
-  list-style: none;
-  position: relative;
-  padding: 0 0 0 20px !important;
-`;
-
-const iconWidth = 30;
-
-const ToggleIcon = styled.div`
-  position: absolute;
-  margin: -${iconWidth}px 0 0 -${iconWidth / 2}px;
-  width: ${iconWidth / 2}px;
-  height: ${iconWidth}px;
-  line-height: ${iconWidth}px;
-  text-align: center;
-  cursor: pointer;
-  z-index: 1;
-`;
-
 class FilterByParams extends React.Component<IProps, State> {
   constructor(props) {
     super(props);
 
     this.state = {
-      key: '',
-      parentFieldIds: {}
+      key: "",
+      parentFieldIds: {},
     };
   }
 
-  filterItems = e => {
+  filterItems = (e) => {
     this.setState({ key: e.target.value });
 
     const { update } = this.props;
@@ -79,7 +54,7 @@ class FilterByParams extends React.Component<IProps, State> {
     } else {
       // multi select
       const value = getParam(history, [paramKey]);
-      const params = value ? value.split(',') : [];
+      const params = value ? value.split(",") : [];
 
       if (params.includes(id)) {
         const index = params.indexOf(id);
@@ -92,11 +67,11 @@ class FilterByParams extends React.Component<IProps, State> {
       setParams(history, { [paramKey]: params.toString() });
     }
 
-    removeParams(history, 'page');
+    removeParams(history, "page");
   };
 
   groupByParent = (array: any[]) => {
-    const key = 'parentId';
+    const key = "parentId";
 
     return array.reduce((rv, x) => {
       (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -139,7 +114,7 @@ class FilterByParams extends React.Component<IProps, State> {
       icon,
       searchable,
       multiple,
-      treeView
+      treeView,
     } = this.props;
     const { key } = this.state;
 
@@ -157,14 +132,14 @@ class FilterByParams extends React.Component<IProps, State> {
         return null;
       }
 
-      let className = '';
+      let className = "";
       const _id = field._id;
       const value = getParam(history, [paramKey]);
 
       if (value === _id) {
-        className = 'active';
+        className = "active";
       } else if (multiple && value && value.includes(_id)) {
-        className = 'active';
+        className = "active";
       }
 
       return (
@@ -177,7 +152,7 @@ class FilterByParams extends React.Component<IProps, State> {
           >
             {icon ? (
               <Icon icon={icon} style={{ color: field.colorCode }} />
-            ) : null}{' '}
+            ) : null}{" "}
             <FieldStyle>{field.name}</FieldStyle>
             <SidebarCounter>{this.getCount(field, isOpen)}</SidebarCounter>
           </a>
@@ -187,17 +162,17 @@ class FilterByParams extends React.Component<IProps, State> {
 
     const renderContent = () => {
       if (!treeView) {
-        return fields.map(field => {
+        return fields.map((field) => {
           return renderFieldItem(field);
         });
       }
 
-      const subFields = fields.filter(f => f.parentId);
-      const parents = fields.filter(f => !f.parentId);
+      const subFields = fields.filter((f) => f.parentId);
+      const parents = fields.filter((f) => !f.parentId);
 
       const groupByParent = this.groupByParent(subFields);
 
-      const renderTree = field => {
+      const renderTree = (field) => {
         const childrens = groupByParent[field._id];
 
         if (childrens) {
@@ -211,11 +186,11 @@ class FilterByParams extends React.Component<IProps, State> {
                 <ToggleIcon
                   onClick={this.onToggle.bind(this, field._id, isOpen)}
                 >
-                  <Icon icon={isOpen ? 'angle-down' : 'angle-right'} />
+                  <Icon icon={isOpen ? "angle-down" : "angle-right"} />
                 </ToggleIcon>
 
                 {isOpen &&
-                  childrens.map(childField => {
+                  childrens.map((childField) => {
                     return renderTree(childField);
                   })}
               </ChildList>
@@ -226,7 +201,7 @@ class FilterByParams extends React.Component<IProps, State> {
         return renderFieldItem(field);
       };
 
-      return parents.map(field => {
+      return parents.map((field) => {
         return renderTree(field);
       });
     };

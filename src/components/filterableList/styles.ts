@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import styledTS from 'styled-components-ts';
-import { colors, dimensions } from '../../styles';
+import styled from "styled-components";
+import styledTS from "styled-components-ts";
+import { colors, dimensions } from "../../styles";
 
 const PopoverHeader = styled.div`
   display: block !important;
@@ -59,7 +59,7 @@ const PopoverList = styledTS<{ selectable?: boolean }>(styled.ul)`
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     font-size: 13px;
-    padding-right: ${props => props.selectable && '30px'};
+    padding-right: ${(props) => props.selectable && "30px"};
 
     i {
       margin-right: ${dimensions.unitSpacing / 2}px;
@@ -120,14 +120,42 @@ const AvatarImg = styled.img`
   margin-right: ${dimensions.unitSpacing}px;
 `;
 
+const ChildList = styled.div`
+  list-style: none;
+  position: relative;
+  padding: 0 0 0 20px !important;
+`;
+
+const iconWidth = 30;
+
+const ToggleIcon = styled.div`
+  position: absolute;
+  margin: -${iconWidth}px 0 0 -${iconWidth / 2}px;
+  width: ${iconWidth / 2}px;
+  height: ${iconWidth}px;
+  line-height: ${iconWidth}px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+`;
+
+const PopoverContent = styled.div`
+  > input {
+    padding: 10px 20px;
+  }
+`;
+
 export {
   PopoverHeader,
   PopoverBody,
   PopoverList,
   PopoverFooter,
+  PopoverContent,
   FlexRow,
   AvatarImg,
-  IconWrapper
+  IconWrapper,
+  ChildList,
+  ToggleIcon,
 };
 
 export default {
@@ -135,7 +163,10 @@ export default {
   PopoverBody,
   PopoverList,
   PopoverFooter,
+  PopoverContent,
   FlexRow,
   AvatarImg,
-  IconWrapper
+  IconWrapper,
+  ChildList,
+  ToggleIcon,
 };
