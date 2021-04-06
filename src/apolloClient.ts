@@ -7,7 +7,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { __, getEnv } from './utils/core';
-import Alert from './utils/Alert';
 
 const { REACT_APP_API_URL, REACT_APP_API_SUBSCRIPTION_URL } = getEnv();
 
@@ -18,17 +17,13 @@ const httpLink = createHttpLink({
 });
 
 // Error handler
-const errorLink = onError(({ networkError, graphQLErrors }) => {
+const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors && graphQLErrors.length > 0) {
     const [error] = graphQLErrors;
 
     if (error.message === 'Login required') {
       window.location.reload();
     }
-  }
-
-  if (networkError) {
-    Alert.error(__('NetworkError'));
   }
 });
 
