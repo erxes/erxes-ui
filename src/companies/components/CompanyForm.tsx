@@ -23,7 +23,8 @@ import validator from 'validator';
 import { IUser } from '../../auth/types';
 import {
   COMPANY_BUSINESS_TYPES,
-  COMPANY_INDUSTRY_TYPES
+  COMPANY_INDUSTRY_TYPES,
+  COUNTRIES
 } from '../constants';
 import { ICompany, ICompanyDoc, ICompanyLinks } from '../types';
 
@@ -51,6 +52,7 @@ type State = {
   primaryPhone?: string;
   industry?: string[];
   businessType?: string;
+  location?: string;
 };
 
 class CompanyForm extends React.Component<Props, State> {
@@ -72,8 +74,9 @@ class CompanyForm extends React.Component<Props, State> {
       doNotDisturb: company.doNotDisturb || 'No',
       users: [],
       avatar: company.avatar,
-      industry: company.industry || [],
-      businessType: company.businessType || ''
+      industry: company.industry || '',
+      businessType: company.businessType || '',
+      location: company.location || ''
     };
   }
 
@@ -138,6 +141,10 @@ class CompanyForm extends React.Component<Props, State> {
 
   onBusinessChange = option => {
     this.setState({ businessType: option.value });
+  };
+
+  onCountryChange = option => {
+    this.setState({ location: option.value });
   };
 
   onChange = (
@@ -276,6 +283,18 @@ class CompanyForm extends React.Component<Props, State> {
                     name="description"
                     componentClass="textarea"
                     defaultValue={company.description || ''}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Headquarters Country</ControlLabel>
+                  <Select
+                    value={this.state.location}
+                    onChange={this.onCountryChange}
+                    options={this.generateConstantParams(
+                      COUNTRIES
+                    )}
+                    placeholder={__('Select country')}
+                    clearable={true}
                   />
                 </FormGroup>
               </FormColumn>
