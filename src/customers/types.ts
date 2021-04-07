@@ -19,6 +19,7 @@ export interface ICustomerLinks {
 
 export interface ICustomerDoc {
   firstName?: string;
+  middleName?: string;
   lastName?: string;
   phones?: string[];
   sex?: number;

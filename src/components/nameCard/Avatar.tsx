@@ -128,7 +128,7 @@ class Avatar extends React.Component<Props> {
       return `${customer.firstName} ${customer.lastName}`;
     }
 
-    return customer.firstName || customer.lastName || customer.name || null;
+    return customer.firstName || customer.lastName || customer.name || customer.middleName || null;
   }
 
   render() {

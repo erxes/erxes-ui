@@ -6,6 +6,7 @@ import {
 const basicFields = `
   _id
   firstName
+  middleName
   lastName
   avatar
   sex
