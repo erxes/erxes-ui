@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from '../../components/Icon';
 import { Tabs, TabTitle } from '../../components/tabs';
 import NoteForm from '../../internalNotes/containers/Form';
+import TicketCommentForm from '../../boards/containers/TicketCommentForm';
 import { WhiteBoxRoot } from '../../layout/styles';
 import { __ } from '../../utils';
 
@@ -41,6 +42,15 @@ class ActivityInputs extends React.PureComponent<Props, State> {
       );
     }
 
+    if (currentTab === 'ticket') {
+      return (
+        <TicketCommentForm
+          contentType={`${contentType}_comment`}
+          contentTypeId={contentTypeId}
+        />
+      );
+    }
+
     if (!showEmail) {
       return null;
     }
@@ -48,41 +58,45 @@ class ActivityInputs extends React.PureComponent<Props, State> {
     return null;
   }
 
+  renderTabTitle(type: string, icon: string, title: string) {
+    const currentTab = this.state.currentTab;
+
+    return (
+      <TabTitle
+        key={Math.random()}
+        className={currentTab === type ? 'active' : ''}
+        onClick={this.onChangeTab.bind(this, type)}
+      >
+        <Icon icon={icon} /> {__(title)}
+      </TabTitle>
+    );
+  }
+
   renderExtraTab() {
-    const { showEmail, extraTabs } = this.props;
-    let tabEmail;
+    const { showEmail, extraTabs, contentType } = this.props;
+    const tabs: any = [];
+
+    if (contentType === 'ticket') {
+      tabs.push(this.renderTabTitle('ticket', 'icon-book', 'New reply'));
+    }
 
     if (showEmail) {
-      tabEmail = (
-        <TabTitle
-          className={this.state.currentTab === 'email' ? 'active' : ''}
-          onClick={this.onChangeTab.bind(this, 'email')}
-        >
-          <Icon icon="envelope-add" /> {__('Email')}
-        </TabTitle>
-      );
+      tabs.push(this.renderTabTitle('email', 'envelope-add', 'Email'));
     }
 
     return (
       <>
-        {tabEmail}
+        {tabs}
         {extraTabs}
       </>
     );
   }
 
   render() {
-    const { currentTab } = this.state;
-
     return (
       <WhiteBoxRoot>
         <Tabs>
-          <TabTitle
-            className={currentTab === 'newNote' ? 'active' : ''}
-            onClick={this.onChangeTab.bind(this, 'newNote')}
-          >
-            <Icon icon="file-plus" /> {__('New note')}
-          </TabTitle>
+          {this.renderTabTitle('newNote', 'file-plus', 'New note')}
 
           {this.renderExtraTab()}
         </Tabs>

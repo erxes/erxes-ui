@@ -48,13 +48,29 @@ export type BoardsQueryResponse = {
 export type PipelinesQueryResponse = {
   pipelines: IPipeline[];
   loading: boolean;
-  refetch: (
-    { boardId, type }: { boardId?: string; type?: string }
-  ) => Promise<any>;
+  refetch: ({
+    boardId,
+    type
+  }: {
+    boardId?: string;
+    type?: string;
+  }) => Promise<any>;
 };
 
 export type StagesQueryResponse = {
   stages: IStage[];
   loading: boolean;
   refetch: ({ pipelineId }: { pipelineId?: string }) => Promise<any>;
+};
+
+export type TicketCommentAddMutationVariables = {
+  ticketId: string;
+  content: string;
+  userId: string;
+};
+
+export type TicketCommentAddMutationResponse = {
+  ticketCommentAdd: (params: {
+    variables: TicketCommentAddMutationVariables;
+  }) => Promise<any>;
 };
