@@ -33,7 +33,8 @@ const commonParams = `
   $assignedUserIds: [String],
   $labelIds: [String],
   $extraParams: JSON,
-  $closeDateType: String
+  $closeDateType: String,
+  $assignedToMe: String
 `;
 
 const commonParamDefs = `
@@ -43,7 +44,8 @@ const commonParamDefs = `
   assignedUserIds: $assignedUserIds,
   labelIds: $labelIds,
   extraParams: $extraParams,
-  closeDateType: $closeDateType
+  closeDateType: $closeDateType,
+  assignedToMe: $assignedToMe
 `;
 
 const stageParams = `
