@@ -26,7 +26,7 @@ type FinalProps = {
 class CustomerChooser extends React.Component<
   WrapperProps & FinalProps,
   { newCustomer?: ICustomer }
-  > {
+> {
   constructor(props) {
     super(props);
 
@@ -133,7 +133,7 @@ export default class Wrapper extends React.Component<
     perPage: number;
     searchValue: string;
   }
-  > {
+> {
   constructor(props) {
     super(props);
 

@@ -19,6 +19,7 @@ type Props = {
   mainTypeId?: string;
   onSelect?: (companies: ICompany[]) => void;
   collapseCallback?: () => void;
+  title?: string;
 };
 
 function Component(
@@ -29,7 +30,8 @@ function Component(
     mainType = '',
     mainTypeId = '',
     onSelect,
-    collapseCallback
+    collapseCallback,
+    title
   }: Props
 ) {
   const renderCompanyChooser = props => {
@@ -113,7 +115,7 @@ function Component(
 
   return (
     <Box
-      title={__('Companies')}
+      title={__(`${title || 'Companies'}`)}
       name="showCompanies"
       extraButtons={quickButtons}
       isOpen={true}
