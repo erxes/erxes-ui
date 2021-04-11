@@ -31,8 +31,7 @@ export type EditConformityVariables = {
   mainType: string;
   mainTypeId: string;
   relType: string;
-  relTypeIds: string[];
-  proccessId?: string;
+  relTypeIds: string[]
 };
 
 // mutation types

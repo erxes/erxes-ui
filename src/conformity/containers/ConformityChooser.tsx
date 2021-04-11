@@ -67,16 +67,12 @@ const ConformityChooser = (props: FinalProps) => {
       proxy.writeQuery({ ...selector, data: result });
     };
 
-    const proccessId = Math.random().toString();
-    localStorage.setItem('proccessId', proccessId);
-
     editConformityMutation({
       variables: {
         mainType: data.mainType,
         mainTypeId: data.mainTypeId,
         relType: data.relType,
-        relTypeIds,
-        proccessId
+        relTypeIds
       },
       optimisticResponse: {
         __typename: 'Mutation',

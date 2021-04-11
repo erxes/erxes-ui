@@ -16,16 +16,14 @@ const commonCreateFields = `
   $mainType: String,
   $mainTypeId: String,
   $relType: String,
-  $relTypeIds: [String],
-  $proccessId: String
+  $relTypeIds: [String]
 `;
 
 const commonCreateVariables = `
   mainType: $mainType,
   mainTypeId: $mainTypeId,
   relType: $relType,
-  relTypeIds: $relTypeIds,
-  proccessId: $proccessId
+  relTypeIds: $relTypeIds
 `;
 
 const conformityAdd = `
