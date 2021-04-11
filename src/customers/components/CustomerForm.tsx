@@ -92,6 +92,7 @@ class CustomerForm extends React.Component<Props, State> {
       ...this.state,
       firstName: finalValues.firstName,
       lastName: finalValues.lastName,
+      middleName: finalValues.middleName,
       sex: Number(finalValues.sex),
       position: finalValues.position,
       department: finalValues.department,
@@ -265,6 +266,12 @@ class CustomerForm extends React.Component<Props, State> {
                   name: 'firstName'
                 })}
 
+                {this.renderFormGroup('Middle Name', {
+                  ...formProps,
+                  name: 'middleName',
+                  defaultValue: customer.middleName || ''
+                })}
+
                 <FormGroup>
                   <ControlLabel required={true}>Email</ControlLabel>
                   <AutoCompletionSelect
@@ -321,6 +328,20 @@ class CustomerForm extends React.Component<Props, State> {
                 })}
 
                 <FormGroup>
+                  <ControlLabel required={false}>Birthday</ControlLabel>
+                  <DateContainer>
+                    <DateControl
+                      {...formProps}
+                      required={false}
+                      name="birthDate"
+                      placeholder={'Birthday'}
+                      value={this.state.birthDate}
+                      onChange={this.onDateChange}
+                    />
+                  </DateContainer>
+                </FormGroup>
+
+                <FormGroup>
                   <ControlLabel>Phone</ControlLabel>
                   <AutoCompletionSelect
                     defaultValue={primaryPhone}
@@ -341,20 +362,6 @@ class CustomerForm extends React.Component<Props, State> {
                   defaultValue: customer.phoneValidationStatus || 'unknown',
                   options: PHONE_VALIDATION_STATUSES
                 })}
-
-                <FormGroup>
-                  <ControlLabel required={false}>Birthday</ControlLabel>
-                  <DateContainer>
-                    <DateControl
-                      {...formProps}
-                      required={false}
-                      name="birthDate"
-                      placeholder={'Birthday'}
-                      value={this.state.birthDate}
-                      onChange={this.onDateChange}
-                    />
-                  </DateContainer>
-                </FormGroup>
 
                 {this.renderFormGroup('Position', {
                   ...formProps,

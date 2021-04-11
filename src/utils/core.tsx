@@ -11,8 +11,8 @@ import urlParser from './urlParser';
 export { urlParser, router }
 
 export const renderFullName = data => {
-  if (data.firstName || data.lastName) {
-    return (data.firstName || '') + ' ' + (data.lastName || '');
+  if (data.firstName || data.lastName || data.middleName) {
+    return  (data.firstName || '') + ' ' + (data.middleName || '') + ' ' + (data.lastName || '');
   }
 
   if (data.primaryEmail || data.primaryPhone) {
