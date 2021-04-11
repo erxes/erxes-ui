@@ -20,6 +20,7 @@ export type Props = {
   mainTypeId?: string;
   onSelect?: (customers: ICustomer[]) => void;
   actionSection?: any;
+  title?: string;
 };
 
 function Component({
@@ -28,7 +29,8 @@ function Component({
   mainType = '',
   mainTypeId = '',
   onSelect,
-  actionSection
+  actionSection,
+  title = ''
 }: Props) {
   const renderRelatedCustomerChooser = props => {
     return (
@@ -111,7 +113,7 @@ function Component({
 
   return (
     <Box
-      title={__('Customers')}
+      title={__(`${title || 'Customers'}`)}
       extraButtons={extraButtons}
       isOpen={true}
       name="showCustomers"
