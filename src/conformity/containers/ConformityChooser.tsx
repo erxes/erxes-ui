@@ -28,18 +28,61 @@ type FinalProps = {
 } & Props;
 
 const ConformityChooser = (props: FinalProps) => {
-  const { editConformityMutation, data, onSelect, chooserComponent } = props;
+  const {
+    editConformityMutation,
+    data,
+    onSelect,
+    chooserComponent,
+    refetchQuery
+  } = props;
 
   const onSelected = relTypes => {
     const relTypeIds = relTypes.map(item => item._id);
+    const update = proxy => {
+      let selector: { query: any; variables?: any } = {
+        query: gql(refetchQuery),
+        variables: {
+          mainType: data.mainType,
+          mainTypeId: data.mainTypeId,
+          relType: data.relType,
+          isSaved: true
+        }
+      };
+
+      // Read the data from our cache for this query.
+      let result;
+      const qryName = gql(refetchQuery).definitions[0].name.value;
+
+      try {
+        result = proxy.readQuery(selector);
+
+        // Do not do anything while reading query somewhere else
+      } catch (e) {
+        return;
+      }
+
+      result[qryName] = relTypes;
+
+      // Write our result back to the cache.
+      proxy.writeQuery({ ...selector, data: result });
+    };
+
+    const proccessId = Math.random().toString();
+    localStorage.setItem('proccessId', proccessId);
 
     editConformityMutation({
       variables: {
         mainType: data.mainType,
         mainTypeId: data.mainTypeId,
         relType: data.relType,
-        relTypeIds
-      }
+        relTypeIds,
+        proccessId
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        conformityEdit: relTypes
+      },
+      update
     })
       .then(() => {
         if (onSelect) {
@@ -58,7 +101,7 @@ const ConformityChooser = (props: FinalProps) => {
 
   if (chooserComponent) {
     const Component = chooserComponent;
-    return <Component {...extendedProps} />
+    return <Component {...extendedProps} />;
   }
 
   if (props.data.options) {
@@ -76,21 +119,10 @@ export default withProps<Props>(
       IConformityEdit & { isSaved?: boolean }
     >(gql(mutations.conformityEdit), {
       name: 'editConformityMutation',
-      options: ({ data, refetchQuery }) => {
+      options: () => {
         return {
           refetchQueries: [
-            {
-              query: gql(refetchQuery),
-              variables: {
-                mainType: data.mainType,
-                mainTypeId: data.mainTypeId,
-                relType: data.relType,
-                isSaved: true
-              }
-            },
-            'activityLogs',
-            'customers',
-            'companies'
+            'activityLogs'
           ]
         };
       }

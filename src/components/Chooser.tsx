@@ -18,7 +18,7 @@ export type CommonProps = {
   perPage: number;
   clearState: () => void;
   limit?: number;
-  newItem?
+  newItem?;
   resetAssociatedItem?: () => void;
   closeModal: () => void;
   onSelect: (datas: any[]) => void;

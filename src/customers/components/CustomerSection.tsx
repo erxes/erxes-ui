@@ -55,14 +55,14 @@ function Component({
     />
   );
 
-  const renderActionSection = (customer) => {
-    if (!actionSection){
+  const renderActionSection = customer => {
+    if (!actionSection) {
       return;
     }
 
     const ActionSection = actionSection;
-    return (<ActionSection customer={customer} isSmall={true} />);
-  }
+    return <ActionSection customer={customer} isSmall={true} />;
+  };
 
   const renderBody = (customersObj: ICustomer[]) => {
     if (!customersObj) {

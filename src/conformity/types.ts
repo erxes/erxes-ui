@@ -27,14 +27,23 @@ export interface IConformityEdit {
 }
 
 export type EditConformityVariables = {
-  _id: string;
+  _id?: string;
+  mainType: string;
+  mainTypeId: string;
   relType: string;
   relTypeIds: string[];
+  proccessId?: string;
 };
 
 // mutation types
 export type AddConformityMutation = ({ variables: IConformityDoc }) => void;
 
 export type EditConformityMutation = ({
-  variables: EditConformityVariables
+  variables,
+  update,
+  optimisticResponse
+}: {
+  variables: EditConformityVariables;
+  update?: (store: any, data: any) => void;
+  optimisticResponse?: any;
 }) => Promise<any>;
