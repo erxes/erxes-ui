@@ -1,3 +1,5 @@
+import colors from '../styles/colors';
+
 export const ICON_AND_COLOR_TABLE = {
   customer: {
     icon: 'user-plus',
@@ -94,5 +96,9 @@ export const ICON_AND_COLOR_TABLE = {
   sms: {
     icon: 'comment-lines',
     color: '#FF6600'
+  },
+  campaign: {
+    icon: 'megaphone',
+    color: colors.colorCoreBlue
   }
 };
