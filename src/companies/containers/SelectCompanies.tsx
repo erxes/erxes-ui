@@ -22,6 +22,7 @@ export default ({
   onSelect,
   initialValue,
   multi = true,
+  customOption,
   label,
   name
 }: {
@@ -44,6 +45,7 @@ export default ({
       generateOptions={generateCompanyOptions}
       onSelect={onSelect}
       customQuery={queries.companies}
+      customOption={customOption}
       multi={multi}
     />
   );

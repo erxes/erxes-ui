@@ -22,6 +22,7 @@ export default ({
   onSelect,
   initialValue,
   multi = true,
+  customOption,
   label,
   name
 }: {
@@ -44,6 +45,7 @@ export default ({
       initialValue={defaultValue}
       generateOptions={generateCustomerOptions}
       onSelect={onSelect}
+      customOption={customOption}
       multi={multi}
     />
   );
