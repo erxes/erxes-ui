@@ -14,6 +14,7 @@ export * from './utils';
 export * from './boards';
 export * from './activityLogs';
 export * from './internalNotes';
+export * from './products';
 
 export {
   apolloClient,
