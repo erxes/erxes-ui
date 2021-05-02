@@ -102,8 +102,8 @@ type Props = {
   full?: boolean;
   icon?: string;
   currentAttach?: IAttachment;
-  onSlidePrev?: (index: number) => void;
-  onSlideNext?: (index: number) => void;
+  onSlidePrev?: () => void;
+  onSlideNext?: () => void;
   onRemove?: () => void;
 };
 
@@ -225,15 +225,12 @@ class AttachmentWithPreview extends React.Component<Props, State> {
                     </div>
                   </PreviewOverlay>
                   {onSlidePrev && (
-                    <PreviewBtn className="left" onClick={() => onSlidePrev(2)}>
+                    <PreviewBtn className="left" onClick={onSlidePrev}>
                       <Icon icon="angle-left" size={32} />
                     </PreviewBtn>
                   )}
                   {onSlideNext && (
-                    <PreviewBtn
-                      className="right"
-                      onClick={() => onSlideNext(2)}
-                    >
+                    <PreviewBtn className="right" onClick={onSlideNext}>
                       <Icon icon="angle-right" size={32} />
                     </PreviewBtn>
                   )}

@@ -87,8 +87,8 @@ type Props = {
   additionalItem?: React.ReactNode;
   simple?: boolean;
   index?: number;
-  onSlidePrev?: (index: number) => void;
-  onSlideNext?: (index: number) => void;
+  onSlidePrev?: () => void;
+  onSlideNext?: () => void;
   onRemove?: () => void;
 };
 

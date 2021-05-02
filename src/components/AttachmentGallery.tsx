@@ -53,32 +53,32 @@ function AttachmentsGallery(props: Props) {
     toggleHide(!hideOthers);
   };
 
-  const onSlidePrev = (index) => {
+  const onSlidePrev = () => {
     const { attachments } = props;
 
     if (!attachments || attachments.length === 0) {
       return null;
     }
 
-    if (index - 1 === -1) {
+    if (currentIndex - 1 === -1) {
       return setIndex(attachments.length - 1);
     }
 
-    return setIndex(index - 1);
+    return setIndex(currentIndex - 1);
   };
 
-  const onSlideNext = (index) => {
+  const onSlideNext = () => {
     const { attachments } = props;
 
     if (!attachments || attachments.length === 0) {
       return null;
     }
 
-    if (index + 1 === attachments.length) {
+    if (currentIndex + 1 === attachments.length) {
       return setIndex(0);
     }
 
-    return setIndex(index + 1);
+    return setIndex(currentIndex + 1);
   };
 
   const renderItem = (item: IAttachment, index: number) => {
