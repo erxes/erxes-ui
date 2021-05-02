@@ -160,7 +160,7 @@ type State = {
   visible: boolean;
 };
 
-class ImageWithPreview extends React.Component<Props, State> {
+class AttachmentWithPreview extends React.Component<Props, State> {
   state = { visible: false };
 
   onToggle = () => {
@@ -252,4 +252,4 @@ class ImageWithPreview extends React.Component<Props, State> {
   }
 }
 
-export default ImageWithPreview;
+export default AttachmentWithPreview;

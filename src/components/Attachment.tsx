@@ -1,11 +1,11 @@
-import Icon from './Icon';
-import ImageWithPreview from './ImageWithPreview';
-import React from 'react';
-import styled from 'styled-components';
-import { rgba } from '../styles/ecolor';
-import colors from '../styles/colors';
-import { IAttachment } from '../types';
-import { __, readFile } from '../utils/core';
+import Icon from "./Icon";
+import ImageWithPreview from "./ImageWithPreview";
+import React from "react";
+import styled from "styled-components";
+import { rgba } from "../styles/ecolor";
+import colors from "../styles/colors";
+import { IAttachment } from "../types";
+import { __, readFile } from "../utils/core";
 
 export const AttachmentWrapper = styled.div`
   border-radius: 4px;
@@ -81,18 +81,22 @@ const AttachmentName = styled.span`
 `;
 
 type Props = {
+  currentAttach?: IAttachment;
   attachment: IAttachment;
   scrollBottom?: () => void;
   additionalItem?: React.ReactNode;
   simple?: boolean;
+  index?: number;
+  onSlidePrev?: () => void;
+  onSlideNext?: () => void;
 };
 
 class Attachment extends React.Component<Props> {
   static AttachmentWrapper = AttachmentWrapper;
   static Meta = Meta;
 
-  renderOtherInfo = attachment => {
-    const name = attachment.name || attachment.url || '';
+  renderOtherInfo = (attachment) => {
+    const name = attachment.name || attachment.url || "";
 
     return (
       <>
@@ -127,13 +131,13 @@ class Attachment extends React.Component<Props> {
     );
   };
 
-  renderVideoFile = attachment => {
+  renderVideoFile = (attachment) => {
     return (
       <AttachmentWrapper>
         <ItemInfo>
           <video controls={true} loop={true}>
             <source src={attachment.url} type="video/mp4" />
-            {__('Your browser does not support the video tag')}.
+            {__("Your browser does not support the video tag")}.
           </video>
         </ItemInfo>
       </AttachmentWrapper>
@@ -152,20 +156,25 @@ class Attachment extends React.Component<Props> {
     return (
       <ImageWithPreview
         onLoad={this.onLoadImage}
-        alt={attachment.url}
+        index={this.props.index}
+        alt={attachment.name}
         src={attachment.url}
+        size={attachment.size}
+        currentAttach={this.props.currentAttach}
+        onSlidePrev={this.props.onSlidePrev}
+        onSlideNext={this.props.onSlideNext}
       />
     );
   }
 
-  renderAtachment = ({ attachment }) => {
+  renderAttachment = ({ attachment }) => {
     if (!attachment.type) {
       return null;
     }
 
     const { simple } = this.props;
 
-    if (attachment.type.startsWith('image')) {
+    if (attachment.type.startsWith("image")) {
       if (simple) {
         return this.renderImagePreview(attachment);
       }
@@ -178,47 +187,47 @@ class Attachment extends React.Component<Props> {
       );
     }
 
-    const url = attachment.url || attachment.name || '';
-    const fileExtension = url.split('.').pop();
+    const url = attachment.url || attachment.name || "";
+    const fileExtension = url.split(".").pop();
 
     let filePreview;
 
     switch (fileExtension) {
-      case 'docx':
-        filePreview = this.renderOtherFile(attachment, 'doc');
+      case "docx":
+        filePreview = this.renderOtherFile(attachment, "doc");
         break;
-      case 'pptx':
-        filePreview = this.renderOtherFile(attachment, 'ppt');
+      case "pptx":
+        filePreview = this.renderOtherFile(attachment, "ppt");
         break;
-      case 'xlsx':
-        filePreview = this.renderOtherFile(attachment, 'xls');
+      case "xlsx":
+        filePreview = this.renderOtherFile(attachment, "xls");
         break;
-      case 'mp4':
+      case "mp4":
         filePreview = this.renderVideoFile(attachment);
         break;
-      case 'zip':
-      case 'csv':
-      case 'doc':
-      case 'ppt':
-      case 'psd':
-      case 'avi':
-      case 'txt':
-      case 'rar':
-      case 'mp3':
-      case 'pdf':
-      case 'png':
-      case 'xls':
-      case 'jpeg':
+      case "zip":
+      case "csv":
+      case "doc":
+      case "ppt":
+      case "psd":
+      case "avi":
+      case "txt":
+      case "rar":
+      case "mp3":
+      case "pdf":
+      case "png":
+      case "xls":
+      case "jpeg":
         filePreview = this.renderOtherFile(attachment, fileExtension);
         break;
       default:
-        filePreview = this.renderOtherFile(attachment, 'file-2');
+        filePreview = this.renderOtherFile(attachment, "file-2");
     }
     return filePreview;
   };
 
   render() {
-    return this.renderAtachment(this.props);
+    return this.renderAttachment(this.props);
   }
 }
 
