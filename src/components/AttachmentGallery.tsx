@@ -53,32 +53,32 @@ function AttachmentsGallery(props: Props) {
     toggleHide(!hideOthers);
   };
 
-  const onSlidePrev = () => {
+  const onSlidePrev = (index) => {
     const { attachments } = props;
 
     if (!attachments || attachments.length === 0) {
       return null;
     }
 
-    if (currentIndex - 1 === -1) {
+    if (index - 1 === -1) {
       return setIndex(attachments.length - 1);
     }
 
-    return setIndex(currentIndex - 1);
+    return setIndex(index - 1);
   };
 
-  const onSlideNext = () => {
+  const onSlideNext = (index) => {
     const { attachments } = props;
 
     if (!attachments || attachments.length === 0) {
       return null;
     }
 
-    if (currentIndex + 1 === attachments.length) {
+    if (index + 1 === attachments.length) {
       return setIndex(0);
     }
 
-    return setIndex(currentIndex + 1);
+    return setIndex(index + 1);
   };
 
   const renderItem = (item: IAttachment, index: number) => {
@@ -93,8 +93,8 @@ function AttachmentsGallery(props: Props) {
         <Attachment
           currentAttach={props.attachments[currentIndex]}
           attachment={item}
-          index={index}
           additionalItem={remove}
+          onRemove={onRemove}
           onSlidePrev={onSlidePrev}
           onSlideNext={onSlideNext}
         />

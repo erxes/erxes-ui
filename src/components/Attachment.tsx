@@ -1,11 +1,11 @@
 import Icon from "./Icon";
-import ImageWithPreview from "./ImageWithPreview";
 import React from "react";
 import styled from "styled-components";
 import { rgba } from "../styles/ecolor";
 import colors from "../styles/colors";
 import { IAttachment } from "../types";
 import { __, readFile } from "../utils/core";
+import AttachmentWithPreview from "./AttachmentWithPreview";
 
 export const AttachmentWrapper = styled.div`
   border-radius: 4px;
@@ -87,8 +87,9 @@ type Props = {
   additionalItem?: React.ReactNode;
   simple?: boolean;
   index?: number;
-  onSlidePrev?: () => void;
-  onSlideNext?: () => void;
+  onSlidePrev?: (index: number) => void;
+  onSlideNext?: (index: number) => void;
+  onRemove?: () => void;
 };
 
 class Attachment extends React.Component<Props> {
@@ -120,11 +121,23 @@ class Attachment extends React.Component<Props> {
     );
   };
 
-  renderOtherFile = (attachment, icon) => {
+  renderOtherFile = (attachment: IAttachment, icon?: string) => {
+    const { currentAttach, onSlideNext, onSlidePrev, onRemove } = this.props;
+
     return (
       <AttachmentWrapper>
         <PreviewWrapper>
-          <Icon icon={icon} />
+          <AttachmentWithPreview
+            icon={icon}
+            onLoad={this.onLoadImage}
+            alt={attachment.name}
+            src={attachment.url}
+            size={attachment.size}
+            currentAttach={currentAttach}
+            onSlidePrev={onSlidePrev}
+            onSlideNext={onSlideNext}
+            onRemove={onRemove}
+          />
         </PreviewWrapper>
         <ItemInfo>{this.renderOtherInfo(attachment)}</ItemInfo>
       </AttachmentWrapper>
@@ -154,9 +167,8 @@ class Attachment extends React.Component<Props> {
 
   renderImagePreview(attachment) {
     return (
-      <ImageWithPreview
+      <AttachmentWithPreview
         onLoad={this.onLoadImage}
-        index={this.props.index}
         alt={attachment.name}
         src={attachment.url}
         size={attachment.size}
@@ -179,12 +191,7 @@ class Attachment extends React.Component<Props> {
         return this.renderImagePreview(attachment);
       }
 
-      return (
-        <AttachmentWrapper>
-          <PreviewWrapper>{this.renderImagePreview(attachment)}</PreviewWrapper>
-          <ItemInfo>{this.renderOtherInfo(attachment)}</ItemInfo>
-        </AttachmentWrapper>
-      );
+      return this.renderOtherFile(attachment);
     }
 
     const url = attachment.url || attachment.name || "";

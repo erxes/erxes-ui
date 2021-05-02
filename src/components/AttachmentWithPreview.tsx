@@ -1,51 +1,10 @@
-import { fadeIn, slideDown } from "../utils/animations";
 import React from "react";
 import styled from "styled-components";
 import { readFile } from "../utils/core";
 import CommonPortal from "./CommonPortal";
 import Icon from "./Icon";
 import { IAttachment } from "types";
-
-export const PreviewWrapper = styled.div`
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  padding: 40px;
-  background: rgba(48, 67, 92, 0.8);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s;
-  z-index: 50000;
-  animation-name: ${fadeIn};
-  animation-duration: 0.3s;
-  animation-timing-function: ease;
-  cursor: zoom-out;
-
-  img {
-    width: auto;
-    max-width: 80%;
-    max-height: 80%;
-    max-height: 80vh;
-    box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.5);
-    transition: max-width 0.1s ease, max-height 0.1s ease;
-    animation-name: ${slideDown};
-    animation-duration: 0.3s;
-    animation-timing-function: ease;
-  }
-
-  iframe {
-    border-raidus: 3ps;
-    background-color: #fff;
-    padding: 10px;
-    max-width: 80%;
-    max-height: 80%;
-    max-height: 80vh;
-  }
-`;
+import { PreviewWrapper, Image } from "./ImageWithPreview";
 
 const PreviewOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
@@ -71,15 +30,6 @@ const PreviewOverlay = styled.div`
       font-size: 14px;
       opacity: 0.8;
     }
-  }
-`;
-
-const Image = styled.img`
-  cursor: zoom-in;
-  transition: all 0.3s;
-
-  &:hover {
-    opacity: 0.8;
   }
 `;
 
@@ -150,10 +100,11 @@ type Props = {
   size?: number;
   onLoad?: () => void;
   full?: boolean;
-  index?: number;
+  icon?: string;
   currentAttach?: IAttachment;
-  onSlidePrev?: () => void;
-  onSlideNext?: () => void;
+  onSlidePrev?: (index: number) => void;
+  onSlideNext?: (index: number) => void;
+  onRemove?: () => void;
 };
 
 type State = {
@@ -204,17 +155,35 @@ class AttachmentWithPreview extends React.Component<Props, State> {
     );
   }
 
+  renderAttachment() {
+    const { onLoad, src, icon } = this.props;
+
+    if (icon) {
+      return <Icon icon={icon} onClick={this.onToggle} />;
+    }
+
+    return (
+      <Image
+        src={readFile(src || "")}
+        onLoad={onLoad}
+        onClick={this.onToggle}
+      />
+    );
+  }
+
   render() {
-    const { alt, src, size, onLoad, currentAttach } = this.props;
+    const {
+      alt,
+      src,
+      currentAttach,
+      onSlideNext,
+      onSlidePrev,
+      onRemove,
+    } = this.props;
 
     return (
       <>
-        <Image
-          {...this.props}
-          src={readFile(src || "")}
-          onLoad={onLoad}
-          onClick={this.onToggle}
-        />
+        {this.renderAttachment()}
         {this.state.visible && (
           <CommonPortal>
             <PreviewWrapper>
@@ -223,27 +192,53 @@ class AttachmentWithPreview extends React.Component<Props, State> {
               ) : (
                 this.renderPreview()
               )}
-              <PreviewOverlay>
-                <div>
-                  <h4>{alt}</h4>
-                  <p>Size - {size && Math.round(size / 1000)}kB</p>
-                  <Actions>
-                    <a>
-                      <Icon icon="external-link-alt" size={12} /> Open in new
-                      tab
-                    </a>
-                    <a>
-                      <Icon icon="cancel" size={10} /> Delete
-                    </a>
-                  </Actions>
-                </div>
-              </PreviewOverlay>
-              <PreviewBtn className="left" onClick={this.props.onSlidePrev}>
-                <Icon icon="angle-left" size={32} />
-              </PreviewBtn>
-              <PreviewBtn className="right" onClick={this.props.onSlideNext}>
-                <Icon icon="angle-right" size={32} />
-              </PreviewBtn>
+              {currentAttach && (
+                <>
+                  <PreviewOverlay>
+                    <div>
+                      <h4>{currentAttach.name}</h4>
+                      <p>
+                        Size -{" "}
+                        {currentAttach.size &&
+                          Math.round(currentAttach.size / 1000)}
+                        kB
+                      </p>
+                      <Actions>
+                        <a
+                          href={currentAttach.url || ""}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Icon icon="external-link-alt" size={12} /> Open in
+                          new tab
+                        </a>
+                        <a
+                          href={readFile(currentAttach.url || "")}
+                          rel="noopener noreferrer"
+                        >
+                          <Icon icon="download-1" size={12} /> Download
+                        </a>
+                        <a onClick={onRemove}>
+                          <Icon icon="cancel" size={10} /> Delete
+                        </a>
+                      </Actions>
+                    </div>
+                  </PreviewOverlay>
+                  {onSlidePrev && (
+                    <PreviewBtn className="left" onClick={() => onSlidePrev(2)}>
+                      <Icon icon="angle-left" size={32} />
+                    </PreviewBtn>
+                  )}
+                  {onSlideNext && (
+                    <PreviewBtn
+                      className="right"
+                      onClick={() => onSlideNext(2)}
+                    >
+                      <Icon icon="angle-right" size={32} />
+                    </PreviewBtn>
+                  )}
+                </>
+              )}
             </PreviewWrapper>
           </CommonPortal>
         )}
