@@ -60,6 +60,7 @@ const PreviewWrapper = styled.div`
 
   i {
     font-size: 36px;
+    cursor: pointer;
     color: ${colors.colorSecondary};
   }
 `;
@@ -87,9 +88,8 @@ type Props = {
   additionalItem?: React.ReactNode;
   simple?: boolean;
   index?: number;
-  onSlidePrev?: () => void;
-  onSlideNext?: () => void;
-  onRemove?: () => void;
+  onSlidePrev?: (index: number) => void;
+  onSlideNext?: (index: number) => void;
 };
 
 class Attachment extends React.Component<Props> {
@@ -122,13 +122,14 @@ class Attachment extends React.Component<Props> {
   };
 
   renderOtherFile = (attachment: IAttachment, icon?: string) => {
-    const { currentAttach, onSlideNext, onSlidePrev, onRemove } = this.props;
+    const { currentAttach, onSlideNext, onSlidePrev, index } = this.props;
 
     return (
       <AttachmentWrapper>
         <PreviewWrapper>
           <AttachmentWithPreview
             icon={icon}
+            index={index}
             onLoad={this.onLoadImage}
             alt={attachment.name}
             src={attachment.url}
@@ -136,7 +137,6 @@ class Attachment extends React.Component<Props> {
             currentAttach={currentAttach}
             onSlidePrev={onSlidePrev}
             onSlideNext={onSlideNext}
-            onRemove={onRemove}
           />
         </PreviewWrapper>
         <ItemInfo>{this.renderOtherInfo(attachment)}</ItemInfo>

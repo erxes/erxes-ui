@@ -36,6 +36,7 @@ const ToggleButton = styled(Delete.withComponent("div"))`
 type Props = {
   attachments: IAttachment[];
   onChange: (attachments: IAttachment[]) => void;
+  removeAttachment: (index: number) => void;
   limit?: number;
 };
 
@@ -44,41 +45,39 @@ function AttachmentsGallery(props: Props) {
   const [currentIndex, setIndex] = useState(0);
 
   const removeAttachment = (index: number) => {
-    const updatedAttachments = props.attachments.splice(index, 1);
-
-    props.onChange(updatedAttachments);
+    props.removeAttachment(index);
   };
 
   const toggleAttachments = () => {
     toggleHide(!hideOthers);
   };
 
-  const onSlidePrev = () => {
+  const onSlidePrev = (index: number) => {
     const { attachments } = props;
 
     if (!attachments || attachments.length === 0) {
       return null;
     }
 
-    if (currentIndex - 1 === -1) {
+    if (index - 1 === -1) {
       return setIndex(attachments.length - 1);
     }
 
-    return setIndex(currentIndex - 1);
+    return setIndex(index - 1);
   };
 
-  const onSlideNext = () => {
+  const onSlideNext = (index: number) => {
     const { attachments } = props;
 
     if (!attachments || attachments.length === 0) {
       return null;
     }
 
-    if (currentIndex + 1 === attachments.length) {
+    if (index + 1 === attachments.length) {
       return setIndex(0);
     }
 
-    return setIndex(currentIndex + 1);
+    return setIndex(index + 1);
   };
 
   const renderItem = (item: IAttachment, index: number) => {
@@ -91,10 +90,12 @@ function AttachmentsGallery(props: Props) {
     return (
       <Item key={item.url}>
         <Attachment
-          currentAttach={props.attachments[currentIndex]}
+          currentAttach={
+            props.attachments[currentIndex !== 0 ? currentIndex : index]
+          }
           attachment={item}
+          index={currentIndex !== 0 ? currentIndex : index}
           additionalItem={remove}
-          onRemove={onRemove}
           onSlidePrev={onSlidePrev}
           onSlideNext={onSlideNext}
         />

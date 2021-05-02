@@ -111,6 +111,16 @@ class Uploader extends React.Component<Props, State> {
     target.value = "";
   };
 
+  removeAttachment = (index: number) => {
+    const attachments = [...this.state.attachments];
+
+    attachments.splice(index, 1);
+
+    this.setState({ attachments });
+
+    this.props.onChange(attachments);
+  };
+
   renderUploadButton() {
     const { multiple, single } = this.props;
 
@@ -148,6 +158,7 @@ class Uploader extends React.Component<Props, State> {
           attachments={attachments}
           limit={limit}
           onChange={onChange}
+          removeAttachment={this.removeAttachment}
         />
         {this.renderUploadButton()}
       </>

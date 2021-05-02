@@ -98,13 +98,13 @@ type Props = {
   alt?: string;
   src?: string;
   size?: number;
+  index?: number;
   onLoad?: () => void;
   full?: boolean;
   icon?: string;
   currentAttach?: IAttachment;
-  onSlidePrev?: () => void;
-  onSlideNext?: () => void;
-  onRemove?: () => void;
+  onSlidePrev?: (index: number) => void;
+  onSlideNext?: (index: number) => void;
 };
 
 type State = {
@@ -175,10 +175,10 @@ class AttachmentWithPreview extends React.Component<Props, State> {
     const {
       alt,
       src,
+      index,
       currentAttach,
       onSlideNext,
       onSlidePrev,
-      onRemove,
     } = this.props;
 
     return (
@@ -218,19 +218,22 @@ class AttachmentWithPreview extends React.Component<Props, State> {
                         >
                           <Icon icon="download-1" size={12} /> Download
                         </a>
-                        <a onClick={onRemove}>
-                          <Icon icon="cancel" size={10} /> Delete
-                        </a>
                       </Actions>
                     </div>
                   </PreviewOverlay>
                   {onSlidePrev && (
-                    <PreviewBtn className="left" onClick={onSlidePrev}>
+                    <PreviewBtn
+                      className="left"
+                      onClick={() => onSlidePrev(index || 0)}
+                    >
                       <Icon icon="angle-left" size={32} />
                     </PreviewBtn>
                   )}
                   {onSlideNext && (
-                    <PreviewBtn className="right" onClick={onSlideNext}>
+                    <PreviewBtn
+                      className="right"
+                      onClick={() => onSlideNext(index || 0)}
+                    >
                       <Icon icon="angle-right" size={32} />
                     </PreviewBtn>
                   )}
