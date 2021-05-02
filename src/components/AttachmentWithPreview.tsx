@@ -92,6 +92,8 @@ const Actions = styled.div`
 
 const KEYCODES = {
   ESCAPE: 27,
+  ARROWRIGHT: 39,
+  ARROWLEFT: 37,
 };
 
 type Props = {
@@ -119,6 +121,7 @@ class AttachmentWithPreview extends React.Component<Props, State> {
   };
 
   componentDidMount() {
+    console.log("how many", this.props.index);
     document.addEventListener("keydown", this.handleKeydown);
   }
 
@@ -127,8 +130,18 @@ class AttachmentWithPreview extends React.Component<Props, State> {
   }
 
   handleKeydown = (e) => {
+    const { onSlidePrev, onSlideNext, index } = this.props;
+
     if (e.keyCode === KEYCODES.ESCAPE && this.state.visible) {
       this.setState({ visible: false });
+    }
+
+    if (e.keyCode === KEYCODES.ARROWRIGHT && onSlideNext) {
+      onSlideNext(index || 0);
+    }
+
+    if (e.keyCode === KEYCODES.ARROWLEFT && onSlidePrev) {
+      onSlidePrev(index || 0);
     }
   };
 
