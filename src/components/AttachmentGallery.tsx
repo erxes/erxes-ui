@@ -67,7 +67,6 @@ function AttachmentsGallery(props: Props) {
   };
 
   const onSlideNext = (index: number) => {
-    console.log(index);
     const { attachments } = props;
 
     if (!attachments || attachments.length === 0) {

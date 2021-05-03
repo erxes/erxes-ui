@@ -6,6 +6,7 @@ import colors from "../styles/colors";
 import { IAttachment } from "../types";
 import { __, readFile } from "../utils/core";
 import AttachmentWithPreview from "./AttachmentWithPreview";
+import ImageWithPreview from "./ImageWithPreview";
 
 export const AttachmentWrapper = styled.div`
   border-radius: 4px;
@@ -62,6 +63,7 @@ const PreviewWrapper = styled.div`
     font-size: 36px;
     cursor: pointer;
     color: ${colors.colorSecondary};
+    padding: 15px 30px;
   }
 `;
 
@@ -82,12 +84,13 @@ const AttachmentName = styled.span`
 `;
 
 type Props = {
-  currentAttach?: IAttachment;
   attachment: IAttachment;
   scrollBottom?: () => void;
   additionalItem?: React.ReactNode;
   simple?: boolean;
+
   index?: number;
+  currentAttach?: IAttachment;
   onSlidePrev?: (index: number) => void;
   onSlideNext?: (index: number) => void;
 };
@@ -131,9 +134,7 @@ class Attachment extends React.Component<Props> {
             icon={icon}
             index={index}
             onLoad={this.onLoadImage}
-            alt={attachment.name}
-            src={attachment.url}
-            size={attachment.size}
+            attachment={attachment}
             currentAttach={currentAttach}
             onSlidePrev={onSlidePrev}
             onSlideNext={onSlideNext}
@@ -167,14 +168,10 @@ class Attachment extends React.Component<Props> {
 
   renderImagePreview(attachment) {
     return (
-      <AttachmentWithPreview
+      <ImageWithPreview
         onLoad={this.onLoadImage}
-        alt={attachment.name}
+        alt={attachment.url}
         src={attachment.url}
-        size={attachment.size}
-        currentAttach={this.props.currentAttach}
-        onSlidePrev={this.props.onSlidePrev}
-        onSlideNext={this.props.onSlideNext}
       />
     );
   }
