@@ -42,7 +42,6 @@ type Props = {
 
 function AttachmentsGallery(props: Props) {
   const [hideOthers, toggleHide] = useState(true);
-  const [currentIndex, setIndex] = useState(0);
 
   const removeAttachment = (index: number) => {
     props.removeAttachment(index);
@@ -50,34 +49,6 @@ function AttachmentsGallery(props: Props) {
 
   const toggleAttachments = () => {
     toggleHide(!hideOthers);
-  };
-
-  const onSlidePrev = (index: number) => {
-    const { attachments } = props;
-
-    if (!attachments || attachments.length === 0) {
-      return null;
-    }
-
-    if (index - 1 === -1) {
-      return setIndex(attachments.length - 1);
-    }
-
-    return setIndex(index - 1);
-  };
-
-  const onSlideNext = (index: number) => {
-    const { attachments } = props;
-
-    if (!attachments || attachments.length === 0) {
-      return null;
-    }
-
-    if (index + 1 === attachments.length) {
-      return setIndex(0);
-    }
-
-    return setIndex(index + 1);
   };
 
   const renderItem = (item: IAttachment, index: number) => {
@@ -90,14 +61,10 @@ function AttachmentsGallery(props: Props) {
     return (
       <Item key={item.url}>
         <Attachment
-          currentAttach={
-            props.attachments[currentIndex !== 0 ? currentIndex : index]
-          }
           attachment={item}
-          index={currentIndex !== 0 ? currentIndex : index}
+          attachments={props.attachments}
+          index={index}
           additionalItem={remove}
-          onSlidePrev={onSlidePrev}
-          onSlideNext={onSlideNext}
         />
       </Item>
     );

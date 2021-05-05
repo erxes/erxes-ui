@@ -36,12 +36,12 @@ export const PreviewWrapper = styled.div`
   }
 
   iframe {
-    border-raidus: 3ps;
+    border-raidus: 3px;
     background-color: #fff;
     padding: 10px;
-    max-width: 80%;
-    max-height: 80%;
-    max-height: 80vh;
+    max-width: 90%;
+    height: 80%;
+    margin-bottom: 50px;
   }
 `;
 

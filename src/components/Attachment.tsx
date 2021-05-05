@@ -90,14 +90,20 @@ type Props = {
   simple?: boolean;
 
   index?: number;
-  currentAttach?: IAttachment;
-  onSlidePrev?: (index: number) => void;
-  onSlideNext?: (index: number) => void;
+  attachments?: IAttachment[];
 };
 
 class Attachment extends React.Component<Props> {
   static AttachmentWrapper = AttachmentWrapper;
   static Meta = Meta;
+
+  onLoadImage = () => {
+    const { scrollBottom } = this.props;
+
+    if (scrollBottom) {
+      scrollBottom();
+    }
+  };
 
   renderOtherInfo = (attachment) => {
     const name = attachment.name || attachment.url || "";
@@ -125,7 +131,7 @@ class Attachment extends React.Component<Props> {
   };
 
   renderOtherFile = (attachment: IAttachment, icon?: string) => {
-    const { currentAttach, onSlideNext, onSlidePrev, index } = this.props;
+    const { index, attachments } = this.props;
 
     return (
       <AttachmentWrapper>
@@ -135,9 +141,7 @@ class Attachment extends React.Component<Props> {
             index={index}
             onLoad={this.onLoadImage}
             attachment={attachment}
-            currentAttach={currentAttach}
-            onSlidePrev={onSlidePrev}
-            onSlideNext={onSlideNext}
+            attachments={attachments}
           />
         </PreviewWrapper>
         <ItemInfo>{this.renderOtherInfo(attachment)}</ItemInfo>
@@ -156,14 +160,6 @@ class Attachment extends React.Component<Props> {
         </ItemInfo>
       </AttachmentWrapper>
     );
-  };
-
-  onLoadImage = () => {
-    const { scrollBottom } = this.props;
-
-    if (scrollBottom) {
-      scrollBottom();
-    }
   };
 
   renderImagePreview(attachment) {
