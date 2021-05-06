@@ -40,11 +40,10 @@ class ProductChooser extends React.Component<FinalProps, { perPage: number }> {
     }
 
     this.setState({ perPage: this.state.perPage + 20 }, () =>
-      this.props.productsQuery.refetch()
-      // this.props.productsQuery.refetch({
-      //   searchValue: value,
-      //   perPage: this.state.perPage
-      // })
+      this.props.productsQuery.refetch({
+        searchValue: value,
+        perPage: this.state.perPage
+      })
     );
   };
 

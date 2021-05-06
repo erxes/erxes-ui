@@ -45,8 +45,10 @@ export interface IProductCategory {
 }
 
 export type ProductsQueryResponse = {
+  loading: boolean;
+  refetch: (variables?: { searchValue?: string; perPage?: number }) => void;
   products: IProduct[];
-} & QueryResponse;
+};
 
 export type ProductCategoriesQueryResponse = {
   productCategories: IProductCategory[];
