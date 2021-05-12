@@ -40,7 +40,7 @@ type State = {
   parentCompanyId?: string;
   ownerId?: string;
   companies?: ICompany[];
-  doNotDisturb?: string;
+  isSubscribed?: string;
   users?: IUser[];
   avatar?: string;
 
@@ -71,7 +71,7 @@ class CompanyForm extends React.Component<Props, State> {
       parentCompanyId: company.parentCompanyId || '',
       ownerId: company.ownerId || userId,
       companies,
-      doNotDisturb: company.doNotDisturb || 'No',
+      isSubscribed: company.isSubscribed || 'Yes',
       users: [],
       avatar: company.avatar,
       industry: company.industry || '',
@@ -347,22 +347,22 @@ class CompanyForm extends React.Component<Props, State> {
                   defaultValue: company.size || 0
                 })}
 
-                {this.renderFormGroup('Do not disturb', {
+                {this.renderFormGroup('Subscribed', {
                   componentClass: 'radio',
                   options: [
                     {
                       childNode: 'Yes',
                       value: 'Yes',
-                      checked: this.state.doNotDisturb === 'Yes',
+                      checked: this.state.isSubscribed === 'Yes',
                       onChange: e =>
-                        this.setState({ doNotDisturb: e.target.value })
+                        this.setState({ isSubscribed: e.target.value })
                     },
                     {
                       childNode: 'No',
                       value: 'No',
-                      checked: this.state.doNotDisturb === 'No',
+                      checked: this.state.isSubscribed === 'No',
                       onChange: e =>
-                        this.setState({ doNotDisturb: e.target.value })
+                        this.setState({ isSubscribed: e.target.value })
                     }
                   ]
                 })}

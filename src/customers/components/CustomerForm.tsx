@@ -45,7 +45,7 @@ type Props = {
 
 type State = {
   ownerId: string;
-  doNotDisturb: string;
+  isSubscribed: string;
   hasAuthority: string;
   users: IUser[];
   avatar: string;
@@ -65,7 +65,7 @@ class CustomerForm extends React.Component<Props, State> {
 
     this.state = {
       ownerId: customer.ownerId || userId,
-      doNotDisturb: customer.doNotDisturb || 'No',
+      isSubscribed: customer.isSubscribed || 'Yes',
       hasAuthority: customer.hasAuthority || 'No',
       users: [],
       birthDate: customer.birthDate,
@@ -391,24 +391,24 @@ class CustomerForm extends React.Component<Props, State> {
                   ]
                 })}
 
-                {this.renderFormGroup('Do not disturb', {
+                {this.renderFormGroup('Subscribed', {
                   ...formProps,
-                  name: 'doNotDisturb',
+                  name: 'isSubscribed',
                   componentClass: 'radio',
                   options: [
                     {
                       childNode: 'Yes',
                       value: 'Yes',
-                      checked: this.state.doNotDisturb === 'Yes',
+                      checked: this.state.isSubscribed === 'Yes',
                       onChange: e =>
-                        this.setState({ doNotDisturb: e.target.value })
+                        this.setState({ isSubscribed: e.target.value })
                     },
                     {
                       childNode: 'No',
                       value: 'No',
-                      checked: this.state.doNotDisturb === 'No',
+                      checked: this.state.isSubscribed === 'No',
                       onChange: e =>
-                        this.setState({ doNotDisturb: e.target.value })
+                        this.setState({ isSubscribed: e.target.value })
                     }
                   ]
                 })}

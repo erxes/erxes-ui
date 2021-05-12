@@ -15,7 +15,7 @@ const commonFields = `
   $leadStatus: String,
   $hasAuthority: String,
   $description: String,
-  $doNotDisturb: String,
+  $isSubscribed: String,
   $links: JSON,
   $customFieldsData: JSON,
   $code: String
@@ -40,7 +40,7 @@ const commonVariables = `
   leadStatus: $leadStatus,
   hasAuthority: $hasAuthority,
   description: $description,
-  doNotDisturb: $doNotDisturb,
+  isSubscribed: $isSubscribed,
   links: $links,
   customFieldsData: $customFieldsData,
   code: $code,
@@ -79,7 +79,7 @@ const customersEdit = `
       leadStatus
       hasAuthority
       description
-      doNotDisturb
+      isSubscribed
       links
       emailValidationStatus
       phoneValidationStatus

@@ -12,7 +12,7 @@ const commonFields = `
   $primaryPhone: String,
   $businessType: String,
   $description: String,
-  $doNotDisturb: String,
+  $isSubscribed: String,
   $links: JSON,
   $customFieldsData: JSON,
   $code: String,
@@ -33,7 +33,7 @@ const commonVariables = `
   primaryPhone: $primaryPhone,
   businessType: $businessType,
   description: $description,
-  doNotDisturb: $doNotDisturb,
+  isSubscribed: $isSubscribed,
   links: $links,
   customFieldsData: $customFieldsData,
   code: $code,
@@ -67,7 +67,7 @@ const companiesEdit = `
       primaryPhone
       businessType
       description
-      doNotDisturb
+      isSubscribed
       code
       links
       location

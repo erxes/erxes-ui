@@ -26,7 +26,7 @@ const basicFields = `
   leadStatus
   hasAuthority
   description
-  doNotDisturb
+  isSubscribed
   code
   emailValidationStatus
   phoneValidationStatus

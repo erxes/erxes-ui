@@ -42,7 +42,7 @@ export interface ICustomerDoc {
   leadStatus?: string;
   hasAuthority?: string;
   description?: string;
-  doNotDisturb?: string;
+  isSubscribed?: string;
   links?: ICustomerLinks;
   customFieldsData?: { [key: string]: any };
   visitorContactInfo?: IVisitorContact;

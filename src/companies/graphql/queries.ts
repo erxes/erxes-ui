@@ -23,7 +23,7 @@ const companyFields = `
   primaryPhone
   businessType
   description
-  doNotDisturb
+  isSubscribed
   code
   links
   owner {

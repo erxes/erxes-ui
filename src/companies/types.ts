@@ -37,7 +37,8 @@ export interface ICompanyDoc {
   businessType?: string;
   description?: string;
   employees?: number;
-  doNotDisturb?: string;
+  isSubscribed?: string;
+  
   links: ICompanyLinks;
   tagIds?: string[];
   customFieldsData?: any;
