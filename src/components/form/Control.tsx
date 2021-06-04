@@ -123,7 +123,7 @@ class FormControl extends React.Component<Props> {
               <Select {...attributes}>
                 {props.options.map((option, index) => {
                   return (
-                    <option key={index} value={option.value || ''}>
+                    <option key={index} value={option.value || '' } disabled={option.disabled}>
                       {option.label || ''}
                     </option>
                   );
