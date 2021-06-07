@@ -26,6 +26,13 @@ const productFields = `
     type
     size
   }
+  vendor {
+    _id
+    primaryName
+    primaryPhone
+    primaryEmail
+    code
+  }
 `;
 
 const products = `
