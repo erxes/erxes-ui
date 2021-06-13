@@ -6,9 +6,11 @@ import {
   Input,
   Radio,
   Select,
-  SelectWrapper
+  SelectWrapper,
+  Progress
 } from './styles';
 import Textarea from './Textarea';
+import ProgressBar from '../ProgressBar';
 
 type Props = {
   children?: React.ReactNode;
@@ -92,11 +94,8 @@ class FormControl extends React.Component<Props> {
       onBlur: props.onBlur,
       value: props.value,
       defaultValue: props.defaultValue,
-      [props.defaultChecked
-        ? 'defaultChecked'
-        : 'checked']: props.defaultChecked
-          ? props.defaultChecked
-          : props.checked,
+      [props.defaultChecked ? 'defaultChecked' : 'checked']:
+        props.defaultChecked ? props.defaultChecked : props.checked,
       placeholder: props.placeholder,
       hasError: errorMessage ? true : false,
       type: props.type,
@@ -158,6 +157,29 @@ class FormControl extends React.Component<Props> {
       }
 
       return renderElement(Radio, attributes, elementType, childNode);
+    }
+
+    if (elementType === 'poll') {
+      const options = props.options;
+      if (options) {
+        const count = options.length;
+        return options.map((option, index) => {
+          const percentage = (index * 100) / count;
+
+          return (
+            <Progress key={attributes.key ? attributes.key : null}>
+              <div>
+                {renderElement(Radio, attributes, elementType, childNode)}
+                <b>{option}: </b>
+                <span>({percentage.toFixed(2)}%)</span>
+              </div>
+              <ProgressBar percentage={percentage} height="10px" />
+            </Progress>
+          );
+        });
+      }
+
+      return null;
     }
 
     if (elementType === 'checkbox') {
