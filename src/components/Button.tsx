@@ -192,7 +192,7 @@ export default class Button extends React.Component<ButtonProps> {
     size: 'medium',
     block: false,
     type: 'button',
-    uppercase: true
+    uppercase: false
   };
 
   render() {
