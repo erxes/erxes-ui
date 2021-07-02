@@ -307,6 +307,24 @@ const FlexWrapper = styled.span`
   flex: 1;
 `;
 
+const Progress = styled.div`
+  width: 100%;
+  margin-bottom: ${dimensions.unitSpacing}px;
+
+  span {
+    margin-right: ${dimensions.unitSpacing}px;
+  }
+
+  b {
+    margin-right: ${dimensions.unitSpacing}px;
+  }
+
+  & > div {
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+`;
+
 export {
   Input,
   SelectWrapper,
@@ -318,5 +336,6 @@ export {
   Label,
   Formgroup,
   FlexWrapper,
-  Error
+  Error,
+  Progress
 };

@@ -115,6 +115,7 @@ export type IEditorProps = {
   autoGrowMaxHeight?: number;
   name?: string;
   isSubmitted?: boolean;
+  formItems?: any;
 };
 
 export type QueryResponse = {

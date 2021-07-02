@@ -93,6 +93,7 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
       autoGrowMinHeight = 180,
       autoGrowMaxHeight,
       toolbarLocation = 'top',
+      formItems,
       onChange
     } = this.props;
 
@@ -122,13 +123,14 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
           dialog_backgroundCoverColor: '#30435C',
           allowedContent: true,
           toolbarLocation,
-          extraPlugins: `codemirror,strinsert,onCtrlEnter${
+          extraPlugins: `codemirror,strinsert,formInsert,onCtrlEnter${
             autoGrow ? ',autogrow' : ''
           }`,
           autoGrow_minHeight: autoGrowMinHeight,
           autoGrow_maxHeight: autoGrowMaxHeight,
           autoGrow_onStartup: true,
           strinsert: insertItems,
+          formInsert: formItems,
           autoGrowOnStartup: true,
           toolbar: toolbar || [
             {
@@ -164,8 +166,14 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
               ]
             },
             { name: 'links', items: ['Link', 'Unlink'] },
-            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-            { name: 'others', items: [insertItems && 'strinsert'] },
+            {
+              name: 'styles',
+              items: ['Styles', 'Format', 'Font', 'FontSize']
+            },
+            {
+              name: 'others',
+              items: [formItems && 'formInsert', insertItems && 'strinsert']
+            },
             { name: 'clear', items: ['RemoveFormat'] },
             { name: 'tools', items: ['Maximize'] }
           ],
