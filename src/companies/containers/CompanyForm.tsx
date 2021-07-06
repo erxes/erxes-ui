@@ -10,7 +10,7 @@ import { ICompany } from '../types';
 
 type Props = {
   company: ICompany;
-  getAssociatedCompany?: (companyId: string) => void;
+  getAssociatedCompany?: (newCompany: ICompany) => void;
   closeModal: () => void;
 };
 
