@@ -53,9 +53,9 @@ const generateFormItems = forms => {
   const items: Array<{ name: string; value?: string }> = [];
 
   forms.forEach(field => {
-    const { form = {}, brand = {}, name } = field;
+    const { form, brand, name } = field;
 
-    if (!brand.code || !form.code) {
+    if (!brand || !brand.code || !form || !form.code) {
       return;
     }
 
