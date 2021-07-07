@@ -102,7 +102,7 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
         return;
       }
 
-      const matchProperty = 'fullName';
+      const matchProperty = 'username';
       const query = opts.query.toLowerCase();
 
       const data = mentionUsers.filter(
@@ -183,10 +183,10 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
               itemTemplate:
                 '<li data-id="{id}">' +
                 '<img class="editor-avatar" src="{avatar}"' +
-                '<strong>{fullName}</strong>' +
+                '<strong>{username}</strong>' +
                 '</li>',
               outputTemplate:
-                '<a mentioned-user-id="{id}">@{fullName}</a><span>&nbsp;</span>',
+                '<a mentioned-user-id="{id}">@{username}</a><span>&nbsp;</span>',
               minChars: 0
             }
           ],
