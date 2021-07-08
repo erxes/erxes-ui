@@ -15,6 +15,7 @@ const Label = styledTS<{ uppercase?: boolean }>(styled.label)`
   font-weight: ${typography.fontWeightMedium};
   color: ${colors.textPrimary};
   font-size: ${typography.fontSizeUppercase}px;
+  margin-bottom: 3px !important;
 
   > span {
     color: ${colors.colorCoreRed};
@@ -170,7 +171,7 @@ const inputStyle = styledTS<{ disabled?: boolean; color?: string }>(
     + span {
       &::before {
         border-color: ${props =>
-          props.color ? props.color : colors.colorLightGray};
+    props.color ? props.color : colors.colorLightGray};
       }
     }
   }
@@ -191,7 +192,7 @@ const inputStyle = styledTS<{ disabled?: boolean; color?: string }>(
     &:before {
       background-color: ${colors.colorWhite};
       border: ${inputBorderWidth} solid ${props =>
-  props.color ? rgba(props.color, 0.7) : colors.colorShadowGray};
+    props.color ? rgba(props.color, 0.7) : colors.colorShadowGray};
       box-sizing: content-box;
       content: '';
       color: ${colors.colorWhite};
@@ -263,13 +264,14 @@ const Radio = styled(inputStyle)`
 
 const Checkbox = styledTS<{ color?: string }>(styled(inputStyle))`
   + span {
+    margin-right: 2px;
     &:after {
       background-color: transparent;
       top: 53%;
       left: calc(1px + ${inputHeight} / 5);
       width: calc(${inputHeight} / 2);
       height: calc(${inputHeight} / 5);
-      margin-top: calc(${inputHeight} / -2 / 2 * 0.8);
+      margin-top: calc(${inputHeight} / -4 * 0.8);
       border-style: solid;
       border-color: ${colors.colorWhite};
       border-width: 0 0 2px 2px;
@@ -284,7 +286,7 @@ const Checkbox = styledTS<{ color?: string }>(styled(inputStyle))`
     &:before {
       animation: none;
       background-color: ${props =>
-        props.color ? props.color : colors.colorSecondary};
+    props.color ? props.color : colors.colorSecondary};
       border-color: transparent;
     }
 
