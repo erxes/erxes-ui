@@ -1,3 +1,5 @@
+import { customerFields } from "./queries";
+
 const commonFields = `
   $avatar: String,
   $firstName: String,
@@ -51,9 +53,7 @@ const commonVariables = `
 const customersAdd = `
   mutation customersAdd($state: String, ${commonFields}) {
     customersAdd(state: $state, ${commonVariables}) {
-      _id
-      firstName
-      primaryEmail
+      ${customerFields}
     }
   }
 `;
@@ -61,28 +61,7 @@ const customersAdd = `
 const customersEdit = `
   mutation customersEdit($_id: String!, ${commonFields}) {
     customersEdit(_id: $_id, ${commonVariables}) {
-      _id
-      avatar
-      firstName
-      lastName
-      middleName
-      primaryEmail
-      primaryPhone
-      code
-      sex
-      birthDate
-      phones
-      emails
-      ownerId
-      position
-      department
-      leadStatus
-      hasAuthority
-      description
-      isSubscribed
-      links
-      emailValidationStatus
-      phoneValidationStatus
+      ${customerFields}
     }
   }
 `;

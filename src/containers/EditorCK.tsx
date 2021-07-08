@@ -53,9 +53,9 @@ const generateFormItems = forms => {
   const items: Array<{ name: string; value?: string }> = [];
 
   forms.forEach(field => {
-    const { form = {}, brand = {}, name } = field;
+    const { form, brand, name } = field;
 
-    if (!brand.code || !form.code) {
+    if (!brand || !brand.code || !form || !form.code) {
       return;
     }
 
@@ -95,13 +95,13 @@ const EditorContainer = (props: FinalProps) => {
   const mentionUsers: IMentionUser[] = [];
 
   for (const user of users) {
-    if (user.details && user.details.fullName) {
+    if (user.details && user.username) {
       const avatar = user.details.avatar || '/images/avatar-colored.svg';
 
       mentionUsers.push({
         id: user._id,
         avatar: isValidURL(avatar) ? avatar : '/images/avatar-colored.svg',
-        fullName: user.details.fullName
+        username: user.username
       });
     }
   }

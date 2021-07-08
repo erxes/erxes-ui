@@ -3,7 +3,7 @@ import {
   conformityQueryFields
 } from '../../conformity/graphql/queries';
 
-const companyFields = `
+export const companyFields = `
   _id
   createdAt
   modifiedAt

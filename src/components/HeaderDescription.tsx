@@ -10,7 +10,7 @@ import Icon from './Icon';
 const MainDescription = styledTS<{
   expand: boolean;
 }>(styled.div)`
-  width: 610px;
+  width: 100%;
   padding: 30px 10px 30px;
   display: flex;
   align-items: center;
@@ -33,6 +33,7 @@ const MainDescription = styledTS<{
 `;
 
 const Description = styled.div`
+  max-width: 850px;
   display: flex;
   align-items: center;
 `;
