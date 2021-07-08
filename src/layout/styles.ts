@@ -421,7 +421,6 @@ const BarItems = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-evenly;
 
   .dropdown-menu {
     min-width: 200px;
