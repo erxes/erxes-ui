@@ -94,7 +94,7 @@ export type IButtonMutateProps = {
 export type IMentionUser = {
   id: string;
   avatar: string;
-  fullName: string;
+  username: string;
 };
 
 export type IEditorProps = {
@@ -115,6 +115,7 @@ export type IEditorProps = {
   autoGrowMaxHeight?: number;
   name?: string;
   isSubmitted?: boolean;
+  formItems?: any;
 };
 
 export type QueryResponse = {

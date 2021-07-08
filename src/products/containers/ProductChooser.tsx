@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 import gql from 'graphql-tag';
 import * as compose from 'lodash.flowright';
 import React from 'react';
@@ -121,8 +122,11 @@ export default withProps<Props>(
       options: props => ({
         variables: {
           perPage: 20,
-          categoryId: props.categoryId
-        }
+          categoryId: props.categoryId,
+          pipelineId: queryString.parse(location.search).pipelineId,
+          boardId: queryString.parse(location.search).boardId
+        },
+        fetchPolicy: 'network-only'
       })
     }),
     graphql<{}, ProductCategoriesQueryResponse, {}>(

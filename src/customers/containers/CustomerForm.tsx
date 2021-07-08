@@ -16,7 +16,7 @@ type Props = {
   type?: string;
   customer: ICustomer;
   closeModal: () => void;
-  getAssociatedCustomer?: (customerId: string) => void;
+  getAssociatedCustomer?: (newCustomer: ICustomer) => void;
   queryParams: IQueryParams;
 };
 
