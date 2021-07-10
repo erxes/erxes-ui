@@ -1,4 +1,4 @@
-import CKEditor from 'ckeditor4-react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { colors } from '../styles';
 import React from 'react';
 import { IEditorProps } from '../types';
