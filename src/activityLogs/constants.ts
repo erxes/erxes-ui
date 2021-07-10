@@ -1,101 +1,121 @@
 import colors from '../styles/colors';
 
+const dodgerBlue = '#3B85F4';
+const vikingBlue = '#63D2D6';
+const pomegranateRed = '#F44236';
+const sunglowYellow = '#fbc531';
+const astronautBlue = '#273c75';
+const mediumPurple = '#8c7ae6';
+const valenciaRed = '#d74534';
+const scooterBlue = '#34c1c6';
+const mingBlue = '#3a6f81';
+const butterflyBushBlue = '#5b48a2';
+const mountainMeadowBlue = '#16a085';
+const blueRibbon = '#1472FB';
+const chambrayBlue = '#3A5999';
+const millbrookBrown = '#503b2c';
+const curiousBlue = '#1793c7';
+const surfieGreen = '#128c7e';
+const royalBlue = '#6569df';
+const koromikoOrange = '#fdb761';
+const blazeOrange = '#FF6600';
+
 export const ICON_AND_COLOR_TABLE = {
   customer: {
     icon: 'user-plus',
-    color: '#3B85F4'
+    color: dodgerBlue
   },
   segment: {
     icon: 'chart-pie',
-    color: '#63D2D6'
+    color: vikingBlue
   },
   conversation: {
     icon: 'comment-plus',
-    color: '#F44236'
+    color: pomegranateRed
   },
   note: {
     icon: 'file-plus',
-    color: '#fbc531'
+    color: sunglowYellow
   },
   company: {
     icon: 'bag-alt',
-    color: '#273c75'
+    color: astronautBlue
   },
   deal: {
     icon: 'dollar-alt',
-    color: '#8c7ae6'
+    color: mediumPurple
   },
   email: {
     icon: 'envelope-alt',
-    color: '#d74534'
+    color: valenciaRed
   },
   task: {
     icon: 'file-check',
-    color: '#34c1c6'
+    color: scooterBlue
   },
   ticket: {
     icon: 'postcard',
-    color: '#3a6f81'
+    color: mingBlue
   },
   messenger: {
     icon: 'comment-edit',
-    color: '#5b48a2'
+    color: butterflyBushBlue
   },
   lead: {
     icon: 'presentation',
-    color: '#16a085'
+    color: mountainMeadowBlue
   },
   'facebook-messenger': {
     icon: 'messenger',
-    color: '#1472FB'
+    color: blueRibbon
   },
   'facebook-post': {
     icon: 'facebook',
-    color: '#3A5999'
+    color: chambrayBlue
   },
   comment: {
     icon: 'comment-alt-lines',
-    color: '#503b2c'
+    color: millbrookBrown
   },
   callpro: {
     icon: 'phone-volume',
-    color: '#1793c7'
+    color: curiousBlue
   },
   chatfuel: {
     icon: 'comment-1',
-    color: '#208ef0'
+    color: dodgerBlue
   },
   'nylas-gmail': {
     icon: 'envelope',
-    color: '#D44638'
+    color: valenciaRed
   },
   'twitter-dm': {
     icon: 'twitter',
-    color: '#1da1f2'
+    color: dodgerBlue
   },
   twitter: {
     icon: 'twitter',
-    color: '#1da1f2'
+    color: dodgerBlue
   },
   whatsapp: {
     icon: 'whatsapp',
-    color: '#128c7e'
+    color: surfieGreen
   },
   assignee: {
     icon: 'user-check',
-    color: '#6569df'
+    color: royalBlue
   },
   checklist: {
     icon: 'check-square',
-    color: '#6569df'
+    color: royalBlue
   },
   archive: {
     icon: 'archive-alt',
-    color: '#fdb761'
+    color: koromikoOrange
   },
   sms: {
     icon: 'comment-lines',
-    color: '#FF6600'
+    color: blazeOrange
   },
   campaign: {
     icon: 'megaphone',
