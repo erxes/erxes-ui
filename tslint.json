@@ -1,13 +1,7 @@
 {
-  "extends": [
-    "tslint:recommended",
-    "tslint-react",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": [
-      "node_modules/**/*.ts"
-    ]
+    "exclude": ["node_modules/**/*.ts"]
   },
   "rules": {
     "object-literal-sort-keys": false,
@@ -19,10 +13,7 @@
     ],
     "member-access": false,
     "no-angle-bracket-type-assertion": false,
-    "max-classes-per-file": [
-      true,
-      5
-    ],
+    "max-classes-per-file": [true, 5],
     "interface-over-type-literal": false,
     "allowObject": true,
     "import/no-anonymous-default-export": "off"

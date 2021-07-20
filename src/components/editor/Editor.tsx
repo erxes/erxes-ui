@@ -21,7 +21,7 @@ import { getDraftDecorator } from '../editor/DraftjsHelpers';
 import Icon from '../Icon';
 import React from 'react';
 import HeadlinesButton from './HeadlinesButton';
-import { RichEditorControlsRoot, RichEditorRoot } from './styles';
+import { RichEditorControlsRoot, RichEditorRoot , Char} from './styles';
 
 type ErxesEditorProps = {
   editorState: EditorState;
@@ -38,6 +38,8 @@ type ErxesEditorProps = {
   onEscape?: (e: KeyboardEvent) => void;
   handleFileInput?: (e: React.FormEvent<HTMLInputElement>) => void;
   placeholder?: string | React.ReactNode;
+  characterCount: number;
+  integrationKind: string;
 };
 
 export class ErxesEditor extends React.Component<ErxesEditorProps> {
@@ -132,7 +134,9 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
       onEscape,
       bordered,
       isTopPopup = false,
-      plugins
+      plugins, 
+      characterCount,
+      integrationKind
     } = this.props;
 
     const updatedPlugins = [
@@ -188,21 +192,27 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
           <Toolbar>
             {externalProps => (
               <>
-                <BoldButton {...externalProps} />
-                <ItalicButton {...externalProps} />
-                <UnderlineButton {...externalProps} />
-                <Separator {...externalProps} />
-                <HeadlinesButton {...externalProps} />
-                <UnorderedListButton {...externalProps} />
-                <OrderedListButton {...externalProps} />
-                <BlockquoteButton {...externalProps} />
-                <CodeBlockButton {...externalProps} />
-                <LinkButton {...externalProps} />
+              { integrationKind !== 'telnyx' &&
+                  <>
+                  <BoldButton {...externalProps} />
+                  <ItalicButton {...externalProps} />
+                  <UnderlineButton {...externalProps} />
+                  <Separator {...externalProps} />
+                  <HeadlinesButton {...externalProps} />
+                  <UnorderedListButton {...externalProps} />
+                  <OrderedListButton {...externalProps} />
+                  <BlockquoteButton {...externalProps} />
+                  <CodeBlockButton {...externalProps} />
+                  <LinkButton {...externalProps} />
+                  </>
+             }
                 <EmojiSelect />
                 {controls ? controls : null}
               </>
             )}
           </Toolbar>
+          { integrationKind === 'telnyx' && <Char count={characterCount}>{characterCount}</Char> }
+          
         </RichEditorControlsRoot>
         {this.props.pluginContent}
       </RichEditorRoot>
