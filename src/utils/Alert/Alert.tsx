@@ -45,7 +45,7 @@ export const AlertItem = styledTS<{ type: string }>(styled.div)`
   border-left: 10px solid ${props => types[props.type].background};
   animation-duration: 0.3s;
   animation-timing-function: ease;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 
   span {
     margin-left: ${dimensions.unitSpacing}px;
