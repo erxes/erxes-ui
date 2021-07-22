@@ -45,7 +45,7 @@ const basicFields = `
   }
 `;
 
-const customerFields = `
+export const customerFields = `
   ${basicFields}
   integrationId
   createdAt

@@ -93,6 +93,7 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
       autoGrowMinHeight = 180,
       autoGrowMaxHeight,
       toolbarLocation = 'top',
+      formItems,
       onChange
     } = this.props;
 
@@ -101,7 +102,7 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
         return;
       }
 
-      const matchProperty = 'fullName';
+      const matchProperty = 'username';
       const query = opts.query.toLowerCase();
 
       const data = mentionUsers.filter(
@@ -122,13 +123,14 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
           dialog_backgroundCoverColor: '#30435C',
           allowedContent: true,
           toolbarLocation,
-          extraPlugins: `codemirror,strinsert,onCtrlEnter${
+          extraPlugins: `codemirror,strinsert,formInsert,onCtrlEnter${
             autoGrow ? ',autogrow' : ''
           }`,
           autoGrow_minHeight: autoGrowMinHeight,
           autoGrow_maxHeight: autoGrowMaxHeight,
           autoGrow_onStartup: true,
           strinsert: insertItems,
+          formInsert: formItems,
           autoGrowOnStartup: true,
           toolbar: toolbar || [
             {
@@ -164,8 +166,14 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
               ]
             },
             { name: 'links', items: ['Link', 'Unlink'] },
-            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-            { name: 'others', items: [insertItems && 'strinsert'] },
+            {
+              name: 'styles',
+              items: ['Styles', 'Format', 'Font', 'FontSize']
+            },
+            {
+              name: 'others',
+              items: [formItems && 'formInsert', insertItems && 'strinsert']
+            },
             { name: 'clear', items: ['RemoveFormat'] },
             { name: 'tools', items: ['Maximize'] }
           ],
@@ -175,10 +183,10 @@ class EditorCK extends React.Component<IEditorProps, { content: string }> {
               itemTemplate:
                 '<li data-id="{id}">' +
                 '<img class="editor-avatar" src="{avatar}"' +
-                '<strong>{fullName}</strong>' +
+                '<strong>{username}</strong>' +
                 '</li>',
               outputTemplate:
-                '<a mentioned-user-id="{id}">@{fullName}</a><span>&nbsp;</span>',
+                '<a mentioned-user-id="{id}">@{username}</a><span>&nbsp;</span>',
               minChars: 0
             }
           ],
