@@ -6,6 +6,7 @@ import React from 'react';
 import styled from 'styled-components';
 import styledTS from 'styled-components-ts';
 
+  
 const types = {
   info: {
     background: colors.colorCoreBlue,
@@ -29,37 +30,53 @@ const types = {
 };
 
 export const AlertItem = styledTS<{ type: string }>(styled.div)`
-  display: table;
-  margin: 29px auto;
+  display: inline-block;
+  position:relative;
+  align-items:center;
+  margin: 25px 0;
   transition: all 0.5s;
-  color: ${colors.colorWhite};
-  padding: ${dimensions.unitSpacing}px ${dimensions.coreSpacing}px;
+  color: ${colors.colorCoreBlack};
+  padding: 10px 30px 10px 10px;
   z-index: 10;
-  font-weight: ${typography.fontWeightLight};
-  background-color: ${props => types[props.type].background};
+  font-weight: ${typography.fontWeightRegular};
+  background-color: ${colors.colorWhite};
   animation-name: ${slideDown};
-  border-radius: 2px;
+  border-radius: 4px;
+  border-left: 10px solid ${props => types[props.type].background};
   animation-duration: 0.3s;
   animation-timing-function: ease;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 
   span {
     margin-left: ${dimensions.unitSpacing}px;
   }
 
   i {
-    margin: 0;
-    font-size: 15px;
+    margin-right: 5px;
+    font-size: 25px;
+    color: ${props => types[props.type].background};
+  }
+  button {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    background:none;
+    color: ${colors.colorCoreBlack};
+    border: none;
+    text-decoration: none;
+    
   }
 `;
 
 type Props = {
   type: string;
-  children: React.ReactNode;
+  time?: number;
+  children: React.ReactNode; 
 };
 
 type State = {
   visible: boolean;
+  time:number;
 };
 
 export default class AlertStyled extends React.Component<Props, State> {
@@ -67,26 +84,44 @@ export default class AlertStyled extends React.Component<Props, State> {
     type: 'information'
   };
 
-  private timeout?: NodeJS.Timer = undefined;
+  private timeout: NodeJS.Timer ;
 
   constructor(props: Props) {
     super(props);
-
-    this.state = { visible: true };
+    this.state = { visible: true , time: this.props.time ||  3500};
+    this.timeout = setTimeout(() => {
+      this.setState({visible:false})
+    }, this.state.time);
   }
+  handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+    this.setState({visible:false})
+  };
 
-  componentWillUnmount() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
+  holdTimeOut= (e: React.MouseEvent<HTMLButtonElement>) =>{
+    clearTimeout(this.timeout)
+  }
+  
+  setTimeOut = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setTimeout(() => {
+      this.setState({visible:false})
+    }, 2000);
+  };
+
+
+  render() { 
+    if( !this.state.visible){
+      return;
     }
-  }
 
-  render() {
     return (
-      <AlertItem {...this.props}>
+      <AlertItem {...this.props} onMouseOver={this.holdTimeOut} onMouseLeave={this.setTimeOut}>
         <Icon icon={types[this.props.type].icon} />
-        &nbsp;
         {this.props.children}
+        <button
+        type="button"
+        onClick={this.handleClose}
+        onMouseLeave={this.setTimeOut}
+        > x </button>
       </AlertItem>
     );
   }

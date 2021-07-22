@@ -4,13 +4,11 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import AlertStyled from './Alert';
 
-const AlertWrapper = styled.div.attrs({
-  id: 'alert-wrapper'
-})`
+
+const AlertContainer = styled.div`
   position: fixed;
-  top: 0;
+  top:0;
   left: 50%;
-  height: 0;
   transform: translateX(-50%);
   width: auto;
   background: transparent;
@@ -18,44 +16,39 @@ const AlertWrapper = styled.div.attrs({
   font-size: 14px;
 `;
 
-let alertcount = 0;
-let timeout;
+let key = 0;
+
+
+const createContainer = () =>{
+  if (!document.getElementById( `alert-container`)) {
+    const container = document.createElement('div');
+    container.setAttribute('id', `alert-container`);
+    document.body.appendChild(container);
+    ReactDOM.render(<AlertContainer />, container);
+  }
+}
 
 const createAlert = (type: string, text: string, time?: number) => {
-  alertcount++;
+  key++;
+  createContainer();
 
-  if (timeout) {
-    clearTimeout(timeout);
-  }
+  const alert = document.createElement('div');
+  alert.setAttribute('id', `alert-${key}`);
 
-  timeout = setTimeout(() => {
-    alertcount = 0;
-
-    if (document.getElementById('alert-container')) {
-      const container = document.getElementById('alert-container');
-
-      if (container) {
-        document.body.removeChild(container);
-      }
+  const container = document.getElementById('alert-container');
+  if(container){
+    const lastChild = container.lastChild
+    if(lastChild){
+      lastChild.appendChild(alert);
+      ReactDOM.render(
+        <AlertStyled key={key} type={type} time={time}>
+          {T.translate(text)}
+        </AlertStyled>,
+        alert
+      );
     }
-  }, time || 3500);
-
-  if (!document.getElementById('alert-container')) {
-    const popup = document.createElement('div');
-    popup.setAttribute('id', 'alert-container');
-    document.body.appendChild(popup);
-
-    ReactDOM.render(<AlertWrapper />, popup);
+    
   }
-
-  const wrapper = document.getElementById('alert-wrapper');
-
-  ReactDOM.render(
-    <AlertStyled key={alertcount} type={type}>
-      {T.translate(text)}
-    </AlertStyled>,
-    wrapper
-  );
 };
 
 const success = (text: string, time?: number) =>
