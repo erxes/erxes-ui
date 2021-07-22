@@ -7,6 +7,9 @@ import AlertStyled from './Alert';
 
 const AlertContainer = styled.div`
   position: fixed;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
   top:0;
   left: 50%;
   transform: translateX(-50%);
