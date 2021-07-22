@@ -21,7 +21,7 @@ import { getDraftDecorator } from '../editor/DraftjsHelpers';
 import Icon from '../Icon';
 import React from 'react';
 import HeadlinesButton from './HeadlinesButton';
-import { RichEditorControlsRoot, RichEditorRoot , Char} from './styles';
+import { RichEditorControlsRoot, RichEditorRoot, Char} from './styles';
 
 type ErxesEditorProps = {
   editorState: EditorState;
@@ -138,7 +138,7 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
       characterCount,
       integrationKind
     } = this.props;
-
+    
     const updatedPlugins = [
       this.toolbarPlugin,
       this.linkPlugin,
@@ -212,7 +212,6 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
             )}
           </Toolbar>
           { integrationKind === 'telnyx' && <Char count={characterCount}>{characterCount}</Char> }
-          
         </RichEditorControlsRoot>
         {this.props.pluginContent}
       </RichEditorRoot>
