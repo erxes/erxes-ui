@@ -36,8 +36,28 @@ const productFields = `
 `;
 
 const products = `
-  query products($type: String, $categoryId: String, $tag: String, $searchValue: String, $perPage: Int, $page: Int $ids: [String], $excludeIds: Boolean) {
-    products(type: $type, categoryId: $categoryId, tag: $tag, searchValue: $searchValue, perPage: $perPage, page: $page ids: $ids, excludeIds: $excludeIds) {
+  query products(
+    $type: String,
+    $categoryId: String,
+    $tag: String,
+    $searchValue: String,
+    $perPage: Int,
+    $page: Int $ids: [String],
+    $excludeIds: Boolean,
+    $pipelineId: String,
+    $boardId: String
+  ) {
+    products(
+      type: $type,
+      categoryId: $categoryId,
+      tag: $tag,
+      searchValue: $searchValue,
+      perPage: $perPage,
+      page: $page ids: $ids,
+      excludeIds: $excludeIds,
+      pipelineId: $pipelineId,
+      boardId: $boardId
+    ) {
       ${productFields}
     }
   }

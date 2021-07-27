@@ -1,6 +1,8 @@
 import gql from 'graphql-tag';
 import * as compose from 'lodash.flowright';
 import { combinedFields } from '../segments/graphql';
+import { leadIntegrations } from '../leads/graphql';
+import { LeadIntegrationsQueryResponse } from '../leads/types';
 import {
   FieldsCombinedByType,
   FieldsCombinedByTypeQueryResponse
@@ -43,6 +45,34 @@ const generateAttributes = (combinedFields?: FieldsCombinedByType[]) => {
   };
 };
 
+const generateFormItems = forms => {
+  if (!forms) {
+    return;
+  }
+
+  const items: Array<{ name: string; value?: string }> = [];
+
+  forms.forEach(field => {
+    const { form, brand, name } = field;
+
+    if (!brand || !brand.code || !form || !form.code) {
+      return;
+    }
+
+    return items.push({ value: `${form.code},${brand.code}`, name });
+  });
+
+  if (items.length === 0) {
+    return;
+  }
+
+  return {
+    items,
+    title: 'Forms',
+    label: 'Forms'
+  };
+};
+
 type Props = {
   showMentions?: boolean;
 } & IEditorProps;
@@ -50,10 +80,11 @@ type Props = {
 type FinalProps = {
   usersQuery: AllUsersQueryResponse;
   combinedFieldsQuery: FieldsCombinedByTypeQueryResponse;
+  leadsQuery: LeadIntegrationsQueryResponse;
 } & Props;
 
 const EditorContainer = (props: FinalProps) => {
-  const { usersQuery, combinedFieldsQuery } = props;
+  const { usersQuery, combinedFieldsQuery, leadsQuery } = props;
 
   if (usersQuery.loading || combinedFieldsQuery.loading) {
     return null;
@@ -64,13 +95,13 @@ const EditorContainer = (props: FinalProps) => {
   const mentionUsers: IMentionUser[] = [];
 
   for (const user of users) {
-    if (user.details && user.details.fullName) {
+    if (user.details && user.username) {
       const avatar = user.details.avatar || '/images/avatar-colored.svg';
 
       mentionUsers.push({
         id: user._id,
         avatar: isValidURL(avatar) ? avatar : '/images/avatar-colored.svg',
-        fullName: user.details.fullName
+        username: user.username
       });
     }
   }
@@ -82,6 +113,7 @@ const EditorContainer = (props: FinalProps) => {
       {...props}
       mentionUsers={mentionUsers}
       insertItems={insertItems}
+      formItems={generateFormItems(leadsQuery.integrations || [])}
     />
   );
 };
@@ -102,6 +134,17 @@ export default withProps<Props>(
           contentType: 'customer'
         }
       })
+    }),
+    graphql<Props, LeadIntegrationsQueryResponse>(gql(leadIntegrations), {
+      name: 'leadsQuery',
+      options: () => {
+        return {
+          variables: {
+            kind: 'lead',
+            formLoadType: 'embedded'
+          }
+        };
+      }
     })
   )(EditorContainer)
 );
