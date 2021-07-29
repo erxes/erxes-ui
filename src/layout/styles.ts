@@ -184,6 +184,7 @@ const SidebarBox = styledTS<{
   noBackground?: boolean;
   noShadow?: boolean;
   collapsible?: boolean;
+  accordion?: boolean;
   full?: boolean;
 }>(styled.div)`
   background-color: ${(props) => (props.noBackground ? "" : colors.colorWhite)};

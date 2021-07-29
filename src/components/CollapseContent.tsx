@@ -79,21 +79,21 @@ const Container = styledTS<{ open: boolean }>(styled.div)`
   }
 `;
 
-// const Content = styledTS<{ full: boolean }>(styled.div)`
-//   padding: ${props => (props.full ? '0' : '20px')};
-//   border-top: 1px solid ${colors.borderPrimary};
-//   background: ${colors.colorWhite};
-//   border-bottom-left-radius: 4px;
-//   border-bottom-right-radius: 4px;
+const Content = styledTS<{ full: boolean }>(styled.div)`
+  padding: ${props => (props.full ? '0' : '20px')};
+  border-top: 1px solid ${colors.borderPrimary};
+  background: ${colors.colorWhite};
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 
-//   ${Container} {
-//     box-shadow: none;
-//     border-radius: 0;
-//     background: ${colors.colorWhite};
-//     border-bottom: 1px solid ${colors.borderPrimary};
-//     margin: 0;
-//   }
-// `;
+  ${Container} {
+    box-shadow: none;
+    border-radius: 0;
+    background: ${colors.colorWhite};
+    border-bottom: 1px solid ${colors.borderPrimary};
+    margin: 0;
+  }
+`;
 
 type Props = {
   contendId?: string;
@@ -146,7 +146,7 @@ function CollapseContent(props: Props) {
       </Title>
       <Collapse in={open}>
         <div>
-          {/* <Content full={hasImage}>{props.children}</Content> */}
+          <Content full={hasImage}>{props.children}</Content>
         </div>
       </Collapse>
     </Container>

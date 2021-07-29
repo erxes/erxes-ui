@@ -37,6 +37,7 @@ function QuickButtons({
 type Props = {
   children: React.ReactNode;
   collapsible?: boolean;
+  accordion?: boolean;
   className?: string;
   noShadow?: boolean;
   noBackground?: boolean;
@@ -46,6 +47,7 @@ type Props = {
 
 type State = {
   collapse: boolean;
+  accordion: boolean;
 };
 
 class Section extends React.Component<Props, State> {
@@ -59,12 +61,18 @@ class Section extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = { collapse: false };
+    this.state = { collapse: false, accordion: false };
   }
 
   toggleCollapse = () => {
     this.setState({
       collapse: !this.state.collapse
+    });
+  };
+
+  collapseAccordion = () => {
+    this.setState({
+      accordion: !this.state.accordion
     });
   };
 

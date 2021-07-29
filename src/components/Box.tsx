@@ -11,6 +11,7 @@ type BoxProps = {
   extraButtons?: React.ReactNode;
   callback?: () => void;
   collapsible?: boolean;
+  accordion?: boolean;
   isOpen?: boolean;
 };
 
@@ -71,14 +72,14 @@ export default class Box extends React.Component<BoxProps, BoxState> {
     const { Title } = Section;
 
     const { isOpen } = this.state;
-    const { children, title, collapsible } = this.props;
+    const { children, title, collapsible, accordion } = this.props;
 
     return (
       <SectionContainer>
         <Title onClick={this.toggle}>{title}</Title>
         {this.renderDropBtn()}
         {isOpen ? (
-          <Section collapsible={collapsible}>{children}</Section>
+          <Section collapsible={collapsible} accordion={accordion} >{children}</Section>
         ) : null}
       </SectionContainer>
     );
