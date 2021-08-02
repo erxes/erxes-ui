@@ -53,11 +53,11 @@ export default class Box extends React.Component<BoxProps, BoxState> {
     const { isOpen } = this.state;
     const icon = isOpen ? 'angle-down' : 'angle-right';
     const { QuickButtons } = Sidebar.Section;
-    const { extraButtons } = this.props;
+    const { extraButtons, accordion } = this.props;
 
     return (
       <>
-        {isOpen && extraButtons && (
+        {(accordion !== undefined ? accordion : isOpen) && extraButtons && (
           <QuickButtons isSidebarOpen={true}>{extraButtons}</QuickButtons>
         )}
         <SidebarCollapse onClick={this.toggle}>
@@ -74,12 +74,13 @@ export default class Box extends React.Component<BoxProps, BoxState> {
     const { isOpen } = this.state;
     const { children, title, collapsible, accordion } = this.props;
 
+    // console.log(accordion !== undefined ? accordion : isOpen);
     return (
       <SectionContainer>
         <Title onClick={this.toggle}>{title}</Title>
         {this.renderDropBtn()}
-        {isOpen ? (
-          <Section collapsible={collapsible} accordion={accordion} >{children}</Section>
+        {(accordion !== undefined ? accordion : isOpen) ? (
+          <Section collapsible={collapsible}>{children}</Section>
         ) : null}
       </SectionContainer>
     );
