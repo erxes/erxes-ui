@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 import * as compose from 'lodash.flowright';
 import { combinedFields } from '../segments/graphql';
-import { leadIntegrations } from '../leads/graphql';
 import { LeadIntegrationsQueryResponse } from '../leads/types';
 import {
   FieldsCombinedByType,
@@ -45,34 +44,6 @@ const generateAttributes = (combinedFields?: FieldsCombinedByType[]) => {
   };
 };
 
-const generateFormItems = forms => {
-  if (!forms) {
-    return;
-  }
-
-  const items: Array<{ name: string; value?: string }> = [];
-
-  forms.forEach(field => {
-    const { form, brand, name } = field;
-
-    if (!brand || !brand.code || !form || !form.code) {
-      return;
-    }
-
-    return items.push({ value: `${form.code},${brand.code}`, name });
-  });
-
-  if (items.length === 0) {
-    return;
-  }
-
-  return {
-    items,
-    title: 'Forms',
-    label: 'Forms'
-  };
-};
-
 type Props = {
   showMentions?: boolean;
 } & IEditorProps;
@@ -84,7 +55,7 @@ type FinalProps = {
 } & Props;
 
 const EditorContainer = (props: FinalProps) => {
-  const { usersQuery, combinedFieldsQuery, leadsQuery } = props;
+  const { usersQuery, combinedFieldsQuery } = props;
 
   if (usersQuery.loading || combinedFieldsQuery.loading) {
     return null;
@@ -113,7 +84,6 @@ const EditorContainer = (props: FinalProps) => {
       {...props}
       mentionUsers={mentionUsers}
       insertItems={insertItems}
-      formItems={generateFormItems(leadsQuery.integrations || [])}
     />
   );
 };
@@ -134,17 +104,6 @@ export default withProps<Props>(
           contentType: 'customer'
         }
       })
-    }),
-    graphql<Props, LeadIntegrationsQueryResponse>(gql(leadIntegrations), {
-      name: 'leadsQuery',
-      options: () => {
-        return {
-          variables: {
-            kind: 'lead',
-            formLoadType: 'embedded'
-          }
-        };
-      }
     })
   )(EditorContainer)
 );
