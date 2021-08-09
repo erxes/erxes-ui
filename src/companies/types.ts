@@ -42,6 +42,7 @@ export interface ICompanyDoc {
   links: ICompanyLinks;
   tagIds?: string[];
   customFieldsData?: any;
+  trackedData?: any[];
   code?: string;
   location?: string;
 }
