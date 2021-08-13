@@ -3,7 +3,7 @@ import {
   conformityQueryFields
 } from '../../conformity/graphql/queries';
 
-const companyFields = `
+export const companyFields = `
   _id
   createdAt
   modifiedAt
@@ -38,6 +38,7 @@ const companyFields = `
   }
 
   customFieldsData
+  trackedData
   tagIds
   getTags {
     _id

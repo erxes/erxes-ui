@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import * as compose from 'lodash.flowright';
 import { combinedFields } from '../segments/graphql';
+import { LeadIntegrationsQueryResponse } from '../leads/types';
 import {
   FieldsCombinedByType,
   FieldsCombinedByTypeQueryResponse
@@ -50,6 +51,7 @@ type Props = {
 type FinalProps = {
   usersQuery: AllUsersQueryResponse;
   combinedFieldsQuery: FieldsCombinedByTypeQueryResponse;
+  leadsQuery: LeadIntegrationsQueryResponse;
 } & Props;
 
 const EditorContainer = (props: FinalProps) => {
@@ -64,13 +66,13 @@ const EditorContainer = (props: FinalProps) => {
   const mentionUsers: IMentionUser[] = [];
 
   for (const user of users) {
-    if (user.details && user.details.fullName) {
+    if (user.details && user.username) {
       const avatar = user.details.avatar || '/images/avatar-colored.svg';
 
       mentionUsers.push({
         id: user._id,
         avatar: isValidURL(avatar) ? avatar : '/images/avatar-colored.svg',
-        fullName: user.details.fullName
+        username: user.username
       });
     }
   }
