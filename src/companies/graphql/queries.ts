@@ -38,6 +38,7 @@ export const companyFields = `
   }
 
   customFieldsData
+  trackedData
   tagIds
   getTags {
     _id
