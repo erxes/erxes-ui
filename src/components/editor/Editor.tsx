@@ -38,7 +38,6 @@ type ErxesEditorProps = {
   onEscape?: (e: KeyboardEvent) => void;
   handleFileInput?: (e: React.FormEvent<HTMLInputElement>) => void;
   placeholder?: string | React.ReactNode;
-  characterCount: number;
   integrationKind: string;
 };
 
@@ -124,6 +123,54 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
       this.props.handleFileInput(e);
     }
   };
+  _handleBeforeInput = () => {
+    const { editorState, integrationKind } = this.props;
+
+    if(integrationKind !== "telnyx"){
+      return 'un-handled';
+    }
+
+    const MAX_LENGTH = 160;
+    const currentContent = editorState.getCurrentContent();
+    const currentContentLength = currentContent.getPlainText('').length
+
+  	if (currentContentLength > MAX_LENGTH - 1) {
+    	return 'handled';
+    }
+
+    return 'un-handled'
+  }
+  _handlePastedText = (pastedText) => {
+    const { editorState, integrationKind } = this.props;
+
+    if(integrationKind !== "telnyx"){
+      return 'un-handled';
+    }
+
+    const MAX_LENGTH = 160;
+    const currentContent = editorState.getCurrentContent();
+    const currentContentLength = currentContent.getPlainText('').length
+
+  	if (currentContentLength + pastedText.length > MAX_LENGTH) {
+    	return 'handled';
+    }
+    return 'un-handled'
+  }
+
+  renderChar = () =>{
+    const { editorState, integrationKind } = this.props;
+
+    if(integrationKind !== "telnyx"){
+      return;
+    }
+
+    const currentContent = editorState.getCurrentContent();
+    const currentContentLength = currentContent.getPlainText('').length
+
+    const characterCount = 160 - currentContentLength;
+
+    return <Char count={characterCount}>{characterCount}</Char>
+  }
 
   render() {
     const {
@@ -134,8 +181,7 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
       onEscape,
       bordered,
       isTopPopup = false,
-      plugins, 
-      characterCount,
+      plugins,
       integrationKind
     } = this.props;
     
@@ -172,6 +218,8 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
           <Editor
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
+            handleBeforeInput={this._handleBeforeInput}
+            handlePastedText={this._handlePastedText}
             onTab={this.onTab}
             onChange={this.props.onChange}
             placeholder={this.props.placeholder}
@@ -211,7 +259,7 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
               </>
             )}
           </Toolbar>
-          { integrationKind === 'telnyx' && <Char count={characterCount}>{characterCount}</Char> }
+          {this.renderChar()} 
         </RichEditorControlsRoot>
         {this.props.pluginContent}
       </RichEditorRoot>
