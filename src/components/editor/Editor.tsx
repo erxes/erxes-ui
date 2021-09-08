@@ -123,35 +123,39 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
       this.props.handleFileInput(e);
     }
   };
-  _handleBeforeInput = () => {
-    const { editorState, integrationKind } = this.props;
+
+  getContentLength = () => {
+    const { editorState } = this.props;
+    const currentContent = editorState.getCurrentContent();
+
+    return currentContent.getPlainText('').length
+  }
+
+  handleBeforeInput = () => {
+    const { integrationKind } = this.props;
 
     if(integrationKind !== "telnyx"){
       return 'un-handled';
     }
 
-    const MAX_LENGTH = 160;
-    const currentContent = editorState.getCurrentContent();
-    const currentContentLength = currentContent.getPlainText('').length
+    const contentLength = this.getContentLength()
 
-  	if (currentContentLength > MAX_LENGTH - 1) {
+  	if (contentLength > 159) {
     	return 'handled';
     }
-
     return 'un-handled'
   }
-  _handlePastedText = (pastedText) => {
-    const { editorState, integrationKind } = this.props;
+
+  handlePastedText = (pastedText) => {
+    const { integrationKind } = this.props;
 
     if(integrationKind !== "telnyx"){
       return 'un-handled';
     }
 
-    const MAX_LENGTH = 160;
-    const currentContent = editorState.getCurrentContent();
-    const currentContentLength = currentContent.getPlainText('').length
+    const contentLength = this.getContentLength()
 
-  	if (currentContentLength + pastedText.length > MAX_LENGTH) {
+  	if (contentLength + pastedText.length > 160) {
     	return 'handled';
     }
     return 'un-handled'
@@ -218,8 +222,8 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
           <Editor
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
-            handleBeforeInput={this._handleBeforeInput}
-            handlePastedText={this._handlePastedText}
+            handleBeforeInput={this.handleBeforeInput}
+            handlePastedText={this.handlePastedText}
             onTab={this.onTab}
             onChange={this.props.onChange}
             placeholder={this.props.placeholder}
