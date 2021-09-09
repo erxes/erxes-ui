@@ -15,10 +15,13 @@ const PerPageChooser = ({ history }: IRouterProps) => {
     router.setParams(history, { perPage });
 
     const storageValue = window.localStorage.getItem('pagination:perPage');
+
     let items: any = {};
+
     if (storageValue) {
       items = JSON.parse(storageValue);
     }
+
     items[window.location.pathname] = perPage;
 
     window.localStorage.setItem('pagination:perPage', JSON.stringify(items));
