@@ -104,7 +104,21 @@ class FilterableList extends React.Component<Props, State> {
     this.setState({ parentIds });
   };
 
-  renderItem(item) {
+  renderIcons(item, hasChildren: boolean, isOpen: boolean) {
+    return item.iconClass ? (
+      <>
+        {hasChildren && (
+          <ToggleIcon onClick={this.onToggle.bind(this, item._id, isOpen)}>
+            <Icon icon={isOpen ? "angle-down" : "angle-right"} />
+          </ToggleIcon>
+        )}
+
+        <i className={item.iconClass} style={{ color: item.iconColor }} />
+      </>
+    ) : null;
+  }
+
+  renderItem(item: any, hasChildren: boolean) {
     const { showCheckmark = true } = this.props;
     const { key } = this.state;
 
@@ -113,6 +127,7 @@ class FilterableList extends React.Component<Props, State> {
     }
 
     const onClick = () => this.toggleItem(item._id);
+    const isOpen = this.state.parentIds[item._id];
 
     return (
       <FlexRow key={item._id}>
@@ -121,15 +136,13 @@ class FilterableList extends React.Component<Props, State> {
           style={item.style}
           onClick={onClick}
         >
-          {item.iconClass ? (
-            <i
-              className={`icon ${item.iconClass}`}
-              style={{ color: item.iconColor }}
-            />
-          ) : null}{" "}
+          {this.renderIcons(item, hasChildren, isOpen)}
+
           {item.avatar ? <AvatarImg src={item.avatar} /> : null}
+
           <span>{item.title || "[undefined]"}</span>
         </li>
+
         {item.additionalIconClass && (
           <IconWrapper
             onClick={
@@ -153,13 +166,9 @@ class FilterableList extends React.Component<Props, State> {
 
       return (
         <SidebarList key={`parent-${parent._id}`}>
-          {this.renderItem(parent)}
+          {this.renderItem(parent, true)}
 
           <ChildList>
-            <ToggleIcon onClick={this.onToggle.bind(this, parent._id, isOpen)}>
-              <Icon icon={isOpen ? "angle-down" : "angle-right"} />
-            </ToggleIcon>
-
             {isOpen &&
               childrens.map((childparent) =>
                 this.renderTree(childparent, subFields)
@@ -169,7 +178,7 @@ class FilterableList extends React.Component<Props, State> {
       );
     }
 
-    return this.renderItem(parent);
+    return this.renderItem(parent, false);
   }
 
   renderItems() {
@@ -190,7 +199,7 @@ class FilterableList extends React.Component<Props, State> {
     }
 
     if (!treeView) {
-      return items.map((item) => this.renderItem(item));
+      return items.map((item) => this.renderItem(item, false));
     }
 
     const parents = items.filter((item) => !item.parentId);
