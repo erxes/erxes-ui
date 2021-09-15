@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { colors } from '../styles';
-import Alert from '../utils/Alert';
-import { __ } from '../utils/core';
-import Button from './Button';
-import FormControl from './form/Control';
-import Icon from './Icon';
+import React from "react";
+import styled from "styled-components";
+import { colors } from "../styles";
+import Alert from "../utils/Alert";
+import { __ } from "../utils/core";
+import Button from "./Button";
+import FormControl from "./form/Control";
+import Icon from "./Icon";
 
 const List = styled.ul`
   list-style: none;
@@ -28,6 +28,15 @@ const List = styled.ul`
       cursor: pointer;
     }
   }
+
+  input.editInput {
+    border: none;
+    outline: none;
+  }
+
+  input.editInput:focus {
+    outline: none;
+  }
 `;
 
 const Actions = styled.div`
@@ -44,26 +53,49 @@ type Props = {
 
 type State = {
   options: string[];
+  optionsObj: { text: string; _id: string }[];
   adding: boolean;
+  editing: boolean;
+  editedIdx: string;
+};
+
+const convertOptions = (options: string[]) => {
+  const optionObj = options.map((option) => {
+    return { text: option, _id: Math.random().toString() };
+  });
+  return optionObj;
 };
 
 class ModifiableList extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    const optionsObj = convertOptions(props.options);
+
     this.state = {
       adding: true,
-      options: props.options || []
+      options: props.options || [],
+      optionsObj: optionsObj || [],
+      editing: false,
+      editedIdx: "",
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     const { options } = nextProps;
 
-    if (nextProps.options !== this.state.options) {
-      this.setState({ options });
+    if (options !== this.state.options) {
+      const optionsObj = convertOptions(options);
+      this.setState({ options, optionsObj });
     }
   }
+
+  handleChangeOption = (optionValue?: string) => {
+    if (this.props.onChangeOption) {
+      const optionsArr = this.state.optionsObj.map((option) => option.text);
+      this.props.onChangeOption(optionsArr, optionValue);
+    }
+  };
 
   handleAddOption = () => {
     this.setState({ adding: true });
@@ -74,43 +106,73 @@ class ModifiableList extends React.Component<Props, State> {
   };
 
   handleSaveOption = () => {
-    const { options } = this.state;
-    const optionValue = (document.getElementById(
-      'optionValue'
-    ) as HTMLInputElement).value;
+    const { optionsObj } = this.state;
+    const optionValue = (
+      document.getElementById("optionValue") as HTMLInputElement
+    ).value;
 
     if (!optionValue) {
-      return Alert.warning('Nothing inserted');
+      return Alert.warning("Nothing inserted");
     }
-
-    this.setState({ options: [...options, optionValue] }, () => {
-      if (this.props.onChangeOption) {
-        this.props.onChangeOption(this.state.options, optionValue);
-        (document.getElementById('optionValue') as HTMLInputElement).value = '';
-      }
-    });
-  };
-
-  handleRemoveOption = (i: string) => {
-    const { options } = this.state;
 
     this.setState(
       {
-        options: options.filter(item => item !== i)
+        optionsObj: [
+          ...optionsObj,
+          { text: optionValue, _id: Math.random().toString() },
+        ],
       },
       () => {
-        if (this.props.onChangeOption) {
-          this.props.onChangeOption(this.state.options);
-        }
+        this.handleChangeOption(optionValue);
+        (document.getElementById("optionValue") as HTMLInputElement).value = "";
       }
     );
   };
 
-  onKeyPress = e => {
-    if (e.key === 'Enter') {
+  showEditForm = (option: { text: string; _id: string }) => {
+    this.setState({ editing: true, editedIdx: option._id });
+  };
+
+  handleEditOption = (e) => {
+    const { optionsObj, editedIdx } = this.state;
+
+    const updatedOptionsObj = optionsObj.map((option) =>
+      option._id === editedIdx
+        ? { text: e.target.value, _id: option._id }
+        : option
+    );
+
+    this.setState({ optionsObj: updatedOptionsObj });
+  };
+
+  handleRemoveOption = (i) => {
+    const { optionsObj } = this.state;
+
+    this.setState(
+      {
+        optionsObj: optionsObj.filter((option) => option._id !== i._id),
+      },
+      () => {
+        this.handleChangeOption();
+      }
+    );
+  };
+
+  onKeyPress = (e) => {
+    if (e.key === "Enter") {
       e.preventDefault();
       this.handleSaveOption();
     }
+  };
+
+  saveEditedOption = (value: string) => {
+    if (value.trim().length === 0) {
+      return Alert.warning("Option value required!");
+    }
+
+    this.setState({ editing: false, editedIdx: "" }, () => {
+      this.handleChangeOption();
+    });
   };
 
   renderButtonOrElement = () => {
@@ -146,15 +208,33 @@ class ModifiableList extends React.Component<Props, State> {
 
     return (
       <Button onClick={this.handleAddOption} size="small" icon="plus-circle">
-        {__(this.props.addButtonLabel || 'Add an option')}
+        {__(this.props.addButtonLabel || "Add an option")}
       </Button>
     );
   };
 
-  renderOption = (option, index) => {
+  renderOption = (option: { text: string; _id: string }) => {
     return (
-      <li key={index}>
-        {option}
+      <li key={option._id} onDoubleClick={this.showEditForm.bind(this, option)}>
+        {this.state.editing && this.state.editedIdx === option._id ? (
+          <input
+            className="editInput"
+            onChange={this.handleEditOption}
+            value={option.text}
+            onBlur={(e) => {
+              e.preventDefault();
+              this.saveEditedOption(e.currentTarget.value);
+            }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                this.saveEditedOption(e.currentTarget.value);
+              }
+            }}
+          />
+        ) : (
+          option.text
+        )}
         <Icon
           icon="cancel-1"
           onClick={this.handleRemoveOption.bind(this, option)}
@@ -166,9 +246,7 @@ class ModifiableList extends React.Component<Props, State> {
   render() {
     return (
       <List>
-        {this.state.options.map((option, index) =>
-          this.renderOption(option, index)
-        )}
+        {this.state.optionsObj.map((option) => this.renderOption(option))}
         {this.renderButtonOrElement()}
       </List>
     );
