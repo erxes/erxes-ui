@@ -127,7 +127,7 @@ class FilterableList extends React.Component<Props, State> {
     }
 
     const onClick = () => this.toggleItem(item._id);
-    const isOpen = this.state.parentIds[item._id];
+    const isOpen = this.state.parentIds[item._id] || !!key;
 
     return (
       <FlexRow key={item._id}>
@@ -162,7 +162,7 @@ class FilterableList extends React.Component<Props, State> {
     const childrens = groupByParent[parent._id];
 
     if (childrens) {
-      const isOpen = this.state.parentIds[parent._id];
+      const isOpen = this.state.parentIds[parent._id] || !!this.state.key;
 
       return (
         <SidebarList key={`parent-${parent._id}`}>
