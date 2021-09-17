@@ -31,6 +31,7 @@ export const currentUser = `
         completedSteps
       }
       isShowNotification
+      score
     }
   }
 `;

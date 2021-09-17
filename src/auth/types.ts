@@ -49,6 +49,7 @@ export interface IUserDoc {
   permissionActions?: string[];
   configs?: any;
   configsConstants?: any;
+  score?: number;
 }
 
 export interface IUser extends IUserDoc {

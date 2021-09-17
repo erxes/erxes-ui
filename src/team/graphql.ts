@@ -47,6 +47,7 @@ const users = `
       isActive
       groupIds
       brandIds
+      score
 
       details {
         ${detailFields}
