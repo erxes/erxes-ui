@@ -6,6 +6,7 @@ import { __ } from "../utils/core";
 import Button from "./Button";
 import FormControl from "./form/Control";
 import Icon from "./Icon";
+import SortableList from "./SortableList";
 
 const List = styled.ul`
   list-style: none;
@@ -23,6 +24,8 @@ const List = styled.ul`
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    border: none;
 
     &:hover {
       cursor: pointer;
@@ -243,10 +246,29 @@ class ModifiableList extends React.Component<Props, State> {
     );
   };
 
+  onChangeOptions = (optionsObj) => {
+    this.setState({ optionsObj }, () => {
+      this.handleChangeOption();
+    });
+  };
+
   render() {
+    const child = (option) => this.renderOption(option);
+
+    const renderListOption = (
+      <SortableList
+        fields={this.state.optionsObj}
+        child={child}
+        onChangeFields={this.onChangeOptions}
+        isModal={true}
+        showDragHandler={false}
+        droppableId="property option fields"
+      />
+    );
+
     return (
       <List>
-        {this.state.optionsObj.map((option) => this.renderOption(option))}
+        {renderListOption}
         {this.renderButtonOrElement()}
       </List>
     );
