@@ -34,6 +34,7 @@ export const Avatar = styled.img`
   height: 20px;
   border-radius: 10px;
   background: ${colors.bgActive};
+  object-fit: cover;
   float: left;
   margin-right: 5px;
 `;
