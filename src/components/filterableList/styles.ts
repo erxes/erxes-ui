@@ -11,10 +11,6 @@ const PopoverHeader = styled.div`
   }
 `;
 
-const PopoverBody = styled.div`
-  min-width: 260px;
-`;
-
 const FlexRow = styled.div`
   display: flex;
   justify-content: space-between;
@@ -49,20 +45,22 @@ const PopoverList = styledTS<{ selectable?: boolean }>(styled.ul)`
   overflow: auto;
   padding-bottom: 10px;
   padding-top: 10px;
+  text-indent: -${dimensions.unitSpacing + 5}px;
+  margin-left: ${dimensions.unitSpacing}px;
 
   li {
     position: relative;
     display: block;
     overflow: hidden;
-    padding: 5px 20px;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
+    padding: ${dimensions.unitSpacing / 2}px ${dimensions.unitSpacing * 3 + 7}px;
+    white-space: normal;
     font-size: 13px;
     padding-right: ${(props) => props.selectable && "30px"};
 
     i {
-      margin-right: ${dimensions.unitSpacing / 2}px;
+      &.icon-tag-alt{
+        margin-right: ${dimensions.unitSpacing / 5}px;
+      }
     }
 
     &:hover {
@@ -80,8 +78,8 @@ const PopoverList = styledTS<{ selectable?: boolean }>(styled.ul)`
       position: absolute;
       color: ${colors.colorCoreDarkGray};
       top: ${dimensions.headerSpacing}%;
-      right: ${dimensions.unitSpacing * 1.5}px;
-      margin-top: -9px;
+      right: ${dimensions.unitSpacing * 0.5}px;
+      margin-top: -${dimensions.unitSpacing - 1}px;
     }
 
     &.all:before {
@@ -92,6 +90,20 @@ const PopoverList = styledTS<{ selectable?: boolean }>(styled.ul)`
       content: '\\ebe8';
     }
   }
+`;
+
+const PopoverBody = styled.div`
+  ${PopoverList} {
+    max-height: 275px;
+    overflow: auto;
+  }
+
+  ul {
+    overflow: unset;
+    max-height: unset;
+  }
+
+  min-width: 260px;
 `;
 
 const PopoverFooter = styled.div`
@@ -130,18 +142,24 @@ const iconWidth = 30;
 
 const ToggleIcon = styled.div`
   position: absolute;
-  margin: -${iconWidth}px 0 0 -${iconWidth / 2}px;
+  left:${dimensions.unitSpacing * 0.5}px;
   width: ${iconWidth / 2}px;
   height: ${iconWidth}px;
   line-height: ${iconWidth}px;
   text-align: center;
   cursor: pointer;
   z-index: 1;
+
+  i {
+    &:before {
+      display:block
+    }
+  }
 `;
 
 const PopoverContent = styled.div`
   > input {
-    padding: 10px 20px;
+    padding: ${dimensions.unitSpacing}px ${dimensions.unitSpacing * 2}px
   }
 `;
 
