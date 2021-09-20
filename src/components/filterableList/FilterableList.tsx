@@ -105,7 +105,11 @@ class FilterableList extends React.Component<Props, State> {
   };
 
   renderIcons(item, hasChildren: boolean, isOpen: boolean) {
-    return item.iconClass ? (
+    if (!item.iconClass) {
+      return null;
+    }
+
+    return (
       <>
         {hasChildren && (
           <ToggleIcon onClick={this.onToggle.bind(this, item._id, isOpen)}>
@@ -115,7 +119,7 @@ class FilterableList extends React.Component<Props, State> {
 
         <i className={item.iconClass} style={{ color: item.iconColor }} />
       </>
-    ) : null;
+    );
   }
 
   renderItem(item: any, hasChildren: boolean) {
