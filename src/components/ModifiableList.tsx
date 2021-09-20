@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { colors } from "../styles";
-import Alert from "../utils/Alert";
-import { __ } from "../utils/core";
-import Button from "./Button";
-import FormControl from "./form/Control";
-import Icon from "./Icon";
-import SortableList from "./SortableList";
+import React from 'react';
+import styled from 'styled-components';
+import { colors } from '../styles';
+import Alert from '../utils/Alert';
+import { __ } from '../utils/core';
+import Button from './Button';
+import FormControl from './form/Control';
+import Icon from './Icon';
+import SortableList from './SortableList';
 
 const List = styled.ul`
   list-style: none;
@@ -63,7 +63,7 @@ type State = {
 };
 
 const convertOptions = (options: string[]) => {
-  const optionObj = options.map((option) => {
+  const optionObj = options.map(option => {
     return { text: option, _id: Math.random().toString() };
   });
   return optionObj;
@@ -80,7 +80,7 @@ class ModifiableList extends React.Component<Props, State> {
       options: props.options || [],
       optionsObj: optionsObj || [],
       editing: false,
-      editedIdx: "",
+      editedIdx: ''
     };
   }
 
@@ -95,7 +95,7 @@ class ModifiableList extends React.Component<Props, State> {
 
   handleChangeOption = (optionValue?: string) => {
     if (this.props.onChangeOption) {
-      const optionsArr = this.state.optionsObj.map((option) => option.text);
+      const optionsArr = this.state.optionsObj.map(option => option.text);
       this.props.onChangeOption(optionsArr, optionValue);
     }
   };
@@ -111,23 +111,23 @@ class ModifiableList extends React.Component<Props, State> {
   handleSaveOption = () => {
     const { optionsObj } = this.state;
     const optionValue = (
-      document.getElementById("optionValue") as HTMLInputElement
+      document.getElementById('optionValue') as HTMLInputElement
     ).value;
 
     if (!optionValue) {
-      return Alert.warning("Nothing inserted");
+      return Alert.warning('Nothing inserted');
     }
 
     this.setState(
       {
         optionsObj: [
           ...optionsObj,
-          { text: optionValue, _id: Math.random().toString() },
-        ],
+          { text: optionValue, _id: Math.random().toString() }
+        ]
       },
       () => {
         this.handleChangeOption(optionValue);
-        (document.getElementById("optionValue") as HTMLInputElement).value = "";
+        (document.getElementById('optionValue') as HTMLInputElement).value = '';
       }
     );
   };
@@ -136,10 +136,10 @@ class ModifiableList extends React.Component<Props, State> {
     this.setState({ editing: true, editedIdx: option._id });
   };
 
-  handleEditOption = (e) => {
+  handleEditOption = e => {
     const { optionsObj, editedIdx } = this.state;
 
-    const updatedOptionsObj = optionsObj.map((option) =>
+    const updatedOptionsObj = optionsObj.map(option =>
       option._id === editedIdx
         ? { text: e.target.value, _id: option._id }
         : option
@@ -148,12 +148,12 @@ class ModifiableList extends React.Component<Props, State> {
     this.setState({ optionsObj: updatedOptionsObj });
   };
 
-  handleRemoveOption = (i) => {
+  handleRemoveOption = i => {
     const { optionsObj } = this.state;
 
     this.setState(
       {
-        optionsObj: optionsObj.filter((option) => option._id !== i._id),
+        optionsObj: optionsObj.filter(option => option._id !== i._id)
       },
       () => {
         this.handleChangeOption();
@@ -161,8 +161,8 @@ class ModifiableList extends React.Component<Props, State> {
     );
   };
 
-  onKeyPress = (e) => {
-    if (e.key === "Enter") {
+  onKeyPress = e => {
+    if (e.key === 'Enter') {
       e.preventDefault();
       this.handleSaveOption();
     }
@@ -170,10 +170,10 @@ class ModifiableList extends React.Component<Props, State> {
 
   saveEditedOption = (value: string) => {
     if (value.trim().length === 0) {
-      return Alert.warning("Option value required!");
+      return Alert.warning('Option value required!');
     }
 
-    this.setState({ editing: false, editedIdx: "" }, () => {
+    this.setState({ editing: false, editedIdx: '' }, () => {
       this.handleChangeOption();
     });
   };
@@ -211,7 +211,7 @@ class ModifiableList extends React.Component<Props, State> {
 
     return (
       <Button onClick={this.handleAddOption} size="small" icon="plus-circle">
-        {__(this.props.addButtonLabel || "Add an option")}
+        {__(this.props.addButtonLabel || 'Add an option')}
       </Button>
     );
   };
@@ -224,12 +224,12 @@ class ModifiableList extends React.Component<Props, State> {
             className="editInput"
             onChange={this.handleEditOption}
             value={option.text}
-            onBlur={(e) => {
+            onBlur={e => {
               e.preventDefault();
               this.saveEditedOption(e.currentTarget.value);
             }}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
                 e.preventDefault();
                 this.saveEditedOption(e.currentTarget.value);
               }
@@ -246,14 +246,14 @@ class ModifiableList extends React.Component<Props, State> {
     );
   };
 
-  onChangeOptions = (optionsObj) => {
+  onChangeOptions = optionsObj => {
     this.setState({ optionsObj }, () => {
       this.handleChangeOption();
     });
   };
 
   render() {
-    const child = (option) => this.renderOption(option);
+    const child = option => this.renderOption(option);
 
     const renderListOption = (
       <SortableList
