@@ -25,6 +25,7 @@ type Props = {
   loading?: boolean;
   className?: string;
   treeView?: boolean;
+  isIndented?: boolean;
 
   // hooks
   onClick?: (items: any[], id: string) => void;
@@ -213,7 +214,7 @@ class FilterableList extends React.Component<Props, State> {
   }
 
   render() {
-    const { className, onSearch, selectable, links } = this.props;
+    const { className, onSearch, selectable, links, isIndented } = this.props;
 
     return (
       <div className={className}>
@@ -222,7 +223,7 @@ class FilterableList extends React.Component<Props, State> {
         </PopoverHeader>
 
         <PopoverBody>
-          <PopoverList selectable={selectable}>
+          <PopoverList isIndented={isIndented} selectable={selectable}>
             {this.renderItems()}
           </PopoverList>
         </PopoverBody>
