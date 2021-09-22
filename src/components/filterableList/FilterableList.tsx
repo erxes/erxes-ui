@@ -113,7 +113,10 @@ class FilterableList extends React.Component<Props, State> {
     return (
       <>
         {hasChildren && (
-          <ToggleIcon onClick={this.onToggle.bind(this, item._id, isOpen)}>
+          <ToggleIcon
+            isIndented={this.props.isIndented}
+            onClick={this.onToggle.bind(this, item._id, isOpen)}
+          >
             <Icon icon={isOpen ? "angle-down" : "angle-right"} />
           </ToggleIcon>
         )}
