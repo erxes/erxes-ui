@@ -131,46 +131,27 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
     return currentContent.getPlainText('').length
   }
 
-  handleBeforeInput = () => {
-    const { integrationKind } = this.props;
-
-    if(integrationKind !== "telnyx"){
-      return 'un-handled';
-    }
-
-    const contentLength = this.getContentLength()
-
-  	if (contentLength > 159) {
-    	return 'handled';
-    }
-    return 'un-handled'
-  }
-
   handlePastedText = (pastedText) => {
     const { integrationKind } = this.props;
-
     if(integrationKind !== "telnyx"){
       return 'un-handled';
     }
 
     const contentLength = this.getContentLength()
-
   	if (contentLength + pastedText.length > 160) {
     	return 'handled';
     }
     return 'un-handled'
   }
 
-  renderChar = () =>{
+  renderChar = () => {
     const { editorState, integrationKind } = this.props;
-
     if(integrationKind !== "telnyx"){
       return;
     }
 
     const currentContent = editorState.getCurrentContent();
     const currentContentLength = currentContent.getPlainText('').length
-
     const characterCount = 160 - currentContentLength;
 
     return <Char count={characterCount}>{characterCount}</Char>
@@ -222,7 +203,7 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
           <Editor
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
-            handleBeforeInput={this.handleBeforeInput}
+            handleBeforeInput={this.handlePastedText}
             handlePastedText={this.handlePastedText}
             onTab={this.onTab}
             onChange={this.props.onChange}
