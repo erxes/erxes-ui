@@ -25,6 +25,7 @@ type Props = {
   loading?: boolean;
   className?: string;
   treeView?: boolean;
+  isIndented?: boolean;
 
   // hooks
   onClick?: (items: any[], id: string) => void;
@@ -104,7 +105,28 @@ class FilterableList extends React.Component<Props, State> {
     this.setState({ parentIds });
   };
 
-  renderItem(item) {
+  renderIcons(item, hasChildren: boolean, isOpen: boolean) {
+    if (!item.iconClass) {
+      return null;
+    }
+
+    return (
+      <>
+        {hasChildren && (
+          <ToggleIcon
+            isIndented={this.props.isIndented}
+            onClick={this.onToggle.bind(this, item._id, isOpen)}
+          >
+            <Icon icon={isOpen ? "angle-down" : "angle-right"} />
+          </ToggleIcon>
+        )}
+
+        <i className={item.iconClass} style={{ color: item.iconColor }} />
+      </>
+    );
+  }
+
+  renderItem(item: any, hasChildren: boolean) {
     const { showCheckmark = true } = this.props;
     const { key } = this.state;
 
@@ -113,6 +135,7 @@ class FilterableList extends React.Component<Props, State> {
     }
 
     const onClick = () => this.toggleItem(item._id);
+    const isOpen = this.state.parentIds[item._id] || !!key;
 
     return (
       <FlexRow key={item._id}>
@@ -121,15 +144,13 @@ class FilterableList extends React.Component<Props, State> {
           style={item.style}
           onClick={onClick}
         >
-          {item.iconClass ? (
-            <i
-              className={`icon ${item.iconClass}`}
-              style={{ color: item.iconColor }}
-            />
-          ) : null}{" "}
+          {this.renderIcons(item, hasChildren, isOpen)}
+
           {item.avatar ? <AvatarImg src={item.avatar} /> : null}
+
           <span>{item.title || "[undefined]"}</span>
         </li>
+
         {item.additionalIconClass && (
           <IconWrapper
             onClick={
@@ -149,17 +170,13 @@ class FilterableList extends React.Component<Props, State> {
     const childrens = groupByParent[parent._id];
 
     if (childrens) {
-      const isOpen = this.state.parentIds[parent._id];
+      const isOpen = this.state.parentIds[parent._id] || !!this.state.key;
 
       return (
         <SidebarList key={`parent-${parent._id}`}>
-          {this.renderItem(parent)}
+          {this.renderItem(parent, true)}
 
           <ChildList>
-            <ToggleIcon onClick={this.onToggle.bind(this, parent._id, isOpen)}>
-              <Icon icon={isOpen ? "angle-down" : "angle-right"} />
-            </ToggleIcon>
-
             {isOpen &&
               childrens.map((childparent) =>
                 this.renderTree(childparent, subFields)
@@ -169,7 +186,7 @@ class FilterableList extends React.Component<Props, State> {
       );
     }
 
-    return this.renderItem(parent);
+    return this.renderItem(parent, false);
   }
 
   renderItems() {
@@ -190,7 +207,7 @@ class FilterableList extends React.Component<Props, State> {
     }
 
     if (!treeView) {
-      return items.map((item) => this.renderItem(item));
+      return items.map((item) => this.renderItem(item, false));
     }
 
     const parents = items.filter((item) => !item.parentId);
@@ -200,7 +217,7 @@ class FilterableList extends React.Component<Props, State> {
   }
 
   render() {
-    const { className, onSearch, selectable, links } = this.props;
+    const { className, onSearch, selectable, links, isIndented } = this.props;
 
     return (
       <div className={className}>
@@ -209,7 +226,7 @@ class FilterableList extends React.Component<Props, State> {
         </PopoverHeader>
 
         <PopoverBody>
-          <PopoverList selectable={selectable}>
+          <PopoverList isIndented={isIndented} selectable={selectable}>
             {this.renderItems()}
           </PopoverList>
         </PopoverBody>
