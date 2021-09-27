@@ -13,7 +13,9 @@ export const currentUser = `
       details {
         avatar
         fullName
+        birthDate
         shortName
+        workStartedDate
         position
         location
         description

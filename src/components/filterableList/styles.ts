@@ -78,7 +78,7 @@ const PopoverList = styledTS<{ selectable?: boolean, isIndented?:boolean }>(styl
       position: absolute;
       color: ${colors.colorCoreDarkGray};
       top: ${dimensions.headerSpacing}%;
-      right: ${dimensions.unitSpacing * 0.5}px;
+      right: ${(props) => props.isIndented ? `${dimensions.unitSpacing * 0.5}px` : `${dimensions.unitSpacing * 1.5}px`};
       margin-top: -${dimensions.unitSpacing - 1}px;
     }
 

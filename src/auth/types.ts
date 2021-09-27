@@ -16,7 +16,9 @@ export interface IUserDetails {
   fullName?: string;
   shortName?: string;
   description?: string;
+  birthDate?: Date;
   position?: string;
+  workStartedDate?: Date;
   location?: string;
   operatorPhone?: string;
 }
