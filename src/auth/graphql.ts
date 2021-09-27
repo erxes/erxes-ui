@@ -30,6 +30,13 @@ export const currentUser = `
         isCompleted
         completedSteps
       }
+      isShowNotification
     }
+  }
+`;
+
+export const userChanged = `
+	subscription userChanged($userId: String) {
+		userChanged(userId: $userId)
   }
 `;
