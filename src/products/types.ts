@@ -28,6 +28,10 @@ export interface IProduct {
   vendorId?: string;
 
   attachment?: any;
+  attachmentMore?: any[];
+  supply: string;
+  productCount: string;
+  minimiumCount: string;
   category: IProductCategory;
   vendor?: ICompany;
 }
@@ -38,6 +42,8 @@ export interface IProductCategory {
   order: string;
   code: string;
   description?: string;
+  attachment?: any;
+  status: string;
   parentId?: string;
   createdAt: Date;
   productCount: number;
@@ -53,7 +59,6 @@ export type ProductsQueryResponse = {
 export type ProductCategoriesQueryResponse = {
   productCategories: IProductCategory[];
 } & QueryResponse;
-
 
 export type ProductAddMutationResponse = {
   productAdd: (params: { variables: IProductDoc }) => Promise<void>;
