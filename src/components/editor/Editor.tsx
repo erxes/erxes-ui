@@ -21,7 +21,7 @@ import { getDraftDecorator } from '../editor/DraftjsHelpers';
 import Icon from '../Icon';
 import React from 'react';
 import HeadlinesButton from './HeadlinesButton';
-import { RichEditorControlsRoot, RichEditorRoot, Char} from './styles';
+import { RichEditorControlsRoot, RichEditorRoot, Char } from './styles';
 
 type ErxesEditorProps = {
   editorState: EditorState;
@@ -133,20 +133,24 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
 
   handlePastedText = (pastedText) => {
     const { integrationKind } = this.props;
-    if(integrationKind !== "telnyx"){
+
+    if (integrationKind !== "telnyx"){
       return 'un-handled';
     }
 
-    const contentLength = this.getContentLength()
+    const contentLength = this.getContentLength();
+
   	if (contentLength + pastedText.length > 160) {
     	return 'handled';
     }
+
     return 'un-handled'
   }
 
   renderChar = () => {
     const { editorState, integrationKind } = this.props;
-    if(integrationKind !== "telnyx"){
+
+    if (integrationKind !== "telnyx") {
       return;
     }
 
@@ -169,7 +173,7 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
       plugins,
       integrationKind
     } = this.props;
-    
+
     const updatedPlugins = [
       this.toolbarPlugin,
       this.linkPlugin,
