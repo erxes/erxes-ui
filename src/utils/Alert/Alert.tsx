@@ -79,13 +79,12 @@ export const AlertItem = styledTS<{ type: string }>(styled.div)`
 
 type Props = {
   type: string;
-  time?: number;
   children: React.ReactNode;
+  timeout?: NodeJS.Timer;
 };
 
 type State = {
   visible: boolean;
-  time: number;
 };
 
 export default class AlertStyled extends React.Component<Props, State> {
@@ -93,16 +92,11 @@ export default class AlertStyled extends React.Component<Props, State> {
     type: "information",
   };
 
-  private timeout: NodeJS.Timer;
+  private timeout?: NodeJS.Timer = undefined;
 
   constructor(props: Props) {
     super(props);
-
-    this.state = { visible: true, time: this.props.time || 3500 };
-
-    this.timeout = setTimeout(() => {
-      this.setState({ visible: false });
-    }, this.state.time);
+    this.state = { visible: true };
   }
 
   handleClose = () => {
@@ -110,14 +104,26 @@ export default class AlertStyled extends React.Component<Props, State> {
   };
 
   holdTimeOut = () => {
-    clearTimeout(this.timeout);
+    this.setState({ visible: true });
+    if (this.props.timeout) {
+      clearTimeout(this.props.timeout);
+    }
   };
 
   setTimeOut = () => {
+    if (this.props.timeout) {
+      clearTimeout(this.props.timeout);
+    }
     setTimeout(() => {
-      this.setState({ visible: false });
-    }, 2000);
+      this.setState({ visible: false }); 
+    }, 3000);
   };
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+  }
 
   render() {
     if (!this.state.visible) {

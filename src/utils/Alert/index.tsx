@@ -4,7 +4,9 @@ import ReactDOM from "react-dom";
 import styled from "styled-components";
 import AlertStyled from "./Alert";
 
-const AlertContainer = styled.div`
+const AlertsWrapper = styled.div.attrs({
+  id: 'alerts-wrapper'
+})`
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -19,41 +21,44 @@ const AlertContainer = styled.div`
 `;
 
 let key = 0;
-
-const createContainer = () => {
-  if (!document.getElementById(`alert-container`)) {
-    const container = document.createElement("div");
-
-    container.setAttribute("id", `alert-container`);
-    document.body.appendChild(container);
-
-    ReactDOM.render(<AlertContainer />, container);
-  }
-};
+let timeout;
+let alertcount = 0
 
 const createAlert = (type: string, text: string, time?: number) => {
-  key++;
-  createContainer();
-
-  const alert = document.createElement("div");
-  alert.setAttribute("id", `alert-${key}`);
-
-  const container = document.getElementById("alert-container");
-
-  if (container) {
-    const lastChild = container.lastChild;
-
-    if (lastChild) {
-      lastChild.appendChild(alert);
-
-      ReactDOM.render(
-        <AlertStyled key={key} type={type} time={time}>
-          {T.translate(text)}
-        </AlertStyled>,
-        alert
-      );
-    }
+  if (!document.getElementById(`alerts-wrapper`)) {
+    ReactDOM.render(<AlertsWrapper />,  document.getElementById("root"));
   }
+
+  const alertsWrapper = document.getElementById(`alerts-wrapper`);
+  alertcount = alertsWrapper ? alertsWrapper.childElementCount : 0;
+  key = alertcount+1;
+
+
+  if (!document.getElementById(`alert-container-${key}`)) {
+    const alertContainer = document.createElement('div');
+    if(alertContainer && alertsWrapper){
+      alertsWrapper.appendChild(alertContainer);
+    }
+    alertContainer.setAttribute('id', `alert-container-${key}`);
+    ReactDOM.render(
+      <AlertStyled key={key} type={type} timeout={timeout}>
+        {T.translate(text)}
+      </AlertStyled>,
+      alertContainer
+    );
+    alertcount++;
+  }
+
+  timeout = setTimeout(() => {
+    if (document.getElementById(`alert-container-${key}`)) {
+      const container = document.getElementById(`alert-container-${key}`);
+      if(container){
+          container.remove();
+      }
+      alertcount--;
+    }
+  }, time || 3500);
+  
 };
 
 const success = (text: string, time?: number) =>
