@@ -50,7 +50,7 @@ class CategoryFormContainer extends React.Component<Props> {
 }
 
 const getRefetchQueries = () => {
-  return ['productCategories', 'productCategoriesTotalCount'];
+  return ['productCategories', 'productCategoriesTotalCount', 'products'];
 };
 
 export default CategoryFormContainer;

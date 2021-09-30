@@ -243,59 +243,54 @@ class Form extends React.Component<Props, State> {
           />
         </FormGroup>
 
+
+
+        <FormGroup>
+          <ControlLabel>Product supply</ControlLabel>
+
+          <FormControl
+            {...formProps}
+            name="supply"
+            componentClass="select"
+            onChange={onSupplyChange}
+            defaultValue={object.supply}
+            options={PRODUCT_SUPPLY}
+
+          >
+          </FormControl>
+        </FormGroup>
+
         <FormWrapper>
           <FormColumn>
             <FormGroup>
-              <ControlLabel>Product supply</ControlLabel>
+              <ControlLabel>Product count</ControlLabel>
 
               <FormControl
                 {...formProps}
-                name="supply"
-                componentClass="select"
-                onChange={onSupplyChange}
-                defaultValue={object.supply}
-                options={PRODUCT_SUPPLY}
-
+                name="productCount"
+                value={this.state.productCount}
+                disabled={this.state.disabled}
+                onChange={onMinimiumAndCount.bind(this, "productCount")}
+                type="number"
               >
               </FormControl>
             </FormGroup>
           </FormColumn>
-
           <FormColumn>
-            <FormWrapper>
-              <FormColumn>
-                <FormGroup>
-                  <ControlLabel>Product count</ControlLabel>
+            <FormGroup>
+              <ControlLabel>Minimium count</ControlLabel>
 
-                  <FormControl
-                    {...formProps}
-                    name="productCount"
-                    value={this.state.productCount}
-                    disabled={this.state.disabled}
-                    onChange={onMinimiumAndCount.bind(this, "productCount")}
-                    type="number"
-                  >
-                  </FormControl>
-                </FormGroup>
-              </FormColumn>
-              <FormColumn>
-                <FormGroup>
-                  <ControlLabel>Minimium count</ControlLabel>
-
-                  <FormControl
-                    {...formProps}
-                    name="minimiumCount"
-                    value={this.state.minimiumCount}
-                    disabled={this.state.disabled}
-                    onChange={onMinimiumAndCount.bind(this, "minimiumCount")}
-                    type="number"
-                  >
-                  </FormControl>
-                </FormGroup>
-              </FormColumn>
-            </FormWrapper>
+              <FormControl
+                {...formProps}
+                name="minimiumCount"
+                value={this.state.minimiumCount}
+                disabled={this.state.disabled}
+                onChange={onMinimiumAndCount.bind(this, "minimiumCount")}
+                type="number"
+              >
+              </FormControl>
+            </FormGroup>
           </FormColumn>
-
         </FormWrapper>
 
         <FormGroup>
