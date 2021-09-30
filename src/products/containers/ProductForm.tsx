@@ -35,6 +35,8 @@ class ProductFormContainer extends React.Component<FinalProps> {
       object
     }: IButtonMutateProps) => {
       values.unitPrice = Number(values.unitPrice);
+      values.productCount = Number(values.productCount);
+      values.minimiumCount = Number(values.minimiumCount);
 
       return (
         <ButtonMutate

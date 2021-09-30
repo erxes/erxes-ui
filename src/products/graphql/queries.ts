@@ -20,12 +20,21 @@ const productFields = `
     code
     name
   }
-  attachment {
-    name
+  attachment {    
     url
-    type
+    name    
     size
+    type
   }
+  attachmentMore {
+    url
+    name    
+    size
+    type
+  }
+  supply
+  productCount
+  minimiumCount
   vendor {
     _id
     primaryName
@@ -64,14 +73,21 @@ const products = `
 `;
 
 const productCategories = `
-  query productCategories {
-    productCategories {
+  query productCategories($status: String) {
+    productCategories(status: $status) {
       _id
       name
       order
       code
       parentId
       description
+      status
+      attachment {
+        name
+        url
+        type
+        size
+      }
 
       isRoot
       productCount
@@ -82,5 +98,5 @@ const productCategories = `
 export default {
   productFields,
   products,
-  productCategories,
+  productCategories
 };

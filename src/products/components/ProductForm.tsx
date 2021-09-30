@@ -9,10 +9,10 @@ import FormGroup from '../../components/form/Group';
 import ControlLabel from '../../components/form/Label';
 import ModalTrigger from '../../components/ModalTrigger';
 import Uploader from '../../components/Uploader';
-import { ModalFooter } from '../../styles/main';
+import { ModalFooter, FormColumn, FormWrapper } from '../../styles/main';
 import { IAttachment, IButtonMutateProps, IFormProps } from '../../types';
 import { extractAttachment, generateCategoryOptions } from '../../utils';
-import { TYPES } from '../constants';
+import { TYPES, PRODUCT_SUPPLY } from '../constants';
 import CategoryForm from '../containers/CategoryForm';
 import { Row } from '../styles';
 import { IProduct, IProductCategory } from '../types';
@@ -24,7 +24,34 @@ type Props = {
   closeModal: () => void;
 };
 
-class Form extends React.Component<Props> {
+type State = {
+  disabled: boolean;
+  productCount: number;
+  minimiumCount: number;
+
+  attachment: IAttachment;
+  attachmentMore: IAttachment[];
+}
+class Form extends React.Component<Props, State> {
+
+  constructor(props) {
+    super(props);
+
+    const { product } = props
+
+    const productCount = product && product.productCount ? product.productCount : 0;
+    const minimiumCount = product && product.minimiumCount ? product.minimiumCount : 0;
+    const disabled = product && product.supply === "limited" ? false : true;
+
+    this.state = {
+      disabled,
+      productCount,
+      minimiumCount,
+      attachment: {} as IAttachment,
+      attachmentMore: [] as IAttachment[]
+    };
+  }
+
   renderFormTrigger(trigger: React.ReactNode) {
     const content = props => (
       <CategoryForm {...props} categories={this.props.productCategories} />
@@ -42,13 +69,29 @@ class Form extends React.Component<Props> {
 
     const types = TYPES.ALL;
 
+    const { attachment, attachmentMore } = this.state;
+
+    values.attachment = Object.entries(attachment).length > 0 ? attachment : null;
+    values.attachmentMore = Object.entries(attachmentMore).length > 0 ? attachmentMore : null;
+
     if (product) {
       values._id = product._id;
       values.attachment = product.attachment
         ? { ...product.attachment, __typename: undefined }
         : null;
+
+      const tempAttachments = product.attachmentMore || [];
+      const attachMore: any[] = [];
+
+      tempAttachments.forEach(attachmentOne => {
+        const tmp = attachmentOne ? { ...attachmentOne, __typename: undefined } : null;
+        attachMore.push(tmp);
+      });
+      values.attachmentMore = attachMore;
       values.description = product.description;
       values.vendorId = product.vendorId;
+      values.productCount = product.productCount;
+      values.minimiumCount = product.minimiumCount;
     }
 
     const trigger = (
@@ -57,9 +100,45 @@ class Form extends React.Component<Props> {
       </Button>
     );
 
+    const onMinimiumAndCount = (variable: string, e) => {
+      const value = e.target.value;
+      this.setState({ [variable]: value } as any);
+      values[variable] = value;
+      object[variable] = values[variable];
+    }
+
+    const onSupplyChange = e => {
+
+      let value = 0;
+      let minValue = 0;
+      this.setState({ disabled: true });
+
+      if (e.target.value === "limited") {
+        value = object.productCount || 0;
+        minValue = object.minimiumCount || 0;
+        this.setState({ disabled: false });
+      }
+
+      this.setState({ productCount: value });
+      this.setState({ minimiumCount: minValue });
+
+      values.productCount = value;
+      object.productCount = values.productCount;
+
+      values.minimiumCount = minValue;
+      object.minimiumCount = values.minimiumCount;
+    };
+
     const onChangeAttachment = (files: IAttachment[]) => {
+
       values.attachment = files.length ? files[0] : null;
       object.attachment = values.attachment;
+
+      values.attachmentMore = files;
+      object.attachmentMore = values.attachmentMore;
+
+      this.setState({ attachment: values.attachment, attachmentMore: values.attachmentMore });
+
     };
 
     const onChangeDescription = e => {
@@ -73,7 +152,7 @@ class Form extends React.Component<Props> {
     };
 
     const attachments =
-      (object.attachment && extractAttachment([object.attachment])) || [];
+      (object.attachmentMore && extractAttachment(object.attachmentMore)) || [];
 
     return (
       <>
@@ -164,6 +243,73 @@ class Form extends React.Component<Props> {
           />
         </FormGroup>
 
+        <FormWrapper>
+          <FormColumn>
+            <FormGroup>
+              <ControlLabel>Product supply</ControlLabel>
+
+              <FormControl
+                {...formProps}
+                name="supply"
+                componentClass="select"
+                onChange={onSupplyChange}
+                defaultValue={object.supply}
+                options={PRODUCT_SUPPLY}
+
+              >
+              </FormControl>
+            </FormGroup>
+          </FormColumn>
+
+          <FormColumn>
+            <FormWrapper>
+              <FormColumn>
+                <FormGroup>
+                  <ControlLabel>Product count</ControlLabel>
+
+                  <FormControl
+                    {...formProps}
+                    name="productCount"
+                    value={this.state.productCount}
+                    disabled={this.state.disabled}
+                    onChange={onMinimiumAndCount.bind(this, "productCount")}
+                    type="number"
+                  >
+                  </FormControl>
+                </FormGroup>
+              </FormColumn>
+              <FormColumn>
+                <FormGroup>
+                  <ControlLabel>Minimium count</ControlLabel>
+
+                  <FormControl
+                    {...formProps}
+                    name="minimiumCount"
+                    value={this.state.minimiumCount}
+                    disabled={this.state.disabled}
+                    onChange={onMinimiumAndCount.bind(this, "minimiumCount")}
+                    type="number"
+                  >
+                  </FormControl>
+                </FormGroup>
+              </FormColumn>
+            </FormWrapper>
+          </FormColumn>
+
+        </FormWrapper>
+
+        <FormGroup>
+          <ControlLabel>Images</ControlLabel>
+
+          <Uploader
+            defaultFileList={attachments}
+            onChange={onChangeAttachment}
+            multiple={true}
+            single={false}
+          />
+
+        </FormGroup>
+
         <FormGroup>
           <ControlLabel>Vendor</ControlLabel>
           <SelectCompanies
@@ -190,16 +336,6 @@ class Form extends React.Component<Props> {
         <FormGroup>
           <ControlLabel>SKU</ControlLabel>
           <FormControl {...formProps} name="sku" defaultValue={object.sku} />
-        </FormGroup>
-
-        <FormGroup>
-          <ControlLabel>Image</ControlLabel>
-          <Uploader
-            defaultFileList={attachments}
-            onChange={onChangeAttachment}
-            multiple={false}
-            single={true}
-          />
         </FormGroup>
 
         <ModalFooter>
