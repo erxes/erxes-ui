@@ -40,7 +40,7 @@ class CategoryForm extends React.Component<Props, State> {
 
     const object = category || ({} as IProductCategory);
     const { attachment } = this.state;
-    values.attachment = Object.entries(attachment).length > 0 ? this.state.attachment : null;
+    values.attachment = Object.entries(attachment).length > 0 ? attachment : null;
 
     if (category) {
       values._id = category._id;
