@@ -21,7 +21,7 @@ type Props = {
 };
 
 type State = {
-  attachment: IAttachment
+  attachment?: IAttachment
 }
 
 class CategoryForm extends React.Component<Props, State> {
@@ -29,32 +29,47 @@ class CategoryForm extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
+    const { category } = props;
+    const attachment = category ? category.attachment : undefined;
+
     this.state = {
-      attachment: {} as IAttachment
+      attachment: attachment ? { ...attachment, __typename: undefined } : undefined
     };
   }
+
+  generateDoc = (values: {
+    _id?: string;
+    attachment?: IAttachment;
+  }) => {
+    const { category } = this.props;
+    const finalValues = values;
+    const { attachment } = this.state;
+
+    finalValues.attachment = attachment;
+
+    if (category) {
+      finalValues._id = category._id;
+    }
+
+    return {
+      ...finalValues,
+      attachment: this.state.attachment
+    };
+  };
+
+  onChangeAttachment = (files: IAttachment[]) => {
+
+    // values.attachment = files.length ? files[0] : null;
+    // object.attachment = values.attachment;
+
+    this.setState({ attachment: files.length ? files[0] : undefined });
+  };
 
   renderContent = (formProps: IFormProps) => {
     const { renderButton, closeModal, category, categories } = this.props;
     const { values, isSubmitted } = formProps;
 
     const object = category || ({} as IProductCategory);
-    const { attachment } = this.state;
-    values.attachment = Object.entries(attachment).length > 0 ? attachment : null;
-
-    if (category) {
-      values._id = category._id;
-      values.attachment = category.attachment
-        ? { ...category.attachment, __typename: undefined }
-        : null;
-    }
-
-    const onChangeAttachment = (files: IAttachment[]) => {
-
-      values.attachment = files.length ? files[0] : null;
-      object.attachment = values.attachment;
-      this.setState({ attachment: values.attachment });
-    };
 
     const attachments =
       (object.attachment && extractAttachment([object.attachment])) || [];
@@ -114,7 +129,7 @@ class CategoryForm extends React.Component<Props, State> {
 
               <Uploader
                 defaultFileList={attachments}
-                onChange={onChangeAttachment}
+                onChange={this.onChangeAttachment}
                 multiple={false}
                 single={true}
               />
@@ -148,7 +163,7 @@ class CategoryForm extends React.Component<Props, State> {
 
           {renderButton({
             name: 'product & service category',
-            values,
+            values: this.generateDoc(values),
             isSubmitted,
             callback: closeModal,
             object: category
