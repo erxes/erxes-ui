@@ -5,7 +5,7 @@ Opensource (dev branch)
 3. yarn install
 4. git checkout package.json yarn.lock
 5. yarn build
-6. npm login (username: batamar password: Dombo@123)
+6. npm login (username: password:)
 6. npm version
 7. npm publish
 8. CODE-оо заавал push хийх !!!!!!!!!!!!
