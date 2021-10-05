@@ -45,6 +45,7 @@ export const companyFields = `
     name
     colorCode
   }
+  score
 `;
 
 const listParamsDef = `
