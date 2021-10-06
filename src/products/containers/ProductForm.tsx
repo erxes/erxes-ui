@@ -47,7 +47,7 @@ class ProductFormContainer extends React.Component<FinalProps> {
       values.unitPrice = Number(unitPrice);
       values.productCount = Number(productCount);
       values.minimiumCount = Number(minimiumCount);
-      values.attachment = attachment ? { ...attachment, __typename: undefined } : undefined;
+      values.attachment = attachment ? { ...attachment, __typename: undefined } : null;
       values.attachmentMore = attachmentMoreArray;
 
       return (

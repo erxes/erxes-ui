@@ -71,6 +71,8 @@ class Form extends React.Component<Props, State> {
       finalValues._id = product._id;
     }
 
+    finalValues.attachment = attachment;
+
     return {
       ...finalValues,
       attachment,
@@ -114,7 +116,11 @@ class Form extends React.Component<Props, State> {
     const { productCount, minimiumCount } = this.state;
     const islimited = e.target.value === "limited";
 
-    this.setState({ disabled: islimited ? false : true, productCount: islimited ? productCount : 0, minimiumCount: islimited ? minimiumCount : 0 });
+    this.setState({
+      disabled: islimited ? false : true,
+      productCount: islimited ? productCount : 0,
+      minimiumCount: islimited ? minimiumCount : 0
+    });
   };
 
   renderContent = (formProps: IFormProps) => {

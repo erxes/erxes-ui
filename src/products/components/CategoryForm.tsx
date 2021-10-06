@@ -31,10 +31,10 @@ class CategoryForm extends React.Component<Props, State> {
     super(props);
 
     const category = props.category || {} as ICategory;
-    const { attachment } = category
+    const attachment = category.attachment || undefined;
 
     this.state = {
-      attachment: attachment ? attachment : undefined
+      attachment
     };
   }
 
@@ -57,7 +57,7 @@ class CategoryForm extends React.Component<Props, State> {
   };
 
   onChangeAttachment = (files: IAttachment[]) => {
-    this.setState({ attachment: files.length ? files[0] : undefined });
+    this.setState({ attachment: files ? files[0] : undefined });
   };
 
   renderContent = (formProps: IFormProps) => {
