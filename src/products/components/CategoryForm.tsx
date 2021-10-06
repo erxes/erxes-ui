@@ -32,7 +32,6 @@ class CategoryForm extends React.Component<Props, State> {
 
     const category = props.category || {} as ICategory;
     const { attachment } = category
-    // const attachment = category && category.attachment ? category.attachment : undefined;
 
     this.state = {
       attachment: attachment ? attachment : undefined
