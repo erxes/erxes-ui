@@ -21,6 +21,10 @@ class CategoryFormContainer extends React.Component<Props> {
       callback,
       object
     }: IButtonMutateProps) => {
+      const attachment = values.attachment || undefined;
+
+      values.attachment = attachment ? { ...attachment, __typename: undefined } : null;
+
       return (
         <ButtonMutate
           mutation={
@@ -50,7 +54,7 @@ class CategoryFormContainer extends React.Component<Props> {
 }
 
 const getRefetchQueries = () => {
-  return ['productCategories', 'productCategoriesTotalCount'];
+  return ['productCategories', 'productCategoriesTotalCount', 'products'];
 };
 
 export default CategoryFormContainer;

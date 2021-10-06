@@ -1,4 +1,5 @@
 import React from "react";
+
 import SelectCompanies from "../../companies/containers/SelectCompanies";
 import Button from "../../components/Button";
 import EditorCK from "../../components/EditorCK";
@@ -27,30 +28,74 @@ type State = {
   disabled: boolean;
   productCount: number;
   minimiumCount: number;
-
-  attachment: IAttachment;
-  attachmentMore: IAttachment[];
+  attachment?: IAttachment;
+  attachmentMore?: IAttachment[];
+  vendorId: string;
+  description: string;
 };
+
 class Form extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
-    const { product } = props;
-
-    const productCount =
-      product && product.productCount ? product.productCount : 0;
-    const minimiumCount =
-      product && product.minimiumCount ? product.minimiumCount : 0;
-    const disabled = product && product.supply === "limited" ? false : true;
-
-    this.state = {
-      disabled,
+    const product = props.product || ({} as IProduct);
+    const {
+      attachment,
+      attachmentMore,
+      supply,
       productCount,
       minimiumCount,
-      attachment: {} as IAttachment,
-      attachmentMore: [] as IAttachment[],
+      vendorId,
+      description,
+    } = product;
+
+    this.state = {
+      disabled: supply === "limited" ? false : true,
+      productCount: productCount ? productCount : 0,
+      minimiumCount: minimiumCount ? minimiumCount : 0,
+      attachment: attachment ? attachment : undefined,
+      attachmentMore: attachmentMore ? attachmentMore : undefined,
+      vendorId: vendorId ? vendorId : "",
+      description: description ? description : "",
     };
   }
+
+  generateDoc = (values: {
+    _id?: string;
+    attachment?: IAttachment;
+    attachmentMore?: IAttachment[];
+    productCount: number;
+    minimiumCount: number;
+    vendorId: string;
+    description: string;
+  }) => {
+    const { product } = this.props;
+    const finalValues = values;
+    const {
+      attachment,
+      attachmentMore,
+      productCount,
+      minimiumCount,
+      vendorId,
+      description,
+    } = this.state;
+
+    if (product) {
+      finalValues._id = product._id;
+    }
+
+    finalValues.attachment = attachment;
+
+    return {
+      ...finalValues,
+      attachment,
+      attachmentMore,
+      productCount,
+      minimiumCount,
+      vendorId,
+      description,
+    };
+  };
 
   renderFormTrigger(trigger: React.ReactNode) {
     const content = (props) => (
@@ -62,6 +107,35 @@ class Form extends React.Component<Props, State> {
     );
   }
 
+  onComboEvent = (variable: string, e) => {
+    const value = variable === "vendorId" ? e : e.target.value;
+
+    this.setState({ [variable]: value } as any);
+  };
+
+  onChangeDescription = (e) => {
+    this.setState({ description: e.editor.getData() });
+  };
+
+  onChangeAttachment = (files: IAttachment[]) => {
+    this.setState({ attachment: files.length ? files[0] : undefined });
+  };
+
+  onChangeAttachmentMore = (files: IAttachment[]) => {
+    this.setState({ attachmentMore: files ? files : undefined });
+  };
+
+  onSupplyChange = (e) => {
+    const { productCount, minimiumCount } = this.state;
+    const islimited = e.target.value === "limited";
+
+    this.setState({
+      disabled: islimited ? false : true,
+      productCount: islimited ? productCount : 0,
+      minimiumCount: islimited ? minimiumCount : 0,
+    });
+  };
+
   renderContent = (formProps: IFormProps) => {
     const { renderButton, closeModal, product, productCategories } = this.props;
     const { values, isSubmitted } = formProps;
@@ -69,94 +143,25 @@ class Form extends React.Component<Props, State> {
 
     const types = TYPES.ALL;
 
-    const { attachment, attachmentMore } = this.state;
-
-    values.attachment =
-      Object.entries(attachment).length > 0 ? attachment : null;
-    values.attachmentMore =
-      Object.entries(attachmentMore).length > 0 ? attachmentMore : null;
-
-    if (product) {
-      values._id = product._id;
-      values.attachment = product.attachment
-        ? { ...product.attachment, __typename: undefined }
-        : null;
-
-      const tempAttachments = product.attachmentMore || [];
-      const attachMore: any[] = [];
-
-      tempAttachments.forEach((attachmentOne) => {
-        const tmp = attachmentOne
-          ? { ...attachmentOne, __typename: undefined }
-          : null;
-        attachMore.push(tmp);
-      });
-      values.attachmentMore = attachMore;
-      values.description = product.description;
-      values.vendorId = product.vendorId;
-      values.productCount = product.productCount;
-      values.minimiumCount = product.minimiumCount;
-    }
-
     const trigger = (
       <Button btnStyle="primary" uppercase={false} icon="plus-circle">
         Add category
       </Button>
     );
 
-    const onMinimiumAndCount = (variable: string, e) => {
-      const value = e.target.value;
-      this.setState({ [variable]: value } as any);
-      values[variable] = value;
-      object[variable] = values[variable];
-    };
-
-    const onSupplyChange = (e) => {
-      let value = 0;
-      let minValue = 0;
-      this.setState({ disabled: true });
-
-      if (e.target.value === "limited") {
-        value = object.productCount || 0;
-        minValue = object.minimiumCount || 0;
-        this.setState({ disabled: false });
-      }
-
-      this.setState({ productCount: value });
-      this.setState({ minimiumCount: minValue });
-
-      values.productCount = value;
-      object.productCount = values.productCount;
-
-      values.minimiumCount = minValue;
-      object.minimiumCount = values.minimiumCount;
-    };
-
-    const onChangeAttachment = (files: IAttachment[]) => {
-      values.attachment = files.length ? files[0] : null;
-      object.attachment = values.attachment;
-
-      values.attachmentMore = files;
-      object.attachmentMore = values.attachmentMore;
-
-      this.setState({
-        attachment: values.attachment,
-        attachmentMore: values.attachmentMore,
-      });
-    };
-
-    const onChangeDescription = (e) => {
-      values.description = e.editor.getData();
-      object.description = values.description;
-    };
-
-    const onSelectCompany = (vendorId) => {
-      object.vendorId = vendorId;
-      values.vendorId = vendorId;
-    };
-
     const attachments =
+      (object.attachment && extractAttachment([object.attachment])) || [];
+
+    const attachmentsMore =
       (object.attachmentMore && extractAttachment(object.attachmentMore)) || [];
+
+    const {
+      vendorId,
+      description,
+      productCount,
+      disabled,
+      minimiumCount,
+    } = this.state;
 
     return (
       <>
@@ -223,11 +228,11 @@ class Form extends React.Component<Props, State> {
         <FormGroup>
           <ControlLabel>Description</ControlLabel>
           <EditorCK
-            content={product ? product.description : ""}
-            onChange={onChangeDescription}
+            content={description}
+            onChange={this.onChangeDescription}
             height={150}
             isSubmitted={formProps.isSaved}
-            name={`product_description_${product ? product._id : ""}`}
+            name={`product_description_${description}`}
             toolbar={[
               {
                 name: "basicstyles",
@@ -247,62 +252,67 @@ class Form extends React.Component<Props, State> {
           />
         </FormGroup>
 
+        <FormGroup>
+          <ControlLabel>Product supply</ControlLabel>
+
+          <FormControl
+            {...formProps}
+            name="supply"
+            componentClass="select"
+            onChange={this.onSupplyChange}
+            defaultValue={object.supply}
+            options={PRODUCT_SUPPLY}
+          ></FormControl>
+        </FormGroup>
+
         <FormWrapper>
           <FormColumn>
             <FormGroup>
-              <ControlLabel>Product supply</ControlLabel>
+              <ControlLabel>Product count</ControlLabel>
 
               <FormControl
                 {...formProps}
-                name="supply"
-                componentClass="select"
-                onChange={onSupplyChange}
-                defaultValue={object.supply}
-                options={PRODUCT_SUPPLY}
+                name="productCount"
+                value={productCount}
+                disabled={disabled}
+                onChange={this.onComboEvent.bind(this, "productCount")}
+                type="number"
               ></FormControl>
             </FormGroup>
           </FormColumn>
-
           <FormColumn>
-            <FormWrapper>
-              <FormColumn>
-                <FormGroup>
-                  <ControlLabel>Product count</ControlLabel>
+            <FormGroup>
+              <ControlLabel>Minimium count</ControlLabel>
 
-                  <FormControl
-                    {...formProps}
-                    name="productCount"
-                    value={this.state.productCount}
-                    disabled={this.state.disabled}
-                    onChange={onMinimiumAndCount.bind(this, "productCount")}
-                    type="number"
-                  ></FormControl>
-                </FormGroup>
-              </FormColumn>
-              <FormColumn>
-                <FormGroup>
-                  <ControlLabel>Minimium count</ControlLabel>
-
-                  <FormControl
-                    {...formProps}
-                    name="minimiumCount"
-                    value={this.state.minimiumCount}
-                    disabled={this.state.disabled}
-                    onChange={onMinimiumAndCount.bind(this, "minimiumCount")}
-                    type="number"
-                  ></FormControl>
-                </FormGroup>
-              </FormColumn>
-            </FormWrapper>
+              <FormControl
+                {...formProps}
+                name="minimiumCount"
+                value={minimiumCount}
+                disabled={disabled}
+                onChange={this.onComboEvent.bind(this, "minimiumCount")}
+                type="number"
+              ></FormControl>
+            </FormGroup>
           </FormColumn>
         </FormWrapper>
+
+        <FormGroup>
+          <ControlLabel>Feature image</ControlLabel>
+
+          <Uploader
+            defaultFileList={attachments}
+            onChange={this.onChangeAttachment}
+            multiple={false}
+            single={true}
+          />
+        </FormGroup>
 
         <FormGroup>
           <ControlLabel>Images</ControlLabel>
 
           <Uploader
-            defaultFileList={attachments}
-            onChange={onChangeAttachment}
+            defaultFileList={attachmentsMore}
+            onChange={this.onChangeAttachmentMore}
             multiple={true}
             single={false}
           />
@@ -314,8 +324,8 @@ class Form extends React.Component<Props, State> {
             label="Choose an vendor"
             name="vendorId"
             customOption={{ value: "", label: "No vendor chosen" }}
-            initialValue={object.vendorId}
-            onSelect={onSelectCompany}
+            initialValue={vendorId}
+            onSelect={this.onComboEvent.bind(this, "vendorId")}
             multi={false}
           />
         </FormGroup>
@@ -348,7 +358,7 @@ class Form extends React.Component<Props, State> {
 
           {renderButton({
             name: "product and service",
-            values,
+            values: this.generateDoc(values),
             isSubmitted,
             callback: closeModal,
             object: product,

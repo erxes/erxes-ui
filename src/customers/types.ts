@@ -54,6 +54,7 @@ export interface ICustomerDoc {
   isOnline?: boolean;
   lastSeenAt?: number;
   sessionCount?: number;
+  score?: number;
 }
 
 export interface IUrlVisits {
