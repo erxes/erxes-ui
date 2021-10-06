@@ -40,23 +40,24 @@ class Form extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
-    const { product } = props
+    const product = props.product || ({} as IProduct);
+    const { attachment, attachmentMore, supply, productCount, minimiumCount, vendorId, description } = product;
 
-    const attachment = product && product.attachment ? product.attachment : undefined;
-    const attachmentMore = product && product.attachmentMore ? product.attachmentMore : [];
-    const attachMoreArray: any[] = [];
-    attachmentMore.map(attachment => {
-      attachMoreArray.push({ ...attachment, __typename: undefined });
-    })
+    // const attachment = product && product.attachment ? product.attachment : undefined;
+    // const attachmentMore = product && product.attachmentMore ? product.attachmentMore : [];
+    // const attachMoreArray: any[] = [];
+    // attachmentMore.map(attachment => {
+    //   attachMoreArray.push({ ...attachment, __typename: undefined });
+    // })
 
     this.state = {
-      disabled: product && product.supply === "limited" ? false : true,
-      productCount: product && product.productCount ? product.productCount : 0,
-      minimiumCount: product && product.minimiumCount ? product.minimiumCount : 0,
-      attachment: attachment ? { ...attachment, __typename: undefined } : undefined,
-      attachmentMore: attachMoreArray.length ? attachMoreArray : undefined,
-      vendorId: product && product.vendorId ? product.vendorId : "",
-      description: product && product.description ? product.description : ""
+      disabled: supply === "limited" ? false : true,
+      productCount: productCount ? productCount : 0,
+      minimiumCount: minimiumCount ? minimiumCount : 0,
+      attachment: attachment ? attachment : undefined,
+      attachmentMore: attachmentMore ? attachmentMore : undefined,
+      vendorId: vendorId ? vendorId : "",
+      description: description ? description : ""
     };
   }
 
@@ -73,25 +74,18 @@ class Form extends React.Component<Props, State> {
     const finalValues = values;
     const { attachment, attachmentMore, productCount, minimiumCount, vendorId, description } = this.state;
 
-    finalValues.attachment = attachment;
-    finalValues.attachmentMore = attachmentMore;
-    finalValues.productCount = productCount;
-    finalValues.minimiumCount = minimiumCount;
-    finalValues.vendorId = vendorId;
-    finalValues.description = description;
-
     if (product) {
       finalValues._id = product._id;
     }
 
     return {
       ...finalValues,
-      attachment: this.state.attachment,
-      attachmentMore: this.state.attachmentMore,
-      productCount: this.state.productCount,
-      minimiumCount: this.state.minimiumCount,
-      vendorId: this.state.vendorId,
-      description: this.state.description
+      attachment,
+      attachmentMore,
+      productCount,
+      minimiumCount,
+      vendorId,
+      description
     };
   };
 
@@ -107,6 +101,7 @@ class Form extends React.Component<Props, State> {
 
   onComboEvent = (variable: string, e) => {
     const value = variable === "vendorId" ? e : e.target.value;
+
     this.setState({ [variable]: value } as any);
   }
 
@@ -121,17 +116,9 @@ class Form extends React.Component<Props, State> {
 
   onSupplyChange = e => {
     const { productCount, minimiumCount } = this.state;
+    const islimited = e.target.value === "limited";
 
-    this.setState({ disabled: true });
-
-    if (e.target.value === "limited") {
-      this.setState({ disabled: false });
-      this.setState({ productCount });
-      this.setState({ minimiumCount });
-    } else {
-      this.setState({ productCount: 0 });
-      this.setState({ minimiumCount: 0 });
-    }
+    this.setState({ disabled: islimited ? false : true, productCount: islimited ? productCount : 0, minimiumCount: islimited ? minimiumCount : 0 });
   };
 
   renderContent = (formProps: IFormProps) => {
@@ -149,6 +136,8 @@ class Form extends React.Component<Props, State> {
 
     const attachments =
       (object.attachmentMore && extractAttachment(object.attachmentMore)) || [];
+
+    const { vendorId, description, productCount, disabled, minimiumCount } = this.state;
 
     return (
       <>
@@ -215,11 +204,11 @@ class Form extends React.Component<Props, State> {
         <FormGroup>
           <ControlLabel>Description</ControlLabel>
           <EditorCK
-            content={this.state.description}
+            content={description}
             onChange={this.onChangeDescription}
             height={150}
             isSubmitted={formProps.isSaved}
-            name={`product_description_${this.state.description}`}
+            name={`product_description_${description}`}
             toolbar={[
               {
                 name: 'basicstyles',
@@ -264,8 +253,8 @@ class Form extends React.Component<Props, State> {
               <FormControl
                 {...formProps}
                 name="productCount"
-                value={this.state.productCount}
-                disabled={this.state.disabled}
+                value={productCount}
+                disabled={disabled}
                 onChange={this.onComboEvent.bind(this, "productCount")}
                 type="number"
               >
@@ -279,8 +268,8 @@ class Form extends React.Component<Props, State> {
               <FormControl
                 {...formProps}
                 name="minimiumCount"
-                value={this.state.minimiumCount}
-                disabled={this.state.disabled}
+                value={minimiumCount}
+                disabled={disabled}
                 onChange={this.onComboEvent.bind(this, "minimiumCount")}
                 type="number"
               >
@@ -307,7 +296,7 @@ class Form extends React.Component<Props, State> {
             label="Choose an vendor"
             name="vendorId"
             customOption={{ value: '', label: 'No vendor chosen' }}
-            initialValue={this.state.vendorId}
+            initialValue={vendorId}
             onSelect={this.onComboEvent.bind(this, "vendorId")}
             multi={false}
           />

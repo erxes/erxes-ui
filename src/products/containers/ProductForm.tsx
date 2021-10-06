@@ -34,9 +34,19 @@ class ProductFormContainer extends React.Component<FinalProps> {
       callback,
       object
     }: IButtonMutateProps) => {
-      values.unitPrice = Number(values.unitPrice);
-      values.productCount = Number(values.productCount);
-      values.minimiumCount = Number(values.minimiumCount);
+
+      const { unitPrice, productCount, minimiumCount, attachment, attachmentMore } = values;
+      const attachmentMoreArray: any[] = [];
+
+      attachmentMore.map(attachment => {
+        attachmentMoreArray.push({ ...attachment, __typename: undefined });
+      })
+
+      values.unitPrice = Number(unitPrice);
+      values.productCount = Number(productCount);
+      values.minimiumCount = Number(minimiumCount);
+      values.attachment = { ...attachment, __typename: undefined };
+      values.attachmentMore = attachmentMoreArray;
 
       return (
         <ButtonMutate

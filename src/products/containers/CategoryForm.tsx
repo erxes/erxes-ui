@@ -21,6 +21,8 @@ class CategoryFormContainer extends React.Component<Props> {
       callback,
       object
     }: IButtonMutateProps) => {
+      values.attachment = { ...values.attachment, __typename: undefined };
+
       return (
         <ButtonMutate
           mutation={

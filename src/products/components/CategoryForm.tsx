@@ -12,6 +12,7 @@ import { IAttachment, IButtonMutateProps, IFormProps } from '../../types';
 import { extractAttachment, generateCategoryOptions } from '../../utils';
 import { IProductCategory } from '../types';
 import { PRODUCT_CATEGORY_STATUSES } from '../constants';
+import { ICategory } from 'utils/categories';
 
 type Props = {
   categories: IProductCategory[];
@@ -29,11 +30,12 @@ class CategoryForm extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
-    const { category } = props;
-    const attachment = category && category.attachment ? category.attachment : undefined;
+    const category = props.category || {} as ICategory;
+    const { attachment } = category
+    // const attachment = category && category.attachment ? category.attachment : undefined;
 
     this.state = {
-      attachment: attachment ? { ...attachment, __typename: undefined } : undefined
+      attachment: attachment ? attachment : undefined
     };
   }
 
@@ -45,15 +47,13 @@ class CategoryForm extends React.Component<Props, State> {
     const finalValues = values;
     const { attachment } = this.state;
 
-    finalValues.attachment = attachment;
-
     if (category) {
       finalValues._id = category._id;
     }
 
     return {
       ...finalValues,
-      attachment: this.state.attachment
+      attachment
     };
   };
 
@@ -64,7 +64,6 @@ class CategoryForm extends React.Component<Props, State> {
   renderContent = (formProps: IFormProps) => {
     const { renderButton, closeModal, category, categories } = this.props;
     const { values, isSubmitted } = formProps;
-
     const object = category || ({} as IProductCategory);
 
     const attachments =
