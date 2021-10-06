@@ -43,13 +43,6 @@ class Form extends React.Component<Props, State> {
     const product = props.product || ({} as IProduct);
     const { attachment, attachmentMore, supply, productCount, minimiumCount, vendorId, description } = product;
 
-    // const attachment = product && product.attachment ? product.attachment : undefined;
-    // const attachmentMore = product && product.attachmentMore ? product.attachmentMore : [];
-    // const attachMoreArray: any[] = [];
-    // attachmentMore.map(attachment => {
-    //   attachMoreArray.push({ ...attachment, __typename: undefined });
-    // })
-
     this.state = {
       disabled: supply === "limited" ? false : true,
       productCount: productCount ? productCount : 0,
@@ -111,6 +104,9 @@ class Form extends React.Component<Props, State> {
 
   onChangeAttachment = (files: IAttachment[]) => {
     this.setState({ attachment: files.length ? files[0] : undefined });
+  };
+
+  onChangeAttachmentMore = (files: IAttachment[]) => {
     this.setState({ attachmentMore: files ? files : undefined });
   };
 
@@ -135,6 +131,9 @@ class Form extends React.Component<Props, State> {
     );
 
     const attachments =
+      (object.attachment && extractAttachment([object.attachment])) || [];
+
+    const attachmentsMore =
       (object.attachmentMore && extractAttachment(object.attachmentMore)) || [];
 
     const { vendorId, description, productCount, disabled, minimiumCount } = this.state;
@@ -279,11 +278,23 @@ class Form extends React.Component<Props, State> {
         </FormWrapper>
 
         <FormGroup>
-          <ControlLabel>Images</ControlLabel>
+          <ControlLabel>Feature image</ControlLabel>
 
           <Uploader
             defaultFileList={attachments}
             onChange={this.onChangeAttachment}
+            multiple={false}
+            single={true}
+          />
+
+        </FormGroup>
+
+        <FormGroup>
+          <ControlLabel>Images</ControlLabel>
+
+          <Uploader
+            defaultFileList={attachmentsMore}
+            onChange={this.onChangeAttachmentMore}
             multiple={true}
             single={false}
           />
