@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ButtonMutate from '../../components/ButtonMutate';
 import { IButtonMutateProps } from '../../types';
 import CategoryForm from '../components/CategoryForm';
