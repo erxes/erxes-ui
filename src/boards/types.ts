@@ -1,3 +1,4 @@
+import { IUser } from 'auth/types';
 import { QueryResponse } from '../types';
 
 export interface IBoard {
@@ -11,6 +12,9 @@ export interface IPipeline {
   name: string;
   boardId: string;
   visibility: string;
+  status: string;
+  createdAt: Date;
+  createdUser: IUser;
   members?: any[];
   memberIds?: string[];
   bgColor?: string;
@@ -50,7 +54,7 @@ export type PipelinesQueryResponse = {
   loading: boolean;
   refetch: ({
     boardId,
-    type
+    type,
   }: {
     boardId?: string;
     type?: string;
