@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import colors from "../styles/colors";
-import { rgba } from "../styles/ecolor";
-import { IAttachment } from "../types";
-import Alert from "../utils/Alert";
-import { __ } from "../utils/core";
-import uploadHandler from "../utils/uploadHandler";
-import Spinner from "./Spinner";
-import AttachmentsGallery from "./AttachmentGallery";
+import React from 'react';
+import styled from 'styled-components';
+import colors from '../styles/colors';
+import { rgba } from '../styles/ecolor';
+import { IAttachment } from '../types';
+import Alert from '../utils/Alert';
+import { __ } from '../utils/core';
+import uploadHandler from '../utils/uploadHandler';
+import Spinner from './Spinner';
+import AttachmentsGallery from './AttachmentGallery';
 
 const LoadingContainer = styled.div`
   margin: 10px 0;
@@ -41,7 +41,7 @@ const UploadBtn = styled.div`
     }
   }
 
-  input[type="file"] {
+  input[type='file'] {
     display: none;
   }
 `;
@@ -62,7 +62,7 @@ type State = {
 class Uploader extends React.Component<Props, State> {
   static defaultProps = {
     multiple: true,
-    limit: 4,
+    limit: 4
   };
 
   constructor(props: Props) {
@@ -70,8 +70,17 @@ class Uploader extends React.Component<Props, State> {
 
     this.state = {
       attachments: props.defaultFileList || [],
-      loading: false,
+      loading: false
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      JSON.stringify(nextProps.defaultFileList) !==
+      JSON.stringify(this.props.defaultFileList)
+    ) {
+      this.setState({ attachments: nextProps.defaultFileList });
+    }
   }
 
   handleFileInput = ({ target }) => {
@@ -82,17 +91,17 @@ class Uploader extends React.Component<Props, State> {
 
       beforeUpload: () => {
         this.setState({
-          loading: true,
+          loading: true
         });
       },
 
       afterUpload: ({ status, response, fileInfo }) => {
-        if (status !== "ok") {
+        if (status !== 'ok') {
           Alert.error(response);
           return this.setState({ loading: false });
         }
 
-        Alert.info("Success");
+        Alert.info('Success');
 
         // set attachments
         const attachment = { url: response, ...fileInfo };
@@ -103,12 +112,12 @@ class Uploader extends React.Component<Props, State> {
 
         this.setState({
           loading: false,
-          attachments,
+          attachments
         });
-      },
+      }
     });
 
-    target.value = "";
+    target.value = '';
   };
 
   removeAttachment = (index: number) => {
@@ -131,9 +140,9 @@ class Uploader extends React.Component<Props, State> {
     return (
       <UploadBtn>
         <label>
-          {__("Upload an attachment")}
+          {__('Upload an attachment')}
           <input
-            type="file"
+            type='file'
             multiple={multiple}
             onChange={this.handleFileInput}
           />
@@ -151,7 +160,7 @@ class Uploader extends React.Component<Props, State> {
         {loading && (
           <LoadingContainer>
             <Spinner objective={true} size={18} />
-            {__("Uploading")}...
+            {__('Uploading')}...
           </LoadingContainer>
         )}
         <AttachmentsGallery

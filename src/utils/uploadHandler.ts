@@ -69,10 +69,7 @@ export const deleteHandler = (params: {
 };
 
 const uploadHandler = (params: Params) => {
-  const {
-    REACT_APP_API_URL,
-    REACT_APP_FILE_UPLOAD_MAX_SIZE = 20 * 1024 * 1024
-  } = getEnv();
+  const { REACT_APP_API_URL, REACT_APP_FILE_UPLOAD_MAX_SIZE } = getEnv();
 
   const {
     files,
@@ -103,10 +100,15 @@ const uploadHandler = (params: Params) => {
 
     const fileInfo = { name: file.name, size: file.size, type: file.type };
 
-    // skip file that size is more than 20mb
-    if (fileInfo.size > parseInt(REACT_APP_FILE_UPLOAD_MAX_SIZE, 10)) {
+    const fileUploadMaxSize =
+      REACT_APP_FILE_UPLOAD_MAX_SIZE || 20 * 1024 * 1024;
+
+    // skip file that size is more than REACT_APP_FILE_UPLOAD_MAX_SIZE
+    if (fileInfo.size > parseInt(fileUploadMaxSize, 10)) {
       Alert.warning(
-        `Your file ${fileInfo.name} size is too large. Upload files less than 20MB of size.`
+        `Your file ${fileInfo.name} size is too large. Upload files less than ${
+          fileUploadMaxSize / 1024 / 1024
+        }MB of size.`
       );
 
       continue;
