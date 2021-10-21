@@ -5,10 +5,14 @@ import FormControl from '../../components/form/Control';
 import CommonForm from '../../components/form/Form';
 import FormGroup from '../../components/form/Group';
 import ControlLabel from '../../components/form/Label';
+import Uploader from '../../components/Uploader';
+import { FormColumn, FormWrapper } from '../../styles/main';
 import { ModalFooter } from '../../styles/main';
-import { IButtonMutateProps, IFormProps } from '../../types';
-import { generateCategoryOptions } from '../../utils';
+import { IAttachment, IButtonMutateProps, IFormProps } from '../../types';
+import { extractAttachment, generateCategoryOptions } from '../../utils';
 import { IProductCategory } from '../types';
+import { PRODUCT_CATEGORY_STATUSES } from '../constants';
+import { ICategory } from 'utils/categories';
 
 type Props = {
   categories: IProductCategory[];
@@ -17,16 +21,52 @@ type Props = {
   closeModal: () => void;
 };
 
-class CategoryForm extends React.Component<Props> {
+type State = {
+  attachment?: IAttachment
+}
+
+class CategoryForm extends React.Component<Props, State> {
+
+  constructor(props) {
+    super(props);
+
+    const category = props.category || {} as ICategory;
+    const attachment = category.attachment || undefined;
+
+    this.state = {
+      attachment
+    };
+  }
+
+  generateDoc = (values: {
+    _id?: string;
+    attachment?: IAttachment;
+  }) => {
+    const { category } = this.props;
+    const finalValues = values;
+    const { attachment } = this.state;
+
+    if (category) {
+      finalValues._id = category._id;
+    }
+
+    return {
+      ...finalValues,
+      attachment
+    };
+  };
+
+  onChangeAttachment = (files: IAttachment[]) => {
+    this.setState({ attachment: files ? files[0] : undefined });
+  };
+
   renderContent = (formProps: IFormProps) => {
     const { renderButton, closeModal, category, categories } = this.props;
     const { values, isSubmitted } = formProps;
-
     const object = category || ({} as IProductCategory);
 
-    if (category) {
-      values._id = category._id;
-    }
+    const attachments =
+      (object.attachment && extractAttachment([object.attachment])) || [];
 
     return (
       <>
@@ -62,6 +102,35 @@ class CategoryForm extends React.Component<Props> {
           />
         </FormGroup>
 
+        <FormWrapper>
+          <FormColumn>
+            <FormGroup>
+              <ControlLabel>State</ControlLabel>
+
+              <FormControl
+                {...formProps}
+                name="status"
+                componentClass="select"
+                defaultValue={object.status}
+                options={PRODUCT_CATEGORY_STATUSES}
+              >
+              </FormControl>
+            </FormGroup>
+          </FormColumn>
+          <FormColumn>
+            <FormGroup>
+              <ControlLabel>Image</ControlLabel>
+
+              <Uploader
+                defaultFileList={attachments}
+                onChange={this.onChangeAttachment}
+                multiple={false}
+                single={true}
+              />
+            </FormGroup>
+          </FormColumn>
+        </FormWrapper>
+
         <FormGroup>
           <ControlLabel>Parent Category</ControlLabel>
 
@@ -88,7 +157,7 @@ class CategoryForm extends React.Component<Props> {
 
           {renderButton({
             name: 'product & service category',
-            values,
+            values: this.generateDoc(values),
             isSubmitted,
             callback: closeModal,
             object: category
