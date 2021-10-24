@@ -17,6 +17,7 @@ export interface IPipeline {
   createdUser: IUser;
   members?: any[];
   memberIds?: string[];
+  condition?: string;
   bgColor?: string;
   isWatched: boolean;
   startDate?: Date;
