@@ -17,7 +17,9 @@ const detailFields = `
   avatar
   fullName
   shortName
+  birthDate
   position
+  workStartedDate
   location
   description
   operatorPhone
@@ -47,6 +49,7 @@ const users = `
       isActive
       groupIds
       brandIds
+      score
 
       details {
         ${detailFields}
@@ -57,4 +60,4 @@ const users = `
   }
 `;
 
-export { users, allUsers, detailFields }
+export { users, allUsers, detailFields };

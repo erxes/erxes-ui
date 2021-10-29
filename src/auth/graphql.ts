@@ -13,7 +13,9 @@ export const currentUser = `
       details {
         avatar
         fullName
+        birthDate
         shortName
+        workStartedDate
         position
         location
         description
@@ -30,6 +32,14 @@ export const currentUser = `
         isCompleted
         completedSteps
       }
+      isShowNotification
+      score
     }
+  }
+`;
+
+export const userChanged = `
+	subscription userChanged($userId: String) {
+		userChanged(userId: $userId)
   }
 `;

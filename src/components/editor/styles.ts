@@ -125,4 +125,17 @@ const RichEditorControlsRoot = styledTS<{ isTopPopup: boolean }>(styled.div)`
   }
 `;
 
-export { RichEditorRoot, RichEditorControlsRoot };
+const Char = styledTS<{ count: number }>(styled.div)`
+  color: ${props =>
+    props.count > 10
+      ? props.count < 30 && colors.colorCoreOrange
+      : colors.colorCoreRed};
+  font-weight: bold;
+  display:flex;
+  justify-content:flex-end;
+  padding-top:10px;
+  padding-right:15px;
+  font-size:12px;
+`;
+
+export { RichEditorRoot, RichEditorControlsRoot, Char };

@@ -16,7 +16,9 @@ export interface IUserDetails {
   fullName?: string;
   shortName?: string;
   description?: string;
+  birthDate?: Date;
   position?: string;
+  workStartedDate?: Date;
   location?: string;
   operatorPhone?: string;
 }
@@ -49,6 +51,7 @@ export interface IUserDoc {
   permissionActions?: string[];
   configs?: any;
   configsConstants?: any;
+  score?: number;
 }
 
 export interface IUser extends IUserDoc {
@@ -65,6 +68,8 @@ export type AllUsersQueryResponse = {
 export type CurrentUserQueryResponse = {
   currentUser: IUser;
   loading: boolean;
+  subscribeToMore: any;
+  refetch: () => void;
 };
 
 export type UsersQueryResponse = {

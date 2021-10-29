@@ -8,6 +8,10 @@ const productParamsDef = `
   $code: String
   $customFieldsData: JSON,
   $attachment: AttachmentInput,
+  $attachmentMore: [AttachmentInput],
+  $supply: String,
+  $productCount: Int,
+  $minimiumCount: Int,
   $vendorId: String,
 `;
 
@@ -16,6 +20,8 @@ const productCategoryParamsDef = `
   $code: String!,
   $parentId: String,
   $description: String,
+  $attachment: AttachmentInput,
+  $status: String,
 `;
 
 const productParams = `
@@ -27,8 +33,12 @@ const productParams = `
   unitPrice: $unitPrice,
   code: $code,
   customFieldsData: $customFieldsData,
-  vendorId: $vendorId,
-  attachment: $attachment
+  attachment: $attachment,
+  attachmentMore: $attachmentMore,
+  supply: $supply,
+  productCount: $productCount,
+  minimiumCount: $minimiumCount,
+  vendorId: $vendorId
 `;
 
 const productCategoryParams = `
@@ -36,6 +46,8 @@ const productCategoryParams = `
   code: $code,
   parentId: $parentId,
   description: $description,
+  attachment: $attachment,
+  status: $status,
 `;
 
 const productAdd = `
@@ -74,5 +86,5 @@ export default {
   productAdd,
   productEdit,
   productCategoryAdd,
-  productCategoryEdit,
+  productCategoryEdit
 };

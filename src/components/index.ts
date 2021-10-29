@@ -66,6 +66,7 @@ import Toggle from './Toggle';
 import Uploader from './Uploader';
 import WithPermission from './WithPermission';
 import HelpPopover from './HelpPopover';
+import Drawer from './Drawer';
 
 export {
   HelpPopover,
@@ -140,4 +141,5 @@ export {
   withTableWrapper,
   Tabs,
   TabTitle,
+  Drawer,
 }

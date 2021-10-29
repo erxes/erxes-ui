@@ -38,12 +38,14 @@ export interface ICompanyDoc {
   description?: string;
   employees?: number;
   isSubscribed?: string;
-  
+
   links: ICompanyLinks;
   tagIds?: string[];
   customFieldsData?: any;
+  trackedData?: any[];
   code?: string;
   location?: string;
+  score?: number;
 }
 
 export interface ICompany extends ICompanyDoc {

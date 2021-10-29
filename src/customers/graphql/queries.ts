@@ -30,6 +30,7 @@ const basicFields = `
   code
   emailValidationStatus
   phoneValidationStatus
+  score
 
   isOnline
   lastSeenAt
