@@ -297,7 +297,7 @@ class Form extends React.Component<Props, State> {
         </FormWrapper>
 
         <FormGroup>
-          <ControlLabel>Feature image</ControlLabel>
+          <ControlLabel>Featured image</ControlLabel>
 
           <Uploader
             defaultFileList={attachments}
@@ -308,7 +308,7 @@ class Form extends React.Component<Props, State> {
         </FormGroup>
 
         <FormGroup>
-          <ControlLabel>Images</ControlLabel>
+          <ControlLabel>Secondary Images</ControlLabel>
 
           <Uploader
             defaultFileList={attachmentsMore}
@@ -332,12 +332,18 @@ class Form extends React.Component<Props, State> {
 
         <FormGroup>
           <ControlLabel required={true}>Unit price</ControlLabel>
+          <p>
+            Please ensure you have set the default currency in the{' '}
+            <a href="/settings/general"> {('General Settings')}</a> of the
+            System Configuration.
+          </p>
           <FormControl
             {...formProps}
             type="number"
             name="unitPrice"
             defaultValue={object.unitPrice}
             required={true}
+            min={0}
           />
         </FormGroup>
 
