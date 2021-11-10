@@ -195,6 +195,14 @@ class Attachment extends React.Component<Props> {
       return this.renderOtherFile(attachment);
     }
 
+    if (attachment.type === 'audio') {
+      return this.renderAudioFile(attachment);
+    }
+
+    if (attachment.type === 'video') {
+      return this.renderVideoFile(attachment);
+    }
+
     const url = attachment.url || attachment.name || '';
     const fileExtension = url.split('.').pop();
 
