@@ -128,10 +128,11 @@ class Form extends React.Component<Props, State> {
   onSupplyChange = (e) => {
     const { productCount, minimiumCount } = this.state;
     const islimited = e.target.value === "limited";
+    const isUnique = e.target.value === "unique"
 
     this.setState({
       disabled: islimited ? false : true,
-      productCount: islimited ? productCount : 0,
+      productCount: islimited ? productCount : isUnique ? 1 :  0,
       minimiumCount: islimited ? minimiumCount : 0,
     });
   };
