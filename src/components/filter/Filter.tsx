@@ -36,17 +36,18 @@ function Filter({ queryParams = {}, history }: IProps) {
     }
   };
 
-  const renderFilterParam = (paramKey: string, bool: boolean) => {
+  const renderFilterParam = (
+    paramKey: string,
+    bool: boolean,
+    customText?: string
+  ) => {
     if (!queryParams[paramKey]) {
       return null;
     }
 
     const onClick = () => onClickClose([paramKey]);
 
-    let text = paramKey;
-    if (paramKey === 'awaitingResponse') {
-      text = 'Awaiting Response';
-    }
+    const text = customText || paramKey;
 
     return (
       <Chip capitalize={true} onClick={onClick}>
@@ -117,9 +118,12 @@ function Filter({ queryParams = {}, history }: IProps) {
       {renderFilterParam('status', false)}
       {renderFilterParam('participating', true)}
       {renderFilterParam('unassigned', true)}
-      {renderFilterParam('awaitingResponse', true)}
+      {renderFilterParam('awaitingResponse', true, 'Awaiting Response')}
       {renderFilterWithData('brandId', 'brand')}
       {renderFilterParam('integrationType', false)}
+      {renderFilterParam('departmentId', true, 'Department')}
+      {renderFilterParam('unitId', true, 'Unit')}
+      {renderFilterParam('branchId', true, 'Branch')}
       {renderFilterWithData('tag', 'tag')}
       {renderFilterWithData('segment', 'segment')}
       {renderFilterParam('kind', false)}
