@@ -28,17 +28,23 @@ type Params = {
   userId?: string;
   responseType?: string;
   extraFormData?: Array<{ key: string; value: string }>;
+  erxesApiUrl?: String | null;
 };
 
 export const deleteHandler = (params: {
   fileName: string;
   url?: string;
   afterUpload: ({ status }: { status: string }) => any;
+  erxesApiUrl: String | null;
 }) => {
   const { REACT_APP_API_URL } = getEnv();
+  const erxesApiUrl = params.erxesApiUrl ? params.erxesApiUrl : '';
 
   const {
-    url = `${REACT_APP_API_URL}/delete-file`,
+    url = REACT_APP_API_URL !== undefined && !erxesApiUrl
+      ? `${REACT_APP_API_URL}/delete-file`
+      : `${erxesApiUrl}/delete-file`,
+
     fileName,
     afterUpload
   } = params;
@@ -71,12 +77,16 @@ export const deleteHandler = (params: {
 const uploadHandler = (params: Params) => {
   const { REACT_APP_API_URL, REACT_APP_FILE_UPLOAD_MAX_SIZE } = getEnv();
 
+  const erxesApiUrl = params.erxesApiUrl ? params.erxesApiUrl : '';
+
   const {
     files,
     beforeUpload,
     afterUpload,
     afterRead,
-    url = `${REACT_APP_API_URL}/upload-file`,
+    url = REACT_APP_API_URL !== undefined && !erxesApiUrl
+      ? `${REACT_APP_API_URL}/upload-file`
+      : `${erxesApiUrl}/upload-file`,
     kind = 'main',
     responseType = 'text',
     userId,
