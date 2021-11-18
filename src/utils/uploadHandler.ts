@@ -31,7 +31,7 @@ type Params = {
   erxesApiUrl?: string | null;
 };
 
-const getApiUrl = (appUrl, erxesApiUrl, type) => {
+const getApiUrl = (appUrl: string, erxesApiUrl: string, type: string) => {
   return appUrl !== undefined && !erxesApiUrl
     ? `${appUrl}/${type}`
     : `${erxesApiUrl}/${type}`;
