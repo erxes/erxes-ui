@@ -61,7 +61,6 @@ type Props = {
   avatar?: string;
   defaultAvatar?: string;
   onAvatarUpload: (response: any) => void;
-  erxesApiUrl?: any;
 };
 
 type State = {
@@ -89,11 +88,9 @@ class AvatarUpload extends React.Component<Props, State> {
 
   handleImageChange = e => {
     const imageFile = e.target.files;
-    const erxesApiUrl = this.props.erxesApiUrl ? this.props.erxesApiUrl : "";
 
     uploadHandler({
       files: imageFile,
-      erxesApiUrl,
 
       beforeUpload: () => {
         this.setState({ avatarPreviewStyle: { opacity: '0.2' } });
