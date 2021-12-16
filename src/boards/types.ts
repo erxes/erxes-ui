@@ -30,6 +30,8 @@ export interface IPipeline {
   itemsTotalCount?: number;
   isCheckUser?: boolean;
   excludeCheckUserIds?: string[];
+  numberConfig?: string;
+  numberSize?: string;
 }
 
 export interface IStage {
