@@ -18,6 +18,7 @@ type Props = {
   onChange?: (e: React.FormEvent<HTMLElement>) => void;
   onClick?: (e: React.MouseEvent) => void;
   onKeyPress?: (e: React.KeyboardEvent) => void;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
   defaultValue?: any;
   value?: any;
   defaultChecked?: boolean;
@@ -90,6 +91,7 @@ class FormControl extends React.Component<Props> {
     const attributes = {
       onChange,
       onKeyPress: props.onKeyPress,
+      onKeyDown: props.onKeyDown,
       onClick: props.onClick,
       onBlur: props.onBlur,
       value: props.value,

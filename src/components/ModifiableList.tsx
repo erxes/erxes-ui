@@ -51,13 +51,14 @@ const Actions = styled.div`
 type Props = {
   options: string[];
   addButtonLabel?: string;
+  showAddButton?: boolean;
   onChangeOption?: (options?: string[], optionValue?: string) => void;
 };
 
 type State = {
   options: string[];
   optionsObj: { text: string; _id: string }[];
-  adding: boolean;
+  adding?: boolean;
   editing: boolean;
   editedIdx: string;
 };
@@ -75,8 +76,14 @@ class ModifiableList extends React.Component<Props, State> {
 
     const optionsObj = convertOptions(props.options);
 
+    let adding = true;
+
+    if (props.showAddButton) {
+      adding = false;
+    }
+
     this.state = {
-      adding: true,
+      adding,
       options: props.options || [],
       optionsObj: optionsObj || [],
       editing: false,

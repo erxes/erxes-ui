@@ -274,7 +274,7 @@ const SidebarCounter = styledTS<{ nowrap?: boolean; fullLength?: boolean }>(
   padding-left: 5px;
 
   a {
-    padding: 0;
+    padding: 0 !important;
     color: ${colors.linkPrimary};
   }
 

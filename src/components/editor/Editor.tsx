@@ -21,7 +21,7 @@ import { getDraftDecorator } from '../editor/DraftjsHelpers';
 import Icon from '../Icon';
 import React from 'react';
 import HeadlinesButton from './HeadlinesButton';
-import { RichEditorControlsRoot, RichEditorRoot } from './styles';
+import { RichEditorControlsRoot, RichEditorRoot, Char } from './styles';
 
 type ErxesEditorProps = {
   editorState: EditorState;
@@ -38,6 +38,7 @@ type ErxesEditorProps = {
   onEscape?: (e: KeyboardEvent) => void;
   handleFileInput?: (e: React.FormEvent<HTMLInputElement>) => void;
   placeholder?: string | React.ReactNode;
+  integrationKind: string;
 };
 
 export class ErxesEditor extends React.Component<ErxesEditorProps> {
@@ -123,6 +124,43 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
     }
   };
 
+  getContentLength = () => {
+    const { editorState } = this.props;
+    const currentContent = editorState.getCurrentContent();
+
+    return currentContent.getPlainText('').length
+  }
+
+  handlePastedText = (pastedText) => {
+    const { integrationKind } = this.props;
+
+    if (integrationKind !== "telnyx"){
+      return 'un-handled';
+    }
+
+    const contentLength = this.getContentLength();
+
+  	if (contentLength + pastedText.length > 160) {
+    	return 'handled';
+    }
+
+    return 'un-handled'
+  }
+
+  renderChar = () => {
+    const { editorState, integrationKind } = this.props;
+
+    if (integrationKind !== "telnyx") {
+      return;
+    }
+
+    const currentContent = editorState.getCurrentContent();
+    const currentContentLength = currentContent.getPlainText('').length
+    const characterCount = 160 - currentContentLength;
+
+    return <Char count={characterCount}>{characterCount}</Char>
+  }
+
   render() {
     const {
       editorState,
@@ -132,7 +170,8 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
       onEscape,
       bordered,
       isTopPopup = false,
-      plugins
+      plugins,
+      integrationKind
     } = this.props;
 
     const updatedPlugins = [
@@ -168,6 +207,8 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
           <Editor
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
+            handleBeforeInput={this.handlePastedText}
+            handlePastedText={this.handlePastedText}
             onTab={this.onTab}
             onChange={this.props.onChange}
             placeholder={this.props.placeholder}
@@ -188,21 +229,26 @@ export class ErxesEditor extends React.Component<ErxesEditorProps> {
           <Toolbar>
             {externalProps => (
               <>
-                <BoldButton {...externalProps} />
-                <ItalicButton {...externalProps} />
-                <UnderlineButton {...externalProps} />
-                <Separator {...externalProps} />
-                <HeadlinesButton {...externalProps} />
-                <UnorderedListButton {...externalProps} />
-                <OrderedListButton {...externalProps} />
-                <BlockquoteButton {...externalProps} />
-                <CodeBlockButton {...externalProps} />
-                <LinkButton {...externalProps} />
+              { integrationKind !== 'telnyx' &&
+                  <>
+                  <BoldButton {...externalProps} />
+                  <ItalicButton {...externalProps} />
+                  <UnderlineButton {...externalProps} />
+                  <Separator {...externalProps} />
+                  <HeadlinesButton {...externalProps} />
+                  <UnorderedListButton {...externalProps} />
+                  <OrderedListButton {...externalProps} />
+                  <BlockquoteButton {...externalProps} />
+                  <CodeBlockButton {...externalProps} />
+                  <LinkButton {...externalProps} />
+                  </>
+             }
                 <EmojiSelect />
                 {controls ? controls : null}
               </>
             )}
           </Toolbar>
+          {this.renderChar()} 
         </RichEditorControlsRoot>
         {this.props.pluginContent}
       </RichEditorRoot>

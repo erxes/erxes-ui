@@ -73,11 +73,15 @@ class ActivityInputs extends React.PureComponent<Props, State> {
   }
 
   renderExtraTab() {
-    const { showEmail, extraTabs } = this.props;
+    const { showEmail, extraTabs, contentType } = this.props;
     const tabs: any = [];
 
     if (showEmail) {
       tabs.push(this.renderTabTitle('email', 'envelope-add', 'Email'));
+    }
+
+    if (contentType === 'ticket') {
+      tabs.push(this.renderTabTitle('ticket', 'ticket', 'Ticket reply'));
     }
 
     return (

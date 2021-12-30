@@ -9,6 +9,7 @@ export interface IAttachment {
   type: string;
   url: string;
   size?: number;
+  duration?: number;
 }
 
 export type IAttachmentPreview = {
