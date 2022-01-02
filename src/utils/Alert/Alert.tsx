@@ -79,62 +79,26 @@ export const AlertItem = styledTS<{ type: string }>(styled.div)`
 
 type Props = {
   type: string;
+  index: number;
+  deleteNode: (index: number) => void;
   children: React.ReactNode;
-  timeout?: NodeJS.Timer;
 };
 
-type State = {
-  visible: boolean;
-};
-
-export default class AlertStyled extends React.Component<Props, State> {
+export default class AlertStyled extends React.Component<Props> {
   static defaultProps = {
     type: "information",
   };
 
-  private timeout?: NodeJS.Timer = undefined;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = { visible: true };
-  }
-
   handleClose = () => {
-    this.setState({ visible: false });
+    const { deleteNode, index } = this.props;
+    
+    deleteNode(index);
   };
-
-  holdTimeOut = () => {
-    this.setState({ visible: true });
-    if (this.props.timeout) {
-      clearTimeout(this.props.timeout);
-    }
-  };
-
-  setTimeOut = () => {
-    if (this.props.timeout) {
-      clearTimeout(this.props.timeout);
-    }
-    setTimeout(() => {
-      this.setState({ visible: false }); 
-    }, 3000);
-  };
-
-  componentWillUnmount() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-  }
 
   render() {
-    if (!this.state.visible) {
-      return null;
-    }
-
     return (
       <AlertItem
         {...this.props}
-        onMouseOver={this.holdTimeOut}
-        onMouseLeave={this.setTimeOut}
       >
         <div>
           <Icon icon={types[this.props.type].icon} />
@@ -143,7 +107,6 @@ export default class AlertStyled extends React.Component<Props, State> {
         <button
           type="button"
           onClick={this.handleClose}
-          onMouseLeave={this.setTimeOut}
         >
           <Icon icon="times" />
         </button>

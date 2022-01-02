@@ -20,45 +20,64 @@ const AlertsWrapper = styled.div.attrs({
   font-size: 14px;
 `;
 
-let key = 0;
-let timeout;
-let alertcount = 0
-
 const createAlert = (type: string, text: string, time?: number) => {
-  if (!document.getElementById(`alerts-wrapper`)) {
-    ReactDOM.render(<AlertsWrapper />,  document.getElementById("root"));
-  }
-
-  const alertsWrapper = document.getElementById(`alerts-wrapper`);
-  alertcount = alertsWrapper ? alertsWrapper.childElementCount : 0;
-  key = alertcount+1;
-
-
-  if (!document.getElementById(`alert-container-${key}`)) {
+  if (!document.getElementById('alert-container')) {
     const alertContainer = document.createElement('div');
-    if(alertContainer && alertsWrapper){
+    
+    alertContainer.setAttribute('id', 'alert-container');
+    
+    document.body.appendChild(alertContainer);
+    
+    ReactDOM.render(<AlertsWrapper />, alertContainer);
+  }
+  
+  const alertsWrapper = document.getElementById(`alerts-wrapper`);
+
+  const timeout = setTimeout(() => {
+    const lastChild = alertsWrapper ? alertsWrapper.lastChild : null;
+    
+    if (!lastChild) {
+      const alertContainer = document.getElementById('alert-container');
+
+      if (alertContainer) {
+        alertContainer.remove();
+      }
+
+      clearTimeout(timeout);
+      
+      return;
+    }
+    
+    lastChild.remove();
+  }, time || 3500);
+
+  
+  const alertcount = alertsWrapper ? alertsWrapper.childElementCount : 0;
+  
+  if (!document.getElementById(`alert-container-${alertcount}`)) {
+    const alertContainer = document.createElement('div');
+    
+    if (alertContainer && alertsWrapper) {
       alertsWrapper.appendChild(alertContainer);
     }
-    alertContainer.setAttribute('id', `alert-container-${key}`);
+    
+    alertContainer.setAttribute('id', `alert-container-${alertcount}`);
+
+    const deleteNode = (index: number) => {
+      const container = document.getElementById(`alert-container-${index}`);
+
+      if (container) {
+        container.remove();
+      }
+    }
+    
     ReactDOM.render(
-      <AlertStyled key={key} type={type} timeout={timeout}>
+      <AlertStyled key={alertcount} index={alertcount} deleteNode={deleteNode} type={type}>
         {T.translate(text)}
       </AlertStyled>,
       alertContainer
     );
-    alertcount++;
   }
-
-  timeout = setTimeout(() => {
-    if (document.getElementById(`alert-container-${key}`)) {
-      const container = document.getElementById(`alert-container-${key}`);
-      if(container){
-          container.remove();
-      }
-      alertcount--;
-    }
-  }, time || 3500);
-  
 };
 
 const success = (text: string, time?: number) =>
