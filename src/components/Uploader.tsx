@@ -8,6 +8,8 @@ import { __ } from '../utils/core';
 import uploadHandler from '../utils/uploadHandler';
 import Spinner from './Spinner';
 import AttachmentsGallery from './AttachmentGallery';
+import Icon from './Icon';
+import { Meta } from './Attachment';
 
 const LoadingContainer = styled.div`
   margin: 10px 0;
@@ -26,7 +28,6 @@ const LoadingContainer = styled.div`
 const UploadBtn = styled.div`
   position: relative;
   margin-top: 10px;
-
   label {
     padding: 7px 15px;
     background: ${rgba(colors.colorCoreDarkBlue, 0.05)};
@@ -34,11 +35,40 @@ const UploadBtn = styled.div`
     font-weight: 500;
     transition: background 0.3s ease;
     display: inline-block;
+    &:hover {
+      background: ${rgba(colors.colorCoreDarkBlue, 0.1)};
+      cursor: pointer;
+    }
+  }
+  input[type='file'] {
+    display: none;
+  }
+`;
+
+const UploadBtnWithIcon = styled.div`
+  label {
+    align-items: center;
+    transition: background 0.3s ease;
+    display: flex;
+    margin: 0 0 5px;
+    font-weight: bold;
+    position: relative;
+    margin-top: 10px;
+    padding: 0px 15px;
+    background: ${rgba(colors.colorCoreDarkBlue, 0.05)};
+    border-radius: 4px;
 
     &:hover {
       background: ${rgba(colors.colorCoreDarkBlue, 0.1)};
       cursor: pointer;
     }
+  }
+
+  i {
+    font-size: 36px;
+    cursor: pointer;
+    color: #6569df;
+    padding: 15px 30px;
   }
 
   input[type='file'] {
@@ -52,6 +82,10 @@ type Props = {
   single?: boolean;
   limit?: number;
   multiple?: boolean;
+  accept?: string;
+  text?: string;
+  icon?: string;
+  warningText?: string;
 };
 
 type State = {
@@ -131,23 +165,47 @@ class Uploader extends React.Component<Props, State> {
   };
 
   renderUploadButton() {
-    const { multiple, single } = this.props;
+    const { multiple, single, text, accept, icon, warningText } = this.props;
 
     if (single && this.state.attachments.length > 0) {
       return null;
     }
 
+    if (!icon) {
+      return (
+        <UploadBtn>
+          <label>
+            {__('Upload an attachment')}
+            <input
+              type="file"
+              multiple={multiple}
+              onChange={this.handleFileInput}
+              accept={accept || ''}
+            />
+          </label>
+        </UploadBtn>
+      );
+    }
+
     return (
-      <UploadBtn>
+      <UploadBtnWithIcon>
         <label>
-          {__('Upload an attachment')}
+          {icon ? <Icon icon={icon}></Icon> : null}
+          <div>
+            <span>{text ? __(text) : __('Upload an attachment')}</span>
+            <Meta>
+              <span>{warningText}</span>
+            </Meta>
+          </div>
+
           <input
-            type='file'
+            type="file"
             multiple={multiple}
             onChange={this.handleFileInput}
+            accept={accept || ''}
           />
         </label>
-      </UploadBtn>
+      </UploadBtnWithIcon>
     );
   }
 

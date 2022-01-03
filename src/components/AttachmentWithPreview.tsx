@@ -8,7 +8,7 @@ import { PreviewWrapper, Image } from "./ImageWithPreview";
 
 const PreviewOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  position: fixed;
   right: 0;
   left: 0;
   height: 100px;
@@ -34,7 +34,7 @@ const PreviewOverlay = styled.div`
 `;
 
 const PreviewBtn = styled.a`
-  position: absolute;
+  position: fixed;
   height: 100px;
   bottom: 0;
   z-index: 60000;
