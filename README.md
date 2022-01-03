@@ -5,10 +5,10 @@ Opensource (dev branch)
 3. yarn install
 4. git checkout package.json yarn.lock
 5. yarn build
-6. npm login (username: <username> password: <password>)
-6. npm version
-7. npm publish
-8. CODE-оо заавал push хийх !!!!!!!!!!!!
+6. npm login (username: password:)
+7. npm version
+8. npm publish
+9. CODE-оо заавал push хийх !!!!!!!!!!!!
 
 Saas дээр erxes-ui болон erxes-api-utils 2-ийн хувьд дээрх үйлдэл давтагдана.
 
@@ -21,7 +21,7 @@ d. dev branch
 
 1. git pull upstream dev
 2. when conflict, accept current change of package.json, yarn.lock
-2.1 commit changes
+   2.1 commit changes
 3. replace yarn.lock, package.json with erxes/ui's
 4. remove @erxes/erxes-ui from package.json
 5. yarn install
