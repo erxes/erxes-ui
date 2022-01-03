@@ -1,92 +1,115 @@
-import Icon from '../../components/Icon';
-import { colors, dimensions, typography } from '../../styles';
-import { darken } from '../../styles/ecolor';
-import { slideDown } from '../../utils/animations';
-import React from 'react';
-import styled from 'styled-components';
-import styledTS from 'styled-components-ts';
+import Icon from "../../components/Icon";
+import { colors, dimensions, typography } from "../../styles";
+import { darken } from "../../styles/ecolor";
+import { slideDown } from "../../utils/animations";
+import React from "react";
+import styled from "styled-components";
+import styledTS from "styled-components-ts";
 
 const types = {
   info: {
     background: colors.colorCoreBlue,
-    icon: 'info-circle'
+    icon: "info-circle",
   },
 
   warning: {
     background: darken(colors.colorCoreYellow, 10),
-    icon: 'exclamation-triangle'
+    icon: "exclamation-triangle",
   },
 
   error: {
     background: colors.colorCoreRed,
-    icon: 'times-circle'
+    icon: "times-circle",
   },
 
   success: {
     background: colors.colorCoreGreen,
-    icon: 'check-circle'
-  }
+    icon: "check-circle",
+  },
 };
 
 export const AlertItem = styledTS<{ type: string }>(styled.div)`
-  display: table;
-  margin: 29px auto;
+  position:relative;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
   transition: all 0.5s;
-  color: ${colors.colorWhite};
-  padding: ${dimensions.unitSpacing}px ${dimensions.coreSpacing}px;
-  z-index: 10;
-  font-weight: ${typography.fontWeightLight};
-  background-color: ${props => types[props.type].background};
+  color: ${colors.textPrimary};
+  margin: ${dimensions.unitSpacing}px auto;
+  padding: ${dimensions.unitSpacing}px;
+  z-index: ${dimensions.unitSpacing};
+  font-weight: ${typography.fontWeightRegular};
+  background-color: ${colors.colorWhite};
   animation-name: ${slideDown};
-  border-radius: 2px;
+  border-radius: 4px;
+  border-left: ${dimensions.unitSpacing - 4}px solid ${(props) =>
+  types[props.type].background};
   animation-duration: 0.3s;
   animation-timing-function: ease;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: -1px 0 5px rgba(0, 0, 0, 0.3);
+  
+  > div {
+    display: flex;
+    align-items: center;
+    margin-right: ${dimensions.unitSpacing}px;
+  }
 
   span {
     margin-left: ${dimensions.unitSpacing}px;
   }
 
   i {
-    margin: 0;
-    font-size: 15px;
+    margin-right: 5px;
+    font-size: 25px;
+    color: ${(props) => types[props.type].background};
+  }
+
+  button {
+    background:none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    > i {
+      font-size: ${dimensions.unitSpacing + 2}px;
+      color: ${colors.colorCoreGray};
+    }
   }
 `;
 
 type Props = {
   type: string;
+  index: number;
+  deleteNode: (index: number) => void;
   children: React.ReactNode;
 };
 
-type State = {
-  visible: boolean;
-};
-
-export default class AlertStyled extends React.Component<Props, State> {
+export default class AlertStyled extends React.Component<Props> {
   static defaultProps = {
-    type: 'information'
+    type: "information",
   };
 
-  private timeout?: NodeJS.Timer = undefined;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = { visible: true };
-  }
-
-  componentWillUnmount() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-  }
+  handleClose = () => {
+    const { deleteNode, index } = this.props;
+    
+    deleteNode(index);
+  };
 
   render() {
     return (
-      <AlertItem {...this.props}>
-        <Icon icon={types[this.props.type].icon} />
-        &nbsp;
-        {this.props.children}
+      <AlertItem
+        {...this.props}
+      >
+        <div>
+          <Icon icon={types[this.props.type].icon} />
+          {this.props.children}
+        </div>
+        <button
+          type="button"
+          onClick={this.handleClose}
+        >
+          <Icon icon="times" />
+        </button>
       </AlertItem>
     );
   }

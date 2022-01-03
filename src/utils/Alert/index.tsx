@@ -1,16 +1,18 @@
-import T from 'i18n-react';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import styled from 'styled-components';
-import AlertStyled from './Alert';
+import T from "i18n-react";
+import React from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
+import AlertStyled from "./Alert";
 
-const AlertWrapper = styled.div.attrs({
-  id: 'alert-wrapper'
+const AlertsWrapper = styled.div.attrs({
+  id: 'alerts-wrapper'
 })`
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   top: 0;
   left: 50%;
-  height: 0;
   transform: translateX(-50%);
   width: auto;
   background: transparent;
@@ -18,59 +20,79 @@ const AlertWrapper = styled.div.attrs({
   font-size: 14px;
 `;
 
-let alertcount = 0;
-let timeout;
-
 const createAlert = (type: string, text: string, time?: number) => {
-  alertcount++;
-
-  if (timeout) {
-    clearTimeout(timeout);
+  if (!document.getElementById('alert-container')) {
+    const alertContainer = document.createElement('div');
+    
+    alertContainer.setAttribute('id', 'alert-container');
+    
+    document.body.appendChild(alertContainer);
+    
+    ReactDOM.render(<AlertsWrapper />, alertContainer);
   }
+  
+  const alertsWrapper = document.getElementById(`alerts-wrapper`);
 
-  timeout = setTimeout(() => {
-    alertcount = 0;
+  const timeout = setTimeout(() => {
+    const lastChild = alertsWrapper ? alertsWrapper.lastChild : null;
+    
+    if (!lastChild) {
+      const alertContainer = document.getElementById('alert-container');
 
-    if (document.getElementById('alert-container')) {
-      const container = document.getElementById('alert-container');
-
-      if (container) {
-        document.body.removeChild(container);
+      if (alertContainer) {
+        alertContainer.remove();
       }
+
+      clearTimeout(timeout);
+      
+      return;
     }
+    
+    lastChild.remove();
   }, time || 3500);
 
-  if (!document.getElementById('alert-container')) {
-    const popup = document.createElement('div');
-    popup.setAttribute('id', 'alert-container');
-    document.body.appendChild(popup);
+  
+  const alertcount = alertsWrapper ? alertsWrapper.childElementCount : 0;
+  
+  if (!document.getElementById(`alert-container-${alertcount}`)) {
+    const alertContainer = document.createElement('div');
+    
+    if (alertContainer && alertsWrapper) {
+      alertsWrapper.appendChild(alertContainer);
+    }
+    
+    alertContainer.setAttribute('id', `alert-container-${alertcount}`);
 
-    ReactDOM.render(<AlertWrapper />, popup);
+    const deleteNode = (index: number) => {
+      const container = document.getElementById(`alert-container-${index}`);
+
+      if (container) {
+        container.remove();
+      }
+    }
+    
+    ReactDOM.render(
+      <AlertStyled key={alertcount} index={alertcount} deleteNode={deleteNode} type={type}>
+        {T.translate(text)}
+      </AlertStyled>,
+      alertContainer
+    );
   }
-
-  const wrapper = document.getElementById('alert-wrapper');
-
-  ReactDOM.render(
-    <AlertStyled key={alertcount} type={type}>
-      {T.translate(text)}
-    </AlertStyled>,
-    wrapper
-  );
 };
 
 const success = (text: string, time?: number) =>
-  createAlert('success', text, time);
+  createAlert("success", text, time);
 const error = (text: string, time?: number) =>
-  createAlert('error', text.replace('GraphQL error:', ''), time);
+  createAlert("error", text.replace("GraphQL error:", ""), time);
 const warning = (text: string, time?: number) =>
-  createAlert('warning', text, time);
-const info = (text: string, time?: number) => createAlert('info', text, time);
+  createAlert("warning", text, time);
+const info = (text: string, time?: number) => createAlert("info", text, time);
 
 const Alert = {
   success,
   error,
   warning,
-  info
+  info,
 };
 
 export default Alert;
