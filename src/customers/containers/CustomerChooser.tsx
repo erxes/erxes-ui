@@ -46,6 +46,8 @@ class CustomerChooser extends React.Component<
       this.setState({ newCustomer });
     };
 
+    console.log('data update: ', data);
+
     const updatedProps = {
       ...this.props,
       data: {
@@ -54,7 +56,7 @@ class CustomerChooser extends React.Component<
         datas: data.customers,
         mainTypeId: data.mainTypeId,
         mainType: data.mainType,
-        relType: 'customer'
+        relType: data.relType || 'customer'
       },
       search,
       clearState: () => search(''),
@@ -92,6 +94,7 @@ const WithQuery = withProps<Props>(
             mainType: data.mainType,
             mainTypeId: data.mainTypeId,
             isRelated: data.isRelated,
+            relType: data.relType,
             sortField: 'createdAt',
             sortDirection: -1
           },
@@ -121,6 +124,7 @@ type WrapperProps = {
     customers: ICustomer[];
     mainTypeId?: string;
     mainType?: string;
+    relType?: string;
     isRelated?: boolean;
   };
   onSelect: (datas: ICustomer[]) => void;
@@ -152,6 +156,9 @@ export default class Wrapper extends React.Component<
 
   render() {
     const { searchValue, perPage } = this.state;
+
+    console.log('props: ', this.props);
+
     return (
       <WithQuery
         {...this.props}

@@ -21,9 +21,11 @@ export type Props = {
   onSelect?: (customers: ICustomer[]) => void;
   actionSection?: any;
   title?: string;
+  relType?: string;
 };
 
 function Component({
+  relType,
   name,
   items = [],
   mainType = '',
@@ -36,7 +38,14 @@ function Component({
     return (
       <CustomerChooser
         {...props}
-        data={{ name, customers: items, mainTypeId, mainType, isRelated: true }}
+        data={{
+          name,
+          customers: items,
+          mainTypeId,
+          mainType,
+          relType,
+          isRelated: true
+        }}
         onSelect={onSelect}
       />
     );
@@ -50,9 +59,9 @@ function Component({
 
   const relQuickButtons = (
     <ModalTrigger
-      title="Related Associate"
+      title='Related Associate'
       trigger={relCustomerTrigger}
-      size="lg"
+      size='lg'
       content={renderRelatedCustomerChooser}
     />
   );
@@ -81,7 +90,7 @@ function Component({
           </SectionBodyItem>
         ))}
         {customersObj.length === 0 && (
-          <EmptyState icon="user-6" text="No customer" />
+          <EmptyState icon='user-6' text='No customer' />
         )}
         {mainTypeId && mainType && relQuickButtons}
       </div>
@@ -92,7 +101,7 @@ function Component({
     return (
       <CustomerChooser
         {...props}
-        data={{ name, customers: items, mainTypeId, mainType }}
+        data={{ name, relType, customers: items, mainTypeId, mainType }}
         onSelect={onSelect}
       />
     );
@@ -100,11 +109,11 @@ function Component({
 
   const extraButtons = (
     <ModalTrigger
-      title="Associate"
-      size="lg"
+      title='Associate'
+      size='lg'
       trigger={
         <button>
-          <Icon icon="plus-circle" />
+          <Icon icon='plus-circle' />
         </button>
       }
       content={customerChooser}
@@ -116,7 +125,7 @@ function Component({
       title={__(`${title || 'Customers'}`)}
       extraButtons={extraButtons}
       isOpen={true}
-      name="showCustomers"
+      name='showCustomers'
     >
       {renderBody(items)}
     </Box>
@@ -130,15 +139,16 @@ export type ICustomerSectionProps = {
   customers?: ICustomer[];
   onSelect?: (datas: ICustomer[]) => void;
   actionSection?: any;
+  relType?: string;
 };
 
 export default (props: ICustomerSectionProps) => {
   return (
     <GetConformity
       {...props}
-      relType="customer"
+      relType={props.relType || 'customer'}
       component={Component}
-      queryName="customers"
+      queryName='customers'
       itemsQuery={queries.customers}
       alreadyItems={props.customers}
     />
