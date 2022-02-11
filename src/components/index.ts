@@ -66,6 +66,7 @@ import Toggle from './Toggle';
 import Uploader from './Uploader';
 import WithPermission from './WithPermission';
 import HelpPopover from './HelpPopover';
+import Switch from './Switch';
 import Drawer from './Drawer';
 
 export {
@@ -137,6 +138,7 @@ export {
   Step,
   Steps,
   Submenu,
+  Switch,
   Table,
   withTableWrapper,
   Tabs,
