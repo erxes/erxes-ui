@@ -175,7 +175,7 @@ class FormControl extends React.Component<Props> {
                 <b>{option}: </b>
                 <span>({percentage.toFixed(2)}%)</span>
               </div>
-              <ProgressBar percentage={percentage} height="10px" />
+              <ProgressBar percentage={percentage} height={10} />
             </Progress>
           );
         });
