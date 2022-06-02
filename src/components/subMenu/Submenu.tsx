@@ -26,9 +26,11 @@ function Submenu({
 }) {
   
   const getLink = (url) => {
-    const storageValue = window.localStorage.getItem('pagination:perPage');
-
+    let storageValue
     let parsedStorageValue;
+
+    if (typeof window !== 'undefined')
+      storageValue = window.localStorage.getItem('pagination:perPage');
 
     try {
       parsedStorageValue = JSON.parse(storageValue || '');
@@ -39,9 +41,9 @@ function Submenu({
     if (url.includes('?')) {
       const pathname = url.split('?')[0];
 
-      if(!url.includes('perPage') && parsedStorageValue[pathname]){
+      if (!url.includes('perPage') && parsedStorageValue[pathname]) {
           return `${url}&perPage=${parsedStorageValue[pathname]}`;
-      } 
+      }
 
       return url;
     }  
@@ -51,7 +53,7 @@ function Submenu({
     }
 
     return url;
-   }
+  }
 
   if (items) {
     return (

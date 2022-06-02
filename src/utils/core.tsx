@@ -429,7 +429,7 @@ export const getEnv = (): any => {
   const envs = {};
 
   for (const envMap of (window as any).envMaps) {
-    envs[envMap.name] = localStorage.getItem(`erxes_env_${envMap.name}`);
+    envs[envMap.name] = localStorage && localStorage.getItem(`erxes_env_${envMap.name}`);
   }
 
   return envs;
@@ -449,7 +449,11 @@ export const cleanIntegrationKind = (name: string) => {
 };
 
 export const getConfig = (key: string) => {
-  const sidebarConfig = localStorage.getItem(key);
+  let sidebarConfig;
+
+  if (typeof window !== 'undefined') {
+    sidebarConfig = localStorage.getItem(key);
+  }
 
   if (sidebarConfig) {
     return JSON.parse(sidebarConfig);
@@ -457,5 +461,7 @@ export const getConfig = (key: string) => {
 };
 
 export const setConfig = (key, params) => {
-  localStorage.setItem(key, JSON.stringify(params));
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(key, JSON.stringify(params));
+  }
 };
